@@ -1,0 +1,5 @@
+package com.emc.vipr.s3;
+
+public class s3api {
+
+}
