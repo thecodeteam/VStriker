@@ -6,4 +6,8 @@
 <fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="com.amazonaws.services.ec2.model.Image"/>
 <fullyQualifiedTypeName name="java.lang.Class"/>
+<fullyQualifiedTypeName name="org.javaswift.joss.client.factory.AccountConfig"/>
+<fullyQualifiedTypeName name="org.javaswift.joss.client.factory.AccountFactory"/>
+<fullyQualifiedTypeName name="org.javaswift.joss.model.Container"/>
+<fullyQualifiedTypeName name="org.javaswift.joss.model.StoredObject"/>
 </qualifiedTypeNameHistroy>
