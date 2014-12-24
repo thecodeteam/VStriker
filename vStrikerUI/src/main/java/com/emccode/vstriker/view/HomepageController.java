@@ -19,7 +19,7 @@ public class HomepageController {
 	
 	private VStriker vStriker;
 	
-	// Contructor
+	// Constructor
 	public HomepageController() {
 	}
 	
