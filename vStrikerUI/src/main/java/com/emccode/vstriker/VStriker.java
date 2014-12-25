@@ -11,52 +11,58 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import com.emccode.vstriker.controller.AccountController;
+import com.emccode.vstriker.controller.HomepageController;
 import com.emccode.vstriker.model.Account;
-import com.emccode.vstriker.view.HomepageController;
 
 /*
  * @author Sanjeev Chauhan
  */
 public class VStriker extends Application {
-	
+
 	private Stage primaryStage;
 	private BorderPane vStrikerLayout;
-	
+
+	// Provide reference to the BorderPane
+	public BorderPane getMainBorderPane() {
+		return vStrikerLayout;
+	}
+
 	// Replace with Account from vStrikerEntities package - ToDo
-	private ObservableList<Account> accountData = FXCollections.observableArrayList();
-	
+	private ObservableList<Account> accountData = FXCollections
+			.observableArrayList();
+
 	// Constructor
 	public VStriker() {
-		//Adding sample data - move to vStrikerLoader package - ToDo
+		// Adding sample data - move to vStrikerLoader package - ToDo
 		accountData.add(new Account("name1", "location1"));
 		accountData.add(new Account("name2", "location2"));
 	}
-	
+
 	// Return list of Accounts
 	public ObservableList<Account> getAccountData() {
 		return accountData;
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("VStriker");
-		
+
 		initVStriker();
 		showHome();
 	}
-	
-	//Initialize the VStriker application
+
+	// Initialize the VStriker application
 	public void initVStriker() {
 		try {
 			System.out.println("Initializing the VStriker application");
-			//Load the layout from the fxml file
+			// Load the layout from the fxml file
 			FXMLLoader loader = new FXMLLoader();
-			//loader.setLocation(VStriker.class.getResource("com/emccode/vstriker/view/VStriker.fxml"));
 			loader.setLocation(VStriker.class.getResource("view/VStriker.fxml"));
 			vStrikerLayout = (BorderPane) loader.load();
-			
-			//Show the scene layout
+
+			// Show the scene layout
 			Scene scene = new Scene(vStrikerLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -64,21 +70,39 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
-	
-	//Show the home page in the application
+
+	// Show the home page in the application
 	public void showHome() {
 		try {
-			//Load home layout
+			// Load home layout
 			FXMLLoader loader = new FXMLLoader();
-			//loader.setLocation(VStriker.class.getResource("com/emccode/vstriker/view/Home.fxml"));
 			loader.setLocation(VStriker.class.getResource("view/Home.fxml"));
 			AnchorPane homeLayout = (AnchorPane) loader.load();
-			
-			//Show the home layout in the center of the application
+
+			// Show the home layout in the center of the application
 			vStrikerLayout.setCenter(homeLayout);
-			
+
 			// Give controller access to main app
 			HomepageController controller = loader.getController();
+			controller.setVStrikerApp(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void showAccount() {
+		System.out.println("In VStriker showAccount");
+		try {
+			// Load home layout
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VStriker.class.getResource("view/Account.fxml"));
+			AnchorPane accountLayout = (AnchorPane) loader.load();
+
+			// Show the home layout in the center of the application
+			vStrikerLayout.setCenter(accountLayout);
+
+			// Give controller access to main app
+			AccountController controller = loader.getController();
 			controller.setVStrikerApp(this);
 		} catch (IOException e) {
 			e.printStackTrace();

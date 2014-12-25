@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="34.0" layoutY="35.0" spacing="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+         <children>
+            <Label layoutX="34.0" layoutY="35.0" prefHeight="16.0" prefWidth="124.0" text="Test being executed" />
+            <ProgressBar layoutX="172.0" layoutY="44.0" prefHeight="20.0" prefWidth="235.0" progress="0.0" />
+            <Label layoutX="484.0" layoutY="46.0" text="Test complete" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
