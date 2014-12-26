@@ -12,12 +12,12 @@ import java.io.InputStreamReader;
 
 public class swiftapi {
 
-	public static Account ViPRSwiftClient(String username,String passwod,String dataNode)throws Exception
+	public static Account ViPRSwiftClient(String username,String password,String dataNode)throws Exception
 	{
 		
 		   AccountConfig config = new AccountConfig();  
-		              config.setUsername("user@domain.com");  
-		               config.setPassword("password");  
+		              config.setUsername(username);  
+		               config.setPassword(password);  
 		               config.setAuthUrl(dataNode + "/v2.0/tokens");  
 		               config.setDisableSslValidation(true);  
 		               Account account = new AccountFactory(config).createAccount();  

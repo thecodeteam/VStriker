@@ -1,6 +1,7 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name="VSTRIKERDB.API")
 @NamedQuery(name="Api.findAll", query="SELECT a FROM Api a")
 public class Api implements Serializable {
 	private static final long serialVersionUID = 1L;

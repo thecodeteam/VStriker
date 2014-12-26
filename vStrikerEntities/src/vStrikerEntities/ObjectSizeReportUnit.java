@@ -9,7 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="OBJECT_SIZE_REPORT_UNIT")
+@Table(name="VSTRIKERDB.OBJECT_SIZE_REPORT_UNIT")
 @NamedQuery(name="ObjectSizeReportUnit.findAll", query="SELECT o FROM ObjectSizeReportUnit o")
 public class ObjectSizeReportUnit implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -27,7 +27,7 @@ public class ObjectSizeReportUnit implements Serializable {
 
 	//bi-directional one-to-one association to ConfigurationTemplate
 	@OneToOne
-	@JoinColumn(name="OBJECT_SIZE_REPORT_UNIT_ID", referencedColumnName="CONF_TEMP_OBJECT_SIZE_REPORT_UNIT_ID")
+	@PrimaryKeyJoinColumn(name="OBJECT_SIZE_REPORT_UNIT_ID", referencedColumnName="CONF_TEMP_OBJECT_SIZE_REPORT_UNIT_ID")
 	private ConfigurationTemplate configurationTemplate;
 
 	public ObjectSizeReportUnit() {
