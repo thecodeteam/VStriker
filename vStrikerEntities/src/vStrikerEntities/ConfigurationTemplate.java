@@ -1,7 +1,9 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 
 
@@ -10,7 +12,7 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="CONFIGURATION_TEMPLATE")
+@Table(name="VSTRIKERDB.CONFIGURATION_TEMPLATE")
 @NamedQuery(name="ConfigurationTemplate.findAll", query="SELECT c FROM ConfigurationTemplate c")
 public class ConfigurationTemplate implements Serializable {
 	private static final long serialVersionUID = 1L;

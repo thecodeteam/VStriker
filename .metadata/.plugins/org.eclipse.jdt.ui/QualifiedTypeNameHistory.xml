@@ -10,4 +10,10 @@
 <fullyQualifiedTypeName name="org.javaswift.joss.client.factory.AccountFactory"/>
 <fullyQualifiedTypeName name="org.javaswift.joss.model.Container"/>
 <fullyQualifiedTypeName name="org.javaswift.joss.model.StoredObject"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="vStrikerEntities.ApiSelected"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="vStrikerEntities.Account"/>
+<fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
 </qualifiedTypeNameHistroy>

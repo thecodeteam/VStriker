@@ -1,6 +1,7 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="API_TYPE")
+@Table(name="VSTRIKERDB.API_TYPE")
 @NamedQuery(name="ApiType.findAll", query="SELECT a FROM ApiType a")
 public class ApiType implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -30,7 +31,7 @@ public class ApiType implements Serializable {
 
 	//bi-directional one-to-one association to CrudOperationType
 	@OneToOne
-	@JoinColumn(name="API_TYPE_ID", referencedColumnName="API_TYPE_ID")
+	@PrimaryKeyJoinColumn(name="API_TYPE_ID", referencedColumnName="API_TYPE_ID")
 	private CrudOperationType crudOperationType;
 
 	public ApiType() {

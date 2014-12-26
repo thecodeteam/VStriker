@@ -9,7 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="TEST_PLAN_OPERATION")
+@Table(name="VSTRIKERDB.TEST_PLAN_OPERATION")
 @NamedQuery(name="TestPlanOperation.findAll", query="SELECT t FROM TestPlanOperation t")
 public class TestPlanOperation implements Serializable {
 	private static final long serialVersionUID = 1L;
