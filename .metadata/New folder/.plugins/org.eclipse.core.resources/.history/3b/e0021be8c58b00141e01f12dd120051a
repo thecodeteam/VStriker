@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="vStrikerEntities" transaction-type="RESOURCE_LOCAL">
+	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+	<properties>
+	 <property name="eclipslink.jdbc.driver" value="Generic JDB Driver"/>
+	 <property name="eclipslink.jdbc.url" value="jdbc:h2:C:\EMC\emccode\vstriker\vStrikerDB\DB\vstrikerdb"/>
+	 <property name="eclipslink.jdbc.user" value="sa"/>
+	 <property name="eclipslink.jdbc.password" value=""/>
+	</properties>
+	
+		<class>vStrikerEntities.Account</class>
+		<class>vStrikerEntities.Api</class>
+		<class>vStrikerEntities.ApiSelected</class>
+		<class>vStrikerEntities.ApiType</class>
+		<class>vStrikerEntities.ConfigurationTemplate</class>
+		<class>vStrikerEntities.CrudOperationType</class>
+		<class>vStrikerEntities.ExecutionPlan</class>
+		<class>vStrikerEntities.ExecutionReport</class>
+		<class>vStrikerEntities.ExecutionReportData</class>
+		<class>vStrikerEntities.ObjectSizeReportUnit</class>
+		<class>vStrikerEntities.TestConfiguration</class>
+		<class>vStrikerEntities.TestPlanOperation</class>
+	</persistence-unit>
+</persistence>
