@@ -29,6 +29,7 @@
 	 <property name="javax.persistence.jdbc.user" value="sa"/>
 	 <property name="javax.persistence.jdbc.password" value=""/>
 	 <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+	 <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 	</properties>
 	
 
