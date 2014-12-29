@@ -36,8 +36,8 @@
       <HBox layoutX="56.92073059082031" layoutY="176.0" spacing="20.0" AnchorPane.rightAnchor="50.0">
          <children>
             <Label layoutX="57.0" layoutY="181.0" text="API/Protocol for this account" />
-            <ChoiceBox layoutX="252.0" layoutY="176.0" prefWidth="150.0" />
-            <Button layoutX="438.0" layoutY="176.0" mnemonicParsing="false" text="Add API / Protocol" />
+            <ChoiceBox fx:id="chooseAPI" layoutX="252.0" layoutY="176.0" prefWidth="150.0" />
+            <Button fx:id="addAPI" layoutX="438.0" layoutY="176.0" mnemonicParsing="false" onAction="#addAPIClicked" text="Add API / Protocol" />
          </children>
       </HBox>
       <Button fx:id="backtoAccount" layoutX="402.0" layoutY="451.0" mnemonicParsing="false" onAction="#backtoAccountClicked" prefHeight="26.0" prefWidth="171.0" text="Back to Accounts &gt;&gt;" AnchorPane.rightAnchor="50.0" />

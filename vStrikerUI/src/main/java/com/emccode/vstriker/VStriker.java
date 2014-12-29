@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import com.emccode.vstriker.controller.AccountController;
 import com.emccode.vstriker.controller.HomepageController;
+import com.emccode.vstriker.controller.S3Controller;
 import com.emccode.vstriker.model.Account;
 
 /*
@@ -74,6 +75,8 @@ public class VStriker extends Application {
 	// Show the home page in the application
 	public void showHome() {
 		try {
+			// Set title
+			this.primaryStage.setTitle("vStriker");
 			// Load home layout
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/Home.fxml"));
@@ -93,6 +96,8 @@ public class VStriker extends Application {
 	public void showAccount() {
 		System.out.println("In VStriker showAccount");
 		try {
+			// Change page title
+			this.primaryStage.setTitle("vStriker:Account");
 			// Load home layout
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/Account.fxml"));
@@ -109,6 +114,26 @@ public class VStriker extends Application {
 		}
 	}
 
+	public void showS3API() {
+		System.out.println("Ind VStriker showS3API");
+		try {
+			// Change page title
+			this.primaryStage.setTitle("vStriker:S3 API Information");
+			// Load S3 page
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VStriker.class.getResource("view/S3API.fxml"));
+			AnchorPane S3Layout = (AnchorPane) loader.load();
+			
+			//Show the S3 page in the center of the application
+			vStrikerLayout.setCenter(S3Layout);
+			
+			// Give controller access to the main app
+			S3Controller controller = loader.getController();
+			controller.setVStrikerApp(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}
