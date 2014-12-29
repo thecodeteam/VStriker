@@ -1,19 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
-<fullyQualifiedTypeName name="java.io.BufferedReader"/>
-<fullyQualifiedTypeName name="com.amazonaws.services.s3.model.S3ObjectInputStream"/>
-<fullyQualifiedTypeName name="java.io.InputStream"/>
-<fullyQualifiedTypeName name="com.amazonaws.services.ec2.model.Image"/>
-<fullyQualifiedTypeName name="java.lang.Class"/>
-<fullyQualifiedTypeName name="org.javaswift.joss.client.factory.AccountConfig"/>
-<fullyQualifiedTypeName name="org.javaswift.joss.client.factory.AccountFactory"/>
-<fullyQualifiedTypeName name="org.javaswift.joss.model.Container"/>
-<fullyQualifiedTypeName name="org.javaswift.joss.model.StoredObject"/>
-<fullyQualifiedTypeName name="java.lang.Exception"/>
-<fullyQualifiedTypeName name="vStrikerEntities.ApiSelected"/>
-<fullyQualifiedTypeName name="java.util.Collection"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="vStrikerEntities.Account"/>
-<fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
-</qualifiedTypeNameHistroy>
+<qualifiedTypeNameHistroy/>
