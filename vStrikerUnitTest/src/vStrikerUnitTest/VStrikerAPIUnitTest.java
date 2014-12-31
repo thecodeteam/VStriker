@@ -3,47 +3,52 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Test;
-import org.apache.commons.logging.impl.Log4JLogger;
+
+import vStrikerTestUtilities.*;
 
 import com.amazonaws.services.s3.model.Bucket;
+import com.amazonaws.services.s3.model.ObjectListing;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.emc.*;
 import com.emc.vipr.s3.s3api;
 import com.emc.vipr.services.s3.ViPRS3Client;
+
 public class VStrikerAPIUnitTest {
 
 	@Test
 	public  void test() throws Exception {
 		TestS3API();
-		TestS3ListBuckets();
+		TestS3ReadBucket();
 		
 	}
 	
 	public static void TestS3API() throws Exception
 	{
 		
-		String username="wuser1@sanity.local";
-		String password="GdzE4oBSL6WOwAnjJ33qAPGTDulEgDZWVQzZ+YvO";
-		String proxy="http://10.247.188.221:10101";
-		//(String S3_ACCESS_KEY_ID,String S3_SECRET_KEY,String S3_ENDPOINT,String S3_ViPR_NAMESPACE ) 
+		String username="root";
+		String password="eEH7s4MBMNcFNZTzPW1FdRmVeWmr7GmfsiOvlUUg";
+		String proxy="http://10.247.134.77:9020";
 		
 		ViPRS3Client conn =s3api.getS3Client(username,password,proxy,"ns");
 		
-    	System.out.println( conn.S3_SERVICE_NAME);
+		vLogger.LogInfo("Unit Test S3 API " +conn.S3_SERVICE_NAME);
+    	
 	}
 
-	public static void TestS3ListBuckets() throws Exception
+	public static void TestS3ReadBucket() throws Exception
 	{
 		
-		String username="wuser1@sanity.local";
-		String password="GdzE4oBSL6WOwAnjJ33qAPGTDulEgDZWVQzZ+YvO";
-		String proxy="http://10.247.188.221:10101";
-		//(String S3_ACCESS_KEY_ID,String S3_SECRET_KEY,String S3_ENDPOINT,String S3_ViPR_NAMESPACE ) 
-		
-		List<Bucket> list =s3api.ListBuckets(username,password,proxy,"ns");
-		for(Iterator<Bucket> i = list.iterator(); i.hasNext(); ) {
-			Bucket item = i.next();
-		    System.out.println(item.getName());
-		}
+		String username="root";
+		String password="eEH7s4MBMNcFNZTzPW1FdRmVeWmr7GmfsiOvlUUg";
+		String proxy="http://10.247.134.77:9020";
+		String bucket="mediaboard-magdy";
+		ObjectListing list =s3api.ReadBucket(username,password,proxy,"ns",bucket);
+		   for (S3ObjectSummary objectSummary : 
+			   list.getObjectSummaries()) {
+			   vLogger.LogInfo("Unit Test S3 API Bucket Read - " + objectSummary.getKey() + "  " +
+                       "(size = " + objectSummary.getSize() + 
+                       ")");
+		   }
 	}
 
 }
