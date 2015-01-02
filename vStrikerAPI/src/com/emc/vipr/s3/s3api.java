@@ -23,9 +23,11 @@ import java.security.SecureRandom;
 import java.util.List;
 
 import com.emc.vipr.services.s3.ViPRS3Client;
+import com.netflix.servo.examples.EchoServerExample.ClientTask;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.amazonaws.services.s3.S3ClientOptions;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.ObjectListing;
@@ -38,8 +40,11 @@ public class s3api {
 // Create Client Instance
     public static ViPRS3Client getS3Client(String S3_ACCESS_KEY_ID,String S3_SECRET_KEY,String S3_ENDPOINT,String S3_ViPR_NAMESPACE ) {
         BasicAWSCredentials creds = new BasicAWSCredentials(S3_ACCESS_KEY_ID, S3_SECRET_KEY);
+        S3ClientOptions opt = new S3ClientOptions();
+        opt.setPathStyleAccess(true);
 		ViPRS3Client client = new ViPRS3Client(S3_ENDPOINT, creds);
-
+		
+		client.setS3ClientOptions(opt);
 		if (S3_ViPR_NAMESPACE != null) {
 		    client.setNamespace(S3_ViPR_NAMESPACE);
 		}
