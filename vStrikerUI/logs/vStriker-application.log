@@ -1,0 +1,802 @@
+2015-01-03 11:40:58 INFO  vLogger:31 - vLogger - In vTestEngine validateS3Connection
+2015-01-03 11:40:59 DEBUG InternalConfig:208 - Configuration override awssdk_config_override.json not found.
+2015-01-03 11:40:59 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"GET
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 16:40:59 GMT
+/"
+2015-01-03 11:40:59 DEBUG request:326 - Sending Request: GET http://object.vipronline.com / Headers: (Authorization: AWS user045:/rheJaRcKCv3mM+QlrbogCnRLlM=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 16:40:59 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 11:40:59 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 11:40:59 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 0][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 11:40:59 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 11:40:59 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 11:40:59 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 11:40:59 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 11:40:59 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 11:40:59 DEBUG DefaultClientConnection:269 - Sending request: GET / HTTP/1.1
+2015-01-03 11:40:59 DEBUG wire:63 - >> "GET / HTTP/1.1[\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - >> "Authorization: AWS user045:/rheJaRcKCv3mM+QlrbogCnRLlM=[\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 16:40:59 GMT[\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 11:40:59 DEBUG headers:273 - >> GET / HTTP/1.1
+2015-01-03 11:40:59 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 11:40:59 DEBUG headers:276 - >> Authorization: AWS user045:/rheJaRcKCv3mM+QlrbogCnRLlM=
+2015-01-03 11:40:59 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 11:40:59 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 16:40:59 GMT
+2015-01-03 11:40:59 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 11:40:59 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 11:40:59 DEBUG wire:63 - << "HTTP/1.1 200 OK[\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - << "Date: Sat, 03 Jan 2015 16:28:22 GMT[\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:479b7:a[\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - << "x-amz-id-2: [\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - << "Content-Type: application/xml[\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - << "Content-Length: 798[\r][\n]"
+2015-01-03 11:40:59 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 11:40:59 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 200 OK
+2015-01-03 11:40:59 DEBUG headers:257 - << HTTP/1.1 200 OK
+2015-01-03 11:40:59 DEBUG headers:260 - << Date: Sat, 03 Jan 2015 16:28:22 GMT
+2015-01-03 11:40:59 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 11:40:59 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:479b7:a
+2015-01-03 11:40:59 DEBUG headers:260 - << x-amz-id-2: 
+2015-01-03 11:40:59 DEBUG headers:260 - << Content-Type: application/xml
+2015-01-03 11:40:59 DEBUG headers:260 - << Content-Length: 798
+2015-01-03 11:40:59 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 11:40:59 TRACE request:61 - Beginning to parse service response XML
+2015-01-03 11:40:59 DEBUG XmlResponsesSaxParser:162 - Sanitizing XML document destined for handler class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 11:40:59 DEBUG wire:77 - << "<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ListAllMyBucketsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Owner><ID>user045</ID><DisplayName>user045</DisplayName></Owner><Buckets><Bucket><Name>cse-demo</Name><CreationDate>2014-10-03T19:07:05.128Z</CreationDate></Bucket><Bucket><Name>emc-media</Name><CreationDate>2014-10-02T16:56:29.286Z</CreationDate></Bucket><Bucket><Name>mediaboard-magdy</Name><CreationDate>2014-10-29T22:14:01.056Z</CreationDate></Bucket><Bucket><Name>mediaboard-verdirame</Name><CreationDate>2014-11-17T20:22:04.563Z</CreationDate></Bucket><Bucket><Name>test</Name><CreationDate>2015-01-02T22:23:12.454Z</CreationDate></Bucket><Bucket><Name>vs-test</Name><CreationDate>2014-12-31T03:07:17.724Z</CreationDate></Bucket></Buckets></ListAllMyBucketsResult>"
+2015-01-03 11:40:59 DEBUG PoolingClientConnectionManager:272 - Connection [id: 0][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 11:40:59 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 0][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 11:40:59 DEBUG XmlResponsesSaxParser:134 - Parsing XML response document with handler: class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 11:40:59 TRACE request:63 - Done parsing service response XML
+2015-01-03 11:40:59 DEBUG request:716 - Received successful response: 200, AWS Request ID: 0a6c5fc0:148a3807b44:479b7:a
+2015-01-03 18:12:49 INFO  vLogger:31 - In vTestEngine validateS3Connection
+2015-01-03 18:12:50 DEBUG InternalConfig:208 - Configuration override awssdk_config_override.json not found.
+2015-01-03 18:12:50 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"GET
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 23:12:50 GMT
+/"
+2015-01-03 18:12:50 DEBUG request:326 - Sending Request: GET http://object.vipronline.com / Headers: (Authorization: AWS user045:UxrwAtI0P5pBWm/rPO+TEJTEcIA=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 23:12:50 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 18:12:50 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 18:12:50 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 0][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:12:50 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 18:12:50 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 18:12:50 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 18:12:50 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 18:12:50 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 18:12:50 DEBUG DefaultClientConnection:269 - Sending request: GET / HTTP/1.1
+2015-01-03 18:12:50 DEBUG wire:63 - >> "GET / HTTP/1.1[\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - >> "Authorization: AWS user045:UxrwAtI0P5pBWm/rPO+TEJTEcIA=[\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 23:12:50 GMT[\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 18:12:50 DEBUG headers:273 - >> GET / HTTP/1.1
+2015-01-03 18:12:50 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 18:12:50 DEBUG headers:276 - >> Authorization: AWS user045:UxrwAtI0P5pBWm/rPO+TEJTEcIA=
+2015-01-03 18:12:50 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 18:12:50 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 23:12:50 GMT
+2015-01-03 18:12:50 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 18:12:50 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 18:12:50 DEBUG wire:63 - << "HTTP/1.1 200 OK[\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - << "Date: Sat, 03 Jan 2015 23:00:12 GMT[\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:47cbd:5[\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - << "x-amz-id-2: [\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - << "Content-Type: application/xml[\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - << "Content-Length: 798[\r][\n]"
+2015-01-03 18:12:50 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:12:50 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 200 OK
+2015-01-03 18:12:50 DEBUG headers:257 - << HTTP/1.1 200 OK
+2015-01-03 18:12:50 DEBUG headers:260 - << Date: Sat, 03 Jan 2015 23:00:12 GMT
+2015-01-03 18:12:50 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 18:12:50 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:47cbd:5
+2015-01-03 18:12:50 DEBUG headers:260 - << x-amz-id-2: 
+2015-01-03 18:12:50 DEBUG headers:260 - << Content-Type: application/xml
+2015-01-03 18:12:50 DEBUG headers:260 - << Content-Length: 798
+2015-01-03 18:12:50 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 18:12:50 TRACE request:61 - Beginning to parse service response XML
+2015-01-03 18:12:50 DEBUG XmlResponsesSaxParser:162 - Sanitizing XML document destined for handler class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 18:12:50 DEBUG wire:77 - << "<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ListAllMyBucketsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Owner><ID>user045</ID><DisplayName>user045</DisplayName></Owner><Buckets><Bucket><Name>cse-demo</Name><CreationDate>2014-10-03T19:07:05.128Z</CreationDate></Bucket><Bucket><Name>emc-media</Name><CreationDate>2014-10-02T16:56:29.286Z</CreationDate></Bucket><Bucket><Name>mediaboard-magdy</Name><CreationDate>2014-10-29T22:14:01.056Z</CreationDate></Bucket><Bucket><Name>mediaboard-verdirame</Name><CreationDate>2014-11-17T20:22:04.563Z</CreationDate></Bucket><Bucket><Name>test</Name><CreationDate>2015-01-02T22:23:12.454Z</CreationDate></Bucket><Bucket><Name>vs-test</Name><CreationDate>2014-12-31T03:07:17.724Z</CreationDate></Bucket></Buckets></ListAllMyBucketsResult>"
+2015-01-03 18:12:50 DEBUG PoolingClientConnectionManager:272 - Connection [id: 0][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 18:12:50 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 0][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:12:50 DEBUG XmlResponsesSaxParser:134 - Parsing XML response document with handler: class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 18:12:50 TRACE request:63 - Done parsing service response XML
+2015-01-03 18:12:50 DEBUG request:716 - Received successful response: 200, AWS Request ID: 0a6c5fc0:148a3807b44:47cbd:5
+2015-01-03 18:13:43 INFO  vLogger:31 - In vTestEngine validateS3Connection
+2015-01-03 18:13:43 DEBUG InternalConfig:208 - Configuration override awssdk_config_override.json not found.
+2015-01-03 18:13:43 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"GET
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 23:13:43 GMT
+/"
+2015-01-03 18:13:43 DEBUG request:326 - Sending Request: GET http://object.vipronline.com / Headers: (Authorization: AWS user045:bSHXzgQvF5h288lqN3nWvYps+Ck=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 23:13:43 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 18:13:43 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 18:13:43 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 0][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:13:43 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 18:13:43 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 18:13:43 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 18:13:43 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 18:13:43 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 18:13:43 DEBUG DefaultClientConnection:269 - Sending request: GET / HTTP/1.1
+2015-01-03 18:13:43 DEBUG wire:63 - >> "GET / HTTP/1.1[\r][\n]"
+2015-01-03 18:13:43 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 18:13:43 DEBUG wire:63 - >> "Authorization: AWS user045:bSHXzgQvF5h288lqN3nWvYps+Ck=[\r][\n]"
+2015-01-03 18:13:43 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 18:13:43 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 23:13:43 GMT[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 18:13:44 DEBUG headers:273 - >> GET / HTTP/1.1
+2015-01-03 18:13:44 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 18:13:44 DEBUG headers:276 - >> Authorization: AWS user045:bSHXzgQvF5h288lqN3nWvYps+Ck=
+2015-01-03 18:13:44 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 18:13:44 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 23:13:43 GMT
+2015-01-03 18:13:44 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 18:13:44 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 18:13:44 DEBUG wire:63 - << "HTTP/1.1 200 OK[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "Date: Sat, 03 Jan 2015 23:01:06 GMT[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:47cbf:4[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "x-amz-id-2: [\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "Content-Type: application/xml[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "Content-Length: 798[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:13:44 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 200 OK
+2015-01-03 18:13:44 DEBUG headers:257 - << HTTP/1.1 200 OK
+2015-01-03 18:13:44 DEBUG headers:260 - << Date: Sat, 03 Jan 2015 23:01:06 GMT
+2015-01-03 18:13:44 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 18:13:44 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:47cbf:4
+2015-01-03 18:13:44 DEBUG headers:260 - << x-amz-id-2: 
+2015-01-03 18:13:44 DEBUG headers:260 - << Content-Type: application/xml
+2015-01-03 18:13:44 DEBUG headers:260 - << Content-Length: 798
+2015-01-03 18:13:44 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 18:13:44 TRACE request:61 - Beginning to parse service response XML
+2015-01-03 18:13:44 DEBUG XmlResponsesSaxParser:162 - Sanitizing XML document destined for handler class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 18:13:44 DEBUG wire:77 - << "<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ListAllMyBucketsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Owner><ID>user045</ID><DisplayName>user045</DisplayName></Owner><Buckets><Bucket><Name>cse-demo</Name><CreationDate>2014-10-03T19:07:05.128Z</CreationDate></Bucket><Bucket><Name>emc-media</Name><CreationDate>2014-10-02T16:56:29.286Z</CreationDate></Bucket><Bucket><Name>mediaboard-magdy</Name><CreationDate>2014-10-29T22:14:01.056Z</CreationDate></Bucket><Bucket><Name>mediaboard-verdirame</Name><CreationDate>2014-11-17T20:22:04.563Z</CreationDate></Bucket><Bucket><Name>test</Name><CreationDate>2015-01-02T22:23:12.454Z</CreationDate></Bucket><Bucket><Name>vs-test</Name><CreationDate>2014-12-31T03:07:17.724Z</CreationDate></Bucket></Buckets></ListAllMyBucketsResult>"
+2015-01-03 18:13:44 DEBUG PoolingClientConnectionManager:272 - Connection [id: 0][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 18:13:44 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 0][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:13:44 DEBUG XmlResponsesSaxParser:134 - Parsing XML response document with handler: class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 18:13:44 TRACE request:63 - Done parsing service response XML
+2015-01-03 18:13:44 DEBUG request:716 - Received successful response: 200, AWS Request ID: 0a6c5fc0:148a3807b44:47cbf:4
+2015-01-03 18:13:44 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"PUT
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 23:13:44 GMT
+/vstrikertest/"
+2015-01-03 18:13:44 DEBUG request:326 - Sending Request: PUT http://object.vipronline.com /vstrikertest/ Headers: (Authorization: AWS user045:3ur2dpPmibOg+YMfccpfFTfjrj8=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 23:13:44 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 18:13:44 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 18:13:44 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 1][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:13:44 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 18:13:44 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 18:13:44 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 18:13:44 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 18:13:44 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 18:13:44 DEBUG DefaultClientConnection:269 - Sending request: PUT /vstrikertest/ HTTP/1.1
+2015-01-03 18:13:44 DEBUG wire:63 - >> "PUT /vstrikertest/ HTTP/1.1[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "Authorization: AWS user045:3ur2dpPmibOg+YMfccpfFTfjrj8=[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 23:13:44 GMT[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "Content-Length: 0[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 18:13:44 DEBUG headers:273 - >> PUT /vstrikertest/ HTTP/1.1
+2015-01-03 18:13:44 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 18:13:44 DEBUG headers:276 - >> Authorization: AWS user045:3ur2dpPmibOg+YMfccpfFTfjrj8=
+2015-01-03 18:13:44 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 18:13:44 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 23:13:44 GMT
+2015-01-03 18:13:44 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 18:13:44 DEBUG headers:276 - >> Content-Length: 0
+2015-01-03 18:13:44 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 18:13:44 DEBUG wire:63 - << "HTTP/1.1 200 OK[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "Date: Sat, 03 Jan 2015 23:01:06 GMT[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:47cbf:c[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "x-amz-id-2: 3b766227177eaaf4738ff0f48ec27e46741485a65ef9f629b54bde9857f0595e[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "Location: /vstrikertest[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "Content-Length: 0[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:13:44 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 200 OK
+2015-01-03 18:13:44 DEBUG headers:257 - << HTTP/1.1 200 OK
+2015-01-03 18:13:44 DEBUG headers:260 - << Date: Sat, 03 Jan 2015 23:01:06 GMT
+2015-01-03 18:13:44 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 18:13:44 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:47cbf:c
+2015-01-03 18:13:44 DEBUG headers:260 - << x-amz-id-2: 3b766227177eaaf4738ff0f48ec27e46741485a65ef9f629b54bde9857f0595e
+2015-01-03 18:13:44 DEBUG headers:260 - << Location: /vstrikertest
+2015-01-03 18:13:44 DEBUG headers:260 - << Content-Length: 0
+2015-01-03 18:13:44 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 18:13:44 DEBUG request:716 - Received successful response: 200, AWS Request ID: 0a6c5fc0:148a3807b44:47cbf:c
+2015-01-03 18:13:44 DEBUG PoolingClientConnectionManager:272 - Connection [id: 1][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 18:13:44 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 1][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:13:44 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"DELETE
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 23:13:44 GMT
+/vstrikertest/"
+2015-01-03 18:13:44 DEBUG request:326 - Sending Request: DELETE http://object.vipronline.com /vstrikertest/ Headers: (Authorization: AWS user045:rhEoNYtXKfxjGgfxXLIqEUfL9TU=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 23:13:44 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 18:13:44 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 18:13:44 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 2][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:13:44 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 18:13:44 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 18:13:44 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 18:13:44 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 18:13:44 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 18:13:44 DEBUG DefaultClientConnection:269 - Sending request: DELETE /vstrikertest/ HTTP/1.1
+2015-01-03 18:13:44 DEBUG wire:63 - >> "DELETE /vstrikertest/ HTTP/1.1[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "Authorization: AWS user045:rhEoNYtXKfxjGgfxXLIqEUfL9TU=[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 23:13:44 GMT[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 18:13:44 DEBUG headers:273 - >> DELETE /vstrikertest/ HTTP/1.1
+2015-01-03 18:13:44 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 18:13:44 DEBUG headers:276 - >> Authorization: AWS user045:rhEoNYtXKfxjGgfxXLIqEUfL9TU=
+2015-01-03 18:13:44 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 18:13:44 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 23:13:44 GMT
+2015-01-03 18:13:44 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 18:13:44 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 18:13:44 DEBUG wire:63 - << "HTTP/1.1 204 No Content[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "Date: Sat, 03 Jan 2015 23:01:06 GMT[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:47cbf:13[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "x-amz-id-2: user045.vstrikertest[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "Content-Length: 0[\r][\n]"
+2015-01-03 18:13:44 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:13:44 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 204 No Content
+2015-01-03 18:13:44 DEBUG headers:257 - << HTTP/1.1 204 No Content
+2015-01-03 18:13:44 DEBUG headers:260 - << Date: Sat, 03 Jan 2015 23:01:06 GMT
+2015-01-03 18:13:44 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 18:13:44 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:47cbf:13
+2015-01-03 18:13:44 DEBUG headers:260 - << x-amz-id-2: user045.vstrikertest
+2015-01-03 18:13:44 DEBUG headers:260 - << Content-Length: 0
+2015-01-03 18:13:44 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 18:13:44 DEBUG PoolingClientConnectionManager:272 - Connection [id: 2][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 18:13:44 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 2][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:13:44 DEBUG request:716 - Received successful response: 204, AWS Request ID: 0a6c5fc0:148a3807b44:47cbf:13
+2015-01-03 18:16:09 INFO  vLogger:31 - In vTestEngine validateS3Connection
+2015-01-03 18:16:10 DEBUG InternalConfig:208 - Configuration override awssdk_config_override.json not found.
+2015-01-03 18:16:10 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"GET
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 23:16:10 GMT
+/"
+2015-01-03 18:16:10 DEBUG request:326 - Sending Request: GET http://object.vipronline.com / Headers: (Authorization: AWS user045:MoVgKEEN4amulp73uoGLpb++Cks=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 23:16:10 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 18:16:10 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 18:16:10 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 0][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:16:10 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 18:16:10 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 18:16:10 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 18:16:10 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 18:16:10 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 18:16:10 DEBUG DefaultClientConnection:269 - Sending request: GET / HTTP/1.1
+2015-01-03 18:16:10 DEBUG wire:63 - >> "GET / HTTP/1.1[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "Authorization: AWS user045:MoVgKEEN4amulp73uoGLpb++Cks=[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 23:16:10 GMT[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 18:16:10 DEBUG headers:273 - >> GET / HTTP/1.1
+2015-01-03 18:16:10 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 18:16:10 DEBUG headers:276 - >> Authorization: AWS user045:MoVgKEEN4amulp73uoGLpb++Cks=
+2015-01-03 18:16:10 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 18:16:10 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 23:16:10 GMT
+2015-01-03 18:16:10 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 18:16:10 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 18:16:10 DEBUG wire:63 - << "HTTP/1.1 200 OK[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "Date: Sat, 03 Jan 2015 23:03:33 GMT[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:47cc5:8[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "x-amz-id-2: [\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "Content-Type: application/xml[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "Content-Length: 798[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:16:10 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 200 OK
+2015-01-03 18:16:10 DEBUG headers:257 - << HTTP/1.1 200 OK
+2015-01-03 18:16:10 DEBUG headers:260 - << Date: Sat, 03 Jan 2015 23:03:33 GMT
+2015-01-03 18:16:10 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 18:16:10 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:47cc5:8
+2015-01-03 18:16:10 DEBUG headers:260 - << x-amz-id-2: 
+2015-01-03 18:16:10 DEBUG headers:260 - << Content-Type: application/xml
+2015-01-03 18:16:10 DEBUG headers:260 - << Content-Length: 798
+2015-01-03 18:16:10 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 18:16:10 TRACE request:61 - Beginning to parse service response XML
+2015-01-03 18:16:10 DEBUG XmlResponsesSaxParser:162 - Sanitizing XML document destined for handler class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 18:16:10 DEBUG wire:77 - << "<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ListAllMyBucketsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Owner><ID>user045</ID><DisplayName>user045</DisplayName></Owner><Buckets><Bucket><Name>cse-demo</Name><CreationDate>2014-10-03T19:07:05.128Z</CreationDate></Bucket><Bucket><Name>emc-media</Name><CreationDate>2014-10-02T16:56:29.286Z</CreationDate></Bucket><Bucket><Name>mediaboard-magdy</Name><CreationDate>2014-10-29T22:14:01.056Z</CreationDate></Bucket><Bucket><Name>mediaboard-verdirame</Name><CreationDate>2014-11-17T20:22:04.563Z</CreationDate></Bucket><Bucket><Name>test</Name><CreationDate>2015-01-02T22:23:12.454Z</CreationDate></Bucket><Bucket><Name>vs-test</Name><CreationDate>2014-12-31T03:07:17.724Z</CreationDate></Bucket></Buckets></ListAllMyBucketsResult>"
+2015-01-03 18:16:10 DEBUG PoolingClientConnectionManager:272 - Connection [id: 0][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 18:16:10 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 0][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:16:10 DEBUG XmlResponsesSaxParser:134 - Parsing XML response document with handler: class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 18:16:10 TRACE request:63 - Done parsing service response XML
+2015-01-03 18:16:10 DEBUG request:716 - Received successful response: 200, AWS Request ID: 0a6c5fc0:148a3807b44:47cc5:8
+2015-01-03 18:16:10 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"PUT
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 23:16:10 GMT
+/vstrikertest/"
+2015-01-03 18:16:10 DEBUG request:326 - Sending Request: PUT http://object.vipronline.com /vstrikertest/ Headers: (Authorization: AWS user045:WcXZpBT7MvZ6v5ebR8RpVBYD/4k=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 23:16:10 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 18:16:10 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 18:16:10 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 1][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:16:10 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 18:16:10 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 18:16:10 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 18:16:10 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 18:16:10 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 18:16:10 DEBUG DefaultClientConnection:269 - Sending request: PUT /vstrikertest/ HTTP/1.1
+2015-01-03 18:16:10 DEBUG wire:63 - >> "PUT /vstrikertest/ HTTP/1.1[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "Authorization: AWS user045:WcXZpBT7MvZ6v5ebR8RpVBYD/4k=[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 23:16:10 GMT[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "Content-Length: 0[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 18:16:10 DEBUG headers:273 - >> PUT /vstrikertest/ HTTP/1.1
+2015-01-03 18:16:10 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 18:16:10 DEBUG headers:276 - >> Authorization: AWS user045:WcXZpBT7MvZ6v5ebR8RpVBYD/4k=
+2015-01-03 18:16:10 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 18:16:10 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 23:16:10 GMT
+2015-01-03 18:16:10 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 18:16:10 DEBUG headers:276 - >> Content-Length: 0
+2015-01-03 18:16:10 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 18:16:10 DEBUG wire:63 - << "HTTP/1.1 200 OK[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "Date: Sat, 03 Jan 2015 23:03:33 GMT[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:47cc6:4[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "x-amz-id-2: 004c9b4565686827e72310807191bf23d02b8a13a5fab55579ec3ff683e33d1a[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "Location: /vstrikertest[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "Content-Length: 0[\r][\n]"
+2015-01-03 18:16:10 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:16:10 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 200 OK
+2015-01-03 18:16:10 DEBUG headers:257 - << HTTP/1.1 200 OK
+2015-01-03 18:16:10 DEBUG headers:260 - << Date: Sat, 03 Jan 2015 23:03:33 GMT
+2015-01-03 18:16:10 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 18:16:10 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:47cc6:4
+2015-01-03 18:16:10 DEBUG headers:260 - << x-amz-id-2: 004c9b4565686827e72310807191bf23d02b8a13a5fab55579ec3ff683e33d1a
+2015-01-03 18:16:10 DEBUG headers:260 - << Location: /vstrikertest
+2015-01-03 18:16:10 DEBUG headers:260 - << Content-Length: 0
+2015-01-03 18:16:10 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 18:16:10 DEBUG request:716 - Received successful response: 200, AWS Request ID: 0a6c5fc0:148a3807b44:47cc6:4
+2015-01-03 18:16:10 DEBUG PoolingClientConnectionManager:272 - Connection [id: 1][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 18:16:10 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 1][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:17:00 INFO  vLogger:31 - In vTestEngine validateS3Connection
+2015-01-03 18:17:01 DEBUG InternalConfig:208 - Configuration override awssdk_config_override.json not found.
+2015-01-03 18:17:01 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"GET
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 23:17:01 GMT
+/"
+2015-01-03 18:17:01 DEBUG request:326 - Sending Request: GET http://object.vipronline.com / Headers: (Authorization: AWS user045:rwQWsnJNVQFRDU9Ldwaw6VGwgSY=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 23:17:01 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 18:17:01 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 18:17:01 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 0][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:17:01 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 18:17:01 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 18:17:01 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 18:17:01 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 18:17:01 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 18:17:01 DEBUG DefaultClientConnection:269 - Sending request: GET / HTTP/1.1
+2015-01-03 18:17:01 DEBUG wire:63 - >> "GET / HTTP/1.1[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "Authorization: AWS user045:rwQWsnJNVQFRDU9Ldwaw6VGwgSY=[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 23:17:01 GMT[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 18:17:01 DEBUG headers:273 - >> GET / HTTP/1.1
+2015-01-03 18:17:01 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 18:17:01 DEBUG headers:276 - >> Authorization: AWS user045:rwQWsnJNVQFRDU9Ldwaw6VGwgSY=
+2015-01-03 18:17:01 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 18:17:01 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 23:17:01 GMT
+2015-01-03 18:17:01 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 18:17:01 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 18:17:01 DEBUG wire:63 - << "HTTP/1.1 200 OK[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - << "Date: Sat, 03 Jan 2015 23:04:23 GMT[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:47cc3:12[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - << "x-amz-id-2: [\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - << "Content-Type: application/xml[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - << "Content-Length: 893[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:17:01 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 200 OK
+2015-01-03 18:17:01 DEBUG headers:257 - << HTTP/1.1 200 OK
+2015-01-03 18:17:01 DEBUG headers:260 - << Date: Sat, 03 Jan 2015 23:04:23 GMT
+2015-01-03 18:17:01 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 18:17:01 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:47cc3:12
+2015-01-03 18:17:01 DEBUG headers:260 - << x-amz-id-2: 
+2015-01-03 18:17:01 DEBUG headers:260 - << Content-Type: application/xml
+2015-01-03 18:17:01 DEBUG headers:260 - << Content-Length: 893
+2015-01-03 18:17:01 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 18:17:01 TRACE request:61 - Beginning to parse service response XML
+2015-01-03 18:17:01 DEBUG XmlResponsesSaxParser:162 - Sanitizing XML document destined for handler class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 18:17:01 DEBUG wire:77 - << "<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ListAllMyBucketsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Owner><ID>user045</ID><DisplayName>user045</DisplayName></Owner><Buckets><Bucket><Name>cse-demo</Name><CreationDate>2014-10-03T19:07:05.128Z</CreationDate></Bucket><Bucket><Name>emc-media</Name><CreationDate>2014-10-02T16:56:29.286Z</CreationDate></Bucket><Bucket><Name>mediaboard-magdy</Name><CreationDate>2014-10-29T22:14:01.056Z</CreationDate></Bucket><Bucket><Name>mediaboard-verdirame</Name><CreationDate>2014-11-17T20:22:04.563Z</CreationDate></Bucket><Bucket><Name>test</Name><CreationDate>2015-01-02T22:23:12.454Z</CreationDate></Bucket><Bucket><Name>vs-test</Name><CreationDate>2014-12-31T03:07:17.724Z</CreationDate></Bucket><Bucket><Name>vstrikertest</Name><CreationDate>2015-01-03T23:03:33.211Z</CreationDate></Bucket></Buckets></ListAllMyBucketsResult>"
+2015-01-03 18:17:01 DEBUG PoolingClientConnectionManager:272 - Connection [id: 0][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 18:17:01 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 0][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:17:01 DEBUG XmlResponsesSaxParser:134 - Parsing XML response document with handler: class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 18:17:01 TRACE request:63 - Done parsing service response XML
+2015-01-03 18:17:01 DEBUG request:716 - Received successful response: 200, AWS Request ID: 0a6c5fc0:148a3807b44:47cc3:12
+2015-01-03 18:17:01 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"DELETE
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 23:17:01 GMT
+/vstrikertest/"
+2015-01-03 18:17:01 DEBUG request:326 - Sending Request: DELETE http://object.vipronline.com /vstrikertest/ Headers: (Authorization: AWS user045:F4Hq3r/PnMLD8P6jJCBWXOJp7sc=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 23:17:01 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 18:17:01 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 18:17:01 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 1][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:17:01 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 18:17:01 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 18:17:01 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 18:17:01 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 18:17:01 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 18:17:01 DEBUG DefaultClientConnection:269 - Sending request: DELETE /vstrikertest/ HTTP/1.1
+2015-01-03 18:17:01 DEBUG wire:63 - >> "DELETE /vstrikertest/ HTTP/1.1[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "Authorization: AWS user045:F4Hq3r/PnMLD8P6jJCBWXOJp7sc=[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 23:17:01 GMT[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 18:17:01 DEBUG headers:273 - >> DELETE /vstrikertest/ HTTP/1.1
+2015-01-03 18:17:01 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 18:17:01 DEBUG headers:276 - >> Authorization: AWS user045:F4Hq3r/PnMLD8P6jJCBWXOJp7sc=
+2015-01-03 18:17:01 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 18:17:01 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 23:17:01 GMT
+2015-01-03 18:17:01 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 18:17:01 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 18:17:01 DEBUG wire:63 - << "HTTP/1.1 204 No Content[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - << "Date: Sat, 03 Jan 2015 23:04:24 GMT[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:47cc5:1d[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - << "x-amz-id-2: user045.vstrikertest[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - << "Content-Length: 0[\r][\n]"
+2015-01-03 18:17:01 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:17:01 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 204 No Content
+2015-01-03 18:17:01 DEBUG headers:257 - << HTTP/1.1 204 No Content
+2015-01-03 18:17:01 DEBUG headers:260 - << Date: Sat, 03 Jan 2015 23:04:24 GMT
+2015-01-03 18:17:01 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 18:17:01 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:47cc5:1d
+2015-01-03 18:17:01 DEBUG headers:260 - << x-amz-id-2: user045.vstrikertest
+2015-01-03 18:17:01 DEBUG headers:260 - << Content-Length: 0
+2015-01-03 18:17:01 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 18:17:01 DEBUG PoolingClientConnectionManager:272 - Connection [id: 1][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 18:17:01 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 1][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:17:01 DEBUG request:716 - Received successful response: 204, AWS Request ID: 0a6c5fc0:148a3807b44:47cc5:1d
+2015-01-03 18:17:21 INFO  vLogger:31 - In vTestEngine validateS3Connection
+2015-01-03 18:17:21 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"GET
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 23:17:21 GMT
+/"
+2015-01-03 18:17:21 DEBUG request:326 - Sending Request: GET http://object.vipronline.com / Headers: (Authorization: AWS user045:SDHiwrBDDATOClvSBuolBJFThbI=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 23:17:21 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 18:17:21 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 18:17:21 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 2][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:17:21 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 18:17:21 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 18:17:21 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 18:17:21 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 18:17:21 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 18:17:21 DEBUG DefaultClientConnection:269 - Sending request: GET / HTTP/1.1
+2015-01-03 18:17:21 DEBUG wire:63 - >> "GET / HTTP/1.1[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "Authorization: AWS user045:SDHiwrBDDATOClvSBuolBJFThbI=[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 23:17:21 GMT[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 18:17:21 DEBUG headers:273 - >> GET / HTTP/1.1
+2015-01-03 18:17:21 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 18:17:21 DEBUG headers:276 - >> Authorization: AWS user045:SDHiwrBDDATOClvSBuolBJFThbI=
+2015-01-03 18:17:21 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 18:17:21 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 23:17:21 GMT
+2015-01-03 18:17:21 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 18:17:21 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 18:17:21 DEBUG wire:63 - << "HTTP/1.1 200 OK[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "Date: Sat, 03 Jan 2015 23:04:43 GMT[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:47cc3:1d[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "x-amz-id-2: [\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "Content-Type: application/xml[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "Content-Length: 798[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:17:21 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 200 OK
+2015-01-03 18:17:21 DEBUG headers:257 - << HTTP/1.1 200 OK
+2015-01-03 18:17:21 DEBUG headers:260 - << Date: Sat, 03 Jan 2015 23:04:43 GMT
+2015-01-03 18:17:21 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 18:17:21 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:47cc3:1d
+2015-01-03 18:17:21 DEBUG headers:260 - << x-amz-id-2: 
+2015-01-03 18:17:21 DEBUG headers:260 - << Content-Type: application/xml
+2015-01-03 18:17:21 DEBUG headers:260 - << Content-Length: 798
+2015-01-03 18:17:21 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 18:17:21 TRACE request:61 - Beginning to parse service response XML
+2015-01-03 18:17:21 DEBUG XmlResponsesSaxParser:162 - Sanitizing XML document destined for handler class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 18:17:21 DEBUG wire:77 - << "<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ListAllMyBucketsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Owner><ID>user045</ID><DisplayName>user045</DisplayName></Owner><Buckets><Bucket><Name>cse-demo</Name><CreationDate>2014-10-03T19:07:05.128Z</CreationDate></Bucket><Bucket><Name>emc-media</Name><CreationDate>2014-10-02T16:56:29.286Z</CreationDate></Bucket><Bucket><Name>mediaboard-magdy</Name><CreationDate>2014-10-29T22:14:01.056Z</CreationDate></Bucket><Bucket><Name>mediaboard-verdirame</Name><CreationDate>2014-11-17T20:22:04.563Z</CreationDate></Bucket><Bucket><Name>test</Name><CreationDate>2015-01-02T22:23:12.454Z</CreationDate></Bucket><Bucket><Name>vs-test</Name><CreationDate>2014-12-31T03:07:17.724Z</CreationDate></Bucket></Buckets></ListAllMyBucketsResult>"
+2015-01-03 18:17:21 DEBUG PoolingClientConnectionManager:272 - Connection [id: 2][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 18:17:21 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 2][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:17:21 DEBUG XmlResponsesSaxParser:134 - Parsing XML response document with handler: class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 18:17:21 TRACE request:63 - Done parsing service response XML
+2015-01-03 18:17:21 DEBUG request:716 - Received successful response: 200, AWS Request ID: 0a6c5fc0:148a3807b44:47cc3:1d
+2015-01-03 18:17:21 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"DELETE
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 23:17:21 GMT
+/vstrikertest/"
+2015-01-03 18:17:21 DEBUG request:326 - Sending Request: DELETE http://object.vipronline.com /vstrikertest/ Headers: (Authorization: AWS user045:/iUsqkVJSJHwUME2DZB4iRyrL54=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 23:17:21 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 18:17:21 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 18:17:21 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 3][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:17:21 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 18:17:21 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 18:17:21 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 18:17:21 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 18:17:21 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 18:17:21 DEBUG DefaultClientConnection:269 - Sending request: DELETE /vstrikertest/ HTTP/1.1
+2015-01-03 18:17:21 DEBUG wire:63 - >> "DELETE /vstrikertest/ HTTP/1.1[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "Authorization: AWS user045:/iUsqkVJSJHwUME2DZB4iRyrL54=[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 23:17:21 GMT[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 18:17:21 DEBUG headers:273 - >> DELETE /vstrikertest/ HTTP/1.1
+2015-01-03 18:17:21 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 18:17:21 DEBUG headers:276 - >> Authorization: AWS user045:/iUsqkVJSJHwUME2DZB4iRyrL54=
+2015-01-03 18:17:21 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 18:17:21 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 23:17:21 GMT
+2015-01-03 18:17:21 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 18:17:21 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 18:17:21 DEBUG wire:63 - << "HTTP/1.1 404 Not Found[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "Content-Type: application/xml[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "Date: Sat, 3 Jan 2015 23:04:43 GMT[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "x-amz-id-2: [\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:47cc3:25[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "Transfer-Encoding: chunked[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:17:21 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 404 Not Found
+2015-01-03 18:17:21 DEBUG headers:257 - << HTTP/1.1 404 Not Found
+2015-01-03 18:17:21 DEBUG headers:260 - << Content-Type: application/xml
+2015-01-03 18:17:21 DEBUG headers:260 - << Date: Sat, 3 Jan 2015 23:04:43 GMT
+2015-01-03 18:17:21 DEBUG headers:260 - << x-amz-id-2: 
+2015-01-03 18:17:21 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:47cc3:25
+2015-01-03 18:17:21 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 18:17:21 DEBUG headers:260 - << Transfer-Encoding: chunked
+2015-01-03 18:17:21 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 18:17:21 DEBUG wire:63 - << "B9[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:77 - << "<Error><Code>NoSuchBucket</Code><Message>The specified bucket does not exist.</Message><Resource>vstrikertest/null</Resource><RequestId>0a6c5fc0:148a3807b44:47cc3:25</RequestId></Error>"
+2015-01-03 18:17:21 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "0[\r][\n]"
+2015-01-03 18:17:21 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:17:21 DEBUG PoolingClientConnectionManager:272 - Connection [id: 3][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 18:17:21 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 3][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:17:21 DEBUG request:762 - Received error response: com.amazonaws.services.s3.model.AmazonS3Exception: Status Code: 404, AWS Service: null, AWS Request ID: 0a6c5fc0:148a3807b44:47cc3:25, AWS Error Code: NoSuchBucket, AWS Error Message: The specified bucket does not exist., S3 Extended Request ID: null
+2015-01-03 18:18:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:18:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:18:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:18:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:19:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:19:01 DEBUG DefaultClientConnection:169 - Connection 0.0.0.0:51151<->12.7.200.31:80 closed
+2015-01-03 18:19:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:19:01 DEBUG DefaultClientConnection:169 - Connection 0.0.0.0:51152<->12.7.200.31:80 closed
+2015-01-03 18:19:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:19:01 DEBUG DefaultClientConnection:169 - Connection 0.0.0.0:51153<->12.7.200.31:80 closed
+2015-01-03 18:19:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:19:01 DEBUG DefaultClientConnection:169 - Connection 0.0.0.0:51154<->12.7.200.31:80 closed
+2015-01-03 18:20:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:20:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:20:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:20:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:21:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:21:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:21:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:21:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:22:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:22:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:22:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:22:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:23:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:23:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:23:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:23:01 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:24:03 INFO  vLogger:31 - In vTestEngine validateS3Connection
+2015-01-03 18:24:03 DEBUG InternalConfig:208 - Configuration override awssdk_config_override.json not found.
+2015-01-03 18:24:03 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"GET
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 23:24:03 GMT
+/"
+2015-01-03 18:24:03 DEBUG request:326 - Sending Request: GET http://object.vipronline.com / Headers: (Authorization: AWS user045:koZuF+qU7r7cmczUYDdrtcYeJHo=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 23:24:03 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 18:24:03 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 18:24:03 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 0][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:24:03 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 18:24:03 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 18:24:03 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 18:24:03 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 18:24:03 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 18:24:03 DEBUG DefaultClientConnection:269 - Sending request: GET / HTTP/1.1
+2015-01-03 18:24:03 DEBUG wire:63 - >> "GET / HTTP/1.1[\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - >> "Authorization: AWS user045:koZuF+qU7r7cmczUYDdrtcYeJHo=[\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 23:24:03 GMT[\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 18:24:03 DEBUG headers:273 - >> GET / HTTP/1.1
+2015-01-03 18:24:03 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 18:24:03 DEBUG headers:276 - >> Authorization: AWS user045:koZuF+qU7r7cmczUYDdrtcYeJHo=
+2015-01-03 18:24:03 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 18:24:03 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 23:24:03 GMT
+2015-01-03 18:24:03 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 18:24:03 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 18:24:03 DEBUG wire:63 - << "HTTP/1.1 200 OK[\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - << "Date: Sat, 03 Jan 2015 23:11:26 GMT[\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:47cd3:4[\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - << "x-amz-id-2: [\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - << "Content-Type: application/xml[\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - << "Content-Length: 798[\r][\n]"
+2015-01-03 18:24:03 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:24:03 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 200 OK
+2015-01-03 18:24:03 DEBUG headers:257 - << HTTP/1.1 200 OK
+2015-01-03 18:24:03 DEBUG headers:260 - << Date: Sat, 03 Jan 2015 23:11:26 GMT
+2015-01-03 18:24:03 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 18:24:03 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:47cd3:4
+2015-01-03 18:24:03 DEBUG headers:260 - << x-amz-id-2: 
+2015-01-03 18:24:03 DEBUG headers:260 - << Content-Type: application/xml
+2015-01-03 18:24:03 DEBUG headers:260 - << Content-Length: 798
+2015-01-03 18:24:03 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 18:24:03 TRACE request:61 - Beginning to parse service response XML
+2015-01-03 18:24:04 DEBUG XmlResponsesSaxParser:162 - Sanitizing XML document destined for handler class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 18:24:04 DEBUG wire:77 - << "<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ListAllMyBucketsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Owner><ID>user045</ID><DisplayName>user045</DisplayName></Owner><Buckets><Bucket><Name>cse-demo</Name><CreationDate>2014-10-03T19:07:05.128Z</CreationDate></Bucket><Bucket><Name>emc-media</Name><CreationDate>2014-10-02T16:56:29.286Z</CreationDate></Bucket><Bucket><Name>mediaboard-magdy</Name><CreationDate>2014-10-29T22:14:01.056Z</CreationDate></Bucket><Bucket><Name>mediaboard-verdirame</Name><CreationDate>2014-11-17T20:22:04.563Z</CreationDate></Bucket><Bucket><Name>test</Name><CreationDate>2015-01-02T22:23:12.454Z</CreationDate></Bucket><Bucket><Name>vs-test</Name><CreationDate>2014-12-31T03:07:17.724Z</CreationDate></Bucket></Buckets></ListAllMyBucketsResult>"
+2015-01-03 18:24:04 DEBUG PoolingClientConnectionManager:272 - Connection [id: 0][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 18:24:04 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 0][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:24:04 DEBUG XmlResponsesSaxParser:134 - Parsing XML response document with handler: class com.amazonaws.services.s3.model.transform.XmlResponsesSaxParser$ListAllMyBucketsHandler
+2015-01-03 18:24:04 TRACE request:63 - Done parsing service response XML
+2015-01-03 18:24:04 DEBUG request:716 - Received successful response: 200, AWS Request ID: 0a6c5fc0:148a3807b44:47cd3:4
+2015-01-03 18:24:04 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"PUT
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 23:24:04 GMT
+/vstrikertest/"
+2015-01-03 18:24:04 DEBUG request:326 - Sending Request: PUT http://object.vipronline.com /vstrikertest/ Headers: (Authorization: AWS user045:GfXkUjT/fO467m6tR+M73FnzuVs=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 23:24:04 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 18:24:04 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 18:24:04 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 1][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:24:04 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 18:24:04 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 18:24:04 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 18:24:04 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 18:24:04 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 18:24:04 DEBUG DefaultClientConnection:269 - Sending request: PUT /vstrikertest/ HTTP/1.1
+2015-01-03 18:24:04 DEBUG wire:63 - >> "PUT /vstrikertest/ HTTP/1.1[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "Authorization: AWS user045:GfXkUjT/fO467m6tR+M73FnzuVs=[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 23:24:04 GMT[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "Content-Length: 0[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 18:24:04 DEBUG headers:273 - >> PUT /vstrikertest/ HTTP/1.1
+2015-01-03 18:24:04 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 18:24:04 DEBUG headers:276 - >> Authorization: AWS user045:GfXkUjT/fO467m6tR+M73FnzuVs=
+2015-01-03 18:24:04 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 18:24:04 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 23:24:04 GMT
+2015-01-03 18:24:04 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 18:24:04 DEBUG headers:276 - >> Content-Length: 0
+2015-01-03 18:24:04 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 18:24:04 DEBUG wire:63 - << "HTTP/1.1 200 OK[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - << "Date: Sat, 03 Jan 2015 23:11:26 GMT[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:47cd3:c[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - << "x-amz-id-2: 3dc9ff63eb5728e74f6dd2abfa5f8beda1e125746d3942351721752f39f66971[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - << "Location: /vstrikertest[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - << "Content-Length: 0[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:24:04 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 200 OK
+2015-01-03 18:24:04 DEBUG headers:257 - << HTTP/1.1 200 OK
+2015-01-03 18:24:04 DEBUG headers:260 - << Date: Sat, 03 Jan 2015 23:11:26 GMT
+2015-01-03 18:24:04 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 18:24:04 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:47cd3:c
+2015-01-03 18:24:04 DEBUG headers:260 - << x-amz-id-2: 3dc9ff63eb5728e74f6dd2abfa5f8beda1e125746d3942351721752f39f66971
+2015-01-03 18:24:04 DEBUG headers:260 - << Location: /vstrikertest
+2015-01-03 18:24:04 DEBUG headers:260 - << Content-Length: 0
+2015-01-03 18:24:04 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 18:24:04 DEBUG request:716 - Received successful response: 200, AWS Request ID: 0a6c5fc0:148a3807b44:47cd3:c
+2015-01-03 18:24:04 DEBUG PoolingClientConnectionManager:272 - Connection [id: 1][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 18:24:04 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 1][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:24:04 DEBUG ViPRS3Signer:62 - Calculated string to sign:
+"DELETE
+
+application/x-www-form-urlencoded; charset=utf-8
+Sat, 03 Jan 2015 23:24:04 GMT
+/vstrikertest/"
+2015-01-03 18:24:04 DEBUG request:326 - Sending Request: DELETE http://object.vipronline.com /vstrikertest/ Headers: (Authorization: AWS user045:m6CQpeo3hGwCWkb4u8Njw5sDcNw=, User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25, Date: Sat, 03 Jan 2015 23:24:04 GMT, Content-Type: application/x-www-form-urlencoded; charset=utf-8, ) 
+2015-01-03 18:24:04 DEBUG PoolingClientConnectionManager:186 - Connection request: [route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 0 of 50; total allocated: 0 of 50]
+2015-01-03 18:24:04 DEBUG PoolingClientConnectionManager:220 - Connection leased: [id: 2][route: {}->http://object.vipronline.com][total kept alive: 0; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:24:04 DEBUG DefaultClientConnectionOperator:177 - Connecting to object.vipronline.com:80
+2015-01-03 18:24:04 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2015-01-03 18:24:04 DEBUG RequestAuthCache:78 - Auth cache not set in the context
+2015-01-03 18:24:04 DEBUG RequestProxyAuthentication:87 - Proxy auth state: UNCHALLENGED
+2015-01-03 18:24:04 DEBUG SdkHttpClient:711 - Attempt 1 to execute request
+2015-01-03 18:24:04 DEBUG DefaultClientConnection:269 - Sending request: DELETE /vstrikertest/ HTTP/1.1
+2015-01-03 18:24:04 DEBUG wire:63 - >> "DELETE /vstrikertest/ HTTP/1.1[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "Host: object.vipronline.com[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "Authorization: AWS user045:m6CQpeo3hGwCWkb4u8Njw5sDcNw=[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "Date: Sat, 03 Jan 2015 23:24:04 GMT[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=utf-8[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - >> "[\r][\n]"
+2015-01-03 18:24:04 DEBUG headers:273 - >> DELETE /vstrikertest/ HTTP/1.1
+2015-01-03 18:24:04 DEBUG headers:276 - >> Host: object.vipronline.com
+2015-01-03 18:24:04 DEBUG headers:276 - >> Authorization: AWS user045:m6CQpeo3hGwCWkb4u8Njw5sDcNw=
+2015-01-03 18:24:04 DEBUG headers:276 - >> User-Agent: aws-sdk-java/1.7.5 Mac_OS_X/10.10.1 Java_HotSpot(TM)_64-Bit_Server_VM/25.25-b02/1.8.0_25
+2015-01-03 18:24:04 DEBUG headers:276 - >> Date: Sat, 03 Jan 2015 23:24:04 GMT
+2015-01-03 18:24:04 DEBUG headers:276 - >> Content-Type: application/x-www-form-urlencoded; charset=utf-8
+2015-01-03 18:24:04 DEBUG headers:276 - >> Connection: Keep-Alive
+2015-01-03 18:24:04 DEBUG wire:63 - << "HTTP/1.1 204 No Content[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - << "Date: Sat, 03 Jan 2015 23:11:26 GMT[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - << "Server: ViPR/1.0[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - << "x-amz-request-id: 0a6c5fc0:148a3807b44:47cd4:5[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - << "x-amz-id-2: user045.vstrikertest[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - << "Content-Length: 0[\r][\n]"
+2015-01-03 18:24:04 DEBUG wire:63 - << "[\r][\n]"
+2015-01-03 18:24:04 DEBUG DefaultClientConnection:254 - Receiving response: HTTP/1.1 204 No Content
+2015-01-03 18:24:04 DEBUG headers:257 - << HTTP/1.1 204 No Content
+2015-01-03 18:24:04 DEBUG headers:260 - << Date: Sat, 03 Jan 2015 23:11:26 GMT
+2015-01-03 18:24:04 DEBUG headers:260 - << Server: ViPR/1.0
+2015-01-03 18:24:04 DEBUG headers:260 - << x-amz-request-id: 0a6c5fc0:148a3807b44:47cd4:5
+2015-01-03 18:24:04 DEBUG headers:260 - << x-amz-id-2: user045.vstrikertest
+2015-01-03 18:24:04 DEBUG headers:260 - << Content-Length: 0
+2015-01-03 18:24:04 DEBUG SdkHttpClient:541 - Connection can be kept alive indefinitely
+2015-01-03 18:24:04 DEBUG PoolingClientConnectionManager:272 - Connection [id: 2][route: {}->http://object.vipronline.com] can be kept alive indefinitely
+2015-01-03 18:24:04 DEBUG PoolingClientConnectionManager:278 - Connection released: [id: 2][route: {}->http://object.vipronline.com][total kept alive: 1; route allocated: 1 of 50; total allocated: 1 of 50]
+2015-01-03 18:24:04 DEBUG request:716 - Received successful response: 204, AWS Request ID: 0a6c5fc0:148a3807b44:47cd4:5
+2015-01-03 18:25:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:25:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:25:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:26:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:26:03 DEBUG DefaultClientConnection:169 - Connection 0.0.0.0:51224<->12.7.200.31:80 closed
+2015-01-03 18:26:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:26:03 DEBUG DefaultClientConnection:169 - Connection 0.0.0.0:51225<->12.7.200.31:80 closed
+2015-01-03 18:26:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:26:03 DEBUG DefaultClientConnection:169 - Connection 0.0.0.0:51226<->12.7.200.31:80 closed
+2015-01-03 18:27:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:27:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:27:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:28:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:28:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:28:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:29:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:29:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:29:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:30:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:30:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS
+2015-01-03 18:30:03 DEBUG PoolingClientConnectionManager:295 - Closing connections idle longer than 60 SECONDS

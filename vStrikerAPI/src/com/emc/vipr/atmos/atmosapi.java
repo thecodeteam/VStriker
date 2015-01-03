@@ -1,18 +1,13 @@
 package com.emc.vipr.atmos;
 
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-
 import com.emc.atmos.api.AtmosApi;
 import com.emc.atmos.api.AtmosConfig;
-import com.emc.atmos.api.jersey.AtmosApiClient;
-import java.io.InputStream;
-
-
-
-
 import com.emc.atmos.api.ObjectId;
+import com.emc.atmos.api.jersey.AtmosApiClient;
 
 public class atmosapi {
 	
