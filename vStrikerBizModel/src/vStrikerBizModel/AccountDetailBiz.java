@@ -1,0 +1,47 @@
+package vStrikerBizModel;
+import vStrikerEntities.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import java.util.List;
+
+import javax.persistence.Query;
+public class AccountDetailBiz {
+
+	
+	public static VwAccountDetail AccountSelect(int acctId ) throws Exception 
+	{
+		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
+		EntityManager entitymanager = actfactory.createEntityManager( );
+		VwAccountDetail act = entitymanager.find(VwAccountDetail.class,acctId);
+		entitymanager.getTransaction( ).commit( );
+		
+		entitymanager.close( );
+		actfactory.close( );
+		
+		return act;
+	}
+
+	public static List<VwAccountDetail> AccountSelectAll() throws Exception 
+	{
+		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
+		EntityManager entitymanager = actfactory.createEntityManager( );
+		Query qry = entitymanager.createNamedQuery("VwAccountDetail.findAll",VwAccountDetail.class);
+		@SuppressWarnings("unchecked")
+		List<VwAccountDetail> list = qry.getResultList();
+		
+		entitymanager.getTransaction( ).commit( );
+		
+		entitymanager.close( );
+		actfactory.close( );
+		
+		return list;
+
+	}
+	
+	
+	
+	
+}

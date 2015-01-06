@@ -9,7 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="VSTRIKERDB.EXECUTION_PLAN")
+@Table(name="EXECUTION_PLAN")
 @NamedQuery(name="ExecutionPlan.findAll", query="SELECT e FROM ExecutionPlan e")
 public class ExecutionPlan implements Serializable {
 	private static final long serialVersionUID = 1L;

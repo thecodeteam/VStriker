@@ -1,8 +1,12 @@
 package vStrikerUnitTest;
+import java.util.List;
+
 import vStrikerEntities.*;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +16,8 @@ public class vStrikerEntitesUnitTest {
 
 	@Test
 	public void test() {
-		TestAccountCreate();
+	//	TestAccountCreate();
+		TestAccountDetail();
 	}
 
 	public void TestAccountCreate()
@@ -54,6 +59,31 @@ public class vStrikerEntitesUnitTest {
 		assertSame(acct.getName(),acct2.getName());
 		
 		
+		
+	}
+	
+	public void TestAccountDetail()
+	{
+		try
+		{
+		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
+		EntityManager entitymanager = actfactory.createEntityManager( );
+		Query qry = entitymanager.createNamedQuery("VwAccountDetail.findAll",VwAccountDetail.class);
+		@SuppressWarnings("unchecked")
+		List<VwAccountDetail> list = qry.getResultList();
+		
+		entitymanager.close( );
+		actfactory.close( );
+		
+		for(VwAccountDetail l : list)
+			System.out.println(l.getAccountId()+"-"+l.getName());
+		}
+		catch(Exception e)
+		
+		{
+			
+			System.out.println(e.getMessage());
+		}
 		
 	}
 }

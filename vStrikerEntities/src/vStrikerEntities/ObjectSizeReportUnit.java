@@ -9,7 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="VSTRIKERDB.OBJECT_SIZE_REPORT_UNIT")
+@Table(name="OBJECT_SIZE_REPORT_UNIT")
 @NamedQuery(name="ObjectSizeReportUnit.findAll", query="SELECT o FROM ObjectSizeReportUnit o")
 public class ObjectSizeReportUnit implements Serializable {
 	private static final long serialVersionUID = 1L;

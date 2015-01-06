@@ -12,7 +12,7 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="VSTRIKERDB.CONFIGURATION_TEMPLATE")
+@Table(name="CONFIGURATION_TEMPLATE")
 @NamedQuery(name="ConfigurationTemplate.findAll", query="SELECT c FROM ConfigurationTemplate c")
 public class ConfigurationTemplate implements Serializable {
 	private static final long serialVersionUID = 1L;

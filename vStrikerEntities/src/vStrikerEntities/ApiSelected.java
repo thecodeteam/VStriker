@@ -9,7 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="VSTRIKERDB.API_SELECTED")
+@Table(name="API_SELECTED")
 @NamedQuery(name="ApiSelected.findAll", query="SELECT a FROM ApiSelected a")
 public class ApiSelected implements Serializable {
 	private static final long serialVersionUID = 1L;

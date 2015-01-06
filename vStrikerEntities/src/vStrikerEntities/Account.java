@@ -12,7 +12,7 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="VSTRIKERDB.ACCOUNT")
+@Table(name="ACCOUNT")
 @NamedQuery(name="Account.findAll", query="SELECT a FROM Account a")
 public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;

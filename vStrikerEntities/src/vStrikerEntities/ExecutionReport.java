@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="VSTRIKERDB.EXECUTION_REPORT")
+@Table(name="EXECUTION_REPORT")
 @NamedQuery(name="ExecutionReport.findAll", query="SELECT e FROM ExecutionReport e")
 public class ExecutionReport implements Serializable {
 	private static final long serialVersionUID = 1L;

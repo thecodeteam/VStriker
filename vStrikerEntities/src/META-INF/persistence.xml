@@ -16,6 +16,7 @@
 		<class>vStrikerEntities.ObjectSizeReportUnit</class>
 		<class>vStrikerEntities.TestConfiguration</class>
 		<class>vStrikerEntities.TestPlanOperation</class>
+		<class>vStrikerEntities.VwAccountDetail</class>
 		
 
 	<properties>
