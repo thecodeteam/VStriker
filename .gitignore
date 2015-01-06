@@ -62,3 +62,7 @@ local.properties
  
 # PDT-specific
 .buildpath
+vStrikerDB/DB/vstrikerdb.mv.db.orig
+vStrikerDB/DB/vstrikerdb.trace.db.orig
+vStrikerDB/DB/vstrikerdb.mv.db
+vStrikerDB/DB/vstrikerdb.trace.db
