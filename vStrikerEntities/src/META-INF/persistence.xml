@@ -20,13 +20,13 @@
 		
 
 	<properties>
-	 <property name="eclipslink.jdbc.driver" value="org.h2.Driver"/>
-	 <property name="eclipslink.jdbc.url" value="jdbc:h2:C:\EMC\emccode\vstriker\vStrikerDB\DB\vstrikerdb"/>
-	 <property name="eclipslink.jdbc.user" value="sa"/>
-	 <property name="eclipslink.jdbc.password" value=""/>
+	 <property name="eclipselink.jdbc.driver" value="org.h2.Driver"/>
+	 <property name="eclipselink.jdbc.url" value="jdbc:h2:/Users/sanjeev/Sanjeev/emc/dev/VStriker/vStrikerDB/DB/vstrikerdb"/>
+	 <property name="eclipselink.jdbc.user" value="sa"/>
+	 <property name="eclipselink.jdbc.password" value=""/>
 	 <property name="eclipselink.ddl-generation" value="none"/>
 	 <property name="eclipselink.jdbc.batch-writing" value="JDBC"/>
-	 <property name="javax.persistence.jdbc.url" value="jdbc:h2:C:\EMC\emccode\vstriker\vStrikerDB\DB\vstrikerdb"/>
+	 <property name="javax.persistence.jdbc.url" value="jdbc:h2:/Users/sanjeev/Sanjeev/emc/dev/VStriker/vStrikerDB/DB/vstrikerdb"/>
 	 <property name="javax.persistence.jdbc.user" value="sa"/>
 	 <property name="javax.persistence.jdbc.password" value=""/>
 	 <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>

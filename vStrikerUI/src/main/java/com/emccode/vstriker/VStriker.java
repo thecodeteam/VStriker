@@ -11,12 +11,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import  com.emccode.vstriker.controller.AccountController;
-import  com.emccode.vstriker.controller.AtmosController;
-import  com.emccode.vstriker.controller.HomepageController;
-import  com.emccode.vstriker.controller.S3Controller;
-import  com.emccode.vstriker.controller.SwiftController;
-import  com.emccode.vstriker.model.Account;
+import com.emccode.vstriker.controller.AccountController;
+import com.emccode.vstriker.controller.AtmosController;
+import com.emccode.vstriker.controller.HomepageController;
+import com.emccode.vstriker.controller.S3Controller;
+import com.emccode.vstriker.controller.SwiftController;
+import com.emccode.vstriker.model.Account;
 
 /*
  * @author Sanjeev Chauhan
@@ -26,10 +26,6 @@ public class VStriker extends Application {
 	private Stage primaryStage;
 	private BorderPane vStrikerLayout;
 
-	// Provide reference to the BorderPane - This is no longer needed - Remove - ToDo
-	public BorderPane getMainBorderPane() {
-		return vStrikerLayout;
-	}
 
 	// Replace with Account from vStrikerEntities package - ToDo
 	private ObservableList<Account> accountData = FXCollections

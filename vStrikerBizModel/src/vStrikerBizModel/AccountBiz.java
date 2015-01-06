@@ -1,13 +1,12 @@
 package vStrikerBizModel;
-import vStrikerEntities.*;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
-import java.util.List;
-
 import javax.persistence.Query;
+
+import vStrikerEntities.Account;
 public class AccountBiz {
 
 	public static void AccountCreate(Account acct ) throws Exception 
@@ -56,7 +55,7 @@ public class AccountBiz {
 		@SuppressWarnings("unchecked")
 		List<Account> list = qry.getResultList();
 		
-		entitymanager.getTransaction( ).commit( );
+		//entitymanager.getTransaction( ).commit( );
 		
 		entitymanager.close( );
 		actfactory.close( );

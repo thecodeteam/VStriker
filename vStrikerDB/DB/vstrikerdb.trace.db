@@ -99,93 +99,8 @@ INSERT INTO VSTRIKERDB.ACCOUNT (ACCOUNT_LOCATION, LAST_VALIDATION_DATE, NAME, VA
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
-01-06 08:50:30 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "B" not found; SQL statement:
-SELECT a.*, b.*,c.* FROM VSTRIKERDB.ACCOUNT a left outer join VSTRIKERDB.API on a.Account_ID=b.Account_ID
-left outer join VSTRIKERDB.API_Type c on b.api_type_id=c.api_type_id [42102-184]
-01-06 08:53:36 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "B" not found; SQL statement:
-SELECT a.Name,Account_location,Validated,Last_Validation_Date, b.*,
-c.api_type_name,
-c.api_type_url
-c.api_type_description 
-FROM VSTRIKERDB.ACCOUNT a left outer join VSTRIKERDB.API b on a.Account_ID=b.Account_ID
-left outer join VSTRIKERDB.API_Type c on b.api_type_id=c.api_type_id [42102-184]
-01-06 08:54:09 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "B" not found; SQL statement:
-SELECT a.Name,Account_location,Validated,Last_Validation_Date, 
-b.*,
-c.api_type_name,
-c.api_type_url
-c.api_type_description 
-
-FROM VSTRIKERDB.ACCOUNT a left outer join VSTRIKERDB.API b on a.Account_ID=b.Account_ID
-left outer join VSTRIKERDB.API_Type c on b.api_type_id=c.api_type_id [42102-184]
-01-06 11:14:56 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "VW_ACCOUNT_DETAIL" not found; SQL statement:
-SELECT ACCOUNT_ID, API_TYPE_ID, API_ID, ACCOUNT_LOCATION, API_TYPE_DESCRIPTION, API_TYPE_NAME, API_TYPE_URL, BUCKET, HTTP_ADDRESS_IP, HTTP_ADDRESS_PORT, HTTPS_ADDRESS_IP, HTTPS_ADDRESS_PORT, LAST_VALIDATION_DATE, NAME, SECRET_KEY, SUBTENANT, URL, VALIDATED FROM VW_ACCOUNT_DETAIL [42102-184]
-01-06 11:43:47 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Column "GUID" not found; SQL statement:
-select GUID [42122-184]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
-	at org.h2.message.DbException.get(DbException.java:179)
-	at org.h2.message.DbException.get(DbException.java:155)
-	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:147)
-	at org.h2.command.dml.Select.prepare(Select.java:834)
-	at org.h2.command.Parser.prepareCommand(Parser.java:247)
-	at org.h2.engine.Session.prepareLocal(Session.java:446)
-	at org.h2.engine.Session.prepareCommand(Session.java:388)
-	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1189)
-	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
-	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
-	at org.h2.server.web.WebApp.getResult(WebApp.java:1390)
-	at org.h2.server.web.WebApp.query(WebApp.java:1063)
-	at org.h2.server.web.WebApp$1.next(WebApp.java:1025)
-	at org.h2.server.web.WebApp$1.next(WebApp.java:1012)
-	at org.h2.server.web.WebThread.process(WebThread.java:168)
-	at org.h2.server.web.WebThread.run(WebThread.java:93)
-	at java.lang.Thread.run(Unknown Source)
-01-06 11:43:53 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Function "GUID" not found; SQL statement:
-select GUID() [90022-184]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
-	at org.h2.message.DbException.get(DbException.java:179)
-	at org.h2.message.DbException.get(DbException.java:155)
-	at org.h2.command.Parser.readJavaFunction(Parser.java:2333)
-	at org.h2.command.Parser.readFunction(Parser.java:2385)
-	at org.h2.command.Parser.readTerm(Parser.java:2719)
-	at org.h2.command.Parser.readFactor(Parser.java:2251)
-	at org.h2.command.Parser.readSum(Parser.java:2238)
-	at org.h2.command.Parser.readConcat(Parser.java:2208)
-	at org.h2.command.Parser.readCondition(Parser.java:2058)
-	at org.h2.command.Parser.readAnd(Parser.java:2030)
-	at org.h2.command.Parser.readExpression(Parser.java:2022)
-	at org.h2.command.Parser.parseSelectSimpleSelectPart(Parser.java:1934)
-	at org.h2.command.Parser.parseSelectSimple(Parser.java:1966)
-	at org.h2.command.Parser.parseSelectSub(Parser.java:1860)
-	at org.h2.command.Parser.parseSelectUnion(Parser.java:1681)
-	at org.h2.command.Parser.parseSelect(Parser.java:1669)
-	at org.h2.command.Parser.parsePrepared(Parser.java:433)
-	at org.h2.command.Parser.parse(Parser.java:305)
-	at org.h2.command.Parser.parse(Parser.java:277)
-	at org.h2.command.Parser.prepareCommand(Parser.java:242)
-	at org.h2.engine.Session.prepareLocal(Session.java:446)
-	at org.h2.engine.Session.prepareCommand(Session.java:388)
-	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1189)
-	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
-	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
-	at org.h2.server.web.WebApp.getResult(WebApp.java:1390)
-	at org.h2.server.web.WebApp.query(WebApp.java:1063)
-	at org.h2.server.web.WebApp$1.next(WebApp.java:1025)
-	at org.h2.server.web.WebApp$1.next(WebApp.java:1012)
-	at org.h2.server.web.WebThread.process(WebThread.java:168)
-	at org.h2.server.web.WebThread.run(WebThread.java:93)
-	at java.lang.Thread.run(Unknown Source)
-01-06 11:52:49 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FROM VSTRIKERDB.VW_ACCOUNT_DETAIL VSTRIKERDB.[*]VW_ACCOUNT_DETAIL VSTRIKERDB.ACCOUNT"; SQL statement:
-SELECT * FROM VSTRIKERDB.VW_ACCOUNT_DETAIL VSTRIKERDB.VW_ACCOUNT_DETAIL VSTRIKERDB.ACCOUNT [42000-184]
-01-06 12:04:19 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/EMC/emccode/vstriker/vStrikerDB/DB/vstrikerdb.mv.db [1.4.184/7]" [50000-184]
+01-04 21:58:25 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:/Users/sanjeev/Sanjeev/emc/dev/VStriker/vStrikerDB/DB/vstrikerdb.mv.db [1.4.184/7]" [50000-184]
 	at org.h2.message.DbException.get(DbException.java:168)
 	at org.h2.message.DbException.convert(DbException.java:295)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -207,17 +122,102 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:108)
 	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:92)
 	at org.h2.Driver.connect(Driver.java:72)
-	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.createConnection(JDBCConnection.java:328)
-	at org.eclipse.datatools.connectivity.DriverConnectionBase.internalCreateConnection(DriverConnectionBase.java:105)
-	at org.eclipse.datatools.connectivity.DriverConnectionBase.open(DriverConnectionBase.java:54)
-	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnection.open(JDBCConnection.java:96)
-	at org.eclipse.datatools.connectivity.drivers.jdbc.JDBCConnectionFactory.createConnection(JDBCConnectionFactory.java:53)
-	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryProvider.createConnection(ConnectionFactoryProvider.java:83)
-	at org.eclipse.datatools.connectivity.internal.ConnectionProfile.createConnection(ConnectionProfile.java:359)
-	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.initializeJDBCConnection(ConnectionInfoImpl.java:705)
-	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionInfoImpl.<init>(ConnectionInfoImpl.java:690)
-	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(ConnectionFactory.java:38)
-	at org.eclipse.datatools.connectivity.sqm.core.SQMConnectionFactory.createConnection(SQMConnectionFactory.java:45)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:208)
+	at org.eclipse.persistence.sessions.DefaultConnector.connect(DefaultConnector.java:98)
+	at org.eclipse.persistence.sessions.DatasourceLogin.connectToDatasource(DatasourceLogin.java:162)
+	at org.eclipse.persistence.internal.sessions.DatabaseSessionImpl.setOrDetectDatasource(DatabaseSessionImpl.java:204)
+	at org.eclipse.persistence.internal.sessions.DatabaseSessionImpl.loginAndDetectDatasource(DatabaseSessionImpl.java:741)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryProvider.login(EntityManagerFactoryProvider.java:239)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.deploy(EntityManagerSetupImpl.java:685)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryDelegate.getAbstractSession(EntityManagerFactoryDelegate.java:204)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryDelegate.getDatabaseSession(EntityManagerFactoryDelegate.java:182)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryImpl.getDatabaseSession(EntityManagerFactoryImpl.java:527)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createEntityManagerFactoryImpl(PersistenceProvider.java:140)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createEntityManagerFactory(PersistenceProvider.java:177)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:79)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:54)
+	at vStrikerBizModel.AccountBiz.AccountSelectAll(AccountBiz.java:52)
+	at com.emccode.vstriker.controller.HomepageController.setVStrikerApp(HomepageController.java:69)
+	at com.emccode.vstriker.VStriker.showHome(VStriker.java:88)
+	at com.emccode.vstriker.VStriker.start(VStriker.java:52)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$153(LauncherImpl.java:821)
+	at com.sun.javafx.application.LauncherImpl$$Lambda$52/795205665.run(Unknown Source)
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$166(PlatformImpl.java:323)
+	at com.sun.javafx.application.PlatformImpl$$Lambda$46/1401420256.run(Unknown Source)
+	at com.sun.javafx.application.PlatformImpl.lambda$null$164(PlatformImpl.java:292)
+	at com.sun.javafx.application.PlatformImpl$$Lambda$48/1325188285.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$165(PlatformImpl.java:291)
+	at com.sun.javafx.application.PlatformImpl$$Lambda$47/752848266.run(Unknown Source)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:/Users/sanjeev/Sanjeev/emc/dev/VStriker/vStrikerDB/DB/vstrikerdb.mv.db [1.4.184/7]" [50000-184]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 50 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:/Users/sanjeev/Sanjeev/emc/dev/VStriker/vStrikerDB/DB/vstrikerdb.mv.db [1.4.184/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:170)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:346)
+	... 45 more
+01-04 21:58:25 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:/Users/sanjeev/Sanjeev/emc/dev/VStriker/vStrikerDB/DB/vstrikerdb.mv.db [1.4.184/7]" [50000-184]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:377)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:360)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2759)
+	at org.h2.mvstore.db.MVTableEngine$Store.<init>(MVTableEngine.java:162)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:98)
+	at org.h2.engine.Database.getPageStore(Database.java:2379)
+	at org.h2.engine.Database.open(Database.java:666)
+	at org.h2.engine.Database.openDatabase(Database.java:266)
+	at org.h2.engine.Database.<init>(Database.java:260)
+	at org.h2.engine.Engine.openSession(Engine.java:60)
+	at org.h2.engine.Engine.openSession(Engine.java:167)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:145)
+	at org.h2.engine.Engine.createSession(Engine.java:128)
+	at org.h2.engine.Engine.createSession(Engine.java:26)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:347)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:108)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:92)
+	at org.h2.Driver.connect(Driver.java:72)
+	at org.eclipse.persistence.sessions.DefaultConnector.directConnect(DefaultConnector.java:165)
+	at org.eclipse.persistence.sessions.DefaultConnector.connect(DefaultConnector.java:117)
+	at org.eclipse.persistence.sessions.DatasourceLogin.connectToDatasource(DatasourceLogin.java:162)
+	at org.eclipse.persistence.internal.sessions.DatabaseSessionImpl.setOrDetectDatasource(DatabaseSessionImpl.java:204)
+	at org.eclipse.persistence.internal.sessions.DatabaseSessionImpl.loginAndDetectDatasource(DatabaseSessionImpl.java:741)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryProvider.login(EntityManagerFactoryProvider.java:239)
+	at org.eclipse.persistence.internal.jpa.EntityManagerSetupImpl.deploy(EntityManagerSetupImpl.java:685)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryDelegate.getAbstractSession(EntityManagerFactoryDelegate.java:204)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryDelegate.getDatabaseSession(EntityManagerFactoryDelegate.java:182)
+	at org.eclipse.persistence.internal.jpa.EntityManagerFactoryImpl.getDatabaseSession(EntityManagerFactoryImpl.java:527)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createEntityManagerFactoryImpl(PersistenceProvider.java:140)
+	at org.eclipse.persistence.jpa.PersistenceProvider.createEntityManagerFactory(PersistenceProvider.java:177)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:79)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:54)
+	at vStrikerBizModel.AccountBiz.AccountSelectAll(AccountBiz.java:52)
+	at com.emccode.vstriker.controller.HomepageController.setVStrikerApp(HomepageController.java:69)
+	at com.emccode.vstriker.VStriker.showHome(VStriker.java:88)
+	at com.emccode.vstriker.VStriker.start(VStriker.java:52)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$153(LauncherImpl.java:821)
+	at com.sun.javafx.application.LauncherImpl$$Lambda$52/795205665.run(Unknown Source)
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$166(PlatformImpl.java:323)
+	at com.sun.javafx.application.PlatformImpl$$Lambda$46/1401420256.run(Unknown Source)
+	at com.sun.javafx.application.PlatformImpl.lambda$null$164(PlatformImpl.java:292)
+	at com.sun.javafx.application.PlatformImpl$$Lambda$48/1325188285.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$165(PlatformImpl.java:291)
+	at com.sun.javafx.application.PlatformImpl$$Lambda$47/752848266.run(Unknown Source)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: The file is locked: nio:/Users/sanjeev/Sanjeev/emc/dev/VStriker/vStrikerDB/DB/vstrikerdb.mv.db [1.4.184/7]" [50000-184]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 49 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:/Users/sanjeev/Sanjeev/emc/dev/VStriker/vStrikerDB/DB/vstrikerdb.mv.db [1.4.184/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:170)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:346)
+	... 44 more
 	at org.eclipse.datatools.connectivity.sqm.internal.core.connection.ConnectionFactory.createConnection(ConnectionFactory.java:59)
 	at org.eclipse.datatools.connectivity.internal.ConnectionFactoryAdapterProvider.createConnection(ConnectionFactoryAdapterProvider.java:114)
 	at org.eclipse.datatools.connectivity.internal.ManagedConnection.createConnection(ManagedConnection.java:163)

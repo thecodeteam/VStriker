@@ -10,16 +10,16 @@
       <HBox layoutX="46.92073059082031" layoutY="87.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
          <children>
             <Label layoutX="47.0" layoutY="92.0" prefHeight="16.0" prefWidth="118.0" text="Account Name" />
-            <TextField layoutX="183.0" layoutY="87.0" prefHeight="26.0" prefWidth="250.0" />
+            <TextField fx:id="accountName" layoutX="183.0" layoutY="87.0" prefHeight="26.0" prefWidth="250.0" />
          </children>
       </HBox>
       <HBox layoutX="60.0" layoutY="60.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="90.0">
          <children>
             <Label layoutX="47.0" layoutY="92.0" prefHeight="16.0" prefWidth="118.0" text="Account Location" />
-            <TextField layoutX="183.0" layoutY="87.0" prefHeight="26.0" prefWidth="253.0" />
+            <TextField fx:id="accountLocation" layoutX="183.0" layoutY="87.0" prefHeight="26.0" prefWidth="253.0" />
          </children>
       </HBox>
-      <Button layoutX="467.0" layoutY="90.0" mnemonicParsing="false" text="Save / Update" />
+      <Button fx:id="saveupdate" layoutX="467.0" layoutY="90.0" mnemonicParsing="false" onAction="#saveupdateClicked" text="Save / Update" />
       <TableView layoutX="45.0" layoutY="232.0" prefHeight="164.0" prefWidth="505.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />

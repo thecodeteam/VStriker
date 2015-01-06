@@ -1,14 +1,18 @@
 package  com.emccode.vstriker.controller;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import vStrikerBizModel.AccountBiz;
+import vStrikerEntities.Account;
 
-import  com.emccode.vstriker.VStriker;
-import  com.emccode.vstriker.model.Account;
+import com.emccode.vstriker.VStriker;
+
 
 //@author Sanjeev Chauhan
 
@@ -44,16 +48,30 @@ public class HomepageController {
 		System.out.println("In HomepageController initialize");
 		assert accountTab != null : "fx:id=\"accountTab\" was not injected: check your FXML file 'Home.fxml'.";
 		// Initialize the account table with two columns
-		nameColumn.setCellValueFactory(cellData -> cellData.getValue()
-				.nameProperty());
-		locationColumn.setCellValueFactory(cellData -> cellData.getValue()
-				.locationProperty());
+		/*
+		nameColumn.setCellValueFactory(new Callback<CellDataFeatures<Account, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(CellDataFeatures<Account, String> p) {
+				return new ReadOnlyObjectWrapper(p.getValue().getName());
+			}
+		});
+		*/
+		nameColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(cellData.getValue().getName()));
+		locationColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(cellData.getValue().getAccountLocation()));
 	}
 
 	// Set the main application
 	public void setVStrikerApp(VStriker vStriker) {
 		this.vStriker = vStriker;
-		accountTable.setItems(vStriker.getAccountData());
+		new AccountBiz();
+		//accountTable.setItems(vStriker.getAccountData());
+		javafx.collections.ObservableList<Account> accountData;
+		try {
+			accountData = FXCollections.observableArrayList(AccountBiz.AccountSelectAll());
+			accountTable.setItems(accountData);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// Add account button clicked
