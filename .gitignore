@@ -2,7 +2,7 @@
 /build/
 /bin/
 target/
- 
+stagefile/ 
 # OS Files #
 .DS_Store
  
@@ -67,3 +67,4 @@ vStrikerDB/DB/vstrikerdb.trace.db.orig
 vStrikerDB/DB/vstrikerdb.mv.db
 vStrikerDB/DB/vstrikerdb.trace.db
 
+stagefile/*.txt
