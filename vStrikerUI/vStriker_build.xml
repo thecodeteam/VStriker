@@ -9,6 +9,7 @@
     <property name="vStrikerAPI.location" value="../vStrikerAPI"/>
     <property name="vStrikerEntities.location" value="../vStrikerEntities"/>
     <property name="vStrikerBizModel.location" value="../vStrikerBizModel"/>
+    <property name="vStrikerTestUtilities.location" value="../vStrikerTestUtilities"/>
     <property name="vStrikerTestEngine.location" value="../vStrikerTestEngine"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
@@ -199,8 +200,74 @@
         <pathelement location="${vStrikerBizModel.location}/../libraries/smart-client-2.0.jar"/>
         <pathelement location="${vStrikerBizModel.location}/../libraries/vipr-object-transformations-2.0.1.jar"/>
     </path>
+    <path id="vStrikerTestUtilities.classpath">
+        <pathelement location="${vStrikerTestUtilities.location}/bin"/>
+        <path refid="vStrikerEntities.classpath"/>
+        <path refid="vStrikerBizModel.classpath"/>
+        <pathelement location="${vStrikerTestUtilities.location}/../libraries/log4j-1.2.16.jar"/>
+        <pathelement location="${vStrikerTestUtilities.location}/../libraries/commons-io-1.3.jar"/>
+    </path>
     <path id="vStrikerTestEngine.classpath">
         <pathelement location="${vStrikerTestEngine.location}/bin"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/annotations-2.0.0.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/archaius-core-0.5.12.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/atmos-client-2.2.1.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/aws-java-sdk-1.7.5.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/commons-codec-1.3.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/commons-codec-1.6.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/commons-collections-3.2.1.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/commons-configuration-1.8.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/commons-io-1.3.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/commons-io-2.4.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/commons-lang-2.6.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/commons-logging-1.1.1.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/commons-logging-api-1.1.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/guava-14.0.1.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/h2-1.4.184.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/httpclient-4.2.2.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/httpclient-4.2.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/httpcore-4.2.2.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/httpcore-4.2.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/httpmime-4.2.2.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jackson-annotations-2.1.1.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jackson-core-2.1.1.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jackson-core-asl-1.9.11.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jackson-databind-2.1.1.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jackson-mapper-asl-1.9.11.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/javax.persistence.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jdom-legacy-1.1.3.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jersey-apache-client4-1.11.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jersey-apache-httpclient4-1.18-CUSTOM.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jersey-client-1.11.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jersey-client-1.18.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jersey-core-1.11.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jersey-core-1.18.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jersey-multipart-1.18.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/joda-time-2.3.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/joss-0.9.8.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/jsr311-api-1.1.1.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/junit.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/log4j-1.2.16.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/lzma-sdk-4j-9.22.0.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/mimepull-1.9.3.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/netflix-commons-util-0.1.1.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/netflix-statistics-0.1.1.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/org.apache.log4j_1.2.15.v201012070815.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/rest_model-1.0.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/ribbon-core-0.3.9.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/ribbon-httpclient-0.3.9.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/rxjava-core-0.14.2.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/s3-client-2.0.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/security-1.1.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/servo-core-0.4.44.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/slf4j-api-1.6.4.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/slf4j-api-1.7.5.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/smart-client-2.0.jar"/>
+        <pathelement location="${vStrikerTestEngine.location}/../libraries/vipr-object-transformations-2.0.1.jar"/>
+        <path refid="vStrikerAPI.classpath"/>
+        <path refid="vStrikerBizModel.classpath"/>
+        <path refid="vStrikerEntities.classpath"/>
+        <path refid="vStrikerTestUtilities.classpath"/>
     </path>
     <path id="vStrikerUI.classpath">
         <pathelement location="bin"/>
@@ -224,6 +291,7 @@
         <ant antfile="vStriker_build.xml" dir="${vStrikerAPI.location}" inheritAll="false" target="clean"/>
         <ant antfile="vStriker_build.xml" dir="${vStrikerEntities.location}" inheritAll="false" target="clean"/>
         <ant antfile="vStriker_build.xml" dir="${vStrikerBizModel.location}" inheritAll="false" target="clean"/>
+        <ant antfile="vStriker_build.xml" dir="${vStrikerTestUtilities.location}" inheritAll="false" target="clean"/>
         <ant antfile="vStriker_build.xml" dir="${vStrikerTestEngine.location}" inheritAll="false" target="clean"/>
     </target>
     <target depends="build-subprojects,build-project" name="build"/>
@@ -239,6 +307,11 @@
             </propertyset>
         </ant>
         <ant antfile="vStriker_build.xml" dir="${vStrikerBizModel.location}" inheritAll="false" target="build-project">
+            <propertyset>
+                <propertyref name="build.compiler"/>
+            </propertyset>
+        </ant>
+        <ant antfile="vStriker_build.xml" dir="${vStrikerTestUtilities.location}" inheritAll="false" target="build-project">
             <propertyset>
                 <propertyref name="build.compiler"/>
             </propertyset>

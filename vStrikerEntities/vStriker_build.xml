@@ -6,6 +6,7 @@
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="vStrikerEntities">
     <property environment="env"/>
     <property name="vStrikerBizModel.location" value="../vStrikerBizModel"/>
+    <property name="vStrikerTestEngine.location" value="../vStrikerTestEngine"/>
     <property name="vStrikerTestUtilities.location" value="../vStrikerTestUtilities"/>
     <property name="vStrikerUI.location" value="../vStrikerUI"/>
     <property name="vStrikerUnitTest.location" value="../vStrikerUnitTest"/>
@@ -91,6 +92,19 @@
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
                 <exclude name="**/*.java"/>
+                <exclude name="vStrikerEntities/Account_.java"/>
+                <exclude name="vStrikerEntities/Api_.java"/>
+                <exclude name="vStrikerEntities/ApiSelected_.java"/>
+                <exclude name="vStrikerEntities/ApiType_.java"/>
+                <exclude name="vStrikerEntities/ConfigurationTemplate_.java"/>
+                <exclude name="vStrikerEntities/CrudOperationType_.java"/>
+                <exclude name="vStrikerEntities/ExecutionPlan_.java"/>
+                <exclude name="vStrikerEntities/ExecutionReport_.java"/>
+                <exclude name="vStrikerEntities/ExecutionReportData_.java"/>
+                <exclude name="vStrikerEntities/ObjectSizeReportUnit_.java"/>
+                <exclude name="vStrikerEntities/TestConfiguration_.java"/>
+                <exclude name="vStrikerEntities/TestPlanOperation_.java"/>
+                <exclude name="vStrikerEntities/VwAccountDetail_.java"/>
             </fileset>
         </copy>
     </target>
@@ -104,12 +118,31 @@
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
+            <exclude name="vStrikerEntities/Account_.java"/>
+            <exclude name="vStrikerEntities/Api_.java"/>
+            <exclude name="vStrikerEntities/ApiSelected_.java"/>
+            <exclude name="vStrikerEntities/ApiType_.java"/>
+            <exclude name="vStrikerEntities/ConfigurationTemplate_.java"/>
+            <exclude name="vStrikerEntities/CrudOperationType_.java"/>
+            <exclude name="vStrikerEntities/ExecutionPlan_.java"/>
+            <exclude name="vStrikerEntities/ExecutionReport_.java"/>
+            <exclude name="vStrikerEntities/ExecutionReportData_.java"/>
+            <exclude name="vStrikerEntities/ObjectSizeReportUnit_.java"/>
+            <exclude name="vStrikerEntities/TestConfiguration_.java"/>
+            <exclude name="vStrikerEntities/TestPlanOperation_.java"/>
+            <exclude name="vStrikerEntities/VwAccountDetail_.java"/>
             <classpath refid="vStrikerEntities.classpath"/>
         </javac>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
         <ant antfile="vStriker_build.xml" dir="${vStrikerBizModel.location}" inheritAll="false" target="clean"/>
         <ant antfile="vStriker_build.xml" dir="${vStrikerBizModel.location}" inheritAll="false" target="build">
+            <propertyset>
+                <propertyref name="build.compiler"/>
+            </propertyset>
+        </ant>
+        <ant antfile="vStriker_build.xml" dir="${vStrikerTestEngine.location}" inheritAll="false" target="clean"/>
+        <ant antfile="vStriker_build.xml" dir="${vStrikerTestEngine.location}" inheritAll="false" target="build">
             <propertyset>
                 <propertyref name="build.compiler"/>
             </propertyset>
