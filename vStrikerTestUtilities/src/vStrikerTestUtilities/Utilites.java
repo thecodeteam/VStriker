@@ -61,7 +61,8 @@ public class Utilites {
 		String s = currentRelativePath.toAbsolutePath().toString();
 		
 		File dir = new File(s.substring(0,s.lastIndexOf("\\")+1)+"ResultFiles");  
-		if (!dir.exists()) {dir.mkdir();}        
+		if (!dir.exists()) {dir.mkdir();}  
+		
       }
 }
 
