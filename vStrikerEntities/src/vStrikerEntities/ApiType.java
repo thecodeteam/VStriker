@@ -10,7 +10,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="API_TYPE")
+@Table(name="VSTRIKERDB.API_TYPE")
 @NamedQuery(name="ApiType.findAll", query="SELECT a FROM ApiType a")
 public class ApiType implements Serializable {
 	private static final long serialVersionUID = 1L;

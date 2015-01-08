@@ -16,7 +16,7 @@ public class vStrikerEntitesUnitTest {
 
 	@Test
 	public void test() {
-	//	TestAccountCreate();
+		TestAccountCreate();
 		TestAccountDetail();
 	}
 

@@ -10,7 +10,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="CRUD_OPERATION_TYPE")
+@Table(name="VSTRIKERDB.CRUD_OPERATION_TYPE")
 @NamedQuery(name="CrudOperationType.findAll", query="SELECT c FROM CrudOperationType c")
 public class CrudOperationType implements Serializable {
 	private static final long serialVersionUID = 1L;

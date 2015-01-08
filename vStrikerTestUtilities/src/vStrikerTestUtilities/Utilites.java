@@ -21,7 +21,7 @@ public class Utilites {
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
 		
-		File dir = new File(s.substring(0,s.lastIndexOf("\\")+1)+"stagefile");  
+		File dir = new File(s.substring(0,s.lastIndexOf("\\")+1)+"StageFiles");  
 		if (!dir.exists()) {dir.mkdir();}        
 			    
 		String fileName=dir+"\\"+testConfName+"_1.txt";
@@ -57,6 +57,11 @@ public class Utilites {
  
 	public void exportResultToFile(String filename,int executionID) {
       
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		
+		File dir = new File(s.substring(0,s.lastIndexOf("\\")+1)+"ResultFiles");  
+		if (!dir.exists()) {dir.mkdir();}        
       }
 }
 
