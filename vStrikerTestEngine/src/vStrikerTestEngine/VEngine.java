@@ -38,16 +38,18 @@ public class VEngine implements Engine {
 		return true;
 	}
 
-	public void validateSwiftConnnection(String user, String key, String url,
+	public boolean validateSwiftConnnection(String user, String key, String url,
 			String namespace) {
 		System.out.println("In vTestEngine validateSwiftConnnection");
+		return true;
 		// TODO Auto-generated method stub
 
 	}
 
-	public void validateAtmosConnnection(String user, String key, String url,
+	public boolean validateAtmosConnnection(String user, String key, String url,
 			String namespace) {
 		System.out.println("In vTestEngine validateAtmosConnnection");
+		return true;
 		// TODO Auto-generated method stub
 
 	}

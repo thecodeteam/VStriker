@@ -3,20 +3,18 @@ package  com.emccode.vstriker;
 import java.io.IOException;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import vStrikerEntities.Account;
 
 import com.emccode.vstriker.controller.AccountController;
 import com.emccode.vstriker.controller.AtmosController;
 import com.emccode.vstriker.controller.HomepageController;
 import com.emccode.vstriker.controller.S3Controller;
 import com.emccode.vstriker.controller.SwiftController;
-import com.emccode.vstriker.model.Account;
 
 /*
  * @author Sanjeev Chauhan
@@ -28,20 +26,19 @@ public class VStriker extends Application {
 
 
 	// Replace with Account from vStrikerEntities package - ToDo
-	private ObservableList<Account> accountData = FXCollections
-			.observableArrayList();
+	// private ObservableList<Account> accountData = FXCollections.observableArrayList();
 
 	// Constructor
 	public VStriker() {
 		// Adding sample data - move to vStrikerLoader package - ToDo
-		accountData.add(new Account("name1", "location1"));
-		accountData.add(new Account("name2", "location2"));
+		// accountData.add(new Account("name1", "location1"));
+		// accountData.add(new Account("name2", "location2"));
 	}
 
 	// Return list of Accounts
-	public ObservableList<Account> getAccountData() {
-		return accountData;
-	}
+	// public ObservableList<Account> getAccountData() {
+	//	return accountData;
+	// }
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -112,7 +109,7 @@ public class VStriker extends Application {
 		}
 	}
 
-	public void showS3API() {
+	public void showS3API(Account validAcct) {
 		System.out.println("In VStriker showS3API");
 		try {
 			// Change page title
@@ -127,14 +124,14 @@ public class VStriker extends Application {
 			
 			// Give controller access to the main app
 			S3Controller controller = loader.getController();
-			controller.setVStrikerApp(this);
+			controller.setVStrikerApp(this, validAcct);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void showSwiftAPI() {
-		System.out.println("Ind VStriker showSwiftAPI");
+	public void showSwiftAPI(Account validAcct) {
+		System.out.println("In VStriker showSwiftAPI");
 		try {
 			// Change page title
 			this.primaryStage.setTitle("vStriker:Swift API Information");
@@ -146,15 +143,15 @@ public class VStriker extends Application {
 			//Show the Swift page in the center of the application
 			vStrikerLayout.setCenter(SwiftLayout);
 			
-			// Give controller access to the main app
+			// Give controller access to the main application
 			SwiftController controller = loader.getController();
-			controller.setVStrikerApp(this);
+			controller.setVStrikerApp(this, validAcct);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void showAtmosAPI() {
+	public void showAtmosAPI(Account validAcct) {
 		System.out.println("In VStriker showAtmosAPI");
 		try {
 			// Change page title
@@ -169,7 +166,7 @@ public class VStriker extends Application {
 			
 			// Give controller access to the main app
 			AtmosController controller = loader.getController();
-			controller.setVStrikerApp(this);
+			controller.setVStrikerApp(this, validAcct);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
