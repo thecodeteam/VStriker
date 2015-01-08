@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="VSTRIKERDB.EXECUTION_REPORT_DATA")
 @NamedQuery(name="ExecutionReportData.findAll", query="SELECT e FROM ExecutionReportData e")
+
 public class ExecutionReportData implements Serializable {
 	private static final long serialVersionUID = 1L;
 
