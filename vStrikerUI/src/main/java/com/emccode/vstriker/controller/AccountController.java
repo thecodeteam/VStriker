@@ -74,7 +74,8 @@ public class AccountController {
 				AccountBiz.AccountCreate(acct);
 			} catch (Exception e) {
 				System.out.println("Failed to save Account");
-				e.printStackTrace();
+				// Show message on screen - ToDo
+				// e.printStackTrace();
 			}
 		}
 	}
@@ -82,20 +83,37 @@ public class AccountController {
 	@FXML
 	public void addAPIClicked(ActionEvent event) {
 		System.out.println("Add API button clicked");
-		switch (chooseAPI.getValue().toString()) {
-		case "S3":
-			vStriker.showS3API();
-			break;
-		case "Swift":
-			vStriker.showSwiftAPI();
-			break;
-		case "Atmos":
-			vStriker.showAtmosAPI();
-			break;
-		default:
-			System.out
-					.println("addAPIClicked - chooseAPI is neither S3, Swift or Atmos");
-			break;
+		// Check if a valid account exists
+		if (accountName.getText() == null
+				|| accountName.getText().length() == 0
+				|| accountLocation.getText() == null
+				|| accountLocation.getText().length() == 0) {
+			System.out.println("Please set Account Name and Account Location");
+		}
+		Account validAcct;
+		try {
+			validAcct = AccountBiz.AccountSelect(accountName.getText(),
+					accountLocation.getText());
+
+			switch (chooseAPI.getValue().toString()) {
+			case "S3":
+				vStriker.showS3API(validAcct);
+				break;
+			case "Swift":
+				vStriker.showSwiftAPI(validAcct);
+				break;
+			case "Atmos":
+				vStriker.showAtmosAPI(validAcct);
+				break;
+			default:
+				System.out
+						.println("addAPIClicked - chooseAPI is neither S3, Swift or Atmos");
+				break;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Not a valid Account");
+			e.printStackTrace();
 		}
 	}
 }

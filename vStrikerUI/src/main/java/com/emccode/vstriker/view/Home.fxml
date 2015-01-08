@@ -18,12 +18,12 @@
 									<children>
 										<TableView fx:id="accountTable" layoutX="50.0" layoutY="55.0" prefHeight="109.0" prefWidth="556.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="55.0" HBox.hgrow="ALWAYS">
 											<columns>
-												<TableColumn maxWidth="1000.0" prefWidth="48.0" text="C1" />
-												<TableColumn fx:id="nameColumn" prefWidth="136.0" text="Name" />
+												<TableColumn fx:id="selectColumn" maxWidth="1000.0" minWidth="20.0" prefWidth="71.0" text="Select" />
+												<TableColumn fx:id="nameColumn" prefWidth="128.0" text="Name" />
 												<TableColumn fx:id="locationColumn" prefWidth="93.0" text="Location" />
-												<TableColumn maxWidth="2000.0" prefWidth="92.0" text="S3" />
-												<TableColumn maxWidth="2000.0" prefWidth="82.0" text="Swift" />
-												<TableColumn maxWidth="2000.0" prefWidth="83.0" text="Atmos" />
+												<TableColumn fx:id="S3Column" maxWidth="2000.0" prefWidth="92.0" text="S3" />
+												<TableColumn fx:id="SwiftColumn" maxWidth="2000.0" prefWidth="82.0" text="Swift" />
+												<TableColumn fx:id="AtmosColumn" maxWidth="2000.0" prefWidth="83.0" text="Atmos" />
 											</columns>
 											<columnResizePolicy>
 												<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -59,12 +59,12 @@
 				</Tab>
 				<Tab text="2. Configuration">
 					<content>
-						<fx:include source="Configuration.fxml"/>
+						<fx:include source="Configuration.fxml" />
 					</content>
 				</Tab>
 				<Tab text="3. Results">
 					<content>
-						<fx:include source="Results.fxml"/>
+						<fx:include source="Results.fxml" />
 					</content>
 				</Tab>
 			</tabs>
