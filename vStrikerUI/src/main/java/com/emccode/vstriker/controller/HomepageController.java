@@ -24,7 +24,10 @@ import vStrikerBizModel.AccountBiz;
 import vStrikerBizModel.AccountDetailBiz;
 import vStrikerBizModel.ApiBiz;
 import vStrikerEntities.Account;
+import vStrikerEntities.Api;
 import vStrikerEntities.VwAccountDetail;
+import vStrikerTestEngine.Engine;
+import vStrikerTestEngine.VEngine;
 
 import com.emccode.vstriker.VStriker;
 
@@ -74,7 +77,6 @@ public class HomepageController {
 	private ObservableList<VwAccountDetail> accountData;
 	private ObservableList<Account> acctList;
 	private List<BooleanProperty> selectedRowList;
-	private int rowSelected;
 
 	// Constructor
 	public HomepageController() {
@@ -177,12 +179,59 @@ public class HomepageController {
 	@FXML
 	public void validateAccountClicked(ActionEvent event) {
 		System.out.println("Validate account button clicked");
+		int selectedRow = getSelectedRow();
+		if (selectedRow == -1) {
+			System.out.println("Please select an Account to validate");
+			return;
+		}
+		ObservableList<VwAccountDetail> accts = accountTable.getItems();
+		try {
+			List<Api> listApi = ApiBiz.ApiSelectforAccount((accts.get(selectedRow).getAccountId()));
+			for (Api a: listApi) {
+				switch (a.getApiTypeId()) {
+				case 1:
+				case 2:
+					if (a.getSecretKey() != null && a.getUrl() != null  && a.getSubtenant() != null) {
+						Engine e = new VEngine();
+						if (e.validateS3Connection(a.getSubtenant(),
+								a.getSecretKey(), a.getUrl(), "")) {
+							System.out.println("S3 connection is validated");
+						} else {
+							System.out.println("S3 connection is not working");
+						}
+					}
+					break;
+				case 3:
+				case 4:
+					System.out.println("Atmos");
+					break;
+				case 5:
+				case 6:
+					System.out.println("Swift");
+					break;
+				default:
+					System.out.println("Please check to ensure the right type of Api is set");
+				}
+			}
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			System.out.println("Unable to validate account Apis");	
+ 			e1.printStackTrace();
+		}
+
 	}
 
 	// Update account button clicked
 	@FXML
 	public void updateAccountClicked(ActionEvent event) {
 		System.out.println("Update account button clicked");
+		int selectedRow = getSelectedRow();
+		if (selectedRow == -1) {
+			System.out.println("Please select an Account to update");
+			return;
+		}
+		vStriker.updateAccount(accountTable.getItems().get(selectedRow));
 	}
 
 	// Delete account button clicked
@@ -261,8 +310,6 @@ public class HomepageController {
 							// selected.
 							showAcctAPIDetails(acctList.get(selectedRowList
 									.indexOf(b)));
-							// Set rowSelected
-							rowSelected = selectedRowList.indexOf(b) - 1;
 						}
 					}
 				});
@@ -293,5 +340,17 @@ public class HomepageController {
 				.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 						cellData.getValue().getUrl()));
 
+	}
+	
+	private int getSelectedRow() {
+		int selectedRow = 0;
+		for (BooleanProperty b: selectedRowList) {
+			if (b.getValue()) {
+				selectedRow = selectedRowList.indexOf(b);
+				System.out.println("selected row is: " + selectedRow);
+				return selectedRow;
+			}
+		}
+			return -1;
 	}
 }
