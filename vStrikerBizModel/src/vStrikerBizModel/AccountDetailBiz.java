@@ -15,7 +15,7 @@ public class AccountDetailBiz {
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
 		VwAccountDetail act = entitymanager.find(VwAccountDetail.class,acctId);
-		entitymanager.getTransaction( ).commit( );
+		// entitymanager.getTransaction( ).commit( );
 		
 		entitymanager.close( );
 		actfactory.close( );

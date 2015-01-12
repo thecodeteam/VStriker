@@ -34,8 +34,7 @@ public class S3Controller {
 	@FXML
 	private ChoiceBox<String> chooseProtocol;
 	@FXML
-	private TextField port;
-
+	private TextField s3port;
 
 	private VStriker vStriker;
 	private Account acct;
@@ -54,15 +53,16 @@ public class S3Controller {
 	@FXML
 	private void initialize() {
 		System.out.println("In S3Controller initialize");
-		chooseProtocol.setItems(FXCollections.observableArrayList("http", "https"));
+		chooseProtocol.setItems(FXCollections.observableArrayList("http",
+				"https"));
 		chooseProtocol.setValue("http");
 		s3accesskey.setPromptText("Access key");
 		s3url.setPromptText("URL to service");
 		s3secretkey.setPromptText("Secret key");
 		s3bucket.setPromptText("Bucket name");
-		port.setPromptText("Port number");
+		s3port.setPromptText("Port number");
 	}
-	
+
 	@FXML
 	public void backtoAccountClicked(ActionEvent event) {
 		System.out.println("Back to Accounts button clicked");
@@ -95,7 +95,7 @@ public class S3Controller {
 			System.out.println("S3 connection is not working");
 		}
 	}
-	
+
 	@FXML
 	public void saveS3Clicked(ActionEvent event) {
 		System.out.println("Save S3 button clicked");
@@ -106,7 +106,8 @@ public class S3Controller {
 				|| s3secretkey.getText().length() == 0
 				|| s3bucket.getText() == null
 				|| s3bucket.getText().length() == 0) {
-			System.out.println("Please set Access Key, URL, Secret Key and Bucket name");
+			System.out
+					.println("Please set Access Key, URL, Secret Key and Bucket name");
 			return;
 		}
 		Api s3api = new Api();
@@ -116,9 +117,30 @@ public class S3Controller {
 		s3api.setSecretKey(s3secretkey.getText());
 		s3api.setBucket(s3bucket.getText());
 		s3api.setHttpAddressIp("tobechanged"); // This should change setProtocol
-		s3api.setHttpAddressPort("999"); // This should change to setPort
-		s3api.setApiTypeId(2); // This depends on protocol - if protocol is http or https 
-		//Add protocol and port after entity is updated - ToDo
+		//s3api.setHttpAddressPort("999"); // This should change to setPort
+		//s3api.setApiTypeId(2); // This depends on protocol - if protocol is http
+								// or https
+		switch (chooseProtocol.getValue().toString()) {
+		case "http":
+			s3api.setApiTypeId(1);
+			if (s3port.getText() == null || s3port.getText().length() == 0) {
+				s3api.setHttpAddressPort("80");
+			} else {
+			s3api.setHttpAddressPort(s3port.getText());
+			}
+			break;
+		case "https":
+			s3api.setApiTypeId(2);
+			if (s3port.getText() == null || s3port.getText().length() == 0) {
+				s3api.setHttpAddressPort("443");
+			} else {
+			s3api.setHttpAddressPort(s3port.getText());
+			}
+			break;
+		default:
+			System.out.println("Api type needs to be http or https");
+		}
+		// Add protocol and port after entity is updated - ToDo
 		try {
 			ApiBiz.ApiCreate(s3api);
 		} catch (Exception e) {

@@ -61,6 +61,9 @@ local.properties
 .cproject
  
 # PDT-specific
+logs/
+DB/
+*.sql
 .buildpath
 vStrikerDB/DB/vstrikerdb.mv.db.orig
 vStrikerDB/DB/vstrikerdb.trace.db.orig

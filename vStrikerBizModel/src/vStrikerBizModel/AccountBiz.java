@@ -86,13 +86,12 @@ public class AccountBiz {
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
-		Account act = entitymanager.find(Account.class,acctId);
+		entitymanager.getTransaction( ).begin( );
+		Account act = entitymanager.find(Account.class, Long.valueOf(acctId));
 		entitymanager.remove(act);
 		entitymanager.getTransaction( ).commit( );
-		
 		entitymanager.close( );
 		actfactory.close( );
-		
 	}
 	
 	

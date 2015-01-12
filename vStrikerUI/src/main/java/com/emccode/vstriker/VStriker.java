@@ -1,4 +1,4 @@
-package  com.emccode.vstriker;
+package com.emccode.vstriker;
 
 import java.io.IOException;
 
@@ -24,9 +24,9 @@ public class VStriker extends Application {
 	private Stage primaryStage;
 	private BorderPane vStrikerLayout;
 
-
 	// Replace with Account from vStrikerEntities package - ToDo
-	// private ObservableList<Account> accountData = FXCollections.observableArrayList();
+	// private ObservableList<Account> accountData =
+	// FXCollections.observableArrayList();
 
 	// Constructor
 	public VStriker() {
@@ -37,7 +37,7 @@ public class VStriker extends Application {
 
 	// Return list of Accounts
 	// public ObservableList<Account> getAccountData() {
-	//	return accountData;
+	// return accountData;
 	// }
 
 	@Override
@@ -118,10 +118,10 @@ public class VStriker extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/S3API.fxml"));
 			AnchorPane S3Layout = (AnchorPane) loader.load();
-			
-			//Show the Swift page in the center of the application
+
+			// Show the Swift page in the center of the application
 			vStrikerLayout.setCenter(S3Layout);
-			
+
 			// Give controller access to the main app
 			S3Controller controller = loader.getController();
 			controller.setVStrikerApp(this, validAcct);
@@ -129,7 +129,7 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void showSwiftAPI(Account validAcct) {
 		System.out.println("In VStriker showSwiftAPI");
 		try {
@@ -139,10 +139,10 @@ public class VStriker extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/SwiftAPI.fxml"));
 			AnchorPane SwiftLayout = (AnchorPane) loader.load();
-			
-			//Show the Swift page in the center of the application
+
+			// Show the Swift page in the center of the application
 			vStrikerLayout.setCenter(SwiftLayout);
-			
+
 			// Give controller access to the main application
 			SwiftController controller = loader.getController();
 			controller.setVStrikerApp(this, validAcct);
@@ -150,7 +150,7 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void showAtmosAPI(Account validAcct) {
 		System.out.println("In VStriker showAtmosAPI");
 		try {
@@ -160,10 +160,10 @@ public class VStriker extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/AtmosAPI.fxml"));
 			AnchorPane AtmosLayout = (AnchorPane) loader.load();
-			
-			//Show the S3 page in the center of the application
+
+			// Show the S3 page in the center of the application
 			vStrikerLayout.setCenter(AtmosLayout);
-			
+
 			// Give controller access to the main app
 			AtmosController controller = loader.getController();
 			controller.setVStrikerApp(this, validAcct);

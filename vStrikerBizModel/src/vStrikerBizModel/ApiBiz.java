@@ -1,8 +1,10 @@
 package vStrikerBizModel;
-import vStrikerEntities.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import vStrikerEntities.Api;
 
 public class ApiBiz {
 	
@@ -57,5 +59,15 @@ public class ApiBiz {
 		
 	}
 	
-	
+	public static void  ApiDeleteforAccount(int accountId ) throws Exception 
+	{
+		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
+		EntityManager entitymanager = actfactory.createEntityManager( );
+		entitymanager.getTransaction( ).begin( );
+		Query qry = entitymanager.createQuery("DELETE from Api a WHERE a.accountId= :acctId", Api.class);
+		int deletedCount = qry.setParameter("acctId", accountId).executeUpdate();
+		entitymanager.getTransaction( ).commit( );		
+		entitymanager.close( );
+		actfactory.close( );
+	}
 }

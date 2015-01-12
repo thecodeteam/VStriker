@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,7 +20,10 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.util.Callback;
+import vStrikerBizModel.AccountBiz;
 import vStrikerBizModel.AccountDetailBiz;
+import vStrikerBizModel.ApiBiz;
+import vStrikerEntities.Account;
 import vStrikerEntities.VwAccountDetail;
 
 import com.emccode.vstriker.VStriker;
@@ -52,9 +56,25 @@ public class HomepageController {
 	@FXML
 	private Button deleteButton;
 	@FXML
+	private TableView<VwAccountDetail> accountDetail;
+	@FXML
+	private TableColumn<VwAccountDetail, String> APIColumn;
+	@FXML
+	private TableColumn<VwAccountDetail, String> ProtocolColumn;
+	@FXML
+	private TableColumn<VwAccountDetail, String> PortColumn;
+	@FXML
+	private TableColumn<VwAccountDetail, String> KeyColumn;
+	@FXML
+	private TableColumn<VwAccountDetail, String> EndPointColumn;
+	@FXML
 	private Button configureButton;
 
 	private VStriker vStriker;
+	private ObservableList<VwAccountDetail> accountData;
+	private ObservableList<Account> acctList;
+	private List<BooleanProperty> selectedRowList;
+	private int rowSelected;
 
 	// Constructor
 	public HomepageController() {
@@ -65,100 +85,77 @@ public class HomepageController {
 	private void initialize() {
 		System.out.println("In HomepageController initialize");
 		assert accountTab != null : "fx:id=\"accountTab\" was not injected: check your FXML file 'Home.fxml'.";
-		// Initialize the account table with two columns
-		/*
-		 * nameColumn.setCellValueFactory(new Callback<CellDataFeatures<Account,
-		 * String>, ObservableValue<String>>() { public ObservableValue<String>
-		 * call(CellDataFeatures<Account, String> p) { return new
-		 * ReadOnlyObjectWrapper(p.getValue().getName()); } });
-		 */
+		// Populate the name column
 		nameColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 				cellData.getValue().getName()));
+		// Populate the location column
 		locationColumn
 				.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 						cellData.getValue().getAccountLocation()));
 
-		// Checkbox in first column
-		List<BooleanProperty> selectedRowList = new ArrayList<BooleanProperty>();
-		javafx.collections.ObservableList<VwAccountDetail> acctList;
-		try {
-			// Create a boolean property for every account that exists
-			acctList = FXCollections.observableArrayList(AccountDetailBiz
-					.AccountSelectAll());
-			for (VwAccountDetail a : acctList) {
-				selectedRowList.add(new SimpleBooleanProperty());
+		List<BooleanProperty> selectedRowList = setupCheckboxColumn();
+		// Populating the Checkbox Column
+		selectColumn
+				.setCellFactory(CheckBoxTableCell
+						.forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
+							public ObservableValue<Boolean> call(Integer index) {
+								System.out.println("Index is: " + index);
+								return selectedRowList.get(index);
+							}
+						}));
+
+		// Populating the API Columns
+		// S3 Column
+		S3Column.setCellValueFactory(new Callback<CellDataFeatures<VwAccountDetail, String>, ObservableValue<String>>() {
+			public ObservableValue<String> call(
+					CellDataFeatures<VwAccountDetail, String> p) {
+				if (p.getValue().getApiTypeName() != null
+						&& p.getValue().getApiTypeName().contains("S3")) {
+					return new SimpleStringProperty("Yes");
+				} else {
+					return new SimpleStringProperty("No");
+				}
 			}
-			// Add a listener for each boolean property
-			for (BooleanProperty b : selectedRowList) {
-				b.addListener(new ChangeListener<Boolean>() {
-					public void changed(ObservableValue<? extends Boolean> obs,
-							Boolean wasSelected, Boolean isSelected) {
-						System.out.println("isSelected: " + isSelected);
+		});
+		// Swift Column
+		SwiftColumn
+				.setCellValueFactory(new Callback<CellDataFeatures<VwAccountDetail, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(
+							CellDataFeatures<VwAccountDetail, String> p) {
+						if (p.getValue().getApiTypeName() != null
+								&& p.getValue().getApiTypeName()
+										.contains("Swift")) {
+							return new SimpleStringProperty("Yes");
+						} else {
+							return new SimpleStringProperty("No");
+						}
 					}
 				});
-			}
-			// Callback for CheckBoxTableCell
-			Callback<Integer, ObservableValue<Boolean>> selectedStateSelectColumn = new Callback<Integer, ObservableValue<Boolean>>() {
-				public ObservableValue<Boolean> call(Integer index) {
-					return selectedRowList.get(index);
-				}
-			};
-			selectColumn.setCellFactory(CheckBoxTableCell
-					.forTableColumn(selectedStateSelectColumn));
-
-			// Populating the API Columns
-			// S3 Column
-			S3Column.setCellValueFactory(new Callback<CellDataFeatures<VwAccountDetail, String>, ObservableValue<String>>() {
-				public ObservableValue<String> call(
-						CellDataFeatures<VwAccountDetail, String> p) {
-					if (p.getValue().getApiTypeName() != null
-							&& p.getValue().getApiTypeName().contains("S3")) {
-						return new SimpleStringProperty("Yes");
-					} else {
-						return new SimpleStringProperty("No");
+		// Atmos Column
+		AtmosColumn
+				.setCellValueFactory(new Callback<CellDataFeatures<VwAccountDetail, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(
+							CellDataFeatures<VwAccountDetail, String> p) {
+						if (p.getValue().getApiTypeName() != null
+								&& p.getValue().getApiTypeName()
+										.contains("Atmos")) {
+							return new SimpleStringProperty("Yes");
+						} else {
+							return new SimpleStringProperty("No");
+						}
 					}
-				}
-			});
-			// Swift Column
-			SwiftColumn.setCellValueFactory(new Callback<CellDataFeatures<VwAccountDetail, String>, ObservableValue<String>>() {
-				public ObservableValue<String> call(
-						CellDataFeatures<VwAccountDetail, String> p) {
-					if (p.getValue().getApiTypeName() != null
-							&& p.getValue().getApiTypeName().contains("Swift")) {
-						return new SimpleStringProperty("Yes");
-					} else {
-						return new SimpleStringProperty("No");
-					}
-				}
-			});
-			// Atmos Column
-			AtmosColumn.setCellValueFactory(new Callback<CellDataFeatures<VwAccountDetail, String>, ObservableValue<String>>() {
-				public ObservableValue<String> call(
-						CellDataFeatures<VwAccountDetail, String> p) {
-					if (p.getValue().getApiTypeName() != null
-							&& p.getValue().getApiTypeName().contains("Atmos")) {
-						return new SimpleStringProperty("Yes");
-					} else {
-						return new SimpleStringProperty("No");
-					}
-				}
-			});
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+				});
 		// Make the checkbox column editable
 		selectColumn.setEditable(true);
 		accountTable.setEditable(true);
-
 	}
 
 	// Set the main application
 	public void setVStrikerApp(VStriker vStriker) {
+		System.out.println("In Homepage Controller setVStrikerApp");
 		this.vStriker = vStriker;
 		new AccountDetailBiz();
-		javafx.collections.ObservableList<VwAccountDetail> accountData;
+		// javafx.collections.ObservableList<VwAccountDetail> accountData;
 		try {
 			accountData = FXCollections.observableArrayList(AccountDetailBiz
 					.AccountSelectAll());
@@ -192,6 +189,42 @@ public class HomepageController {
 	@FXML
 	public void deleteAccountClicked(ActionEvent event) {
 		System.out.println("Delete account button clicked");
+		int selectedRow = 0;
+		for (BooleanProperty b: selectedRowList) {
+			if (b.getValue()) {
+				selectedRow = selectedRowList.indexOf(b);
+				System.out.println("selected row is: " + selectedRow);
+			}
+		}
+		if (selectedRow == 0) {
+			System.out.println("Please select a row to delete");
+			return;
+		}
+		ObservableList<VwAccountDetail> accts = accountTable.getItems();
+
+		// Delete rows from the API table
+		try {
+			ApiBiz.ApiDeleteforAccount(accts.get(selectedRow).getAccountId());
+			ObservableList<VwAccountDetail> acctDetails = accountDetail.getItems();
+			acctDetails.removeAll(acctDetails);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			System.out.println("Unable to delete rows in Api table");	
+ 			e1.printStackTrace();
+		}
+		// Delete the account from Account table
+		try {
+			AccountBiz.AccountDelete(accts.get(selectedRow).getAccountId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Unable to delete account");
+			e.printStackTrace();
+		}
+		accts.remove(selectedRow);
+		// Clear checkboxes
+		for(BooleanProperty b: selectedRowList) {
+			b.setValue(false);
+		}
 	}
 
 	// Configure account button clicked
@@ -200,4 +233,65 @@ public class HomepageController {
 		System.out.println("Configure account button clicked");
 	}
 
+	private List<BooleanProperty> setupCheckboxColumn() {
+		// Associate a BooleanProperty to every cell in the first column.
+		selectedRowList = new ArrayList<BooleanProperty>();
+		try {
+			// Create a boolean property for every account that exists
+			acctList = FXCollections.observableArrayList(AccountBiz
+					.AccountSelectAll());
+			for (Account a : acctList) {
+				selectedRowList.add(new SimpleBooleanProperty());
+			}
+			// Add a listener for each boolean property
+			for (BooleanProperty b : selectedRowList) {
+				b.addListener(new ChangeListener<Boolean>() {
+					public void changed(ObservableValue<? extends Boolean> obs,
+							Boolean wasSelected, Boolean isSelected) {
+						System.out.println("isSelected: " + isSelected);
+						// Change all other BooleanProperty to false
+						if (b.getValue()) {
+							// This means b just was selected so every other
+							// property should be unchecked
+							for (BooleanProperty bo : selectedRowList) {
+								if (b != bo)
+									bo.setValue(false);
+							}
+							// Show API details in the table below for Acct
+							// selected.
+							showAcctAPIDetails(acctList.get(selectedRowList
+									.indexOf(b)));
+							// Set rowSelected
+							rowSelected = selectedRowList.indexOf(b) - 1;
+						}
+					}
+				});
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return selectedRowList;
+	}
+
+	private void showAcctAPIDetails(Account account) {
+		System.out.println("In showAcctAPIDetaisl");
+		System.out.println("Name: " + account.getName() + "Location: "
+				+ account.getAccountLocation() + "Id: "
+				+ account.getAccountId());
+		ObservableList<VwAccountDetail> selectedAcct = FXCollections.observableArrayList();
+		for (VwAccountDetail a : accountData) {
+			if (a.getAccountId() == account.getAccountId())
+				selectedAcct.add(a);
+		}
+		accountDetail.setItems(selectedAcct);
+		// Populate columns in the details table
+		APIColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+				cellData.getValue().getApiTypeName()));
+		KeyColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+				cellData.getValue().getSecretKey()));
+		EndPointColumn
+				.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+						cellData.getValue().getUrl()));
+
+	}
 }
