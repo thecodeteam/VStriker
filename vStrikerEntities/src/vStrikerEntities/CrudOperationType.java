@@ -2,7 +2,14 @@ package vStrikerEntities;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 /**
@@ -10,7 +17,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="VSTRIKERDB.CRUD_OPERATION_TYPE")
+@Table(name="CRUD_OPERATION_TYPE", schema="VSTRIKERDB")
 @NamedQuery(name="CrudOperationType.findAll", query="SELECT c FROM CrudOperationType c")
 public class CrudOperationType implements Serializable {
 	private static final long serialVersionUID = 1L;
