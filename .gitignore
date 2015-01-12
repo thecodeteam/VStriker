@@ -70,4 +70,8 @@ vStrikerDB/DB/vstrikerdb.trace.db.orig
 vStrikerDB/DB/vstrikerdb.mv.db
 vStrikerDB/DB/vstrikerdb.trace.db
 
-stagefile/*.txt
+Stagefiles/*.*
+ResultFiles/*.*
+
+vStrikerDB/DB/vstrikerdb.mv.db
+vStrikerDB/DB/vstrikerdb.trace.db

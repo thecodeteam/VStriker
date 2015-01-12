@@ -1,8 +1,12 @@
 package vStrikerBizModel;
+import java.util.List;
+
 import vStrikerEntities.*;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class ExecutionReportDataBiz {
 	public static void ExecutionReportDataCreate(ExecutionReportData  entity ) throws Exception 
@@ -41,6 +45,20 @@ public class ExecutionReportDataBiz {
 		actfactory.close( );
 		
 		return act;
+	}
+
+	public static List<ExecutionReportData> ExecutionReportDataSelectByRprtID(int rptd ) throws Exception 
+	{
+		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
+		EntityManager entitymanager = actfactory.createEntityManager( );
+		Query qry = entitymanager.createQuery("SELECT e FROM ExecutionReportData e Where e.executionReportId="+rptd);
+		@SuppressWarnings("unchecked")
+		List<ExecutionReportData> list = qry.getResultList();
+		
+		entitymanager.close( );
+		actfactory.close( );
+		
+		return list;
 	}
 	
 	public static void  ExecutionReportDataDelete(int entityId ) throws Exception 

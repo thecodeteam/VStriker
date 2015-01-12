@@ -5,11 +5,11 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="vStrikerTestUtilities">
     <property environment="env"/>
+    <property name="vStrikerTestEngine.location" value="../vStrikerTestEngine"/>
     <property name="vStrikerUnitTest.location" value="../vStrikerUnitTest"/>
     <property name="ECLIPSE_HOME" value="../../../../eclipse/"/>
     <property name="vStrikerEntities.location" value="../vStrikerEntities"/>
     <property name="vStrikerBizModel.location" value="../vStrikerBizModel"/>
-    <property name="vStrikerTestEngine.location" value="../vStrikerTestEngine"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.7"/>
     <property name="source" value="1.7"/>
@@ -143,15 +143,12 @@
         <pathelement location="${vStrikerBizModel.location}/../libraries/smart-client-2.0.jar"/>
         <pathelement location="${vStrikerBizModel.location}/../libraries/vipr-object-transformations-2.0.1.jar"/>
     </path>
-    <path id="vStrikerTestEngine.classpath">
-        <pathelement location="${vStrikerTestEngine.location}/bin"/>
-    </path>
     <path id="vStrikerTestUtilities.classpath">
         <pathelement location="bin"/>
         <path refid="vStrikerEntities.classpath"/>
         <path refid="vStrikerBizModel.classpath"/>
-        <path refid="vStrikerTestEngine.classpath"/>
         <pathelement location="../libraries/log4j-1.2.16.jar"/>
+        <pathelement location="../libraries/commons-io-1.3.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -167,7 +164,6 @@
     <target depends="clean" name="cleanall">
         <ant antfile="vStriker_build.xml" dir="${vStrikerEntities.location}" inheritAll="false" target="clean"/>
         <ant antfile="vStriker_build.xml" dir="${vStrikerBizModel.location}" inheritAll="false" target="clean"/>
-        <ant antfile="vStriker_build.xml" dir="${vStrikerTestEngine.location}" inheritAll="false" target="clean"/>
     </target>
     <target depends="build-subprojects,build-project" name="build"/>
     <target name="build-subprojects">
@@ -181,11 +177,6 @@
                 <propertyref name="build.compiler"/>
             </propertyset>
         </ant>
-        <ant antfile="vStriker_build.xml" dir="${vStrikerTestEngine.location}" inheritAll="false" target="build-project">
-            <propertyset>
-                <propertyref name="build.compiler"/>
-            </propertyset>
-        </ant>
     </target>
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
@@ -195,6 +186,12 @@
         </javac>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
+        <ant antfile="vStriker_build.xml" dir="${vStrikerTestEngine.location}" inheritAll="false" target="clean"/>
+        <ant antfile="vStriker_build.xml" dir="${vStrikerTestEngine.location}" inheritAll="false" target="build">
+            <propertyset>
+                <propertyref name="build.compiler"/>
+            </propertyset>
+        </ant>
         <ant antfile="vStriker_build.xml" dir="${vStrikerUnitTest.location}" inheritAll="false" target="clean"/>
         <ant antfile="vStriker_build.xml" dir="${vStrikerUnitTest.location}" inheritAll="false" target="build">
             <propertyset>

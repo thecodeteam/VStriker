@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.spi.DirectoryManager;
-
+import java.io.FileWriter;
 import org.apache.commons.io.FileUtils;
 
 import vStrikerBizModel.*;
+import vStrikerEntities.ExecutionReport;
+import vStrikerEntities.ExecutionReportData;
 public class Utilites {
 
 	
@@ -21,7 +23,7 @@ public class Utilites {
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
 		
-		File dir = new File(s.substring(0,s.lastIndexOf("\\")+1)+"stagefile");  
+		File dir = new File(s.substring(0,s.lastIndexOf("\\")+1)+"StageFiles");  
 		if (!dir.exists()) {dir.mkdir();}        
 			    
 		String fileName=dir+"\\"+testConfName+"_1.txt";
@@ -55,8 +57,76 @@ public class Utilites {
  
 	// File size code
  
-	public void exportResultToFile(String filename,int executionID) {
+	public void exportResultToFile(String filename,int executionRptID) throws Exception {
       
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		
+		File dir = new File(s.substring(0,s.lastIndexOf("\\")+1)+"ResultFiles");  
+		if (!dir.exists()) {dir.mkdir();}  
+		
+		ExecutionReport rpt =ExecutionReportBiz.ExecutionReportSelect(executionRptID);
+		List<ExecutionReportData> list=ExecutionReportDataBiz.ExecutionReportDataSelectByRprtID(executionRptID); 
+		
+		String sFileName=dir+"\\"+rpt.getExecutionName()+".csv";
+		FileWriter writer = new FileWriter(sFileName);
+		 
+	    writer.append("Execuation Name");
+	    writer.append(',');
+	    writer.append(rpt.getExecutionName());
+	    writer.append('\n');
+ 
+	    writer.append("Execuation Date");
+	    writer.append(',');
+	    writer.append(rpt.getExecutionDate()+"");
+	    writer.append('\n');
+
+	    writer.append("TOTAL_THROUGHPUT");
+	    writer.append(',');
+	    writer.append(rpt.getTotalThroughput());
+	    writer.append('\n');
+
+	    writer.append("MAX_THROUGHPUT");    
+	    writer.append(',');  
+	    writer.append(rpt.getMaxThroughput());    
+	    writer.append('\n');
+	    writer.append("MIN_THROUGHPUT");    
+	    writer.append(',');  
+	    writer.append(rpt.getMinThroughput());    
+	    writer.append('\n');
+	    writer.append("TOTAL_VOLUME_SENT");    
+	    writer.append(',');  
+	    writer.append(rpt.getTotalVolumeSent());    
+	    writer.append('\n');
+	    writer.append("TOTAL_VOLUME_RECEIVED");    
+	    writer.append(',');  
+	    writer.append(rpt.getTotalVolumeReceived());    
+	    writer.append('\n');
+	    writer.append("AVG_LATENCY_PER_CRUD_OPERATION");    
+	    writer.append(',');  
+	    writer.append(rpt.getAvgLatencyPerCrudOperation());   
+	    writer.append('\n');
+	    writer.append("NUMBER_REQUEST_SEC");    
+	    writer.append(',');  
+	    writer.append(rpt.getNumberRequestSec()+"");    
+	    writer.append('\n');
+	    writer.append("PERECENT_FAILED_REQUEST");    
+	    writer.append(',');  
+	    writer.append(rpt.getPerecentFailedRequest()+"");    
+	    writer.append('\n');
+ 
+	    for(vStrikerEntities.ExecutionReportData d :list)
+	    {
+	    	writer.append(d.getDataKey());    
+		    writer.append(',');  
+		    writer.append(d.getDataKey());    
+		    writer.append('\n');
+		    
+	    	
+	    }
+	    
+	    writer.flush();
+	    writer.close();
       }
 }
 

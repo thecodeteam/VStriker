@@ -5,6 +5,7 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="vStrikerAPI">
     <property environment="env"/>
+    <property name="vStrikerTestEngine.location" value="../vStrikerTestEngine"/>
     <property name="vStrikerUI.location" value="../vStrikerUI"/>
     <property name="vStrikerUnitTest.location" value="../vStrikerUnitTest"/>
     <property name="ECLIPSE_HOME" value="../../../../eclipse/"/>
@@ -89,6 +90,12 @@
         </javac>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
+        <ant antfile="vStriker_build.xml" dir="${vStrikerTestEngine.location}" inheritAll="false" target="clean"/>
+        <ant antfile="vStriker_build.xml" dir="${vStrikerTestEngine.location}" inheritAll="false" target="build">
+            <propertyset>
+                <propertyref name="build.compiler"/>
+            </propertyset>
+        </ant>
         <ant antfile="vStriker_build.xml" dir="${vStrikerUI.location}" inheritAll="false" target="clean"/>
         <ant antfile="vStriker_build.xml" dir="${vStrikerUI.location}" inheritAll="false" target="build">
             <propertyset>
