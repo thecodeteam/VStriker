@@ -65,13 +65,16 @@ logs/
 DB/
 *.sql
 .buildpath
-vStrikerDB/DB/vstrikerdb.mv.db.orig
-vStrikerDB/DB/vstrikerdb.trace.db.orig
-vStrikerDB/DB/vstrikerdb.mv.db
-vStrikerDB/DB/vstrikerdb.trace.db
+/vStrikerDB/DB/vstrikerdb.mv.db.orig
+/vStrikerDB/DB/vstrikerdb.trace.db.orig
+/vStrikerDB/DB/vstrikerdb.mv.db
+/vStrikerDB/DB/vstrikerdb.trace.db
 
-Stagefiles/*.*
-ResultFiles/*.*
+/Stagefiles/*.*
+/ResultFiles/*.*
 
-vStrikerDB/DB/vstrikerdb.mv.db
-vStrikerDB/DB/vstrikerdb.trace.db
+/vStrikerDB/DB/vstrikerdb.mv.db
+/vStrikerDB/DB/vstrikerdb.trace.db
+/vStrikerUnitTest/pom.xml
+/vStrikerEntities/src/META-INF/persistence.xml
+/vStrikerTestUtilities/src/log4j.properties
