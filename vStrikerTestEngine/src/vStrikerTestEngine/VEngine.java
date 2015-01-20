@@ -75,6 +75,10 @@ public class VEngine implements Engine {
 			throw new Exception("Missing api information");
 		}
 		
+		// ToDo - From TestConfiguration - get ExecutionPlan and ExecutionReportId 
+		// Use ExecutionReportId to get the ExecutionReport object
+		ExecutionReport report = new ExecutionReport();		
+		
 		// Divide the total number of operations amongst CRUD operations
 		int createOps = 0, readOps = 0, updateOps = 0, deleteOps = 0;
 		if (testconfig.getCreateOperation()) {
@@ -112,6 +116,7 @@ public class VEngine implements Engine {
 		}
 	
 		// The test
+		long sum = 0;
 		ExecutorService executor = Executors.newFixedThreadPool(testconfig
 				.getNumberOfThreads());
 		List<Future<ExecutionReportData>> list = new ArrayList<Future<ExecutionReportData>>();
@@ -120,35 +125,11 @@ public class VEngine implements Engine {
 					listofObjects.get(i), api);
 			Future<ExecutionReportData> submit = executor.submit(s3createworker);
 			list.add(submit);
-		}
-		for (int i = 0; i < readOps; i++) {
-			Callable<ExecutionReportData> s3readworker = new S3ReadWorker(
-					listofObjects.get(i), api);
-			Future<ExecutionReportData> submit = executor.submit(s3readworker);
-			list.add(submit);
-		}
-		for (int i = 0; i < updateOps; i++) {
-			Callable<ExecutionReportData> s3updateworker = new S3UpdateWorker(
-					listofObjects.get(i), api);
-			Future<ExecutionReportData> submit = executor.submit(s3updateworker);
-			list.add(submit);
-		}
-		for (int i = 0; i < deleteOps; i++) {
-			Callable<ExecutionReportData> s3deleteworker = new S3DeleteWorker(
-					listofObjects.get(i), api);
-			Future<ExecutionReportData> submit = executor.submit(s3deleteworker);
-			list.add(submit);
-		}
-
-		// Get the results, save ExecutionReportData object
-		ExecutionReport report = new ExecutionReport();
-		long sum = 0;
-		for (Future<ExecutionReportData> future : list) {
 			try {
-				ExecutionReportData reportData = future.get();
+				ExecutionReportData reportData = submit.get();
 				reportData.setExecutionReportId((int)report.getExecutionReportId());
 				ExecutionReportDataBiz.ExecutionReportDataCreate(reportData);
-				sum += Long.valueOf(future.get().getDataValue());
+				sum += Long.valueOf(submit.get().getDataValue());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} catch (ExecutionException e) {
@@ -157,6 +138,62 @@ public class VEngine implements Engine {
 				e.printStackTrace();
 			}
 		}
+				
+		for (int i = 0; i < readOps; i++) {
+			Callable<ExecutionReportData> s3readworker = new S3ReadWorker(
+					listofObjects.get(i), api);
+			Future<ExecutionReportData> submit = executor.submit(s3readworker);
+			list.add(submit);
+			try {
+				ExecutionReportData reportData = submit.get();
+				reportData.setExecutionReportId((int)report.getExecutionReportId());
+				ExecutionReportDataBiz.ExecutionReportDataCreate(reportData);
+				sum += Long.valueOf(submit.get().getDataValue());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		for (int i = 0; i < updateOps; i++) {
+			Callable<ExecutionReportData> s3updateworker = new S3UpdateWorker(
+					listofObjects.get(i), api);
+			Future<ExecutionReportData> submit = executor.submit(s3updateworker);
+			list.add(submit);
+			try {
+				ExecutionReportData reportData = submit.get();
+				reportData.setExecutionReportId((int)report.getExecutionReportId());
+				ExecutionReportDataBiz.ExecutionReportDataCreate(reportData);
+				sum += Long.valueOf(submit.get().getDataValue());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		for (int i = 0; i < deleteOps; i++) {
+			Callable<ExecutionReportData> s3deleteworker = new S3DeleteWorker(
+					listofObjects.get(i), api);
+			Future<ExecutionReportData> submit = executor.submit(s3deleteworker);
+			list.add(submit);
+			try {
+				ExecutionReportData reportData = submit.get();
+				reportData.setExecutionReportId((int)report.getExecutionReportId());
+				ExecutionReportDataBiz.ExecutionReportDataCreate(reportData);
+				sum += Long.valueOf(submit.get().getDataValue());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 		System.out.println(sum);
 		executor.shutdown();
 		
