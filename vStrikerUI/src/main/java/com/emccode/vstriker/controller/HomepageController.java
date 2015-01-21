@@ -13,8 +13,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -34,6 +37,7 @@ import com.emccode.vstriker.VStriker;
 //@author Sanjeev Chauhan
 
 public class HomepageController {
+	@FXML private TabPane tbMain; 
 	@FXML
 	private Tab accountTab;
 	@FXML
@@ -78,7 +82,6 @@ public class HomepageController {
 	private ObservableList<Account> acctList;
 	private List<BooleanProperty> selectedRowList;
 
-	@FXML private Button configureButton;
 	@FXML private Parent configurationView;
 
 	@FXML private ConfigurationController configurationViewController;
@@ -196,9 +199,9 @@ public class HomepageController {
 		try {
 			List<Api> listApi = ApiBiz.ApiSelectforAccount((accts.get(selectedRow).getAccountId()));
 			for (Api a: listApi) {
-				switch (a.getApiTypeId()) {
-				case 1:
-				case 2:
+				switch (a.getApiType().getApiTypeName()) {
+				
+				case "S3":
 					if (a.getSecretKey() != null && a.getUrl() != null  && a.getSubtenant() != null) {
 						Engine e = new VEngine();
 						if (e.validateS3Connection(a.getSubtenant(),
@@ -209,12 +212,10 @@ public class HomepageController {
 						}
 					}
 					break;
-				case 3:
-				case 4:
+				case "Atmos":
 					System.out.println("Atmos");
 					break;
-				case 5:
-				case 6:
+				case "Swift":
 					System.out.println("Swift");
 					break;
 				default:
@@ -268,7 +269,8 @@ public class HomepageController {
 
 		// Delete rows from the API table
 		try {
-			ApiBiz.ApiDeleteforAccount(accts.get(selectedRow).getAccountId());
+		
+			ApiBiz.ApiDeleteByAcount(accts.get(selectedRow).getAccountId());
 			ObservableList<VwAccountDetail> acctDetails = accountDetail.getItems();
 			acctDetails.removeAll(acctDetails);
 		} catch (Exception e1) {

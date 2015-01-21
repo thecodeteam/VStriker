@@ -16,7 +16,7 @@ import com.emccode.vstriker.controller.AtmosController;
 import com.emccode.vstriker.controller.HomepageController;
 import com.emccode.vstriker.controller.S3Controller;
 import com.emccode.vstriker.controller.SwiftController;
-
+import com.emccode.vstriker.controller.EditConfigurationController;
 /*
  * @author Sanjeev Chauhan
  */
@@ -88,7 +88,28 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
+	public void showConfiguration() {
+		try {
+			// Set title
+			this.primaryStage.setTitle("vStriker:Configuration");
+			// Load home layout
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VStriker.class.getResource("view/Home.fxml"));
+			AnchorPane homeLayout = (AnchorPane) loader.load();
 
+			// Show the home layout in the center of the application
+			vStrikerLayout.setCenter(homeLayout);
+
+			// Give controller access to main app
+			HomepageController controller = loader.getController();
+			controller.setVStrikerApp(this);
+			controller.setTab(1);
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public void showAccount() {
 		System.out.println("In VStriker showAccount");
 		try {
@@ -109,7 +130,50 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+	public void showAddConfiguration() {
+		System.out.println("In VStriker ShowEditConfiguaration");
+		try {
+			// Change page title
+			this.primaryStage.setTitle("vStriker:Add Configuration");
+			// Load home layout
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VStriker.class.getResource("view/EditConfiguration.fxml"));
+			AnchorPane layout = (AnchorPane) loader.load();
+
+			// Show the home layout in the center of the application
+			vStrikerLayout.setCenter(layout);
+
+			// Give controller access to main app
+			EditConfigurationController controller = loader.getController();
+			controller.setVStrikerApp(this);
+		} catch (IOException e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
+	}
+	public void showEditConfiguration(vStrikerEntities.ConfigurationTemplate tempcfg, vStrikerEntities.TestConfiguration testcfg, long l) {
+		System.out.println("In VStriker ShowEditConfiguaration");
+		try {
+			// Change page title
+			this.primaryStage.setTitle("vStriker:Edit Configuration");
+			// Load home layout
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VStriker.class.getResource("view/EditConfiguration.fxml"));
+			AnchorPane layout = (AnchorPane) loader.load();
+
+			// Show the home layout in the center of the application
+			vStrikerLayout.setCenter(layout);
+
+			// Give controller access to main app
+			EditConfigurationController controller = loader.getController();
+			controller.setVStrikerApp(this);
+			controller.seTestEntity(tempcfg,testcfg,l);
+			
+		} catch (IOException e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
+	}
 	public void updateAccount(VwAccountDetail validAcct) {
 		System.out.println("In VStriker updateAccount");
 		try {
