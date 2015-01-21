@@ -1,14 +1,7 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 /**
@@ -25,12 +18,6 @@ public class Api implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="API_ID")
 	private int apiId;
-
-	@Column(name="ACCOUNT_ID")
-	private int accountId;
-
-	@Column(name="API_TYPE_ID")
-	private int apiTypeId;
 
 	private String bucket;
 
@@ -53,6 +40,16 @@ public class Api implements Serializable {
 
 	private String url;
 
+	//bi-directional many-to-one association to Account
+	@ManyToOne
+	@JoinColumn(name="ACCOUNT_ID")
+	private Account account;
+
+	//bi-directional many-to-one association to ApiType
+	@ManyToOne
+	@JoinColumn(name="API_TYPE_ID")
+	private ApiType apiType;
+
 	public Api() {
 	}
 
@@ -62,22 +59,6 @@ public class Api implements Serializable {
 
 	public void setApiId(int apiId) {
 		this.apiId = apiId;
-	}
-
-	public int getAccountId() {
-		return this.accountId;
-	}
-
-	public void setAccountId(int accountId) {
-		this.accountId = accountId;
-	}
-
-	public int getApiTypeId() {
-		return this.apiTypeId;
-	}
-
-	public void setApiTypeId(int apiTypeId) {
-		this.apiTypeId = apiTypeId;
 	}
 
 	public String getBucket() {
@@ -142,6 +123,22 @@ public class Api implements Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public Account getAccount() {
+		return this.account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public ApiType getApiType() {
+		return this.apiType;
+	}
+
+	public void setApiType(ApiType apiType) {
+		this.apiType = apiType;
 	}
 
 }

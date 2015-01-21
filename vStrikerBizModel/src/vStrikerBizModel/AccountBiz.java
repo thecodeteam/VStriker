@@ -31,19 +31,18 @@ public class AccountBiz {
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
 		entitymanager.getTransaction( ).begin( );
-		entitymanager.persist( acct );
+		entitymanager.merge(acct );
 		entitymanager.getTransaction( ).commit( );
 		
 		entitymanager.close( );
 		actfactory.close( );
 	}
 	
-	public static Account AccountSelect(int acctId ) throws Exception 
+	public static Account AccountSelect(long acctId ) throws Exception 
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
-		Account act = entitymanager.find(Account.class,acctId);
-		entitymanager.getTransaction( ).commit( );
+		Account act = (Account)entitymanager.find(Account.class,acctId);
 		
 		entitymanager.close( );
 		actfactory.close( );
@@ -74,24 +73,24 @@ public class AccountBiz {
 		@SuppressWarnings("unchecked")
 		List<Account> list = qry.getResultList();
 		
-		//entitymanager.getTransaction( ).commit( );
-		
 		entitymanager.close( );
 		actfactory.close( );
 		
 		return list;
 	}
 	
-	public static void  AccountDelete(int acctId ) throws Exception 
+	public static void  AccountDelete(long acctId ) throws Exception 
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
 		entitymanager.getTransaction( ).begin( );
-		Account act = entitymanager.find(Account.class, Long.valueOf(acctId));
+		Account act = entitymanager.find(Account.class,acctId);
 		entitymanager.remove(act);
 		entitymanager.getTransaction( ).commit( );
+		
 		entitymanager.close( );
 		actfactory.close( );
+		
 	}
 	
 	

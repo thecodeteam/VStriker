@@ -1,14 +1,7 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 /**
@@ -18,7 +11,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="EXECUTION_REPORT_DATA", schema="VSTRIKERDB")
 @NamedQuery(name="ExecutionReportData.findAll", query="SELECT e FROM ExecutionReportData e")
-
 public class ExecutionReportData implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -33,8 +25,10 @@ public class ExecutionReportData implements Serializable {
 	@Column(name="DATA_VALUE")
 	private String dataValue;
 
-	@Column(name="EXECUTION_REPORT_ID")
-	private int executionReportId;
+	//bi-directional many-to-one association to ExecutionReport
+	@ManyToOne
+	@JoinColumn(name="EXECUTION_REPORT_ID")
+	private ExecutionReport executionReport;
 
 	public ExecutionReportData() {
 	}
@@ -63,12 +57,12 @@ public class ExecutionReportData implements Serializable {
 		this.dataValue = dataValue;
 	}
 
-	public int getExecutionReportId() {
-		return this.executionReportId;
+	public ExecutionReport getExecutionReport() {
+		return this.executionReport;
 	}
 
-	public void setExecutionReportId(int executionReportId) {
-		this.executionReportId = executionReportId;
+	public void setExecutionReport(ExecutionReport executionReport) {
+		this.executionReport = executionReport;
 	}
 
 }

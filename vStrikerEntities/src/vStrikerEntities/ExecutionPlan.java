@@ -1,14 +1,8 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -26,17 +20,24 @@ public class ExecutionPlan implements Serializable {
 	@Column(name="EXECUTION_PLAN_ID")
 	private long executionPlanId;
 
-	@Column(name="ACCOUNT_ID")
-	private int accountId;
+	//bi-directional many-to-one association to Account
+	@ManyToOne
+	@JoinColumn(name="ACCOUNT_ID")
+	private Account account;
 
-	@Column(name="CONFIGURATION_TEMPLATE_ID")
-	private int configurationTemplateId;
+	//bi-directional many-to-one association to ConfigurationTemplate
+	@ManyToOne
+	@JoinColumn(name="CONFIGURATION_TEMPLATE_ID")
+	private ConfigurationTemplate configurationTemplate;
 
-	@Column(name="EXECUTION_REPORT_ID")
-	private int executionReportId;
+	//bi-directional many-to-one association to TestConfiguration
+	@ManyToOne
+	@JoinColumn(name="TESTCONFIGURATION_ID")
+	private TestConfiguration testConfiguration;
 
-	@Column(name="TESTCONFIGURATION_ID")
-	private int testconfigurationId;
+	//bi-directional many-to-one association to ExecutionReport
+	@OneToMany(mappedBy="executionPlan")
+	private List<ExecutionReport> executionReports;
 
 	public ExecutionPlan() {
 	}
@@ -49,36 +50,50 @@ public class ExecutionPlan implements Serializable {
 		this.executionPlanId = executionPlanId;
 	}
 
-	public int getAccountId() {
-		return this.accountId;
+	public Account getAccount() {
+		return this.account;
 	}
 
-	public void setAccountId(int accountId) {
-		this.accountId = accountId;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
-	public int getConfigurationTemplateId() {
-		return this.configurationTemplateId;
+	public ConfigurationTemplate getConfigurationTemplate() {
+		return this.configurationTemplate;
 	}
 
-	public void setConfigurationTemplateId(int configurationTemplateId) {
-		this.configurationTemplateId = configurationTemplateId;
+	public void setConfigurationTemplate(ConfigurationTemplate configurationTemplate) {
+		this.configurationTemplate = configurationTemplate;
 	}
 
-	public int getExecutionReportId() {
-		return this.executionReportId;
+	public TestConfiguration getTestConfiguration() {
+		return this.testConfiguration;
 	}
 
-	public void setExecutionReportId(int executionReportId) {
-		this.executionReportId = executionReportId;
+	public void setTestConfiguration(TestConfiguration testConfiguration) {
+		this.testConfiguration = testConfiguration;
 	}
 
-	public int getTestconfigurationId() {
-		return this.testconfigurationId;
+	public List<ExecutionReport> getExecutionReports() {
+		return this.executionReports;
 	}
 
-	public void setTestconfigurationId(int testconfigurationId) {
-		this.testconfigurationId = testconfigurationId;
+	public void setExecutionReports(List<ExecutionReport> executionReports) {
+		this.executionReports = executionReports;
+	}
+
+	public ExecutionReport addExecutionReport(ExecutionReport executionReport) {
+		getExecutionReports().add(executionReport);
+		executionReport.setExecutionPlan(this);
+
+		return executionReport;
+	}
+
+	public ExecutionReport removeExecutionReport(ExecutionReport executionReport) {
+		getExecutionReports().remove(executionReport);
+		executionReport.setExecutionPlan(null);
+
+		return executionReport;
 	}
 
 }

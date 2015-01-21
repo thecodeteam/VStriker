@@ -2,15 +2,9 @@ package vStrikerEntities;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import java.util.List;
 
 
 /**
@@ -20,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="OBJECT_SIZE_REPORT_UNIT", schema="VSTRIKERDB")
 @NamedQuery(name="ObjectSizeReportUnit.findAll", query="SELECT o FROM ObjectSizeReportUnit o")
+
 public class ObjectSizeReportUnit implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,10 +29,8 @@ public class ObjectSizeReportUnit implements Serializable {
 	@Column(name="REPORT_UNIT_VALUE")
 	private String reportUnitValue;
 
-	//bi-directional one-to-one association to ConfigurationTemplate
-	@OneToOne
-	@PrimaryKeyJoinColumn(name="OBJECT_SIZE_REPORT_UNIT_ID", referencedColumnName="CONF_TEMP_OBJECT_SIZE_REPORT_UNIT_ID")
-	private ConfigurationTemplate configurationTemplate;
+
+
 
 	public ObjectSizeReportUnit() {
 	}
@@ -66,12 +59,9 @@ public class ObjectSizeReportUnit implements Serializable {
 		this.reportUnitValue = reportUnitValue;
 	}
 
-	public ConfigurationTemplate getConfigurationTemplate() {
-		return this.configurationTemplate;
-	}
-
-	public void setConfigurationTemplate(ConfigurationTemplate configurationTemplate) {
-		this.configurationTemplate = configurationTemplate;
-	}
+	   @Override
+	    public String toString() {
+	        return this.reportUnitName;
+	    }
 
 }

@@ -1,17 +1,9 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.List;
 
 
 /**
@@ -28,9 +20,6 @@ public class TestConfiguration implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="TESTCONFIGURATION_ID")
 	private long testconfigurationId;
-
-	@Column(name="API_SELCTED_ID")
-	private int apiSelctedId;
 
 	@Column(name="CREATE_OPERATION")
 	private boolean createOperation;
@@ -75,9 +64,6 @@ public class TestConfiguration implements Serializable {
 	@Column(name="OBJECT_SIZE")
 	private int objectSize;
 
-	@Column(name="OBJECT_SIZE_REPORT_UNIT_ID")
-	private int objectSizeReportUnitId;
-
 	@Column(name="READ_OPERATION")
 	private boolean readOperation;
 
@@ -99,6 +85,19 @@ public class TestConfiguration implements Serializable {
 	@Column(name="UPDATE_PERCENT")
 	private int updatePercent;
 
+	//bi-directional many-to-one association to ApiSelected
+	@OneToMany(mappedBy="testConfiguration")
+	private List<ApiSelected> apiSelecteds;
+
+	//bi-directional many-to-one association to ExecutionPlan
+	@OneToMany(mappedBy="testConfiguration")
+	private List<ExecutionPlan> executionPlans;
+
+	//bi-directional many-to-one association to ObjectSizeReportUnit
+	@ManyToOne
+	@JoinColumn(name="OBJECT_SIZE_REPORT_UNIT_ID")
+	private ObjectSizeReportUnit objectSizeReportUnit;
+
 	public TestConfiguration() {
 	}
 
@@ -108,14 +107,6 @@ public class TestConfiguration implements Serializable {
 
 	public void setTestconfigurationId(long testconfigurationId) {
 		this.testconfigurationId = testconfigurationId;
-	}
-
-	public int getApiSelctedId() {
-		return this.apiSelctedId;
-	}
-
-	public void setApiSelctedId(int apiSelctedId) {
-		this.apiSelctedId = apiSelctedId;
 	}
 
 	public boolean getCreateOperation() {
@@ -230,14 +221,6 @@ public class TestConfiguration implements Serializable {
 		this.objectSize = objectSize;
 	}
 
-	public int getObjectSizeReportUnitId() {
-		return this.objectSizeReportUnitId;
-	}
-
-	public void setObjectSizeReportUnitId(int objectSizeReportUnitId) {
-		this.objectSizeReportUnitId = objectSizeReportUnitId;
-	}
-
 	public boolean getReadOperation() {
 		return this.readOperation;
 	}
@@ -292,6 +275,58 @@ public class TestConfiguration implements Serializable {
 
 	public void setUpdatePercent(int updatePercent) {
 		this.updatePercent = updatePercent;
+	}
+
+	public List<ApiSelected> getApiSelecteds() {
+		return this.apiSelecteds;
+	}
+
+	public void setApiSelecteds(List<ApiSelected> apiSelecteds) {
+		this.apiSelecteds = apiSelecteds;
+	}
+
+	public ApiSelected addApiSelected(ApiSelected apiSelected) {
+		getApiSelecteds().add(apiSelected);
+		apiSelected.setTestConfiguration(this);
+
+		return apiSelected;
+	}
+
+	public ApiSelected removeApiSelected(ApiSelected apiSelected) {
+		getApiSelecteds().remove(apiSelected);
+		apiSelected.setTestConfiguration(null);
+
+		return apiSelected;
+	}
+
+	public List<ExecutionPlan> getExecutionPlans() {
+		return this.executionPlans;
+	}
+
+	public void setExecutionPlans(List<ExecutionPlan> executionPlans) {
+		this.executionPlans = executionPlans;
+	}
+
+	public ExecutionPlan addExecutionPlan(ExecutionPlan executionPlan) {
+		getExecutionPlans().add(executionPlan);
+		executionPlan.setTestConfiguration(this);
+
+		return executionPlan;
+	}
+
+	public ExecutionPlan removeExecutionPlan(ExecutionPlan executionPlan) {
+		getExecutionPlans().remove(executionPlan);
+		executionPlan.setTestConfiguration(null);
+
+		return executionPlan;
+	}
+
+	public ObjectSizeReportUnit getObjectSizeReportUnit() {
+		return this.objectSizeReportUnit;
+	}
+
+	public void setObjectSizeReportUnit(ObjectSizeReportUnit objectSizeReportUnit) {
+		this.objectSizeReportUnit = objectSizeReportUnit;
 	}
 
 }

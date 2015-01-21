@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
+
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emccode.vstriker.controller.S3Controller">
    <children>
       <TextField fx:id="s3accesskey" layoutX="201.0" layoutY="20.0" prefHeight="26.0" prefWidth="364.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="50.0" />

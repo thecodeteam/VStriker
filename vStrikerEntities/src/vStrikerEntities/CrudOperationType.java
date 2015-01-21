@@ -1,15 +1,8 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -33,9 +26,9 @@ public class CrudOperationType implements Serializable {
 	@Column(name="CRUD_OPERATION_NAME")
 	private String crudOperationName;
 
-	//bi-directional one-to-one association to ApiType
-	@OneToOne(mappedBy="crudOperationType")
-	private ApiType apiType;
+	//bi-directional many-to-one association to TestPlanOperation
+	@OneToMany(mappedBy="crudOperationType")
+	private List<TestPlanOperation> testPlanOperations;
 
 	public CrudOperationType() {
 	}
@@ -64,12 +57,26 @@ public class CrudOperationType implements Serializable {
 		this.crudOperationName = crudOperationName;
 	}
 
-	public ApiType getApiType() {
-		return this.apiType;
+	public List<TestPlanOperation> getTestPlanOperations() {
+		return this.testPlanOperations;
 	}
 
-	public void setApiType(ApiType apiType) {
-		this.apiType = apiType;
+	public void setTestPlanOperations(List<TestPlanOperation> testPlanOperations) {
+		this.testPlanOperations = testPlanOperations;
+	}
+
+	public TestPlanOperation addTestPlanOperation(TestPlanOperation testPlanOperation) {
+		getTestPlanOperations().add(testPlanOperation);
+		testPlanOperation.setCrudOperationType(this);
+
+		return testPlanOperation;
+	}
+
+	public TestPlanOperation removeTestPlanOperation(TestPlanOperation testPlanOperation) {
+		getTestPlanOperations().remove(testPlanOperation);
+		testPlanOperation.setCrudOperationType(null);
+
+		return testPlanOperation;
 	}
 
 }

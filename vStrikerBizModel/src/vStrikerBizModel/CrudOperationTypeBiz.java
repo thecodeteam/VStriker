@@ -23,19 +23,18 @@ public class CrudOperationTypeBiz {
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
 		entitymanager.getTransaction( ).begin( );
-		entitymanager.persist( entity );
+		entitymanager.merge( entity );
 		entitymanager.getTransaction( ).commit( );
 		
 		entitymanager.close( );
 		actfactory.close( );
 	}
 	
-	public static CrudOperationType CrudOperationTypeSelect(int entityId ) throws Exception 
+	public static CrudOperationType CrudOperationTypeSelect(long entityId ) throws Exception 
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
 		CrudOperationType act = entitymanager.find(CrudOperationType.class,entityId);
-		entitymanager.getTransaction( ).commit( );
 		
 		entitymanager.close( );
 		actfactory.close( );
@@ -43,11 +42,12 @@ public class CrudOperationTypeBiz {
 		return act;
 	}
 	
-	public static void  CrudOperationTypeDelete(int entityId ) throws Exception 
+	public static void  CrudOperationTypeDelete(long entityId ) throws Exception 
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
 		CrudOperationType act = entitymanager.find(CrudOperationType.class,entityId);
+		entitymanager.getTransaction( ).begin( );
 		entitymanager.remove(act);
 		entitymanager.getTransaction( ).commit( );
 		

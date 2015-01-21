@@ -1,0 +1,25 @@
+package vStrikerEntities;
+
+import javax.annotation.Generated;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+
+<<<<<<< HEAD
+@Generated(value="Dali", date="2015-01-14T17:45:11.222-0800")
+=======
+@Generated(value="Dali", date="2015-01-06T08:44:12.164-0800")
+>>>>>>> a523a881073554020309df560f83fe61b390a492
+@StaticMetamodel(Api.class)
+public class Api_ {
+	public static volatile SingularAttribute<Api, Integer> apiId;
+	public static volatile SingularAttribute<Api, Integer> accountId;
+	public static volatile SingularAttribute<Api, Integer> apiTypeId;
+	public static volatile SingularAttribute<Api, String> bucket;
+	public static volatile SingularAttribute<Api, String> httpAddressIp;
+	public static volatile SingularAttribute<Api, String> httpAddressPort;
+	public static volatile SingularAttribute<Api, String> httpsAddressIp;
+	public static volatile SingularAttribute<Api, String> httpsAddressPort;
+	public static volatile SingularAttribute<Api, String> secretKey;
+	public static volatile SingularAttribute<Api, String> subtenant;
+	public static volatile SingularAttribute<Api, String> url;
+}

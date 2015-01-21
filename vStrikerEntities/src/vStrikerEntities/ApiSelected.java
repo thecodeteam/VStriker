@@ -1,14 +1,7 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 /**
@@ -26,17 +19,20 @@ public class ApiSelected implements Serializable {
 	@Column(name="API_SELECTED_ID")
 	private long apiSelectedId;
 
-	@Column(name="API_SELECTED_HTTP")
-	private boolean apiSelectedHttp;
+	//bi-directional many-to-one association to ApiType
+	@ManyToOne
+	@JoinColumn(name="API_TYPE_ID")
+	private ApiType apiType;
 
-	@Column(name="API_SELECTED_HTTPS")
-	private boolean apiSelectedHttps;
+	//bi-directional many-to-one association to ConfigurationTemplate
+	@ManyToOne
+	@JoinColumn(name="CONFIGURATION_TEMPLATE_ID")
+	private ConfigurationTemplate configurationTemplate;
 
-	@Column(name="API_TYPE_ID")
-	private int apiTypeId;
-
-	@Column(name="TESTCONFIGURATION_ID")
-	private int testconfigurationId;
+	//bi-directional many-to-one association to TestConfiguration
+	@ManyToOne
+	@JoinColumn(name="TESTCONFIGURATION_ID")
+	private TestConfiguration testConfiguration;
 
 	public ApiSelected() {
 	}
@@ -49,36 +45,28 @@ public class ApiSelected implements Serializable {
 		this.apiSelectedId = apiSelectedId;
 	}
 
-	public boolean getApiSelectedHttp() {
-		return this.apiSelectedHttp;
+	public ApiType getApiType() {
+		return this.apiType;
 	}
 
-	public void setApiSelectedHttp(boolean apiSelectedHttp) {
-		this.apiSelectedHttp = apiSelectedHttp;
+	public void setApiType(ApiType apiType) {
+		this.apiType = apiType;
 	}
 
-	public boolean getApiSelectedHttps() {
-		return this.apiSelectedHttps;
+	public ConfigurationTemplate getConfigurationTemplate() {
+		return this.configurationTemplate;
 	}
 
-	public void setApiSelectedHttps(boolean apiSelectedHttps) {
-		this.apiSelectedHttps = apiSelectedHttps;
+	public void setConfigurationTemplate(ConfigurationTemplate configurationTemplate) {
+		this.configurationTemplate = configurationTemplate;
 	}
 
-	public int getApiTypeId() {
-		return this.apiTypeId;
+	public TestConfiguration getTestConfiguration() {
+		return this.testConfiguration;
 	}
 
-	public void setApiTypeId(int apiTypeId) {
-		this.apiTypeId = apiTypeId;
-	}
-
-	public int getTestconfigurationId() {
-		return this.testconfigurationId;
-	}
-
-	public void setTestconfigurationId(int testconfigurationId) {
-		this.testconfigurationId = testconfigurationId;
+	public void setTestConfiguration(TestConfiguration testConfiguration) {
+		this.testConfiguration = testConfiguration;
 	}
 
 }

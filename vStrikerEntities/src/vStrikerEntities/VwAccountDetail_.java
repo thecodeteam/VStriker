@@ -5,9 +5,10 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="Dali", date="2015-01-06T12:20:00.741-0800")
+@Generated(value="Dali", date="2015-01-14T17:45:11.245-0800")
 @StaticMetamodel(VwAccountDetail.class)
 public class VwAccountDetail_ {
+	public static volatile SingularAttribute<VwAccountDetail, String> id;
 	public static volatile SingularAttribute<VwAccountDetail, Integer> accountId;
 	public static volatile SingularAttribute<VwAccountDetail, String> accountLocation;
 	public static volatile SingularAttribute<VwAccountDetail, Integer> apiId;
@@ -26,5 +27,4 @@ public class VwAccountDetail_ {
 	public static volatile SingularAttribute<VwAccountDetail, String> subtenant;
 	public static volatile SingularAttribute<VwAccountDetail, String> url;
 	public static volatile SingularAttribute<VwAccountDetail, Boolean> validated;
-	public static volatile SingularAttribute<VwAccountDetail, String> id;
 }

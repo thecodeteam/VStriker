@@ -1,17 +1,9 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.List;
 
 
 /**
@@ -39,6 +31,14 @@ public class Account implements Serializable {
 	private String name;
 
 	private boolean validated;
+
+	//bi-directional many-to-one association to Api
+	@OneToMany(mappedBy="account")
+	private List<Api> apis;
+
+	//bi-directional many-to-one association to ExecutionPlan
+	@OneToMany(mappedBy="account")
+	private List<ExecutionPlan> executionPlans;
 
 	public Account() {
 	}
@@ -81,6 +81,50 @@ public class Account implements Serializable {
 
 	public void setValidated(boolean validated) {
 		this.validated = validated;
+	}
+
+	public List<Api> getApis() {
+		return this.apis;
+	}
+
+	public void setApis(List<Api> apis) {
+		this.apis = apis;
+	}
+
+	public Api addApi(Api api) {
+		getApis().add(api);
+		api.setAccount(this);
+
+		return api;
+	}
+
+	public Api removeApi(Api api) {
+		getApis().remove(api);
+		api.setAccount(null);
+
+		return api;
+	}
+
+	public List<ExecutionPlan> getExecutionPlans() {
+		return this.executionPlans;
+	}
+
+	public void setExecutionPlans(List<ExecutionPlan> executionPlans) {
+		this.executionPlans = executionPlans;
+	}
+
+	public ExecutionPlan addExecutionPlan(ExecutionPlan executionPlan) {
+		getExecutionPlans().add(executionPlan);
+		executionPlan.setAccount(this);
+
+		return executionPlan;
+	}
+
+	public ExecutionPlan removeExecutionPlan(ExecutionPlan executionPlan) {
+		getExecutionPlans().remove(executionPlan);
+		executionPlan.setAccount(null);
+
+		return executionPlan;
 	}
 
 }

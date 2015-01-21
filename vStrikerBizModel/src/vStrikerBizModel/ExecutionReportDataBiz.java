@@ -27,19 +27,18 @@ public class ExecutionReportDataBiz {
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
 		entitymanager.getTransaction( ).begin( );
-		entitymanager.persist( entity );
+		entitymanager.merge( entity );
 		entitymanager.getTransaction( ).commit( );
 		
 		entitymanager.close( );
 		actfactory.close( );
 	}
 	
-	public static ExecutionReportData ExecutionReportDataSelect(int entityId ) throws Exception 
+	public static ExecutionReportData ExecutionReportDataSelect(long entityId ) throws Exception 
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
 		ExecutionReportData act = entitymanager.find(ExecutionReportData.class,entityId);
-		entitymanager.getTransaction( ).commit( );
 		
 		entitymanager.close( );
 		actfactory.close( );
@@ -47,7 +46,7 @@ public class ExecutionReportDataBiz {
 		return act;
 	}
 
-	public static List<ExecutionReportData> ExecutionReportDataSelectByRprtID(int rptd ) throws Exception 
+	public static List<ExecutionReportData> ExecutionReportDataSelectByRprtID(long rptd ) throws Exception 
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
@@ -61,7 +60,7 @@ public class ExecutionReportDataBiz {
 		return list;
 	}
 	
-	public static void  ExecutionReportDataDelete(int entityId ) throws Exception 
+	public static void  ExecutionReportDataDelete(long entityId ) throws Exception 
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
