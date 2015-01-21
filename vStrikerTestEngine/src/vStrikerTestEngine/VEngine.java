@@ -127,7 +127,7 @@ public class VEngine implements Engine {
 			list.add(submit);
 			try {
 				ExecutionReportData reportData = submit.get();
-				reportData.setExecutionReportId((int)report.getExecutionReportId());
+				reportData.setExecutionReport(report);
 				ExecutionReportDataBiz.ExecutionReportDataCreate(reportData);
 				sum += Long.valueOf(submit.get().getDataValue());
 			} catch (InterruptedException e) {
@@ -146,7 +146,7 @@ public class VEngine implements Engine {
 			list.add(submit);
 			try {
 				ExecutionReportData reportData = submit.get();
-				reportData.setExecutionReportId((int)report.getExecutionReportId());
+				reportData.setExecutionReport(report);
 				ExecutionReportDataBiz.ExecutionReportDataCreate(reportData);
 				sum += Long.valueOf(submit.get().getDataValue());
 			} catch (InterruptedException e) {
@@ -164,7 +164,7 @@ public class VEngine implements Engine {
 			list.add(submit);
 			try {
 				ExecutionReportData reportData = submit.get();
-				reportData.setExecutionReportId((int)report.getExecutionReportId());
+				reportData.setExecutionReport(report);
 				ExecutionReportDataBiz.ExecutionReportDataCreate(reportData);
 				sum += Long.valueOf(submit.get().getDataValue());
 			} catch (InterruptedException e) {
@@ -182,7 +182,7 @@ public class VEngine implements Engine {
 			list.add(submit);
 			try {
 				ExecutionReportData reportData = submit.get();
-				reportData.setExecutionReportId((int)report.getExecutionReportId());
+				reportData.setExecutionReport(report);
 				ExecutionReportDataBiz.ExecutionReportDataCreate(reportData);
 				sum += Long.valueOf(submit.get().getDataValue());
 			} catch (InterruptedException e) {
