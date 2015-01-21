@@ -7,6 +7,7 @@ import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.apache.commons.io.FilenameUtils;
 
@@ -138,7 +139,7 @@ public class VEngine implements Engine {
 		List<Callable<ExecutionReportData>> deleteworkersList = new ArrayList<Callable<ExecutionReportData>>();
 		// Create list of S3DeleteWorkers
 		for (int i = 0; i < deleteOps; i++) {
-			Callable<ExecutionReportData> s3deleteworker = new S3CreateWorker(
+			Callable<ExecutionReportData> s3deleteworker = new S3DeleteWorker(
 					listofObjects.get(i), api);
 			deleteworkersList.add(s3deleteworker);
 		}
@@ -146,7 +147,6 @@ public class VEngine implements Engine {
 		// Pre-test
 		if (!testconfig.getCreateOperation() || (deleteOps > createOps)) {
 			for (String s : listofObjects) {
-				System.out.println("Name of file/object: " + s);
 				s3api.CreateObject(api.getSubtenant(), api.getSecretKey(),
 						api.getUrl(), null, api.getBucket(),
 						FilenameUtils.getName(s), new FileInputStream(s));
@@ -159,85 +159,73 @@ public class VEngine implements Engine {
 		ExecutorService executor = Executors.newFixedThreadPool(testconfig
 				.getNumberOfThreads());
 		List<ExecutionReportData> list = new ArrayList<ExecutionReportData>();
-
+		List<ExecutionReportData> failurelist = new ArrayList<ExecutionReportData>();
+		List<Future<ExecutionReportData>> futurelist = new ArrayList<Future<ExecutionReportData>>();
+		
 		long createTime = System.nanoTime();
-		for (int i = 0; i < createOps; i++) {
+		futurelist = executor.invokeAll(createworkersList);
+		createTime = System.nanoTime() - createTime;
+		for (Future<ExecutionReportData> f: futurelist) {
 			try {
-				ExecutionReportData reportData = executor.submit(
-						createworkersList.get(i)).get();
-				list.add(reportData);
+				list.add(f.get());
 			} catch (Exception e) {
 				ExecutionReportData erd = new ExecutionReportData();
 				erd.setDataKey("create");
 				erd.setDataValue(e.toString());
-				list.add(erd);
+				failurelist.add(erd);
 			}
 		}
-		createTime = System.nanoTime() - createTime;
-
+		
 		long readTime = System.nanoTime();
-		for (int i = 0; i < readOps; i++) {
+		futurelist = executor.invokeAll(readworkersList);
+		readTime = System.nanoTime() - readTime;
+		for (Future<ExecutionReportData> f: futurelist) {
 			try {
-				ExecutionReportData reportData = executor.submit(
-						readworkersList.get(i)).get();
-				list.add(reportData);
+				list.add(f.get());
 			} catch (Exception e) {
 				ExecutionReportData erd = new ExecutionReportData();
 				erd.setDataKey("read");
 				erd.setDataValue(e.toString());
-				list.add(erd);
+				failurelist.add(erd);
 			}
 		}
-		readTime = System.nanoTime() - readTime;
-
+		
 		long updateTime = System.nanoTime();
-		for (int i = 0; i < updateOps; i++) {
-			try {
-				ExecutionReportData reportData = executor.submit(
-						updateworkersList.get(i)).get();
-				list.add(reportData);
-			} catch (Exception e) {
-				ExecutionReportData erd = new ExecutionReportData();
-				erd.setDataKey("update");
-				erd.setDataValue(e.toString());
-				list.add(erd);
-			}
-		}
+		futurelist = executor.invokeAll(updateworkersList);
 		updateTime = System.nanoTime() - updateTime;
-
-		long deleteTime = System.nanoTime();
-		for (int i = 0; i < deleteOps; i++) {
+		for (Future<ExecutionReportData> f: futurelist) {
 			try {
-				ExecutionReportData reportData = executor.submit(
-						deleteworkersList.get(i)).get();
-				list.add(reportData);
+				list.add(f.get());
 			} catch (Exception e) {
 				ExecutionReportData erd = new ExecutionReportData();
 				erd.setDataKey("update");
 				erd.setDataValue(e.toString());
-				list.add(erd);
+				failurelist.add(erd);
 			}
 		}
+		
+		long deleteTime = System.nanoTime();
+		futurelist = executor.invokeAll(deleteworkersList);
 		deleteTime = System.nanoTime() - deleteTime;
-
-		System.out.println(sum);
-		executor.shutdown();
-
-		// post-test - Delete objects created
-		if (!testconfig.getDeleteOperation() || (deleteOps < createOps)) {
-			for (String s : listofObjects) {
-				try {
-					s3api.DeleteObject(api.getSubtenant(), api.getSecretKey(),
-							api.getUrl(), null, api.getBucket(),
-							FilenameUtils.getName(s));
-					System.out.println("Post-test - Deleted: " + s);
-				} catch (Exception e) {
-					System.out.println("Post test cleanup error: "
-							+ e.toString());
-				}
+		for (Future<ExecutionReportData> f: futurelist) {
+			try {
+				list.add(f.get());
+			} catch (Exception e) {
+				ExecutionReportData erd = new ExecutionReportData();
+				erd.setDataKey("delete");
+				erd.setDataValue(e.toString());
+				failurelist.add(erd);
 			}
 		}
 
+		// Save the ExecutionReportData objects in the database
+		/*
+		for (ExecutionReportData e: list) {
+			e.setExecutionReport(1);
+			ExecutionReportDataBiz.ExecutionReportDataCreate(e);
+		}
+		*/
+		
 		// Calculate summary numbers for the report
 		if (testconfig.getCreateOperation()) {
 			System.out

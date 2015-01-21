@@ -81,9 +81,9 @@ public class TestEngineUnitTest {
 		vLogger.LogInfo("TestEngineUnitTest:TestS3");
 		TestConfiguration testconfig = new TestConfiguration();
 		testconfig.setTestConfigName("S3Tests");
-		testconfig.setNumberOfOperations(40);
-		testconfig.setNumberOfThreads(2);
-		testconfig.setObjectSize(100);
+		testconfig.setNumberOfOperations(16);
+		testconfig.setNumberOfThreads(4);
+		testconfig.setObjectSize(1024*1024);
 
 		String username="user045";
 		String password="vd2bty66GwFjJxB34VHFEBgEJ/b8QWDwnAdA1zjg";
@@ -100,9 +100,9 @@ public class TestEngineUnitTest {
 		long starttime = System.nanoTime();
 		// CRUD = 0000 - 1111 
 		// 0001
-		s3xxxd(tengine, testconfig, api);
+		//s3xxxd(tengine, testconfig, api);
 		// 0010
-		s3xxux(tengine, testconfig, api);
+		//s3xxux(tengine, testconfig, api);
 		// 1111
 		s3crud(tengine, testconfig, api);
 		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");

@@ -15,6 +15,7 @@ import com.emc.vipr.s3.s3api;
 public class S3UpdateWorker implements Callable<ExecutionReportData> {
 	private String objectLocation;
 	private Api api;
+	ExecutionReportData reportData = new ExecutionReportData();
 
 	public S3UpdateWorker(String objectLocation, Api api) {
 		this.objectLocation = objectLocation;
@@ -25,9 +26,6 @@ public class S3UpdateWorker implements Callable<ExecutionReportData> {
 		System.out.println("S3UpdateWorker.call()");
 		System.out.println("ObjectLocation: " + objectLocation);
 		System.out.println("Thread: " + Thread.currentThread().getName());
-
-		// Execution_report_data object
-		ExecutionReportData reportData = new ExecutionReportData();
 
 		// Create object in S3
 		long startTime = System.nanoTime();

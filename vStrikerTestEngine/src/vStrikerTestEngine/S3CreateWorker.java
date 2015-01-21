@@ -16,6 +16,7 @@ public class S3CreateWorker implements Callable<ExecutionReportData> {
 
 	private String objectLocation;
 	private Api api;
+	ExecutionReportData reportData = new ExecutionReportData();
 
 	/*
 	 * Constructor
@@ -32,9 +33,6 @@ public class S3CreateWorker implements Callable<ExecutionReportData> {
 		System.out.println("S3AddWorker.call()");
 		System.out.println("ObjectLocation: " + objectLocation);
 		System.out.println("Thread: " + Thread.currentThread().getName());
-
-		// Execution_report_data object
-		ExecutionReportData reportData = new ExecutionReportData();
 
 		// Create object in S3
 		long startTime = System.nanoTime();
