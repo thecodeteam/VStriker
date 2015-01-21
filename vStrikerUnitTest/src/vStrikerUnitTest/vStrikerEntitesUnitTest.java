@@ -1,21 +1,24 @@
 package vStrikerUnitTest;
-import java.util.List;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 
-import vStrikerEntities.*;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import vStrikerEntities.Account;
+import vStrikerEntities.VwAccountDetail;
 
 public class vStrikerEntitesUnitTest {
 
 	@Test
 	public void test() {
+		// Comment
 		TestAccountCreate();
 		TestAccountDetail();
 	}

@@ -1,4 +1,4 @@
-package  com.emccode.vstriker;
+package com.emccode.vstriker;
 
 import java.io.IOException;
 
@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import vStrikerEntities.Account;
+import vStrikerEntities.VwAccountDetail;
 
 import com.emccode.vstriker.controller.AccountController;
 import com.emccode.vstriker.controller.AtmosController;
@@ -24,9 +25,9 @@ public class VStriker extends Application {
 	private Stage primaryStage;
 	private BorderPane vStrikerLayout;
 
-
 	// Replace with Account from vStrikerEntities package - ToDo
-	// private ObservableList<Account> accountData = FXCollections.observableArrayList();
+	// private ObservableList<Account> accountData =
+	// FXCollections.observableArrayList();
 
 	// Constructor
 	public VStriker() {
@@ -37,7 +38,7 @@ public class VStriker extends Application {
 
 	// Return list of Accounts
 	// public ObservableList<Account> getAccountData() {
-	//	return accountData;
+	// return accountData;
 	// }
 
 	@Override
@@ -103,7 +104,28 @@ public class VStriker extends Application {
 
 			// Give controller access to main app
 			AccountController controller = loader.getController();
-			controller.setVStrikerApp(this);
+			controller.createAccount(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateAccount(VwAccountDetail validAcct) {
+		System.out.println("In VStriker updateAccount");
+		try {
+			// Change page title
+			this.primaryStage.setTitle("vStriker:Account");
+			// Load home layout
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VStriker.class.getResource("view/Account.fxml"));
+			AnchorPane accountLayout = (AnchorPane) loader.load();
+
+			// Show the home layout in the center of the application
+			vStrikerLayout.setCenter(accountLayout);
+
+			// Give controller access to main app
+			AccountController controller = loader.getController();
+			controller.updateAccount(this, validAcct);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -118,10 +140,10 @@ public class VStriker extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/S3API.fxml"));
 			AnchorPane S3Layout = (AnchorPane) loader.load();
-			
-			//Show the Swift page in the center of the application
+
+			// Show the Swift page in the center of the application
 			vStrikerLayout.setCenter(S3Layout);
-			
+
 			// Give controller access to the main app
 			S3Controller controller = loader.getController();
 			controller.setVStrikerApp(this, validAcct);
@@ -129,7 +151,7 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void showSwiftAPI(Account validAcct) {
 		System.out.println("In VStriker showSwiftAPI");
 		try {
@@ -139,10 +161,10 @@ public class VStriker extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/SwiftAPI.fxml"));
 			AnchorPane SwiftLayout = (AnchorPane) loader.load();
-			
-			//Show the Swift page in the center of the application
+
+			// Show the Swift page in the center of the application
 			vStrikerLayout.setCenter(SwiftLayout);
-			
+
 			// Give controller access to the main application
 			SwiftController controller = loader.getController();
 			controller.setVStrikerApp(this, validAcct);
@@ -150,7 +172,7 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void showAtmosAPI(Account validAcct) {
 		System.out.println("In VStriker showAtmosAPI");
 		try {
@@ -160,10 +182,10 @@ public class VStriker extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/AtmosAPI.fxml"));
 			AnchorPane AtmosLayout = (AnchorPane) loader.load();
-			
-			//Show the S3 page in the center of the application
+
+			// Show the S3 page in the center of the application
 			vStrikerLayout.setCenter(AtmosLayout);
-			
+
 			// Give controller access to the main app
 			AtmosController controller = loader.getController();
 			controller.setVStrikerApp(this, validAcct);

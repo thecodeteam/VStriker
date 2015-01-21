@@ -1,4 +1,4 @@
-package  com.emccode.vstriker.controller;
+package com.emccode.vstriker.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,14 +14,14 @@ public class SwiftController {
 	private Button backtoAccount;
 	@FXML
 	private Button validateSwift;
-	
+
 	private VStriker vStriker;
 	private Account acct;
 
 	// Constructor
 	public SwiftController() {
 	}
-	
+
 	// Set the main application
 	public void setVStrikerApp(VStriker vStriker, Account validAcct) {
 		this.vStriker = vStriker;
@@ -39,7 +39,7 @@ public class SwiftController {
 		System.out.println("Back to Accounts button clicked");
 		vStriker.showHome();
 	}
-	
+
 	@FXML
 	public void validateSwiftClicked(ActionEvent event) {
 		System.out.println("Validate Swift button clicked");

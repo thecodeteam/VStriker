@@ -21,7 +21,7 @@
             <Label layoutX="70.0" layoutY="120.0" text="Protocol" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="180.0" />
             <ChoiceBox fx:id="chooseProtocol" prefWidth="150.0" />
             <Label layoutX="80.0" layoutY="130.0" text="Port" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="180.0" />
-            <TextField fx:id="port" layoutX="201.0" layoutY="125.0" prefHeight="26.0" prefWidth="149.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="180.0" />
+            <TextField fx:id="s3port" layoutX="201.0" layoutY="125.0" prefHeight="26.0" prefWidth="149.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="180.0" />
          </children>
       </HBox>
       <HBox layoutX="254.0" layoutY="336.0" spacing="10.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="300.0">

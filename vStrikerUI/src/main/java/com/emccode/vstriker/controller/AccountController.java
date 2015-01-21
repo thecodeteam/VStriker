@@ -1,13 +1,19 @@
 package com.emccode.vstriker.controller;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import vStrikerBizModel.AccountBiz;
+import vStrikerBizModel.AccountDetailBiz;
 import vStrikerEntities.Account;
+import vStrikerEntities.VwAccountDetail;
 
 import com.emccode.vstriker.VStriker;
 
@@ -26,16 +32,62 @@ public class AccountController {
 	private TextField accountName;
 	@FXML
 	private TextField accountLocation;
+	@FXML
+	private TableView<VwAccountDetail> accountDetail;
+	@FXML
+	private TableColumn<VwAccountDetail, String> APIColumn;
+	@FXML
+	private TableColumn<VwAccountDetail, String> ProtocolColumn;
+	@FXML
+	private TableColumn<VwAccountDetail, String> PortColumn;
+	@FXML
+	private TableColumn<VwAccountDetail, String> KeyColumn;
+	@FXML
+	private TableColumn<VwAccountDetail, String> EndPointColumn;
 
 	private VStriker vStriker;
+	private VwAccountDetail validAcct;
 
 	// Constructor
 	public AccountController() {
 	}
 
 	// Set the main application
-	public void setVStrikerApp(VStriker vStriker) {
+	public void createAccount(VStriker vStriker) {
 		this.vStriker = vStriker;
+	}
+
+	public void updateAccount(VStriker vStriker, VwAccountDetail validAcct) {
+		System.out.println("In AccountController - updateAccount");
+		this.validAcct = validAcct;
+		createAccount(vStriker);
+		accountName.setText(validAcct.getName());
+		accountLocation.setText(validAcct.getAccountLocation());
+		// Populate the table
+		ObservableList<VwAccountDetail> accountData, selectedAcct;
+		try {
+			accountData = FXCollections.observableArrayList(AccountDetailBiz
+					.AccountSelectAll());
+			selectedAcct = FXCollections.observableArrayList();
+			for (VwAccountDetail a : accountData) {
+				if (a.getAccountId() == validAcct.getAccountId())
+					selectedAcct.add(a);
+			}
+			accountDetail.setItems(selectedAcct);
+			// Populate columns in the details table
+			APIColumn
+					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+							cellData.getValue().getApiTypeName()));
+			KeyColumn
+					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+							cellData.getValue().getSecretKey()));
+			EndPointColumn
+					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+							cellData.getValue().getUrl()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// Initialize

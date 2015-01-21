@@ -1,8 +1,12 @@
 package vStrikerBizModel;
-import vStrikerEntities.*;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import vStrikerEntities.Api;
 
 public class ApiBiz {
 	
@@ -44,6 +48,18 @@ public class ApiBiz {
 		return act;
 	}
 	
+	public static List<Api>  ApiSelectforAccount(int accountId ) throws Exception 
+	{
+		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
+		EntityManager entitymanager = actfactory.createEntityManager( );
+		Query qry = entitymanager.createQuery("SELECT a from Api a WHERE a.accountId= :acctId", Api.class);
+		qry.setParameter("acctId", accountId);
+		List<Api> apiList = qry.getResultList();
+		entitymanager.close( );
+		actfactory.close( );
+		return apiList;
+	}
+	
 	public static void  ApiDelete(int entityId ) throws Exception 
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
@@ -57,5 +73,15 @@ public class ApiBiz {
 		
 	}
 	
-	
+	public static void  ApiDeleteforAccount(int accountId ) throws Exception 
+	{
+		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
+		EntityManager entitymanager = actfactory.createEntityManager( );
+		entitymanager.getTransaction( ).begin( );
+		Query qry = entitymanager.createQuery("DELETE from Api a WHERE a.accountId= :acctId", Api.class);
+		int deletedCount = qry.setParameter("acctId", accountId).executeUpdate();
+		entitymanager.getTransaction( ).commit( );		
+		entitymanager.close( );
+		actfactory.close( );
+	}
 }
