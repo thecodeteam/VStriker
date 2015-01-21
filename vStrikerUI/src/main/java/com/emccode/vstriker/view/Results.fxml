@@ -4,15 +4,28 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="paneRslt" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emccode.vstriker.controller.ResultsController">
    <children>
-      <HBox layoutX="34.0" layoutY="35.0" spacing="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+      <HBox layoutX="24.0" layoutY="35.0" prefHeight="20.0" prefWidth="550.0" spacing="20.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="26.0">
          <children>
-            <Label layoutX="34.0" layoutY="35.0" prefHeight="16.0" prefWidth="124.0" text="Test being executed" />
-            <ProgressBar layoutX="172.0" layoutY="44.0" prefHeight="20.0" prefWidth="235.0" progress="0.0" />
-            <Label layoutX="484.0" layoutY="46.0" text="Test complete" />
+            <Label layoutX="25.0" layoutY="35.0" prefHeight="16.0" prefWidth="124.0" text="Test being executed" />
+            <ProgressBar layoutX="172.0" layoutY="44.0" prefHeight="20.0" prefWidth="308.0" progress="0.0" />
+            <Label id="lblTestComplete" layoutX="484.0" layoutY="46.0" text="Test complete" />
          </children>
       </HBox>
+      <TitledPane animated="false" layoutX="25.0" layoutY="60.0" prefHeight="429.0" prefWidth="550.0" text="Current Test run details">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextArea id="txtTestResult" layoutX="20.0" layoutY="14.0" prefHeight="380.0" prefWidth="360.0" />
+                  <Button fx:id="btnChart" layoutX="393.0" layoutY="66.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Test Run Charts"  onAction="#btnChartClicked"/>
+                  <Button fx:id="btnExport" layoutX="393.0" layoutY="101.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="136.0" text="Test Run Export (CSV)" onAction="#btnExportClicked"/>
+				  <Button fx:id="btnHome" layoutX="393.0" layoutY="136.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="136.0" text="Home" onAction="#btnHomeClicked"/>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
    </children>
 </AnchorPane>

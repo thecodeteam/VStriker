@@ -1,0 +1,18 @@
+package vStrikerEntities;
+
+import javax.annotation.Generated;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+
+<<<<<<< HEAD
+@Generated(value="Dali", date="2015-01-14T17:45:11.228-0800")
+=======
+@Generated(value="Dali", date="2015-01-06T08:44:12.187-0800")
+>>>>>>> a523a881073554020309df560f83fe61b390a492
+@StaticMetamodel(CrudOperationType.class)
+public class CrudOperationType_ {
+	public static volatile SingularAttribute<CrudOperationType, Long> crudOperationTypeId;
+	public static volatile SingularAttribute<CrudOperationType, String> crud_operation_value;
+	public static volatile SingularAttribute<CrudOperationType, String> crudOperationName;
+	public static volatile SingularAttribute<CrudOperationType, ApiType> apiType;
+}

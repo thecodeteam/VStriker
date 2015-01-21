@@ -1,18 +1,9 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.List;
 
 
 /**
@@ -94,9 +85,18 @@ public class ConfigurationTemplate implements Serializable {
 	@Column(name="CONF_TEMP_UPDATE_PERCENT")
 	private int confTempUpdatePercent;
 
-	//bi-directional one-to-one association to ObjectSizeReportUnit
-	@OneToOne(mappedBy="configurationTemplate")
-	private ObjectSizeReportUnit objectSizeReportUnit;
+	//bi-directional many-to-one association to ApiSelected
+	@OneToMany(mappedBy="configurationTemplate")
+	private List<ApiSelected> apiSelecteds;
+
+	//uni-directional one-to-one association to ObjectSizeReportUnit
+	@OneToOne
+	@JoinColumn(name="CONF_TEMP_OBJECT_SIZE_REPORT_UNIT_ID")
+	private ObjectSizeReportUnit objectSizeReportUnit1;
+
+	//bi-directional many-to-one association to ExecutionPlan
+	@OneToMany(mappedBy="configurationTemplate")
+	private List<ExecutionPlan> executionPlans;
 
 	public ConfigurationTemplate() {
 	}
@@ -277,12 +277,57 @@ public class ConfigurationTemplate implements Serializable {
 		this.confTempUpdatePercent = confTempUpdatePercent;
 	}
 
-	public ObjectSizeReportUnit getObjectSizeReportUnit() {
-		return this.objectSizeReportUnit;
+	public List<ApiSelected> getApiSelecteds() {
+		return this.apiSelecteds;
 	}
 
-	public void setObjectSizeReportUnit(ObjectSizeReportUnit objectSizeReportUnit) {
-		this.objectSizeReportUnit = objectSizeReportUnit;
+	public void setApiSelecteds(List<ApiSelected> apiSelecteds) {
+		this.apiSelecteds = apiSelecteds;
+	}
+
+	public ApiSelected addApiSelected(ApiSelected apiSelected) {
+		getApiSelecteds().add(apiSelected);
+		apiSelected.setConfigurationTemplate(this);
+
+		return apiSelected;
+	}
+
+	public ApiSelected removeApiSelected(ApiSelected apiSelected) {
+		getApiSelecteds().remove(apiSelected);
+		apiSelected.setConfigurationTemplate(null);
+
+		return apiSelected;
+	}
+
+	public ObjectSizeReportUnit getObjectSizeReportUnit1() {
+		return this.objectSizeReportUnit1;
+	}
+
+	public void setObjectSizeReportUnit1(ObjectSizeReportUnit objectSizeReportUnit1) {
+		this.objectSizeReportUnit1 = objectSizeReportUnit1;
+	}
+
+
+	public List<ExecutionPlan> getExecutionPlans() {
+		return this.executionPlans;
+	}
+
+	public void setExecutionPlans(List<ExecutionPlan> executionPlans) {
+		this.executionPlans = executionPlans;
+	}
+
+	public ExecutionPlan addExecutionPlan(ExecutionPlan executionPlan) {
+		getExecutionPlans().add(executionPlan);
+		executionPlan.setConfigurationTemplate(this);
+
+		return executionPlan;
+	}
+
+	public ExecutionPlan removeExecutionPlan(ExecutionPlan executionPlan) {
+		getExecutionPlans().remove(executionPlan);
+		executionPlan.setConfigurationTemplate(null);
+
+		return executionPlan;
 	}
 
 }

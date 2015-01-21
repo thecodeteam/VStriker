@@ -1,9 +1,7 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.util.Date;
 
 
@@ -12,17 +10,13 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="VW_ACCOUNT_DETAIL",schema="VSTRIKERDB")
+@Table(name="VW_ACCOUNT_DETAIL", schema="VSTRIKERDB")
 @NamedQuery(name="VwAccountDetail.findAll", query="SELECT v FROM VwAccountDetail v")
 public class VwAccountDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name="ID")
-	private String id;
-	
 	@Column(name="ACCOUNT_ID")
-	private int accountId;
+	private long accountId;
 
 	@Column(name="ACCOUNT_LOCATION")
 	private String accountLocation;
@@ -55,6 +49,10 @@ public class VwAccountDetail implements Serializable {
 
 	@Column(name="HTTPS_ADDRESS_PORT")
 	private String httpsAddressPort;
+	
+	@Id
+	@Column(name="ID")
+	private String id;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="LAST_VALIDATION_DATE")
@@ -74,17 +72,11 @@ public class VwAccountDetail implements Serializable {
 	public VwAccountDetail() {
 	}
 
-	public String getId() {
-		return this.id;
-	}
-	public void setId(String Id) {
-		this.id = Id;
-	}
-	public int getAccountId() {
+	public long getAccountId() {
 		return this.accountId;
 	}
 
-	public void setAccountId(int accountId) {
+	public void setAccountId(long accountId) {
 		this.accountId = accountId;
 	}
 
@@ -174,6 +166,14 @@ public class VwAccountDetail implements Serializable {
 
 	public void setHttpsAddressPort(String httpsAddressPort) {
 		this.httpsAddressPort = httpsAddressPort;
+	}
+
+	public String getId() {
+		return this.id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public Date getLastValidationDate() {

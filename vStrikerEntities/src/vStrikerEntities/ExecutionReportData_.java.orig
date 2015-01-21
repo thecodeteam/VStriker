@@ -1,0 +1,18 @@
+package vStrikerEntities;
+
+import javax.annotation.Generated;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+
+<<<<<<< HEAD
+@Generated(value="Dali", date="2015-01-14T17:45:11.231-0800")
+=======
+@Generated(value="Dali", date="2015-01-06T08:44:12.218-0800")
+>>>>>>> a523a881073554020309df560f83fe61b390a492
+@StaticMetamodel(ExecutionReportData.class)
+public class ExecutionReportData_ {
+	public static volatile SingularAttribute<ExecutionReportData, Long> executionReportDataId;
+	public static volatile SingularAttribute<ExecutionReportData, String> dataKey;
+	public static volatile SingularAttribute<ExecutionReportData, String> dataValue;
+	public static volatile SingularAttribute<ExecutionReportData, Integer> executionReportId;
+}

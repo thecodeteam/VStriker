@@ -1,16 +1,8 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -37,10 +29,17 @@ public class ApiType implements Serializable {
 	@Column(name="API_TYPE_URL")
 	private String apiTypeUrl;
 
-	//bi-directional one-to-one association to CrudOperationType
-	@OneToOne
-	@PrimaryKeyJoinColumn(name="API_TYPE_ID", referencedColumnName="API_TYPE_ID")
-	private CrudOperationType crudOperationType;
+	//bi-directional many-to-one association to ApiSelected
+	@OneToMany(mappedBy="apiType")
+	private List<ApiSelected> apiSelecteds;
+
+	//bi-directional many-to-one association to Api
+	@OneToMany(mappedBy="apiType")
+	private List<Api> apis;
+
+	//bi-directional many-to-one association to TestPlanOperation
+	@OneToMany(mappedBy="apiType")
+	private List<TestPlanOperation> testPlanOperations;
 
 	public ApiType() {
 	}
@@ -77,12 +76,70 @@ public class ApiType implements Serializable {
 		this.apiTypeUrl = apiTypeUrl;
 	}
 
-	public CrudOperationType getCrudOperationType() {
-		return this.crudOperationType;
+	public List<ApiSelected> getApiSelecteds() {
+		return this.apiSelecteds;
 	}
 
-	public void setCrudOperationType(CrudOperationType crudOperationType) {
-		this.crudOperationType = crudOperationType;
+	public void setApiSelecteds(List<ApiSelected> apiSelecteds) {
+		this.apiSelecteds = apiSelecteds;
+	}
+
+	public ApiSelected addApiSelected(ApiSelected apiSelected) {
+		getApiSelecteds().add(apiSelected);
+		apiSelected.setApiType(this);
+
+		return apiSelected;
+	}
+
+	public ApiSelected removeApiSelected(ApiSelected apiSelected) {
+		getApiSelecteds().remove(apiSelected);
+		apiSelected.setApiType(null);
+
+		return apiSelected;
+	}
+
+	public List<Api> getApis() {
+		return this.apis;
+	}
+
+	public void setApis(List<Api> apis) {
+		this.apis = apis;
+	}
+
+	public Api addApi(Api api) {
+		getApis().add(api);
+		api.setApiType(this);
+
+		return api;
+	}
+
+	public Api removeApi(Api api) {
+		getApis().remove(api);
+		api.setApiType(null);
+
+		return api;
+	}
+
+	public List<TestPlanOperation> getTestPlanOperations() {
+		return this.testPlanOperations;
+	}
+
+	public void setTestPlanOperations(List<TestPlanOperation> testPlanOperations) {
+		this.testPlanOperations = testPlanOperations;
+	}
+
+	public TestPlanOperation addTestPlanOperation(TestPlanOperation testPlanOperation) {
+		getTestPlanOperations().add(testPlanOperation);
+		testPlanOperation.setApiType(this);
+
+		return testPlanOperation;
+	}
+
+	public TestPlanOperation removeTestPlanOperation(TestPlanOperation testPlanOperation) {
+		getTestPlanOperations().remove(testPlanOperation);
+		testPlanOperation.setApiType(null);
+
+		return testPlanOperation;
 	}
 
 }

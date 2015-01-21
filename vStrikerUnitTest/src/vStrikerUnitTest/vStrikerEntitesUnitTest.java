@@ -1,28 +1,48 @@
 package vStrikerUnitTest;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
-
 import java.util.List;
+
+import vStrikerEntities.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import org.junit.Test;
+import static org.junit.Assert.*;
 
-import vStrikerEntities.Account;
-import vStrikerEntities.VwAccountDetail;
+import org.junit.Test;
 
 public class vStrikerEntitesUnitTest {
 
 	@Test
 	public void test() {
-		// Comment
+		TestConfigTemp();
 		TestAccountCreate();
 		TestAccountDetail();
 	}
 
+	public void TestConfigTemp()
+	{
+		try
+		{
+			long id =1;
+			EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
+			EntityManager entitymanager = actfactory.createEntityManager( );
+			ConfigurationTemplate act = entitymanager.find(ConfigurationTemplate.class,id);
+
+			entitymanager.close( );
+			actfactory.close( );
+			
+			System.out.println(act.getConfigurationTemplateId()+"-"+act.getConfTempName());
+		}
+	catch(Exception e)
+		
+		{
+			
+			e.printStackTrace();
+		}
+		
+	}
 	public void TestAccountCreate()
 	{
 		Account acct = new Account();

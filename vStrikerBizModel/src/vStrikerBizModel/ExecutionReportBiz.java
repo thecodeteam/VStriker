@@ -22,19 +22,18 @@ public class ExecutionReportBiz {
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
 		entitymanager.getTransaction( ).begin( );
-		entitymanager.persist( entity );
+		entitymanager.merge( entity );
 		entitymanager.getTransaction( ).commit( );
 		
 		entitymanager.close( );
 		actfactory.close( );
 	}
 	
-	public static ExecutionReport ExecutionReportSelect(int entityId ) throws Exception 
+	public static ExecutionReport ExecutionReportSelect(long entityId ) throws Exception 
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
 		ExecutionReport act = entitymanager.find(ExecutionReport.class,entityId);
-		entitymanager.getTransaction( ).commit( );
 		
 		entitymanager.close( );
 		actfactory.close( );
@@ -42,10 +41,11 @@ public class ExecutionReportBiz {
 		return act;
 	}
 	
-	public static void  ExecutionReportDelete(int entityId ) throws Exception 
+	public static void  ExecutionReportDelete(long entityId ) throws Exception 
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
+		entitymanager.getTransaction().begin();
 		ExecutionReport act = entitymanager.find(ExecutionReport.class,entityId);
 		entitymanager.remove(act);
 		entitymanager.getTransaction( ).commit( );

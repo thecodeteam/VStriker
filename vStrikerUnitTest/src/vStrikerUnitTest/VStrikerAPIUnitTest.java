@@ -1,10 +1,15 @@
 package vStrikerUnitTest;
+import java.util.Iterator;
+import java.util.List;
+
 import org.junit.Test;
 
-import vStrikerTestUtilities.vLogger;
+import vStrikerTestUtilities.*;
 
+import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.emc.*;
 import com.emc.vipr.s3.s3api;
 import com.emc.vipr.services.s3.ViPRS3Client;
 
@@ -13,7 +18,7 @@ public class VStrikerAPIUnitTest {
 	@Test
 	public  void test() throws Exception {
 		TestS3API();
-		//TestS3ReadBucket();
+		TestS3ReadBucket();
 		
 	}
 	

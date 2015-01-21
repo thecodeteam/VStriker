@@ -78,6 +78,14 @@ public class HomepageController {
 	private ObservableList<Account> acctList;
 	private List<BooleanProperty> selectedRowList;
 
+	@FXML private Button configureButton;
+	@FXML private Parent configurationView;
+
+	@FXML private ConfigurationController configurationViewController;
+
+	@FXML private Parent resultsView;
+
+	@FXML private ResultsController resultsViewController;
 	// Constructor
 	public HomepageController() {
 	}
@@ -222,6 +230,13 @@ public class HomepageController {
 
 	}
 
+	public void setTab(int i)
+	{
+		SingleSelectionModel<Tab> tb = tbMain.getSelectionModel();
+		tb.select(i);
+		
+	}
+	
 	// Update account button clicked
 	@FXML
 	public void updateAccountClicked(ActionEvent event) {
@@ -280,6 +295,7 @@ public class HomepageController {
 	@FXML
 	public void configureAccountClicked(ActionEvent event) {
 		System.out.println("Configure account button clicked");
+		vStriker.showAddConfiguration();
 	}
 
 	private List<BooleanProperty> setupCheckboxColumn() {

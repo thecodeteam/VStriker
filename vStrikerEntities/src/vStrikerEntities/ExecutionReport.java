@@ -1,17 +1,9 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.List;
 
 
 /**
@@ -59,6 +51,15 @@ public class ExecutionReport implements Serializable {
 
 	@Column(name="TOTAL_VOLUME_SENT")
 	private String totalVolumeSent;
+
+	//bi-directional many-to-one association to ExecutionPlan
+	@ManyToOne
+	@JoinColumn(name="EXECUTION_PLAN_ID")
+	private ExecutionPlan executionPlan;
+
+	//bi-directional many-to-one association to ExecutionReportData
+	@OneToMany(mappedBy="executionReport")
+	private List<ExecutionReportData> executionReportData;
 
 	public ExecutionReport() {
 	}
@@ -149,6 +150,36 @@ public class ExecutionReport implements Serializable {
 
 	public void setTotalVolumeSent(String totalVolumeSent) {
 		this.totalVolumeSent = totalVolumeSent;
+	}
+
+	public ExecutionPlan getExecutionPlan() {
+		return this.executionPlan;
+	}
+
+	public void setExecutionPlan(ExecutionPlan executionPlan) {
+		this.executionPlan = executionPlan;
+	}
+
+	public List<ExecutionReportData> getExecutionReportData() {
+		return this.executionReportData;
+	}
+
+	public void setExecutionReportData(List<ExecutionReportData> executionReportData) {
+		this.executionReportData = executionReportData;
+	}
+
+	public ExecutionReportData addExecutionReportData(ExecutionReportData executionReportData) {
+		getExecutionReportData().add(executionReportData);
+		executionReportData.setExecutionReport(this);
+
+		return executionReportData;
+	}
+
+	public ExecutionReportData removeExecutionReportData(ExecutionReportData executionReportData) {
+		getExecutionReportData().remove(executionReportData);
+		executionReportData.setExecutionReport(null);
+
+		return executionReportData;
 	}
 
 }

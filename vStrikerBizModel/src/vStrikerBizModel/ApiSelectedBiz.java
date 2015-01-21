@@ -1,8 +1,12 @@
 package vStrikerBizModel;
+import java.util.List;
+
 import vStrikerEntities.*;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class ApiSelectedBiz {
 	public static void ApiSelectCreate(ApiSelected  entity ) throws Exception 
@@ -30,12 +34,11 @@ public class ApiSelectedBiz {
 		actfactory.close( );
 	}
 	
-	public static ApiSelected ApiSelectSelect(int entityId ) throws Exception 
+	public static ApiSelected ApiSelectSelect(long entityId ) throws Exception 
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
 		ApiSelected act = entitymanager.find(ApiSelected.class,entityId);
-		entitymanager.getTransaction( ).commit( );
 		
 		entitymanager.close( );
 		actfactory.close( );
@@ -43,10 +46,11 @@ public class ApiSelectedBiz {
 		return act;
 	}
 	
-	public static void  ApiSelectDelete(int entityId ) throws Exception 
+	public static void  ApiSelectDelete(long entityId ) throws Exception 
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
+		entitymanager.getTransaction( ).begin( );
 		ApiSelected act = entitymanager.find(ApiSelected.class,entityId);
 		entitymanager.remove(act);
 		entitymanager.getTransaction( ).commit( );
@@ -56,6 +60,33 @@ public class ApiSelectedBiz {
 		
 	}
 	
+	public static List<VwApiSelectedDetail> ApiSelectedSelectByConfTempID(long id ) throws Exception 
+	{
+		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
+		EntityManager entitymanager = actfactory.createEntityManager( );
+		
+		Query qry = entitymanager.createQuery("SELECT a from VwApiSelectedDetail a WHERE a.configurationTemplateId= :Id", VwApiSelectedDetail.class);
+		qry.setParameter("Id", id);
+		@SuppressWarnings("unchecked")
+		List<VwApiSelectedDetail> acct = (List<VwApiSelectedDetail>) qry.getResultList();
+		entitymanager.close( );
+		actfactory.close( );
+		return acct;
+	}
+
+	public static List<VwApiSelectedDetail> ApiSelectedSelectByTestID(long id ) throws Exception 
+	{
+		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
+		EntityManager entitymanager = actfactory.createEntityManager( );
+		
+		Query qry = entitymanager.createQuery("SELECT a from VwApiSelectedDetail a WHERE a.testconfigurationId= :Id", VwApiSelectedDetail.class);
+		qry.setParameter("Id", id);
+		@SuppressWarnings("unchecked")
+		List<VwApiSelectedDetail> acct = (List<VwApiSelectedDetail>) qry.getResultList();
+		entitymanager.close( );
+		actfactory.close( );
+		return acct;
+	}
 	
 
 }
