@@ -167,6 +167,10 @@ public class HomepageController {
 	public void setVStrikerApp(VStriker vStriker) {
 		System.out.println("In Homepage Controller setVStrikerApp");
 		this.vStriker = vStriker;
+		configurationViewController.setVStrikerApp(vStriker);
+		resultsViewController.setVStrikerApp(vStriker);
+		
+		
 		new AccountDetailBiz();
 		// javafx.collections.ObservableList<VwAccountDetail> accountData;
 		try {
