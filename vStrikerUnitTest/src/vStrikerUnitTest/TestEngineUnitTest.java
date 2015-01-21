@@ -82,7 +82,7 @@ public class TestEngineUnitTest {
 		TestConfiguration testconfig = new TestConfiguration();
 		testconfig.setTestConfigName("S3Tests");
 		testconfig.setNumberOfOperations(40);
-		testconfig.setNumberOfThreads(4);
+		testconfig.setNumberOfThreads(2);
 		testconfig.setObjectSize(100);
 
 		String username="user045";
