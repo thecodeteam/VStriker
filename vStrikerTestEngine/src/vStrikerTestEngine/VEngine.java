@@ -11,6 +11,7 @@ import java.util.concurrent.Future;
 
 import org.apache.commons.io.FilenameUtils;
 
+import vStrikerBizModel.ExecutionReportDataBiz;
 import vStrikerEntities.Api;
 import vStrikerEntities.ExecutionReport;
 import vStrikerEntities.ExecutionReportData;
@@ -81,6 +82,7 @@ public class VEngine implements Engine {
 		// ExecutionReportId
 		// Use ExecutionReportId to get the ExecutionReport object
 		ExecutionReport report = new ExecutionReport();
+		report.setExecutionReportId(1);
 
 		// Divide the total number of operations amongst CRUD operations
 		int createOps = 0, readOps = 0, updateOps = 0, deleteOps = 0;
@@ -219,12 +221,11 @@ public class VEngine implements Engine {
 		}
 
 		// Save the ExecutionReportData objects in the database
-		/*
 		for (ExecutionReportData e: list) {
-			e.setExecutionReport(1);
+			e.setExecutionReport(report);
 			ExecutionReportDataBiz.ExecutionReportDataCreate(e);
 		}
-		*/
+		
 		
 		// Calculate summary numbers for the report
 		if (testconfig.getCreateOperation()) {
