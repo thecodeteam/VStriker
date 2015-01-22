@@ -1,15 +1,19 @@
 package  com.emccode.vstriker.controller;
 
+import java.util.List;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.layout.AnchorPane;
-import vStrikerEntities.Account;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import vStrikerEntities.*;
 
 import com.emccode.vstriker.VStriker;
+import com.emccode.vstriker.model.TestInfo;
 
 //@author Sanjeev Chauhan
 
@@ -22,7 +26,16 @@ public class ResultsController {
 	private Button btnHome;
 	@FXML
 	private AnchorPane paneRslt;
+
+	@FXML private TitledPane panExecuateResult;
+	@FXML private HBox hboxProgress;
+	@FXML private ComboBox<vStrikerEntities.Account> ddAccounts;
+	@FXML private ComboBox<TestInfo> ddTestList;
+	@FXML private Button btnRun;
+	@FXML private ProgressBar progressbarTest;
 	
+	private final ObservableList<TestInfo> testlist = FXCollections.observableArrayList();
+	private final ObservableList<vStrikerEntities.Account> accountlist = FXCollections.observableArrayList();
 	private VStriker vStriker;
 
 	// Constructor
@@ -61,5 +74,91 @@ public class ResultsController {
 		SingleSelectionModel<Tab> tb = main.getSelectionModel();
 		tb.select(0);
 	}
+	
+		@FXML
+	public void onExecuteRun(ActionEvent event)
+	{
+			try
+			{
+				hboxProgress.setVisible(true);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+	}
+
+		public void LoadLists() {
+			System.out.println("Load List initialize");
+			hboxProgress.setVisible(false);
+			panExecuateResult.setVisible(false);
+			
+			this.LoadAccountsList();
+			this.LoadTestsList();
+			
+		}
+		
+		private void LoadAccountsList() {
+			
+
+			this.ddAccounts.getItems().clear();
+			accountlist.clear();
+			
+				try {
+					List<Account> acct=vStrikerBizModel.AccountBiz.AccountSelectAll();
+					for(Account t :acct)
+					{
+						accountlist.add( t);
+					}
+
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+
+				if(!accountlist.isEmpty())
+				{
+				 this.ddAccounts.getItems().addAll(accountlist);
+			   }
+			
+		}
+
+		
+		public void LoadTestsList()
+		{
+
+			this.ddTestList.getItems().clear();
+			testlist.clear();
+			
+				try {
+					List<ConfigurationTemplate> template=vStrikerBizModel.ConfigurationTemplateBiz.ConfigurationTemplateSelectAll();
+					for(ConfigurationTemplate t :template)
+					{
+						testlist.add( new TestInfo(t.getConfTempName(), t.getConfigurationTemplateId(), true));
+						
+					}
+
+					List<TestConfiguration> test=vStrikerBizModel.TestConfigurationBiz.ConfigurationTestSelectAll();
+					for(TestConfiguration t :test)
+					{
+						testlist.add( new TestInfo(t.getTestConfigName(), t.getTestconfigurationId(), false));
+						
+					}
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+
+				if(!testlist.isEmpty())
+				{
+				 this.ddTestList.getItems().addAll(testlist);
+			   }
+		}
 
 }

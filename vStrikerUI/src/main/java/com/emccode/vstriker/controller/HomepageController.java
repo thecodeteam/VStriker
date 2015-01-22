@@ -3,6 +3,8 @@ package com.emccode.vstriker.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -38,8 +40,11 @@ import com.emccode.vstriker.VStriker;
 
 public class HomepageController {
 	@FXML private TabPane tbMain; 
-	@FXML
-	private Tab accountTab;
+	@FXML private Tab accountTab;
+	@FXML private Tab tbAccount;
+	@FXML private Tab tbExecution;
+	@FXML private Tab tbCfg;
+	
 	@FXML
 	private TableView<VwAccountDetail> accountTable;
 	@FXML
@@ -97,6 +102,33 @@ public class HomepageController {
 	@FXML
 	private void initialize() {
 		System.out.println("In HomepageController initialize");
+		
+		// Add Tab Listener
+		tbMain.getSelectionModel().selectedItemProperty().addListener(
+			    new ChangeListener<Tab>() {
+			        @Override
+			        public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
+			           if(t1.getId().equals("tbExecution"))
+			           {
+			        	   vStriker.SetTitle("vStriker:Test Execution");
+			        	   resultsViewController.LoadLists();
+			           }
+			           
+			           if(t1.getId().equals("tbCfg"))
+			           {
+			        	   vStriker.SetTitle("vStriker:Configuration");
+			        	   resultsViewController.LoadLists();
+			           }
+			      
+			           if(t1.getId().equals("tbAccount"))
+			           {
+			        	   vStriker.SetTitle("vStriker");
+			        	   resultsViewController.LoadLists();
+			           }
+			        }
+			    }
+			);
+		
 		assert accountTab != null : "fx:id=\"accountTab\" was not injected: check your FXML file 'Home.fxml'.";
 		// Populate the name column
 		nameColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
@@ -239,6 +271,8 @@ public class HomepageController {
 	{
 		SingleSelectionModel<Tab> tb = tbMain.getSelectionModel();
 		tb.select(i);
+		if(i==2)
+			resultsViewController.LoadLists();
 		
 	}
 	

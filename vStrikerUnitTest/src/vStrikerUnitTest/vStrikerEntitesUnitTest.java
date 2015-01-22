@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import vStrikerBizModel.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -16,9 +17,28 @@ public class vStrikerEntitesUnitTest {
 
 	@Test
 	public void test() {
-		TestConfigTemp();
+	/*	TestConfigTemp();
 		TestAccountCreate();
-		TestAccountDetail();
+		TestAccountDetail();*/
+		testReportExecutionData();
+	}
+	
+	public void testReportExecutionData()
+	{
+		
+		long i=1;
+		try {
+			vStrikerEntities.ExecutionReport rpt = vStrikerBizModel.ExecutionReportBiz.ExecutionReportSelect(i);
+			vStrikerEntities.ExecutionReportData data = new ExecutionReportData();
+			data.setDataKey("Put");
+			data.setDataValue("100");
+			data.setExecutionReport(rpt);
+			vStrikerBizModel.ExecutionReportDataBiz.ExecutionReportDataCreate(data);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	public void TestConfigTemp()

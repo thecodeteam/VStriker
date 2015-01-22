@@ -9,7 +9,7 @@
 	<children>
 		<TabPane fx:id="tbMain" layoutX="125.0" layoutY="30.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<tabs>
-				<Tab text="1. Accounts">
+				<Tab text="1. Accounts" fx:id="tbAccount">
 					<content>
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="288.0" prefWidth="622.0">
 							<children>
@@ -62,7 +62,7 @@
 						<fx:include source="Configuration.fxml" fx:id="configurationView"/>
 					</content>
 				</Tab>
-				<Tab text="3. Execution">
+				<Tab text="3. Execution" fx:id="tbExecution">
 					<content>
 						<fx:include source="Results.fxml" fx:id="resultsView"/>
 					</content>
