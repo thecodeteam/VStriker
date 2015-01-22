@@ -2,6 +2,8 @@ package  com.emccode.vstriker.controller;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,9 +13,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import vStrikerEntities.*;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 import com.emccode.vstriker.VStriker;
 import com.emccode.vstriker.model.TestInfo;
+
 
 //@author Sanjeev Chauhan
 
@@ -33,7 +39,9 @@ public class ResultsController {
 	@FXML private ComboBox<TestInfo> ddTestList;
 	@FXML private Button btnRun;
 	@FXML private ProgressBar progressbarTest;
+	@FXML private Label lblfinished;
 	
+	private Task runWorker;
 	private final ObservableList<TestInfo> testlist = FXCollections.observableArrayList();
 	private final ObservableList<vStrikerEntities.Account> accountlist = FXCollections.observableArrayList();
 	private VStriker vStriker;
@@ -81,6 +89,23 @@ public class ResultsController {
 			try
 			{
 				hboxProgress.setVisible(true);
+
+		                btnRun.setDisable(true);
+		                progressbarTest.setProgress(0);
+		                runWorker = createWorker();
+		                lblfinished.setText("");
+		                progressbarTest.progressProperty().unbind();
+		                progressbarTest.progressProperty().bind(runWorker.progressProperty());
+		               
+		                runWorker.messageProperty().addListener(new ChangeListener<String>() {
+		                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+		                        System.out.println(newValue);
+		                    }
+		                });
+
+		           Thread th= new Thread(runWorker);
+		           th.start();
+		                
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -89,7 +114,38 @@ public class ResultsController {
 			
 			
 	}
-
+		public void setFinish()
+		{
+			this.lblfinished.setText("Completed!");
+			}
+		 public Task createWorker() {
+		        return new Task() {
+		            @Override
+		            protected Object call() throws Exception {
+		                for (int i = 0; i < 50; i++) {
+		                    Thread.sleep(200);
+		                    updateMessage("200 milliseconds");
+		                    updateProgress(i + 1, 50);
+		                    
+		                    //get Selected Account
+		                    
+		                    // Selected Test info (Test / Template)
+		                    
+		                    // Insert Execution Report
+		                    
+		                    // Retive the new Enity
+		                    
+		                    // Call the the engine passing the enitty
+		                    // waint for Execution Report
+		                    // Fill the Text Area
+		                }
+		            	JOptionPane.showConfirmDialog(null, "Test executed successfully!",  "VStriker",
+		    				    JOptionPane.CLOSED_OPTION,JOptionPane.INFORMATION_MESSAGE);
+		                return true;
+		            }
+		        };
+		        
+		    }
 		public void LoadLists() {
 			System.out.println("Load List initialize");
 			hboxProgress.setVisible(false);

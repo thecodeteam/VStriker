@@ -12,7 +12,7 @@
          <children>
             <Label layoutX="25.0" layoutY="35.0" prefHeight="16.0" prefWidth="124.0" text="Test being executed" />
             <ProgressBar fx:id="progressbarTest" layoutX="172.0" layoutY="44.0" prefHeight="20.0" prefWidth="308.0" progress="0.0" />
-            <Label id="lblTestComplete" layoutX="484.0" layoutY="46.0" text="Test complete" />
+            <Label id="lblTestComplete" fx:id="lblfinished" layoutX="480.0" layoutY="46.0" />
          </children>
       </HBox>
       <TitledPane fx:id="panExecuateResult" animated="false" layoutX="25.0" layoutY="145.0" prefHeight="344.0" prefWidth="550.0" text="Current Test run details">
