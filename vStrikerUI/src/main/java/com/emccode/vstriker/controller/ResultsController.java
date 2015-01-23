@@ -4,9 +4,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-
-
-
+import vStrikerTestEngine.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -19,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 import vStrikerEntities.*;
@@ -48,15 +47,26 @@ public class ResultsController {
 	@FXML private Button btnRun;
 	@FXML private ProgressBar progressbarTest;
 	@FXML private Label lblfinished;
+
+	
+	@FXML private TableView<vStrikerEntities.ExecutionReportData> listTestResult;
+	@FXML private TableColumn<vStrikerEntities.ExecutionReportData, String> apiCol;
+	@FXML private TableColumn<vStrikerEntities.ExecutionReportData, String> crudCol;
+	@FXML private TableColumn<vStrikerEntities.ExecutionReportData, String> valueCol;
 	
 	private Task runWorker;
 	private final ObservableList<TestInfo> testlist = FXCollections.observableArrayList();
 	private final ObservableList<vStrikerEntities.Account> accountlist = FXCollections.observableArrayList();
+	
 	private VStriker vStriker;
 	private Timeline timeline;
 	private Timeline timeRunEngine;
+	private ExecutionPlan exePlan = new ExecutionPlan();
+	private ExecutionReport exeReport = new ExecutionReport();
+	
 	
 	double count=0;
+
 	// Constructor
 	public ResultsController() {
 	}
@@ -105,17 +115,19 @@ public class ResultsController {
 		                lblfinished.setText("");
 // Progress Bar
 		                progressbarTest.setProgress(0);
-		                timeline = new Timeline(new KeyFrame(
+
+		                timeRunEngine =  new Timeline(new KeyFrame(
 		                        Duration.millis(1000),
+		                        ae -> RunEngine()));
+		                timeRunEngine.setCycleCount(Animation.INDEFINITE);
+		                timeRunEngine.play();
+		                
+		                timeline = new Timeline(new KeyFrame(
+		                        Duration.millis(100),
 		                        ae -> CheckProgress()));
 		                timeline.setCycleCount(Animation.INDEFINITE);
 		                timeline.play();
-		                
-		                
-		                timeRunEngine =  new Timeline(new KeyFrame(
-		                        Duration.millis(10000),
-		                        ae -> RunEngine()));
-		                timeRunEngine.play();
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -131,7 +143,7 @@ public class ResultsController {
 				timeline.stop();
 				JOptionPane.showConfirmDialog(null, "Test executed successfully!",  "VStriker",
     				    JOptionPane.CLOSED_OPTION,JOptionPane.INFORMATION_MESSAGE);
-			
+				 DisplayResult();
 				
 			}
 			else
@@ -144,21 +156,68 @@ public class ResultsController {
 				else count=150;
 			}
 				
+			
 		}
-		
 
 		public void RunEngine()
 		{
+
 			try
 			{
+			 // Save Plan
+				exePlan.setAccount(ddAccounts.getValue());
+				
+				TestInfo t = ddTestList.getValue(); 
+				if(t.getIsTemplate())
+				{
+					ConfigurationTemplate cfg = vStrikerBizModel.ConfigurationTemplateBiz.ConfigurationTemplateSelect(t.geTestID());
+					exePlan.setConfigurationTemplate(cfg);
+				}
+				else
+				{
+					TestConfiguration test = vStrikerBizModel.TestConfigurationBiz.TestConfigurationSelect(t.geTestID());
+					exePlan.setTestConfiguration(test);
+				}
+				
+				vStrikerBizModel.ExecutionPlanBiz.ExecutionPlanCreate(exePlan);
+				
+			// run Engine
+				
+				//Engine excEngine = new VEngine();
+				//exeReport = excEngine.runTests(exePlan);
+				Thread.sleep(5000);
+				exeReport =vStrikerBizModel.ExecutionReportBiz.ExecutionReportSelect(1);
 				lblfinished.setText("Completed!");
 					
-			} catch (Exception e) {
+			}catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			
 		}
 
+		public void DisplayResult()
+		{
+		 try
+		 {
+			 this.panExecuateResult.setVisible(true);
+			 List<ExecutionReportData> data = exeReport.getExecutionReportData();
+			apiCol.setCellValueFactory(new PropertyValueFactory<ExecutionReportData, String>("dataKey"));
+			valueCol.setCellValueFactory(new PropertyValueFactory<ExecutionReportData, String>("dataValue"));
+			crudCol.setCellValueFactory(new PropertyValueFactory<ExecutionReportData, String>("crudValue"));
+			
+			listTestResult.getItems().addAll(data);
+			 
+			 
+		 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			 
+		}
+		 
 		public void LoadLists() {
 			System.out.println("Load List initialize");
 			hboxProgress.setVisible(false);
