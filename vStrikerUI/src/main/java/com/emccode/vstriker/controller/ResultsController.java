@@ -27,6 +27,7 @@ import javafx.event.EventHandler;
 import com.emccode.vstriker.VStriker;
 import com.emccode.vstriker.model.TestInfo;
 
+import vStrikerTestUtilities.*;
 
 //@author Sanjeev Chauhan
 
@@ -92,6 +93,14 @@ public class ResultsController {
 		@FXML
 	public void btnExportClicked(ActionEvent event) {
 		System.out.println("Back to Accounts button clicked");
+		
+		try {
+			String filename="Execuation_report_"+exeReport.getExecutionReportId()+".csv";
+			vStrikerTestUtilities.Utilites.exportResultToFile(filename, exeReport.getExecutionReportId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 		@FXML

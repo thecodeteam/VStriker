@@ -92,7 +92,7 @@ public class Utilites {
 
 	// File size code
 
-	public void exportResultToFile(String filename, int executionRptID)
+	public static void exportResultToFile(String filename, long l)
 			throws Exception {
 
 		Path currentRelativePath = Paths.get("");
@@ -105,9 +105,9 @@ public class Utilites {
 		}
 
 		ExecutionReport rpt = ExecutionReportBiz
-				.ExecutionReportSelect(executionRptID);
+				.ExecutionReportSelect(l);
 		List<ExecutionReportData> list = ExecutionReportDataBiz
-				.ExecutionReportDataSelectByRprtID(executionRptID);
+				.ExecutionReportDataSelectByRprtID(l);
 
 		String sFileName = dir + "\\" + rpt.getExecutionName() + ".csv";
 		FileWriter writer = new FileWriter(sFileName);
