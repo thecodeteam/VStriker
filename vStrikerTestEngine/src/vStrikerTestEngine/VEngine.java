@@ -12,7 +12,11 @@ import java.util.concurrent.Future;
 import org.apache.commons.io.FilenameUtils;
 
 import vStrikerBizModel.ExecutionReportDataBiz;
+import vStrikerEntities.Account;
 import vStrikerEntities.Api;
+import vStrikerEntities.ApiSelected;
+import vStrikerEntities.ConfigurationTemplate;
+import vStrikerEntities.ExecutionPlan;
 import vStrikerEntities.ExecutionReport;
 import vStrikerEntities.ExecutionReportData;
 import vStrikerEntities.TestConfiguration;
@@ -20,6 +24,7 @@ import vStrikerTestUtilities.Utilites;
 import vStrikerTestUtilities.vLogger;
 
 import com.emc.vipr.s3.s3api;
+import com.sun.javafx.collections.SetListenerHelper;
 
 //@author Sanjeev Chauhan
 
@@ -292,5 +297,95 @@ public class VEngine implements Engine {
 		// TODO Auto-generated method stub
 		System.out.println("In vTestEngine validateAtmosConnnection");
 		return true;
+	}
+	
+	public ExecutionReport runTests(ExecutionPlan plan) throws Exception
+	{
+		ExecutionReport rpt = new ExecutionReport();
+		try
+		{
+		ConfigurationTemplate cfgtemp =plan.getConfigurationTemplate();
+		TestConfiguration test =plan.getTestConfiguration();
+		Account acct = plan.getAccount();
+		
+		List<Api> apilist =	acct.getApis();
+		List<ApiSelected> select;
+		if(cfgtemp!=null)
+		{
+			select =cfgtemp.getApiSelecteds();
+			// load Cfg as test so we can pass on type of entity to engine
+
+			test.setTestConfigName(cfgtemp.getConfTempName());
+			test.setTestConfigDescription(cfgtemp.getConfTempDescription());
+			test.setObjectSizeReportUnit(cfgtemp.getObjectSizeReportUnit1());
+			test.setNumberOfOperations(cfgtemp.getConfTempNumberOfOperations());
+			test.setNumberOfThreads(cfgtemp.getConfTempNumberOfThreads());
+		       
+			test.setNumberOfRetry(cfgtemp.getConfTempNumberOfRetry());
+		    test.setObjectSize(cfgtemp.getConfTempObjectSize());
+
+		    test.setCreateOperation(cfgtemp.getConfTempCreateOperation());
+		    test.setDeleteOperation(cfgtemp.getConfTempDeleteOperation());
+		    test.setUpdateOperation(cfgtemp.getConfTempUpdateOperation());
+		    test.setReadOperation(cfgtemp.getConfTempReadOperation());
+
+		    test.setCreatePercent(cfgtemp.getConfTempCreatePercent());
+		    test.setUpdatePercent(cfgtemp.getConfTempUpdatePercent());
+		    test.setDeletePercent(cfgtemp.getConfTempDeletePercent());
+		    test.setDeletePercent(cfgtemp.getConfTempDeletePercent());   
+			
+			
+		}
+		else select =test.getApiSelecteds();
+		
+		
+		 for(Api p:apilist)
+		 {
+			 for(ApiSelected s:select)
+			 {
+				 if(p.getApiType().getApiTypeId()==s.getApiType().getApiTypeId())
+				 {
+					 switch(p.getApiType().getApiTypeName())
+					 {
+					 case "S3":{
+						 
+						 rpt= runS3Tests(test, p);
+						 System.out.println("Validated S3");
+						 
+						 break;
+					 }
+					 case "SWift":
+					 {
+						 System.out.println("Validated Swift");
+						 break;
+					 }
+					 case "Atmos":
+					 {
+						 System.out.println("Validated Atmos");
+						 break;
+					 }
+					 
+						 default:break;
+					 }
+					 
+				 }
+				 
+			 }
+			
+			 
+		 }
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return rpt;
+			
+			
+		
+		
+		
+		
 	}
 }

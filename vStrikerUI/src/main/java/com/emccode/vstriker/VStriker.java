@@ -69,10 +69,15 @@ public class VStriker extends Application {
 	}
 
 	// Show the home page in the application
+	public void SetTitle(String msg)
+	{
+		
+		this.primaryStage.setTitle(msg);
+	}
 	public void showHome() {
 		try {
 			// Set title
-			this.primaryStage.setTitle("vStriker");
+			this.SetTitle("vStriker");
 			// Load home layout
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/Home.fxml"));
@@ -91,7 +96,7 @@ public class VStriker extends Application {
 	public void showConfiguration() {
 		try {
 			// Set title
-			this.primaryStage.setTitle("vStriker:Configuration");
+			this.SetTitle("vStriker:Configuration");
 			// Load home layout
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/Home.fxml"));
@@ -114,7 +119,7 @@ public class VStriker extends Application {
 		System.out.println("In VStriker showAccount");
 		try {
 			// Change page title
-			this.primaryStage.setTitle("vStriker:Account");
+			this.SetTitle("vStriker:Account");
 			// Load home layout
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/Account.fxml"));
@@ -134,7 +139,7 @@ public class VStriker extends Application {
 		System.out.println("In VStriker ShowEditConfiguaration");
 		try {
 			// Change page title
-			this.primaryStage.setTitle("vStriker:Add Configuration");
+			this.SetTitle("vStriker:Add Configuration");
 			// Load home layout
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/EditConfiguration.fxml"));
@@ -155,7 +160,7 @@ public class VStriker extends Application {
 		System.out.println("In VStriker ShowEditConfiguaration");
 		try {
 			// Change page title
-			this.primaryStage.setTitle("vStriker:Edit Configuration");
+			this.SetTitle("vStriker:Edit Configuration");
 			// Load home layout
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/EditConfiguration.fxml"));
@@ -178,7 +183,7 @@ public class VStriker extends Application {
 		System.out.println("In VStriker updateAccount");
 		try {
 			// Change page title
-			this.primaryStage.setTitle("vStriker:Account");
+			this.SetTitle("vStriker:Account");
 			// Load home layout
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/Account.fxml"));
@@ -199,7 +204,7 @@ public class VStriker extends Application {
 		System.out.println("In VStriker showS3API");
 		try {
 			// Change page title
-			this.primaryStage.setTitle("vStriker:S3 API Information");
+			this.SetTitle("vStriker:S3 API Information");
 			// Load S3 page
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/S3API.fxml"));
@@ -220,7 +225,7 @@ public class VStriker extends Application {
 		System.out.println("In VStriker showSwiftAPI");
 		try {
 			// Change page title
-			this.primaryStage.setTitle("vStriker:Swift API Information");
+			this.SetTitle("vStriker:Swift API Information");
 			// Load Swift page
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/SwiftAPI.fxml"));
@@ -241,7 +246,7 @@ public class VStriker extends Application {
 		System.out.println("In VStriker showAtmosAPI");
 		try {
 			// Change page title
-			this.primaryStage.setTitle("vStriker:Atmos API Information");
+			this.SetTitle("vStriker:Atmos API Information");
 			// Load Atmos page
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/AtmosAPI.fxml"));

@@ -1,7 +1,9 @@
 package vStrikerEntities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +44,10 @@ public class Account implements Serializable {
 
 	public Account() {
 	}
-
+    @Override
+    public String toString() {
+        return name;
+    }
 	public long getAccountId() {
 		return this.accountId;
 	}
