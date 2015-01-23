@@ -258,6 +258,24 @@ public class VEngine implements Engine {
 		report.setTotalVolumeSent(Integer.toString((createOps + updateOps) * testconfig.getObjectSize()).toString());
 		// Total volume received = (readops) * sizeofobject
 		report.setTotalVolumeReceived(Integer.toString(readOps * testconfig.getObjectSize()));
+		report.setAvgLatencyPerCrudOperation(Long.toString(((createTime+readTime+updateTime+deleteTime)/1000000)/testconfig.getNumberOfOperations()));
+		report.setNumberRequestSec((int)(testconfig.getNumberOfOperations()/(createTime+readTime+updateTime+deleteTime)/1000000000));
+		
+		long maxValue = 0, minValue = Long.parseLong(list.get(1).getDataValue());		
+		for (ExecutionReportData erd: list) {
+			if (erd.getDataKey().contains("Create") || erd.getDataKey().contains("Update") || erd.getDataKey().contains("Read")) {
+				maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long.parseLong(erd.getDataValue()) : maxValue;
+				minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long.parseLong(erd.getDataValue()) : minValue;
+
+			}
+		}
+		System.out.println(maxValue + " max value");
+		System.out.println(minValue + " min value");
+		System.out.println(testconfig.getObjectSize() + " object size");
+		report.setMaxThroughput(((long)testconfig.getObjectSize()*1000000000)/minValue + " bytes per second");
+		report.setMinThroughput(((long)testconfig.getObjectSize()*1000000000)/maxValue + " bytes per second");
+		System.out.println(((long)testconfig.getObjectSize()*1000000000)/minValue + " max bytes per second");
+		System.out.println(((long)testconfig.getObjectSize()*1000000000)/maxValue + " min bytes per second");
 
 		return report;
 	}

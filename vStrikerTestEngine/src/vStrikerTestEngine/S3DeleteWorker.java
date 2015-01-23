@@ -32,7 +32,7 @@ public class S3DeleteWorker implements Callable<ExecutionReportData> {
 				api.getUrl(), null, api.getBucket(), FilenameUtils.getName(objectLocation));
 		long endTime = System.nanoTime();
 		System.out.println("DeleteObject execution time: " + (endTime - startTime));
-		reportData.setDataKey(Thread.currentThread().getName());
+		reportData.setDataKey("Delete-" + Thread.currentThread().getName());
 		reportData.setDataValue(Long.toString(endTime-startTime));
 		return reportData;
 	}

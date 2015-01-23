@@ -38,7 +38,7 @@ public class S3ReadWorker implements Callable<ExecutionReportData> {
 				null, api.getBucket(), FilenameUtils.getName(objectLocation));
 		long endTime = System.nanoTime();
 		System.out.println("ReadObject execution time: " + (endTime - startTime));
-		reportData.setDataKey(Thread.currentThread().getName());
+		reportData.setDataKey("Read-" + Thread.currentThread().getName());
 		reportData.setDataValue(Long.toString(endTime - startTime));
 		return reportData;
 	}

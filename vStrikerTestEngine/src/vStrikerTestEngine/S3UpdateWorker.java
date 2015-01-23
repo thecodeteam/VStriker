@@ -34,7 +34,7 @@ public class S3UpdateWorker implements Callable<ExecutionReportData> {
 				new FileInputStream(objectLocation));
 		long endTime = System.nanoTime();
 		System.out.println("UpdateObject execution time: " + (endTime - startTime));
-		reportData.setDataKey(Thread.currentThread().getName());
+		reportData.setDataKey("Update-" + Thread.currentThread().getName());
 		reportData.setDataValue(Long.toString(endTime-startTime));
 		return reportData;
 	}
