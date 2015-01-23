@@ -78,3 +78,4 @@ DB/
 /vStrikerUnitTest/pom.xml
 /vStrikerEntities/src/META-INF/persistence.xml
 /vStrikerTestUtilities/src/log4j.properties
+vStrikerDB/DB/vstrikerdb.mv.db

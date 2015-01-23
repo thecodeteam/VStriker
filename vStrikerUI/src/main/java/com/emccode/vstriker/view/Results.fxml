@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.control.ListView?>
 
 <AnchorPane fx:id="paneRslt" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emccode.vstriker.controller.ResultsController">
    <children>
@@ -15,11 +16,17 @@
             <Label id="lblTestComplete" fx:id="lblfinished" layoutX="480.0" layoutY="46.0" />
          </children>
       </HBox>
+   
       <TitledPane fx:id="panExecuateResult" animated="false" layoutX="25.0" layoutY="145.0" prefHeight="344.0" prefWidth="550.0" text="Current Test run details">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="330.0" prefWidth="548.0" visible="false">
                <children>
-                  <TextArea id="txtTestResult" layoutX="20.0" layoutY="14.0" prefHeight="300.0" prefWidth="360.0" />
+                  <TableView fx:id="listTestResult" layoutX="20.0" layoutY="14.0" prefHeight="300.0" prefWidth="360.0">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="API" fx:id="apiCol"/>
+                        <TableColumn prefWidth="100.0" text="API CALL" fx:id="crudCol"/>
+                        <TableColumn prefWidth="150.0" text="Response Time" fx:id="valueCol"/>
+                     </columns></TableView>
                   <Button fx:id="btnChart" layoutX="393.0" layoutY="66.0" mnemonicParsing="false" onAction="#btnChartClicked" prefHeight="25.0" prefWidth="134.0" text="Test Run Charts" />
                   <Button fx:id="btnExport" layoutX="393.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnExportClicked" prefHeight="25.0" prefWidth="136.0" text="Test Run Export (CSV)" />
 				  <Button fx:id="btnHome" layoutX="393.0" layoutY="136.0" mnemonicParsing="false" onAction="#btnHomeClicked" prefHeight="25.0" prefWidth="136.0" text="Home" />

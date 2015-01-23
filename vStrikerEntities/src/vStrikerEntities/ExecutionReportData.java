@@ -25,6 +25,10 @@ public class ExecutionReportData implements Serializable {
 	@Column(name="DATA_VALUE")
 	private String dataValue;
 
+
+	@Column(name="CRUD_VALUE")
+	private String crudValue;
+
 	//bi-directional many-to-one association to ExecutionReport
 	@ManyToOne
 	@JoinColumn(name="EXECUTION_REPORT_ID")
@@ -49,6 +53,12 @@ public class ExecutionReportData implements Serializable {
 		this.dataKey = dataKey;
 	}
 
+	public String getCrudValue() {
+		return this.crudValue;
+	}
+	public void setCrudValue(String curdValue) {
+		this.crudValue=curdValue;
+	}
 	public String getDataValue() {
 		return this.dataValue;
 	}
