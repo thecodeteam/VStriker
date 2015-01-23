@@ -4,6 +4,14 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+
+
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -12,9 +20,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
 import vStrikerEntities.*;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import com.emccode.vstriker.VStriker;
@@ -45,7 +53,10 @@ public class ResultsController {
 	private final ObservableList<TestInfo> testlist = FXCollections.observableArrayList();
 	private final ObservableList<vStrikerEntities.Account> accountlist = FXCollections.observableArrayList();
 	private VStriker vStriker;
-
+	private Timeline timeline;
+	private Timeline timeRunEngine;
+	
+	double count=0;
 	// Constructor
 	public ResultsController() {
 	}
@@ -88,25 +99,23 @@ public class ResultsController {
 	{
 			try
 			{
-				hboxProgress.setVisible(true);
-
+				        hboxProgress.setVisible(true);
 		                btnRun.setDisable(true);
 		                progressbarTest.setProgress(0);
-		                runWorker = createWorker();
 		                lblfinished.setText("");
-		                progressbarTest.progressProperty().unbind();
-		                progressbarTest.progressProperty().bind(runWorker.progressProperty());
-		               
-		                runWorker.messageProperty().addListener(new ChangeListener<String>() {
-		                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		                        System.out.println(newValue);
-		                    }
-		                });
-
-		           Thread th= new Thread(runWorker);
-		           th.start();
+// Progress Bar
+		                progressbarTest.setProgress(0);
+		                timeline = new Timeline(new KeyFrame(
+		                        Duration.millis(1000),
+		                        ae -> CheckProgress()));
+		                timeline.setCycleCount(Animation.INDEFINITE);
+		                timeline.play();
 		                
-				
+		                
+		                timeRunEngine =  new Timeline(new KeyFrame(
+		                        Duration.millis(10000),
+		                        ae -> RunEngine()));
+		                timeRunEngine.play();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -114,38 +123,42 @@ public class ResultsController {
 			
 			
 	}
-		public void setFinish()
+		public void CheckProgress()
 		{
-			this.lblfinished.setText("Completed!");
+			if(lblfinished.getText().equals("Completed!"))
+			{
+				progressbarTest.setProgress(1);
+				timeline.stop();
+				JOptionPane.showConfirmDialog(null, "Test executed successfully!",  "VStriker",
+    				    JOptionPane.CLOSED_OPTION,JOptionPane.INFORMATION_MESSAGE);
+			
+				
 			}
-		 public Task createWorker() {
-		        return new Task() {
-		            @Override
-		            protected Object call() throws Exception {
-		                for (int i = 0; i < 50; i++) {
-		                    Thread.sleep(200);
-		                    updateMessage("200 milliseconds");
-		                    updateProgress(i + 1, 50);
-		                    
-		                    //get Selected Account
-		                    
-		                    // Selected Test info (Test / Template)
-		                    
-		                    // Insert Execution Report
-		                    
-		                    // Retive the new Enity
-		                    
-		                    // Call the the engine passing the enitty
-		                    // waint for Execution Report
-		                    // Fill the Text Area
-		                }
-		            	JOptionPane.showConfirmDialog(null, "Test executed successfully!",  "VStriker",
-		    				    JOptionPane.CLOSED_OPTION,JOptionPane.INFORMATION_MESSAGE);
-		                return true;
-		            }
-		        };
-		        
-		    }
+			else
+			{
+				if(count<200)
+				{
+					count++;
+					progressbarTest.setProgress(count/200);
+				}
+				else count=150;
+			}
+				
+		}
+		
+
+		public void RunEngine()
+		{
+			try
+			{
+				lblfinished.setText("Completed!");
+					
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		public void LoadLists() {
 			System.out.println("Load List initialize");
 			hboxProgress.setVisible(false);
@@ -218,3 +231,4 @@ public class ResultsController {
 		}
 
 }
+
