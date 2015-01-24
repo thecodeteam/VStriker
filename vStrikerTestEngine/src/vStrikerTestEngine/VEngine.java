@@ -24,7 +24,6 @@ import vStrikerTestUtilities.Utilites;
 import vStrikerTestUtilities.vLogger;
 
 import com.emc.vipr.s3.s3api;
-import com.sun.javafx.collections.SetListenerHelper;
 
 //@author Sanjeev Chauhan
 
@@ -168,11 +167,11 @@ public class VEngine implements Engine {
 		List<ExecutionReportData> list = new ArrayList<ExecutionReportData>();
 		List<ExecutionReportData> failurelist = new ArrayList<ExecutionReportData>();
 		List<Future<ExecutionReportData>> futurelist = new ArrayList<Future<ExecutionReportData>>();
-		
+
 		long createTime = System.nanoTime();
 		futurelist = executor.invokeAll(createworkersList);
 		createTime = System.nanoTime() - createTime;
-		for (Future<ExecutionReportData> f: futurelist) {
+		for (Future<ExecutionReportData> f : futurelist) {
 			try {
 				list.add(f.get());
 			} catch (Exception e) {
@@ -182,11 +181,11 @@ public class VEngine implements Engine {
 				failurelist.add(erd);
 			}
 		}
-		
+
 		long readTime = System.nanoTime();
 		futurelist = executor.invokeAll(readworkersList);
 		readTime = System.nanoTime() - readTime;
-		for (Future<ExecutionReportData> f: futurelist) {
+		for (Future<ExecutionReportData> f : futurelist) {
 			try {
 				list.add(f.get());
 			} catch (Exception e) {
@@ -196,11 +195,11 @@ public class VEngine implements Engine {
 				failurelist.add(erd);
 			}
 		}
-		
+
 		long updateTime = System.nanoTime();
 		futurelist = executor.invokeAll(updateworkersList);
 		updateTime = System.nanoTime() - updateTime;
-		for (Future<ExecutionReportData> f: futurelist) {
+		for (Future<ExecutionReportData> f : futurelist) {
 			try {
 				list.add(f.get());
 			} catch (Exception e) {
@@ -210,11 +209,11 @@ public class VEngine implements Engine {
 				failurelist.add(erd);
 			}
 		}
-		
+
 		long deleteTime = System.nanoTime();
 		futurelist = executor.invokeAll(deleteworkersList);
 		deleteTime = System.nanoTime() - deleteTime;
-		for (Future<ExecutionReportData> f: futurelist) {
+		for (Future<ExecutionReportData> f : futurelist) {
 			try {
 				list.add(f.get());
 			} catch (Exception e) {
@@ -226,12 +225,11 @@ public class VEngine implements Engine {
 		}
 
 		// Save the ExecutionReportData objects in the database
-		for (ExecutionReportData e: list) {
+		for (ExecutionReportData e : list) {
 			e.setExecutionReport(report);
 			ExecutionReportDataBiz.ExecutionReportDataCreate(e);
 		}
-		
-		
+
 		// Calculate summary numbers for the report
 		if (testconfig.getCreateOperation()) {
 			System.out
@@ -260,27 +258,41 @@ public class VEngine implements Engine {
 
 		// Populate the report object
 		// Total volume sent = (createops + updateops) * sizeofobject
-		report.setTotalVolumeSent(Integer.toString((createOps + updateOps) * testconfig.getObjectSize()).toString());
+		report.setTotalVolumeSent(Integer.toString(
+				(createOps + updateOps) * testconfig.getObjectSize())
+				.toString());
 		// Total volume received = (readops) * sizeofobject
-		report.setTotalVolumeReceived(Integer.toString(readOps * testconfig.getObjectSize()));
-		report.setAvgLatencyPerCrudOperation(Long.toString(((createTime+readTime+updateTime+deleteTime)/1000000)/testconfig.getNumberOfOperations()));
-		report.setNumberRequestSec((int)(testconfig.getNumberOfOperations()/(createTime+readTime+updateTime+deleteTime)/1000000000));
-		
-		long maxValue = 0, minValue = Long.parseLong(list.get(1).getDataValue());		
-		for (ExecutionReportData erd: list) {
-			if (erd.getDataKey().contains("Create") || erd.getDataKey().contains("Update") || erd.getDataKey().contains("Read")) {
-				maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long.parseLong(erd.getDataValue()) : maxValue;
-				minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long.parseLong(erd.getDataValue()) : minValue;
+		report.setTotalVolumeReceived(Integer.toString(readOps
+				* testconfig.getObjectSize()));
+		report.setAvgLatencyPerCrudOperation(Long.toString(((createTime
+				+ readTime + updateTime + deleteTime) / 1000000)
+				/ testconfig.getNumberOfOperations()));
+		report.setNumberRequestSec((int) (testconfig.getNumberOfOperations()
+				/ (createTime + readTime + updateTime + deleteTime) / 1000000000));
 
+		long maxValue = 0, minValue = Long
+				.parseLong(list.get(1).getDataValue());
+		for (ExecutionReportData erd : list) {
+			if (erd.getCrudValue().contains("Create")
+					|| erd.getCrudValue().contains("Update")
+					|| erd.getCrudValue().contains("Read")) {
+				maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
+						.parseLong(erd.getDataValue()) : maxValue;
+				minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
+						.parseLong(erd.getDataValue()) : minValue;
 			}
 		}
 		System.out.println(maxValue + " max value");
 		System.out.println(minValue + " min value");
 		System.out.println(testconfig.getObjectSize() + " object size");
-		report.setMaxThroughput(((long)testconfig.getObjectSize()*1000000000)/minValue + " bytes per second");
-		report.setMinThroughput(((long)testconfig.getObjectSize()*1000000000)/maxValue + " bytes per second");
-		System.out.println(((long)testconfig.getObjectSize()*1000000000)/minValue + " max bytes per second");
-		System.out.println(((long)testconfig.getObjectSize()*1000000000)/maxValue + " min bytes per second");
+		report.setMaxThroughput(((long) testconfig.getObjectSize() * 1000000000)
+				/ minValue + " bytes per second");
+		report.setMinThroughput(((long) testconfig.getObjectSize() * 1000000000)
+				/ maxValue + " bytes per second");
+		System.out.println(((long) testconfig.getObjectSize() * 1000000000)
+				/ minValue + " max bytes per second");
+		System.out.println(((long) testconfig.getObjectSize() * 1000000000)
+				/ maxValue + " min bytes per second");
 
 		return report;
 	}
@@ -298,94 +310,80 @@ public class VEngine implements Engine {
 		System.out.println("In vTestEngine validateAtmosConnnection");
 		return true;
 	}
-	
-	public ExecutionReport runTests(ExecutionPlan plan) throws Exception
-	{
+
+	public ExecutionReport runTests(ExecutionPlan plan) throws Exception {
 		ExecutionReport rpt = new ExecutionReport();
-		try
-		{
-		ConfigurationTemplate cfgtemp =plan.getConfigurationTemplate();
-		TestConfiguration test =plan.getTestConfiguration();
-		Account acct = plan.getAccount();
-		
-		List<Api> apilist =	acct.getApis();
-		List<ApiSelected> select;
-		if(cfgtemp!=null)
-		{
-			select =cfgtemp.getApiSelecteds();
-			// load Cfg as test so we can pass on type of entity to engine
+		try {
+			ConfigurationTemplate cfgtemp = plan.getConfigurationTemplate();
+			TestConfiguration test = plan.getTestConfiguration();
+			Account acct = plan.getAccount();
 
-			test.setTestConfigName(cfgtemp.getConfTempName());
-			test.setTestConfigDescription(cfgtemp.getConfTempDescription());
-			test.setObjectSizeReportUnit(cfgtemp.getObjectSizeReportUnit1());
-			test.setNumberOfOperations(cfgtemp.getConfTempNumberOfOperations());
-			test.setNumberOfThreads(cfgtemp.getConfTempNumberOfThreads());
-		       
-			test.setNumberOfRetry(cfgtemp.getConfTempNumberOfRetry());
-		    test.setObjectSize(cfgtemp.getConfTempObjectSize());
+			List<Api> apilist = acct.getApis();
+			List<ApiSelected> select;
+			if (cfgtemp != null) {
+				select = cfgtemp.getApiSelecteds();
+				// load Cfg as test so we can pass on type of entity to engine
 
-		    test.setCreateOperation(cfgtemp.getConfTempCreateOperation());
-		    test.setDeleteOperation(cfgtemp.getConfTempDeleteOperation());
-		    test.setUpdateOperation(cfgtemp.getConfTempUpdateOperation());
-		    test.setReadOperation(cfgtemp.getConfTempReadOperation());
+				test.setTestConfigName(cfgtemp.getConfTempName());
+				test.setTestConfigDescription(cfgtemp.getConfTempDescription());
+				test.setObjectSizeReportUnit(cfgtemp.getObjectSizeReportUnit1());
+				test.setNumberOfOperations(cfgtemp
+						.getConfTempNumberOfOperations());
+				test.setNumberOfThreads(cfgtemp.getConfTempNumberOfThreads());
 
-		    test.setCreatePercent(cfgtemp.getConfTempCreatePercent());
-		    test.setUpdatePercent(cfgtemp.getConfTempUpdatePercent());
-		    test.setDeletePercent(cfgtemp.getConfTempDeletePercent());
-		    test.setDeletePercent(cfgtemp.getConfTempDeletePercent());   
-			
-			
-		}
-		else select =test.getApiSelecteds();
-		
-		
-		 for(Api p:apilist)
-		 {
-			 for(ApiSelected s:select)
-			 {
-				 if(p.getApiType().getApiTypeId()==s.getApiType().getApiTypeId())
-				 {
-					 switch(p.getApiType().getApiTypeName())
-					 {
-					 case "S3":{
-						 
-						 rpt= runS3Tests(test, p);
-						 System.out.println("Validated S3");
-						 
-						 break;
-					 }
-					 case "SWift":
-					 {
-						 System.out.println("Validated Swift");
-						 break;
-					 }
-					 case "Atmos":
-					 {
-						 System.out.println("Validated Atmos");
-						 break;
-					 }
-					 
-						 default:break;
-					 }
-					 
-				 }
-				 
-			 }
-			
-			 
-		 }
-		
+				test.setNumberOfRetry(cfgtemp.getConfTempNumberOfRetry());
+				test.setObjectSize(cfgtemp.getConfTempObjectSize());
+
+				test.setCreateOperation(cfgtemp.getConfTempCreateOperation());
+				test.setDeleteOperation(cfgtemp.getConfTempDeleteOperation());
+				test.setUpdateOperation(cfgtemp.getConfTempUpdateOperation());
+				test.setReadOperation(cfgtemp.getConfTempReadOperation());
+
+				test.setCreatePercent(cfgtemp.getConfTempCreatePercent());
+				test.setUpdatePercent(cfgtemp.getConfTempUpdatePercent());
+				test.setDeletePercent(cfgtemp.getConfTempDeletePercent());
+				test.setDeletePercent(cfgtemp.getConfTempDeletePercent());
+
+			} else
+				select = test.getApiSelecteds();
+
+			for (Api p : apilist) {
+				for (ApiSelected s : select) {
+					if (p.getApiType().getApiTypeId() == s.getApiType()
+							.getApiTypeId()) {
+						switch (p.getApiType().getApiTypeName()) {
+						case "S3": {
+
+							rpt = runS3Tests(test, p);
+							System.out.println("Validated S3");
+
+							break;
+						}
+						case "Swift": {
+							System.out.println("Validated Swift");
+							break;
+						}
+						case "Atmos": {
+							System.out.println("Validated Atmos");
+							break;
+						}
+
+						default:
+							break;
+						}
+
+					}
+
+				}
+
+			}
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return rpt;
-			
-			
-		
-		
-		
-		
+
 	}
 }

@@ -1,17 +1,21 @@
 package vStrikerUnitTest;
-import java.util.List;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 
-import vStrikerEntities.*;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import vStrikerBizModel.*;
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import vStrikerBizModel.ExecutionReportDataBiz;
+import vStrikerEntities.Account;
+import vStrikerEntities.ConfigurationTemplate;
+import vStrikerEntities.ExecutionReportData;
+import vStrikerEntities.VwAccountDetail;
 
 public class vStrikerEntitesUnitTest {
 
@@ -33,7 +37,7 @@ public class vStrikerEntitesUnitTest {
 			data.setDataKey("Put");
 			data.setDataValue("100");
 			data.setExecutionReport(rpt);
-			vStrikerBizModel.ExecutionReportDataBiz.ExecutionReportDataCreate(data);
+			ExecutionReportDataBiz.ExecutionReportDataCreate(data);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
