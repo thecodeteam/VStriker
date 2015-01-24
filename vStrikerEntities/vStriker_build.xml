@@ -105,6 +105,7 @@
                 <exclude name="vStrikerEntities/TestConfiguration_.java"/>
                 <exclude name="vStrikerEntities/TestPlanOperation_.java"/>
                 <exclude name="vStrikerEntities/VwAccountDetail_.java"/>
+            	<exclude name="vStrikerEntities/VwApiSelectedDetail_.java"/>
             </fileset>
         </copy>
     </target>
@@ -131,6 +132,7 @@
             <exclude name="vStrikerEntities/TestConfiguration_.java"/>
             <exclude name="vStrikerEntities/TestPlanOperation_.java"/>
             <exclude name="vStrikerEntities/VwAccountDetail_.java"/>
+        	<exclude name="vStrikerEntities/VwApiSelectedDetail_.java"/>
             <classpath refid="vStrikerEntities.classpath"/>
         </javac>
     </target>
