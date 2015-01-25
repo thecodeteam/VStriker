@@ -8,8 +8,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-
-import org.apache.commons.io.FilenameUtils;
+import java.util.concurrent.TimeUnit;
 
 import vStrikerBizModel.ExecutionReportDataBiz;
 import vStrikerEntities.Account;
@@ -151,13 +150,40 @@ public class VEngine implements Engine {
 		}
 
 		// Pre-test
-		if (!testconfig.getCreateOperation() || (deleteOps > createOps)) {
-			for (String s : listofObjects) {
-				s3api.CreateObject(api.getSubtenant(), api.getSecretKey(),
-						api.getUrl(), null, api.getBucket(),
-						FilenameUtils.getName(s), new FileInputStream(s));
-				System.out.println("Pre-test - Created: " + s);
+		/*
+		 * if (!testconfig.getCreateOperation() || (deleteOps > createOps)) {
+		 * for (String s : listofObjects) {
+		 * s3api.CreateObject(api.getSubtenant(), api.getSecretKey(),
+		 * api.getUrl(), null, api.getBucket(), FilenameUtils.getName(s), new
+		 * FileInputStream(s)); System.out.println("Pre-test - Created: " + s);
+		 * } }
+		 */
+
+		if (!testconfig.getCreateOperation() || (deleteOps > createOps) || (updateOps > createOps) || (readOps > createOps)) {
+			long preteststarttime = System.nanoTime();
+			int mostOps = Math.max(Math.max(deleteOps, updateOps), readOps);
+			int pretestcreates = mostOps - createOps;
+			ExecutorService testprepexecutor = Executors.newWorkStealingPool();
+			List<Callable<ExecutionReportData>> pretestList = new ArrayList<Callable<ExecutionReportData>>();
+
+			for (int i = createOps; i < mostOps; i++) {
+				Callable<ExecutionReportData> s3createworker = new S3CreateWorker(
+						listofObjects.get(i), api);
+				pretestList.add(s3createworker);
 			}
+			testprepexecutor.invokeAll(pretestList);
+			testprepexecutor.shutdown();
+			try {
+				testprepexecutor.awaitTermination(Long.MAX_VALUE,
+						TimeUnit.SECONDS);
+			} catch (Exception e) {
+				System.out.println("PreTest tasks did not finish in time: "
+						+ e.toString());
+			}
+			System.out.println("PreTest Created " + pretestcreates
+					+ " objects in "
+					+ ((System.nanoTime() - preteststarttime) / 1000000)
+					+ " ms");
 		}
 
 		// The test
@@ -224,6 +250,41 @@ public class VEngine implements Engine {
 			}
 		}
 
+		executor.shutdown();
+		try {
+			executor.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			System.out.println("Tests did not finish in time: " + e.toString());
+		}
+
+		// Post-test cleanup
+		if (!testconfig.getDeleteOperation() || (deleteOps < createOps) || (deleteOps < updateOps) || (deleteOps < readOps)) {
+			long postteststarttime = System.nanoTime();
+			int maxOps = Math.max(Math.max(createOps, updateOps), readOps);
+			int posttestdeletes = maxOps - deleteOps;
+			ExecutorService posttestexecutor = Executors.newWorkStealingPool();
+			List<Callable<ExecutionReportData>> posttestList = new ArrayList<Callable<ExecutionReportData>>();
+
+			for (int i = deleteOps; i < maxOps; i++) {
+				Callable<ExecutionReportData> s3deleteworker = new S3DeleteWorker(
+						listofObjects.get(i), api);
+				posttestList.add(s3deleteworker);
+			}
+			posttestexecutor.invokeAll(posttestList);
+			posttestexecutor.shutdown();
+			try {
+				posttestexecutor.awaitTermination(Long.MAX_VALUE,
+						TimeUnit.SECONDS);
+			} catch (Exception e) {
+				System.out.println("PostTest tasks did not finish in time: "
+						+ e.toString());
+			}
+			System.out.println("PostTest deleted " + posttestdeletes
+					+ " objects in "
+					+ ((System.nanoTime() - postteststarttime) / 1000000)
+					+ " ms");
+		}
+
 		// Save the ExecutionReportData objects in the database
 		for (ExecutionReportData e : list) {
 			e.setExecutionReport(report);
@@ -258,41 +319,53 @@ public class VEngine implements Engine {
 
 		// Populate the report object
 		// Total volume sent = (createops + updateops) * sizeofobject
-		report.setTotalVolumeSent(Integer.toString(
-				(createOps + updateOps) * testconfig.getObjectSize())
-				.toString());
+		if (testconfig.getCreateOperation() || testconfig.getUpdateOperation()) {
+			report.setTotalVolumeSent(Integer.toString(
+					(createOps + updateOps) * testconfig.getObjectSize())
+					.toString());
+		} else
+			report.setTotalVolumeSent("0");
+
 		// Total volume received = (readops) * sizeofobject
+		if (testconfig.getReadOperation()) {
 		report.setTotalVolumeReceived(Integer.toString(readOps
 				* testconfig.getObjectSize()));
+		} else report.setTotalVolumeReceived("0");
+		
 		report.setAvgLatencyPerCrudOperation(Long.toString(((createTime
 				+ readTime + updateTime + deleteTime) / 1000000)
 				/ testconfig.getNumberOfOperations()));
 		report.setNumberRequestSec((int) (testconfig.getNumberOfOperations()
 				/ (createTime + readTime + updateTime + deleteTime) / 1000000000));
 
-		long maxValue = 0, minValue = Long
-				.parseLong(list.get(1).getDataValue());
-		for (ExecutionReportData erd : list) {
-			if (erd.getCrudValue().contains("Create")
-					|| erd.getCrudValue().contains("Update")
-					|| erd.getCrudValue().contains("Read")) {
-				maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
-						.parseLong(erd.getDataValue()) : maxValue;
-				minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
-						.parseLong(erd.getDataValue()) : minValue;
+		if (testconfig.getCreateOperation() || testconfig.getReadOperation() || testconfig.getUpdateOperation()) {
+			long maxValue = 0, minValue = Long
+					.parseLong(list.get(1).getDataValue());
+			for (ExecutionReportData erd : list) {
+				if (erd.getCrudValue().contains("Create")
+						|| erd.getCrudValue().contains("Update")
+						|| erd.getCrudValue().contains("Read")) {
+					maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
+							.parseLong(erd.getDataValue()) : maxValue;
+					minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
+							.parseLong(erd.getDataValue()) : minValue;
+				}
 			}
+			System.out.println(maxValue + " max value");
+			System.out.println(minValue + " min value");
+			System.out.println(testconfig.getObjectSize() + " object size");
+			report.setMaxThroughput(((long) testconfig.getObjectSize() * 1000000000)
+					/ minValue + " bytes per second");
+			report.setMinThroughput(((long) testconfig.getObjectSize() * 1000000000)
+					/ maxValue + " bytes per second");
+			System.out.println(((long) testconfig.getObjectSize() * 1000000000)
+					/ minValue + " max bytes per second");
+			System.out.println(((long) testconfig.getObjectSize() * 1000000000)
+					/ maxValue + " min bytes per second");
+		} else {
+			report.setMaxThroughput("N/A");
+			report.setMinThroughput("N/A");
 		}
-		System.out.println(maxValue + " max value");
-		System.out.println(minValue + " min value");
-		System.out.println(testconfig.getObjectSize() + " object size");
-		report.setMaxThroughput(((long) testconfig.getObjectSize() * 1000000000)
-				/ minValue + " bytes per second");
-		report.setMinThroughput(((long) testconfig.getObjectSize() * 1000000000)
-				/ maxValue + " bytes per second");
-		System.out.println(((long) testconfig.getObjectSize() * 1000000000)
-				/ minValue + " max bytes per second");
-		System.out.println(((long) testconfig.getObjectSize() * 1000000000)
-				/ maxValue + " min bytes per second");
 
 		return report;
 	}
@@ -367,15 +440,11 @@ public class VEngine implements Engine {
 							System.out.println("Validated Atmos");
 							break;
 						}
-
 						default:
 							break;
 						}
-
 					}
-
 				}
-
 			}
 
 		} catch (Exception e) {
@@ -384,6 +453,5 @@ public class VEngine implements Engine {
 		}
 
 		return rpt;
-
 	}
 }
