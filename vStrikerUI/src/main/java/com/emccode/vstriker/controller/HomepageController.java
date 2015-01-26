@@ -111,6 +111,7 @@ public class HomepageController {
 			           if(t1.getId().equals("tbExecution"))
 			           {
 			        	   vStriker.SetTitle("vStriker:Test Execution");
+			        	   resultsViewController.setVStrikerApp(vStriker);
 			        	   resultsViewController.LoadLists();
 			           }
 			           

@@ -55,7 +55,6 @@ public class ResultsController {
 	@FXML private TableColumn<vStrikerEntities.ExecutionReportData, String> crudCol;
 	@FXML private TableColumn<vStrikerEntities.ExecutionReportData, String> valueCol;
 	
-	private Task runWorker;
 	private final ObservableList<TestInfo> testlist = FXCollections.observableArrayList();
 	private final ObservableList<vStrikerEntities.Account> accountlist = FXCollections.observableArrayList();
 	
@@ -64,7 +63,7 @@ public class ResultsController {
 	private Timeline timeRunEngine;
 	private ExecutionPlan exePlan = new ExecutionPlan();
 	private ExecutionReport exeReport = new ExecutionReport();
-	
+	private  List<ExecutionReportData> data;
 	
 	double count=0;
 
@@ -73,8 +72,8 @@ public class ResultsController {
 	}
 	
 	// Set the main application
-	public void setVStrikerApp(VStriker vStrikert) {
-		//this.vStriker = vStriker;
+	public void setVStrikerApp(VStriker vStriker) {
+		this.vStriker = vStriker;
 
 	}
 
@@ -82,13 +81,13 @@ public class ResultsController {
 	@FXML
 	private void initialize() {
 		System.out.println("In Result initialize");
-		
+
 	}
 
 		@FXML
 	public void btnChartClicked(ActionEvent event) {
 		System.out.println("Back to Accounts button clicked");
-		//vStriker.showHome();
+		vStriker.showCharts(data);
 	}
 		@FXML
 	public void btnExportClicked(ActionEvent event) {
@@ -128,7 +127,7 @@ public class ResultsController {
 		                timeRunEngine =  new Timeline(new KeyFrame(
 		                        Duration.millis(1000),
 		                        ae -> RunEngine()));
-		                timeRunEngine.setCycleCount(Animation.INDEFINITE);
+		    
 		                timeRunEngine.play();
 		                
 		                timeline = new Timeline(new KeyFrame(
@@ -150,6 +149,7 @@ public class ResultsController {
 			{
 				progressbarTest.setProgress(1);
 				timeline.stop();
+				timeRunEngine.stop();
 				JOptionPane.showConfirmDialog(null, "Test executed successfully!",  "VStriker",
     				    JOptionPane.CLOSED_OPTION,JOptionPane.INFORMATION_MESSAGE);
 				 DisplayResult();
@@ -194,7 +194,7 @@ public class ResultsController {
 				
 				//Engine excEngine = new VEngine();
 				//exeReport = excEngine.runTests(exePlan);
-				Thread.sleep(5000);
+				//Thread.sleep(5000);
 				exeReport =vStrikerBizModel.ExecutionReportBiz.ExecutionReportSelect(1);
 				lblfinished.setText("Completed!");
 					
@@ -210,8 +210,10 @@ public class ResultsController {
 		{
 		 try
 		 {
+			 timeline.stop();
+			 
 			 this.panExecuateResult.setVisible(true);
-			 List<ExecutionReportData> data = exeReport.getExecutionReportData();
+			data = exeReport.getExecutionReportData();
 			apiCol.setCellValueFactory(new PropertyValueFactory<ExecutionReportData, String>("dataKey"));
 			valueCol.setCellValueFactory(new PropertyValueFactory<ExecutionReportData, String>("dataValue"));
 			crudCol.setCellValueFactory(new PropertyValueFactory<ExecutionReportData, String>("crudValue"));
