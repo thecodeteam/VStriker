@@ -1,4 +1,5 @@
 package vStrikerBizModel;
+import java.util.ArrayList;
 import java.util.List;
 
 import vStrikerEntities.*;
@@ -72,4 +73,38 @@ public class ExecutionReportDataBiz {
 		actfactory.close( );
 		
 	}
+	
+	public static List<String> ExecutionReportDataGetApiList(List<ExecutionReportData> data)
+	{
+		List<String> list = new ArrayList<String>();
+		String str="";
+		
+		for(ExecutionReportData a:data)
+		{
+			if(!a.getDataKey().equalsIgnoreCase(str))
+			{
+				str=a.getDataKey();
+				list.add(str);
+			}
+		}
+		
+		return list;
+	}
+	
+	public static List<String> ExecutionReportDataGetApiCrudList(List<ExecutionReportData> data, String api,String crud)
+	{
+		List<String> list = new ArrayList<String>();
+		
+		for(ExecutionReportData a:data)
+		{
+			if(a.getDataKey().equalsIgnoreCase(api)&&a.getCrudValue().equalsIgnoreCase(crud))
+			{
+				
+				list.add(a.getDataValue());
+			}
+		}
+		
+		return list;
+	}
+	
 }
