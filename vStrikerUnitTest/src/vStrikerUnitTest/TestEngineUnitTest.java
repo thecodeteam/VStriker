@@ -22,7 +22,22 @@ public class TestEngineUnitTest {
 		//TestFileGeneration2();
 		//CreateTestPlan();
 		//ValidateS3();
-		TestS3();
+		//TestS3();
+		TestS3xxxd();
+		TestS3xxux();
+		TestS3xxud();
+		TestS3xrxx();
+		TestS3xrxd();
+		TestS3xrux();
+		TestS3xrud();
+		TestS3cxxx();
+		TestS3cxxd();
+		TestS3cxux();
+		TestS3cxud();
+		TestS3crxx();
+		TestS3crxd();
+		TestS3crux();
+		TestS3crud();	
 	}
 	
 	public void TestFileGeneration()
@@ -77,6 +92,171 @@ public class TestEngineUnitTest {
 	}
 	public void CreateTestPlan() {
 		vLogger.LogInfo("TestEngineUnitTest:CreateTestPlan");
+	}
+
+	public void TestS3xxxd() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3xxxd");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3xxxd(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3xxxd");
+	}
+	
+	public void TestS3xxux() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3xxux");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3xxux(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3xxux");
+	}
+	
+	public void TestS3xxud() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3xxud");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3xxud(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3xxud");
+	}
+	
+	public void TestS3xrxx() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3xrxx");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3xrxx(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3xrxx");
+	}
+	
+	public void TestS3xrxd() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3xrxd");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3xrxd(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3xrxd");
+	}
+	
+	public void TestS3xrux() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3xrux");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3xrux(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3xrux");
+	}
+	
+	public void TestS3xrud() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3xrud");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3xrud(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3xrud");
+	}
+	
+	public void TestS3cxxx() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3cxxx");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3cxxx(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3cxxx");
+	}
+	
+	public void TestS3cxxd() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3cxxd");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3cxxd(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3cxxd");
+	}
+	
+	public void TestS3cxux() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3cxux");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3cxux(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3cxux");
+	}
+	
+	public void TestS3cxud() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3cxud");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3cxud(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3cxud");
+	}
+	
+	public void TestS3crxx() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3crxx");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3crxx(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3crxx");
+	}
+	
+	public void TestS3crxd() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3crxd");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3crxd(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3crxd");
+	}
+	
+	public void TestS3crux() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3crux");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3crux(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3crux");
+	}
+	
+	public void TestS3crud() {
+		vLogger.LogInfo("TestEngineUnitTest:TestS3crud");
+		TestConfiguration testconfig = getTestConfiguration();
+		Api api = getApi();		
+		Engine tengine = new VEngine();
+		long starttime = System.nanoTime();
+		s3crud(tengine, testconfig, api);
+		System.out.println("Total test time: " + (System.nanoTime() - starttime)/1000000 + "ms");
+		System.out.println("TestEngineUnitTest: Done TestS3crud");
 	}
 	
 	public void TestS3() {
@@ -411,4 +591,29 @@ public class TestEngineUnitTest {
 		tc.setUpdatePercent(0);
 		tc.setDeletePercent(0);
 	}
-}
+	
+	private TestConfiguration getTestConfiguration() {
+		TestConfiguration testconfig = new TestConfiguration();
+		testconfig.setTestConfigName("S3Tests");
+		testconfig.setNumberOfOperations(100);
+		testconfig.setNumberOfThreads(4);
+		testconfig.setObjectSize(1024*1024);
+		return testconfig;
+	}
+	
+	private Api getApi() {
+		
+		String username="user045";
+		String password="vd2bty66GwFjJxB34VHFEBgEJ/b8QWDwnAdA1zjg";
+		String proxy="http://object.vipronline.com";
+		String bucket="api-test";
+		
+		Api api = new Api();
+		api.setSubtenant(username);
+		api.setSecretKey(password);
+		api.setUrl(proxy);
+		api.setBucket(bucket);
+		return api;
+	}
+	}
+	

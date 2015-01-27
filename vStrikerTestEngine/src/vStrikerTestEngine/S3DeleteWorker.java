@@ -27,7 +27,7 @@ public class S3DeleteWorker implements Callable<ExecutionReportData> {
 		s3api.DeleteObject(api.getSubtenant(), api.getSecretKey(),
 				api.getUrl(), null, api.getBucket(), FilenameUtils.getName(objectLocation));
 		long endTime = System.nanoTime();
-		//System.out.println("DeleteObject execution time: " + (endTime - startTime));
+		System.out.println("DeleteObject execution time: " + (endTime - startTime));
 		reportData.setDataKey("S3");
 		reportData.setThreadValue(Thread.currentThread().getName());
 		reportData.setCrudValue("Delete");
