@@ -31,7 +31,7 @@ public class S3DeleteWorker implements Callable<ExecutionReportData> {
 		reportData.setDataKey("S3");
 		reportData.setThreadValue(Thread.currentThread().getName());
 		reportData.setCrudValue("Delete");
-		reportData.setDataValue(Long.toString(endTime-startTime));
+		reportData.setDataValue(Long.toString((endTime-startTime)/1000000));
 		return reportData;
 	}
 

@@ -23,20 +23,20 @@ public class TestEngineUnitTest {
 		//CreateTestPlan();
 		//ValidateS3();
 		//TestS3();
-		TestS3xxxd();
-		TestS3xxux();
-		TestS3xxud();
-		TestS3xrxx();
-		TestS3xrxd();
-		TestS3xrux();
-		TestS3xrud();
-		TestS3cxxx();
-		TestS3cxxd();
-		TestS3cxux();
-		TestS3cxud();
-		TestS3crxx();
-		TestS3crxd();
-		TestS3crux();
+		//TestS3xxxd();
+		//TestS3xxux();
+		//TestS3xxud();
+		//TestS3xrxx();
+		//TestS3xrxd();
+		//TestS3xrux();
+		//TestS3xrud();
+		//TestS3cxxx();
+		//TestS3cxxd();
+		//TestS3cxux();
+		//TestS3cxud();
+		//TestS3crxx();
+		//TestS3crxd();
+		//TestS3crux();
 		TestS3crud();	
 	}
 	

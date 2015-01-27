@@ -1,6 +1,7 @@
 package vStrikerTestEngine;
 
 import java.io.FileInputStream;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -10,6 +11,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import vStrikerBizModel.ExecutionReportBiz;
 import vStrikerBizModel.ExecutionReportDataBiz;
 import vStrikerEntities.Account;
 import vStrikerEntities.Api;
@@ -80,12 +82,6 @@ public class VEngine implements Engine {
 				|| api.getUrl().length() == 0) {
 			throw new Exception("Missing api information");
 		}
-
-		// ToDo - From TestConfiguration - get ExecutionPlan and
-		// ExecutionReportId
-		// Use ExecutionReportId to get the ExecutionReport object
-		ExecutionReport report = new ExecutionReport();
-		report.setExecutionReportId(1);
 
 		// Divide the total number of operations amongst CRUD operations
 		int createOps = 0, readOps = 0, updateOps = 0, deleteOps = 0;
@@ -284,11 +280,21 @@ public class VEngine implements Engine {
 					+ ((System.nanoTime() - postteststarttime) / 1000000)
 					+ " ms");
 		}
+		
+		// Create the summary report
+		ExecutionReport report = new ExecutionReport();
+		report.setExecutionName(LocalDateTime.now().toString());
+		report.setExecutionReportId(1);
+		//report.setExecutionPlan();
+		//ExecutionReportBiz.ExecutionReportCreate(report);
+
 
 		// Save the ExecutionReportData objects in the database
 		for (ExecutionReportData e : list) {
 			e.setExecutionReport(report);
 			ExecutionReportDataBiz.ExecutionReportDataCreate(e);
+			System.out.println("Id of the data object saved: " + e.getExecutionReportDataId());
+			System.out.println("Id of the summary object saved: " + report.getExecutionReportId());	
 		}
 
 		// Calculate summary numbers for the report
@@ -320,16 +326,16 @@ public class VEngine implements Engine {
 		// Populate the report object
 		// Total volume sent = (createops + updateops) * sizeofobject
 		if (testconfig.getCreateOperation() || testconfig.getUpdateOperation()) {
-			report.setTotalVolumeSent(Integer.toString(
-					(createOps + updateOps) * testconfig.getObjectSize())
+			report.setTotalVolumeSent(Long.toString(
+					(createOps + updateOps) * (long)testconfig.getObjectSize())
 					.toString());
 		} else
 			report.setTotalVolumeSent("0");
 
 		// Total volume received = (readops) * sizeofobject
 		if (testconfig.getReadOperation()) {
-		report.setTotalVolumeReceived(Integer.toString(readOps
-				* testconfig.getObjectSize()));
+		report.setTotalVolumeReceived(Long.toString(readOps
+				* (long)testconfig.getObjectSize()));
 		} else report.setTotalVolumeReceived("0");
 		
 		report.setAvgLatencyPerCrudOperation(Long.toString(((createTime
@@ -351,22 +357,23 @@ public class VEngine implements Engine {
 							.parseLong(erd.getDataValue()) : minValue;
 				}
 			}
-			System.out.println(maxValue + " max value");
-			System.out.println(minValue + " min value");
+			System.out.println(maxValue + " ms - max value");
+			System.out.println(minValue + " ms - min value");
 			System.out.println(testconfig.getObjectSize() + " object size");
-			report.setMaxThroughput(((long) testconfig.getObjectSize() * 1000000000)
+			report.setMaxThroughput(((long) testconfig.getObjectSize() * 1000)
 					/ minValue + " bytes per second");
-			report.setMinThroughput(((long) testconfig.getObjectSize() * 1000000000)
+			report.setMinThroughput(((long) testconfig.getObjectSize() * 1000)
 					/ maxValue + " bytes per second");
-			System.out.println(((long) testconfig.getObjectSize() * 1000000000)
+			System.out.println(((long) testconfig.getObjectSize() * 1000)
 					/ minValue + " max bytes per second");
-			System.out.println(((long) testconfig.getObjectSize() * 1000000000)
+			System.out.println(((long) testconfig.getObjectSize() * 1000)
 					/ maxValue + " min bytes per second");
 		} else {
 			report.setMaxThroughput("N/A");
 			report.setMinThroughput("N/A");
 		}
-
+		
+		ExecutionReportBiz.ExecutionReportUpdate(report);
 		return report;
 	}
 
