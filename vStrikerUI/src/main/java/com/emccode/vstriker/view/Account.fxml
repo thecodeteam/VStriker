@@ -20,7 +20,7 @@
          </children>
       </HBox>
       <Button fx:id="saveupdate" layoutX="467.0" layoutY="90.0" mnemonicParsing="false" onAction="#saveupdateClicked" text="Save / Update" />
-      <TableView fx:id="accountDetail" layoutX="45.0" layoutY="232.0" prefHeight="164.0" prefWidth="505.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+      <TableView fx:id="accountDetail" layoutX="50.0" layoutY="203.0" prefHeight="164.0" prefWidth="505.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
         <columns>
           <TableColumn fx:id="selectColumn" maxWidth="3000.0" prefWidth="59.0" text="Select" />
           <TableColumn fx:id="APIColumn" prefWidth="107.0" text="API" />
@@ -33,7 +33,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <HBox layoutX="56.92073059082031" layoutY="176.0" spacing="20.0" AnchorPane.rightAnchor="50.0">
+      <HBox layoutX="60.0" layoutY="153.0" spacing="20.0" AnchorPane.rightAnchor="50.0">
          <children>
             <Label layoutX="57.0" layoutY="181.0" text="API/Protocol for this account" />
             <ChoiceBox fx:id="chooseAPI" layoutX="252.0" layoutY="176.0" prefWidth="150.0" />
@@ -41,5 +41,12 @@
          </children>
       </HBox>
       <Button fx:id="backtoAccount" layoutX="402.0" layoutY="451.0" mnemonicParsing="false" onAction="#backtoAccountClicked" prefHeight="26.0" prefWidth="171.0" text="Back to Accounts &gt;&gt;" AnchorPane.rightAnchor="50.0" />
+      <HBox layoutX="350.0" layoutY="394.0" spacing="10.0" AnchorPane.rightAnchor="50.0">
+         <children>
+            <Button fx:id="validateAPIBtn" layoutX="350.0" layoutY="394.0" mnemonicParsing="false" onAction="#validateAPIClicked" text="Validate" />
+            <Button fx:id="updateAPIBtn" layoutX="418.0" layoutY="394.0" mnemonicParsing="false" onAction="#updateAPIClicked" text="Update" />
+            <Button fx:id="deleteAPIBtn" layoutX="492.0" layoutY="394.0" mnemonicParsing="false" onAction="#deleteAPIClicked" text="Delete" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

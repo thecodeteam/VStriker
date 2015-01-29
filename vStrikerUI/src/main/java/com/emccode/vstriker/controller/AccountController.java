@@ -55,10 +55,16 @@ public class AccountController {
 	private TableColumn<VwAccountDetail, String> KeyColumn;
 	@FXML
 	private TableColumn<VwAccountDetail, String> EndPointColumn;
+    @FXML
+    private Button validateAPIBtn;
+    @FXML
+    private Button updateAPIBtn;
+    @FXML
+    private Button deleteAPIBtn;
 
 	private VStriker vStriker;
-	//private VwAccountDetail validAcct;
 	private Account validAcct;
+	private int selectedRow;
 
 	// Constructor
 	public AccountController() {
@@ -75,6 +81,12 @@ public class AccountController {
 		createAccount(vStriker);
 		accountName.setText(validAcct.getName());
 		accountLocation.setText(validAcct.getAccountLocation());
+		// If this account has not apis yet - exit immediately
+		if (validAcct.getApis() == null || validAcct.getApis().isEmpty()) {
+			System.out.println("Account has no apis");
+			accountDetail.getItems().clear();
+			return;
+		}
 		// Populate the table
 		ObservableList<VwAccountDetail> accountData, selectedAcct;
 		try {
@@ -128,6 +140,28 @@ public class AccountController {
 		accountName.setPromptText("Enter Account Name");
 		accountLocation.setPromptText("Enter Account Location");
 	}
+	
+    @FXML
+    public void validateAPIClicked(ActionEvent event) {
+        System.out.println("Validate API button clicked");
+    }
+
+    @FXML
+    public void updateAPIClicked(ActionEvent event) {
+        System.out.println("Update API button clicked");
+        // Check if a valid account exists
+        if (accountName.getText() == null
+                || accountName.getText().length() == 0
+                || accountLocation.getText() == null
+                || accountLocation.getText().length() == 0) {
+            System.out.println("Please set Account Name and Account Location");
+        }
+    }
+
+    @FXML
+    public void deleteAPIClicked(ActionEvent event) {
+        System.out.println("Delete API button clicked");
+    }
 
 	@FXML
 	public void backtoAccountClicked(ActionEvent event) {

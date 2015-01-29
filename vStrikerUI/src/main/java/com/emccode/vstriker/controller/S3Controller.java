@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import vStrikerBizModel.ApiBiz;
 import vStrikerEntities.Account;
 import vStrikerEntities.Api;
-import vStrikerEntities.ApiType;
 import vStrikerTestEngine.Engine;
 import vStrikerTestEngine.VEngine;
 
@@ -120,51 +119,53 @@ public class S3Controller {
 		s3api.setSecretKey(s3secretkey.getText());
 		s3api.setBucket(s3bucket.getText());
 		s3api.setHttpAddressIp("tobechanged"); // This should change setProtocol
-		//s3api.setHttpAddressPort("999"); // This should change to setPort
-		//s3api.setApiTypeId(2); // This depends on protocol - if protocol is http
-								// or https
-		
-		 List<vStrikerEntities.ApiType> apitypelist = vStrikerBizModel.ApiTypeBiz.ApiTypeSelectAll();
-		 
-				switch (chooseProtocol.getValue().toString()) {
-				case "http":
-					for(vStrikerEntities.ApiType a:apitypelist  )
-					 {
-						if((a.getApiTypeName().equalsIgnoreCase("S3")) && (a.getApiTypeUrl().equalsIgnoreCase("http")))
-						{
-							s3api.setApiType(a);
-							break;
-						}
-					 }
-					
-					
-					if (s3port.getText() == null || s3port.getText().length() == 0) {
-						s3api.setHttpAddressPort("80");
-					} else {
-					s3api.setHttpAddressPort(s3port.getText());
-					}
+		// s3api.setHttpAddressPort("999"); // This should change to setPort
+		// s3api.setApiTypeId(2); // This depends on protocol - if protocol is
+		// http
+		// or https
+
+		List<vStrikerEntities.ApiType> apitypelist = vStrikerBizModel.ApiTypeBiz
+				.ApiTypeSelectAll();
+
+		switch (chooseProtocol.getValue().toString()) {
+		case "http":
+			for (vStrikerEntities.ApiType a : apitypelist) {
+				if ((a.getApiTypeName().equalsIgnoreCase("S3"))
+						&& (a.getApiTypeUrl().equalsIgnoreCase("http"))) {
+					s3api.setApiType(a);
 					break;
-				case "https":
-					for(vStrikerEntities.ApiType a:apitypelist  )
-					 {
-						if((a.getApiTypeName().equalsIgnoreCase("S3")) && (a.getApiTypeUrl().equalsIgnoreCase("https")))
-						{
-							s3api.setApiType(a);
-							break;
-						}
-					 }
-					
-					if (s3port.getText() == null || s3port.getText().length() == 0) {
-						s3api.setHttpAddressPort("443");
-					} else {
-					s3api.setHttpAddressPort(s3port.getText());
-					}
+				}
+			}
+			if (s3port.getText() == null || s3port.getText().length() == 0) {
+				s3api.setHttpAddressPort("80");
+			} else {
+				s3api.setHttpAddressPort(s3port.getText());
+			}
+			if (!s3url.getText().toLowerCase().startsWith("http://") || !s3url.getText().toLowerCase().startsWith("https://")) {
+				s3url.setText("http://" + s3url.getText());			
+				}
+			break;
+		case "https":
+			for (vStrikerEntities.ApiType a : apitypelist) {
+				if ((a.getApiTypeName().equalsIgnoreCase("S3"))
+						&& (a.getApiTypeUrl().equalsIgnoreCase("https"))) {
+					s3api.setApiType(a);
 					break;
-				default:
-					System.out.println("Api type needs to be http or https");
-				
-		
-		 }
+				}
+			}
+			if (s3port.getText() == null || s3port.getText().length() == 0) {
+				s3api.setHttpAddressPort("443");
+			} else {
+				s3api.setHttpAddressPort(s3port.getText());
+			}
+			if (!s3url.getText().toLowerCase().startsWith("http://") || !s3url.getText().toLowerCase().startsWith("https://")) {
+				s3url.setText("https://" + s3url.getText());			
+				}
+			break;
+		default:
+			System.out.println("Api type needs to be http or https");
+
+		}
 		// Add protocol and port after entity is updated - ToDo
 		try {
 			ApiBiz.ApiCreate(s3api);
