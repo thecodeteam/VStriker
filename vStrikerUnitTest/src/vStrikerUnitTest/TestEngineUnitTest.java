@@ -28,19 +28,19 @@ public class TestEngineUnitTest {
 		// CreateTestPlan();
 		// ValidateS3();
 		// TestS3();
-		TestS3xxxd();
-		TestS3xxux();
-		TestS3xxud();
-		TestS3xrxx();
-		TestS3xrxd();
-		TestS3xrux();
-		TestS3xrud();
-		TestS3cxxx();
-		TestS3cxxd();
-		TestS3cxux();
-		TestS3cxud();
-		TestS3crxx();
-		TestS3crxd();
+		//TestS3xxxd();
+		//TestS3xxux();
+		//TestS3xxud();
+		//TestS3xrxx();
+		//TestS3xrxd();
+		//TestS3xrux();
+		//TestS3xrud();
+		//TestS3cxxx();
+		//TestS3cxxd();
+		//TestS3cxux();
+		//TestS3cxud();
+		//TestS3crxx();
+		//TestS3crxd();
 		TestS3crux();
 		TestS3crud();
 	}
@@ -116,7 +116,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3xxxd");
 		} else {
@@ -141,7 +141,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3xxux");
 		} else {
@@ -169,7 +169,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3xxud");
 		} else {
@@ -194,7 +194,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3xrxx");
 		} else {
@@ -222,7 +222,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3xrxd");
 		} else {
@@ -250,7 +250,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3xrux");
 		} else {
@@ -280,7 +280,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3xrud");
 		} else {
@@ -305,7 +305,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3cxxx");
 		} else {
@@ -333,7 +333,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3cxxd");
 		} else {
@@ -361,7 +361,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3cxux");
 		} else {
@@ -391,7 +391,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3cxud");
 		} else {
@@ -419,7 +419,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3crxx");
 		} else {
@@ -449,7 +449,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3crxd");
 		} else {
@@ -479,7 +479,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3crux");
 		} else {
@@ -511,7 +511,7 @@ public class TestEngineUnitTest {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Total test time: "
+			System.out.println("Total run time: "
 					+ (System.nanoTime() - starttime) / 1000000 + "ms");
 			System.out.println("TestEngineUnitTest: Done TestS3crud");
 		} else {
@@ -549,7 +549,9 @@ public class TestEngineUnitTest {
 			// TestConfiguration testconfig = new TestConfiguration();
 			testconfig.setTestConfigName("S3Tests");
 			testconfig.setNumberOfOperations(8);
-			testconfig.setNumberOfThreads(4);
+			
+			Random rand = new Random();
+			testconfig.setNumberOfThreads(rand.nextInt(8)+1);
 			testconfig.setObjectSize(1024 * 1024);
 			return testconfig;
 		} catch (Exception e) {

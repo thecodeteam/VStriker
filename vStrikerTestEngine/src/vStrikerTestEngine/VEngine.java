@@ -194,7 +194,8 @@ public class VEngine implements Engine {
 		}
 
 		// The test
-		long sum = 0;
+		long totaltime = System.nanoTime();
+		System.out.println("totaltime start : " + totaltime);
 		ExecutorService executor = Executors.newFixedThreadPool(testconfig
 				.getNumberOfThreads());
 		List<ExecutionReportData> list = new ArrayList<ExecutionReportData>();
@@ -263,6 +264,8 @@ public class VEngine implements Engine {
 		} catch (Exception e) {
 			System.out.println("Tests did not finish in time: " + e.toString());
 		}
+		totaltime = System.nanoTime() - totaltime;
+		System.out.println("totaltime end : " + totaltime/1000000 + "ms");
 
 		// Post-test cleanup
 		if (!testconfig.getDeleteOperation() || (deleteOps < createOps)
@@ -334,6 +337,8 @@ public class VEngine implements Engine {
 							+ "ms with " + testconfig.getNumberOfThreads()
 							+ " threads");
 		}
+		
+		System.out.println("Total test time: " + totaltime/1000000 + "ms");
 
 		// Populate the report object
 		// Total volume sent = (createops + updateops) * sizeofobject

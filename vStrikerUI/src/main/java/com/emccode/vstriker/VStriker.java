@@ -9,14 +9,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import vStrikerEntities.Account;
-import vStrikerEntities.VwAccountDetail;
 
 import com.emccode.vstriker.controller.AccountController;
 import com.emccode.vstriker.controller.AtmosController;
+import com.emccode.vstriker.controller.EditConfigurationController;
 import com.emccode.vstriker.controller.HomepageController;
 import com.emccode.vstriker.controller.S3Controller;
 import com.emccode.vstriker.controller.SwiftController;
-import com.emccode.vstriker.controller.EditConfigurationController;
 /*
  * @author Sanjeev Chauhan
  */
@@ -179,7 +178,7 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
-	public void updateAccount(VwAccountDetail validAcct) {
+	public void updateAccount(Account validAcct) {
 		System.out.println("In VStriker updateAccount");
 		try {
 			// Change page title
