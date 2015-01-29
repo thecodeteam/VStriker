@@ -302,19 +302,30 @@ public class HomepageController {
 	@FXML
 	public void deleteAccountClicked(ActionEvent event) {
 		System.out.println("Delete account button clicked");
-		int selectedRow = 0;
-		for (BooleanProperty b: selectedRowList) {
-			if (b.getValue()) {
-				selectedRow = selectedRowList.indexOf(b);
-				System.out.println("selected row is: " + selectedRow);
-			}
-		}
-		if (selectedRow == 0) {
+		int selectedRow = getSelectedRow();
+		if (selectedRow <= 0) {
 			System.out.println("Please select a row to delete");
 			return;
 		}
+		
 		ObservableList<Account> accts = accountTable.getItems();
-
+		Account selectedAcct = accts.get(selectedRow);
+		List<Api> numofApis = selectedAcct.getApis();
+		// Check if acct has any apis
+		System.out.println("Check if acct has apis");
+		try {
+		if (!numofApis.isEmpty()) {
+			for (Api a: numofApis) {
+				ApiBiz.ApiDelete(a.getApiId());
+				accountDetail.getItems().clear();
+			}
+		}
+		} catch (Exception e) {
+			System.out.println("Unable to delete rows in Api table");	
+			e.printStackTrace();
+		}
+		
+		/*
 		// Delete rows from the API table
 		try {
 		
@@ -326,14 +337,18 @@ public class HomepageController {
 			System.out.println("Unable to delete rows in Api table");	
  			e1.printStackTrace();
 		}
+		*/
+		
 		// Delete the account from Account table
+		System.out.println("Delete account from account table");
 		try {
-			AccountBiz.AccountDelete(accts.get(selectedRow).getAccountId());
+			AccountBiz.AccountDelete(selectedAcct.getAccountId());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("Unable to delete account");
 			e.printStackTrace();
 		}
+		System.out.println("Delete account -remove selected row");
 		accts.remove(selectedRow);
 		// Clear checkboxes
 		for(BooleanProperty b: selectedRowList) {
@@ -391,6 +406,12 @@ public class HomepageController {
 		System.out.println("Name: " + account.getName() + " Location: "
 				+ account.getAccountLocation() + " Id: "
 				+ account.getAccountId());
+		// If this account has not apis yet - exit immediately
+		if (account.getApis()==null || account.getApis().isEmpty()) {
+			System.out.println("Account has no apis");
+			accountDetail.getItems().clear();
+			return;
+		}
 		ObservableList<VwAccountDetail> selectedAcct = FXCollections.observableArrayList();
 		for (VwAccountDetail a : accountData) {
 			if (a.getAccountId() == account.getAccountId())
