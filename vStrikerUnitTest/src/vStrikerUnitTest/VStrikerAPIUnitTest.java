@@ -1,4 +1,7 @@
 package vStrikerUnitTest;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,9 +20,9 @@ public class VStrikerAPIUnitTest {
 
 	@Test
 	public  void test() throws Exception {
-		TestS3API();
-		TestS3ReadBucket();
-		
+		//TestS3API();
+		//TestS3ReadBucket();
+		TestS3CreateObject();
 	}
 	
 	public static void TestS3API() throws Exception
@@ -55,4 +58,23 @@ public class VStrikerAPIUnitTest {
 		   }
 	}
 
+	public static void TestS3CreateObject() throws Exception
+	{
+try
+{
+		String username="wuser1@sanity.local";
+		String password="BRuu4J/pKJP9pAXCDvKNF+WozM+/4bJsMOuVC83F";
+		String proxy="http://10.243.188.178:10101";
+		String bucket="test";
+		FileInputStream fis = new FileInputStream("C:\\EMC\\emccode\\vstriker\\vStrikerUI\\StageFiles\\S3 Large Test_1.txt");
+ 
+		s3api.CreateObject(username,password,proxy,null,bucket,"key S3 Large Test_1.txt", fis);
+		
+}
+catch(Exception e)
+{
+	e.printStackTrace();
+}
+
+	}
 }

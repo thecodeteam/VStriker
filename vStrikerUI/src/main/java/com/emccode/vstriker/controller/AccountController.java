@@ -1,13 +1,6 @@
 package com.emccode.vstriker.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,8 +10,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.CheckBoxTableCell;
-import javafx.util.Callback;
 import vStrikerBizModel.AccountBiz;
 import vStrikerBizModel.AccountDetailBiz;
 import vStrikerEntities.Account;
@@ -44,8 +35,6 @@ public class AccountController {
 	@FXML
 	private TableView<VwAccountDetail> accountDetail;
 	@FXML
-	private TableColumn<VwAccountDetail, Boolean> selectColumn;
-	@FXML
 	private TableColumn<VwAccountDetail, String> APIColumn;
 	@FXML
 	private TableColumn<VwAccountDetail, String> ProtocolColumn;
@@ -57,8 +46,7 @@ public class AccountController {
 	private TableColumn<VwAccountDetail, String> EndPointColumn;
 
 	private VStriker vStriker;
-	//private VwAccountDetail validAcct;
-	private Account validAcct;
+	private VwAccountDetail validAcct;
 
 	// Constructor
 	public AccountController() {
@@ -69,7 +57,7 @@ public class AccountController {
 		this.vStriker = vStriker;
 	}
 
-	public void updateAccount(VStriker vStriker, Account validAcct) {
+	public void updateAccount(VStriker vStriker, VwAccountDetail validAcct) {
 		System.out.println("In AccountController - updateAccount");
 		this.validAcct = validAcct;
 		createAccount(vStriker);
@@ -87,15 +75,6 @@ public class AccountController {
 			}
 			accountDetail.setItems(selectedAcct);
 			// Populate columns in the details table
-			List<BooleanProperty> selectedRowList = setupCheckboxColumn(selectedAcct);
-			selectColumn
-					.setCellFactory(CheckBoxTableCell
-							.forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
-								public ObservableValue<Boolean> call(Integer index) {
-									System.out.println("Index is: " + index);
-									return selectedRowList.get(index);
-								}
-							}));
 			APIColumn
 					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 							cellData.getValue().getApiTypeName()));
@@ -105,12 +84,6 @@ public class AccountController {
 			EndPointColumn
 					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 							cellData.getValue().getUrl()));
-			ProtocolColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-					cellData.getValue().getUrl().contains("https")? "https": "http"));
-			PortColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-					cellData.getValue().getUrl().contains("https")? cellData.getValue().getHttpsAddressPort() : cellData.getValue().getHttpAddressPort()));
-			selectColumn.setEditable(true);
-			accountDetail.setEditable(true);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -194,36 +167,5 @@ public class AccountController {
 			System.out.println("Not a valid Account");
 			e.printStackTrace();
 		}
-	}
-	
-	private List<BooleanProperty> setupCheckboxColumn(ObservableList<VwAccountDetail> selectedAcct) {
-		// Associate a BooleanProperty to every cell in the first column.
-		ArrayList<BooleanProperty>selectedRowList = new ArrayList<BooleanProperty>();
-		try {
-			for (VwAccountDetail a : selectedAcct) {
-				selectedRowList.add(new SimpleBooleanProperty());
-			}
-			// Add a listener for each boolean property
-			for (BooleanProperty b : selectedRowList) {
-				b.addListener(new ChangeListener<Boolean>() {
-					public void changed(ObservableValue<? extends Boolean> obs,
-							Boolean wasSelected, Boolean isSelected) {
-						System.out.println("isSelected: " + isSelected);
-						// Change all other BooleanProperty to false
-						if (b.getValue()) {
-							// This means b just was selected so every other
-							// property should be unchecked
-							for (BooleanProperty bo : selectedRowList) {
-								if (b != bo)
-									bo.setValue(false);
-							}
-						}
-					}
-				});
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return selectedRowList;
 	}
 }

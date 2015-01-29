@@ -122,7 +122,8 @@ public class ResultsController {
 		                btnRun.setDisable(true);
 		                progressbarTest.setProgress(0);
 		                lblfinished.setText("");
-// Progress Bar
+// Progress Bar		
+		                count=0;
 		                progressbarTest.setProgress(0);
 
 		                timeRunEngine =  new Timeline(new KeyFrame(
@@ -170,6 +171,7 @@ public class ResultsController {
 				{
 					count++;
 					progressbarTest.setProgress(count/200);
+					
 				}
 				else count=150;
 			}
@@ -206,8 +208,7 @@ public class ResultsController {
 				Engine excEngine = new VEngine();
 				exeReport = excEngine.runTests(exePlan);
 				//Thread.sleep(5000);
-				if(exeReport!=null)
-				vStrikerBizModel.ExecutionReportBiz.ExecutionReportCreate(exeReport);
+			
 				
 				lblfinished.setText("Completed!");
 				btnRun.setDisable(false);
@@ -227,7 +228,11 @@ public class ResultsController {
 			 timeline.stop();
 			 
 			 this.panExecuateResult.setVisible(true);
-			data = exeReport.getExecutionReportData();
+			
+			 exeReport=vStrikerBizModel.ExecutionReportBiz.ExecutionReportSelect(exeReport.getExecutionReportId());
+			 
+			 data = exeReport.getExecutionReportData();
+			
 			apiCol.setCellValueFactory(new PropertyValueFactory<ExecutionReportData, String>("dataKey"));
 			valueCol.setCellValueFactory(new PropertyValueFactory<ExecutionReportData, String>("dataValue"));
 			crudCol.setCellValueFactory(new PropertyValueFactory<ExecutionReportData, String>("crudValue"));

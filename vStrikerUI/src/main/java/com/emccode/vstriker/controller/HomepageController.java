@@ -3,6 +3,8 @@ package com.emccode.vstriker.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -44,19 +46,19 @@ public class HomepageController {
 	@FXML private Tab tbCfg;
 	
 	@FXML
-	private TableView<Account> accountTable;
+	private TableView<VwAccountDetail> accountTable;
 	@FXML
-	private TableColumn<Account, Boolean> selectColumn;
+	private TableColumn<VwAccountDetail, Boolean> selectColumn;
 	@FXML
-	private TableColumn<Account, String> nameColumn;
+	private TableColumn<VwAccountDetail, String> nameColumn;
 	@FXML
-	private TableColumn<Account, String> locationColumn;
+	private TableColumn<VwAccountDetail, String> locationColumn;
 	@FXML
-	private TableColumn<Account, String> S3Column;
+	private TableColumn<VwAccountDetail, String> S3Column;
 	@FXML
-	private TableColumn<Account, String> SwiftColumn;
+	private TableColumn<VwAccountDetail, String> SwiftColumn;
 	@FXML
-	private TableColumn<Account, String> AtmosColumn;
+	private TableColumn<VwAccountDetail, String> AtmosColumn;
 	@FXML
 	private Button addButton;
 	@FXML
@@ -150,58 +152,45 @@ public class HomepageController {
 
 		// Populating the API Columns
 		// S3 Column
-		S3Column.setCellValueFactory(new Callback<CellDataFeatures<Account, String>, ObservableValue<String>>() {
+		S3Column.setCellValueFactory(new Callback<CellDataFeatures<VwAccountDetail, String>, ObservableValue<String>>() {
 			public ObservableValue<String> call(
-					CellDataFeatures<Account, String> p) {
-				boolean flag = false;
-				for (VwAccountDetail view: accountData) {
-					if((view.getAccountId() == p.getValue().getAccountId()) && view.getApiTypeName()!=null && view.getApiTypeName().contains("S3")) {
-						flag = true;
-					}
-				}
-				if (flag) {
+					CellDataFeatures<VwAccountDetail, String> p) {
+				if (p.getValue().getApiTypeName() != null
+						&& p.getValue().getApiTypeName().contains("S3")) {
 					return new SimpleStringProperty("Yes");
 				} else {
 					return new SimpleStringProperty("No");
 				}
 			}
 		});
-				
 		// Swift Column
-		SwiftColumn.setCellValueFactory(new Callback<CellDataFeatures<Account, String>, ObservableValue<String>>() {
-			public ObservableValue<String> call(
-					CellDataFeatures<Account, String> p) {
-				boolean flag = false;
-				for (VwAccountDetail view: accountData) {
-					if((view.getAccountId() == p.getValue().getAccountId()) && view.getApiTypeName()!=null && view.getApiTypeName().contains("Swift")) {
-						flag = true;
+		SwiftColumn
+				.setCellValueFactory(new Callback<CellDataFeatures<VwAccountDetail, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(
+							CellDataFeatures<VwAccountDetail, String> p) {
+						if (p.getValue().getApiTypeName() != null
+								&& p.getValue().getApiTypeName()
+										.contains("Swift")) {
+							return new SimpleStringProperty("Yes");
+						} else {
+							return new SimpleStringProperty("No");
+						}
 					}
-				}
-				if (flag) {
-					return new SimpleStringProperty("Yes");
-				} else {
-					return new SimpleStringProperty("No");
-				}
-			}
-		});
-		
+				});
 		// Atmos Column
-		AtmosColumn.setCellValueFactory(new Callback<CellDataFeatures<Account, String>, ObservableValue<String>>() {
-			public ObservableValue<String> call(
-					CellDataFeatures<Account, String> p) {
-				boolean flag = false;
-				for (VwAccountDetail view: accountData) {
-					if((view.getAccountId() == p.getValue().getAccountId()) && view.getApiTypeName()!=null && view.getApiTypeName().contains("Atmos")) {
-						flag = true;
+		AtmosColumn
+				.setCellValueFactory(new Callback<CellDataFeatures<VwAccountDetail, String>, ObservableValue<String>>() {
+					public ObservableValue<String> call(
+							CellDataFeatures<VwAccountDetail, String> p) {
+						if (p.getValue().getApiTypeName() != null
+								&& p.getValue().getApiTypeName()
+										.contains("Atmos")) {
+							return new SimpleStringProperty("Yes");
+						} else {
+							return new SimpleStringProperty("No");
+						}
 					}
-				}
-				if (flag) {
-					return new SimpleStringProperty("Yes");
-				} else {
-					return new SimpleStringProperty("No");
-				}
-			}
-		});
+				});
 		// Make the checkbox column editable
 		selectColumn.setEditable(true);
 		accountTable.setEditable(true);
@@ -214,11 +203,13 @@ public class HomepageController {
 		configurationViewController.setVStrikerApp(vStriker);
 		resultsViewController.setVStrikerApp(vStriker);
 		
+		
+		new AccountDetailBiz();
+		// javafx.collections.ObservableList<VwAccountDetail> accountData;
 		try {
 			accountData = FXCollections.observableArrayList(AccountDetailBiz
 					.AccountSelectAll());
-			acctList = FXCollections.observableArrayList(AccountBiz.AccountSelectAll());
-			accountTable.setItems(acctList);
+			accountTable.setItems(accountData);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -241,10 +232,9 @@ public class HomepageController {
 			System.out.println("Please select an Account to validate");
 			return;
 		}
-		ObservableList<Account> accts = accountTable.getItems();
+		ObservableList<VwAccountDetail> accts = accountTable.getItems();
 		try {
-			//List<Api> listApi = ApiBiz.ApiSelectforAccount((accts.get(selectedRow).getAccountId()));
-			List<Api> listApi = (AccountBiz.AccountSelect(accts.get(selectedRow).getAccountId())).getApis();
+			List<Api> listApi = ApiBiz.ApiSelectforAccount((accts.get(selectedRow).getAccountId()));
 			for (Api a: listApi) {
 				switch (a.getApiType().getApiTypeName()) {
 				
@@ -314,7 +304,7 @@ public class HomepageController {
 			System.out.println("Please select a row to delete");
 			return;
 		}
-		ObservableList<Account> accts = accountTable.getItems();
+		ObservableList<VwAccountDetail> accts = accountTable.getItems();
 
 		// Delete rows from the API table
 		try {
@@ -388,9 +378,9 @@ public class HomepageController {
 	}
 
 	private void showAcctAPIDetails(Account account) {
-		System.out.println("In showAcctAPIDetails");
-		System.out.println("Name: " + account.getName() + " Location: "
-				+ account.getAccountLocation() + " Id: "
+		System.out.println("In showAcctAPIDetaisl");
+		System.out.println("Name: " + account.getName() + "Location: "
+				+ account.getAccountLocation() + "Id: "
 				+ account.getAccountId());
 		ObservableList<VwAccountDetail> selectedAcct = FXCollections.observableArrayList();
 		for (VwAccountDetail a : accountData) {
@@ -401,15 +391,12 @@ public class HomepageController {
 		// Populate columns in the details table
 		APIColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 				cellData.getValue().getApiTypeName()));
-		ProtocolColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-				cellData.getValue().getUrl().contains("https")? "https": "http"));
-		PortColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-				cellData.getValue().getUrl().contains("https")? cellData.getValue().getHttpsAddressPort() : cellData.getValue().getHttpAddressPort()));
 		KeyColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 				cellData.getValue().getSecretKey()));
 		EndPointColumn
 				.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 						cellData.getValue().getUrl()));
+
 	}
 	
 	private int getSelectedRow() {

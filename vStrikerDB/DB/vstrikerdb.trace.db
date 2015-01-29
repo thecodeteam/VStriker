@@ -6711,3 +6711,9 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/EMC/emcco
 	at org.h2.mvstore.FileStore.open(FileStore.java:170)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:346)
 	... 61 more
+01-29 12:09:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Value too long for column "HTTP_ADDRESS_IP VARCHAR(16) NOT NULL": "'http://10.243.188.178:10101' (27)"; SQL statement:
+UPDATE VSTRIKERDB.API SET HTTP_ADDRESS_IP = 'http://10.243.188.178:10101' WHERE API_ID = 6 [22001-184]
+01-29 12:12:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Value too long for column "HTTP_ADDRESS_IP VARCHAR(16) NOT NULL": "'/10.243.188.178:10101' (21)"; SQL statement:
+UPDATE VSTRIKERDB.API SET HTTP_ADDRESS_IP = '/10.243.188.178:10101' WHERE API_ID = 6 [22001-184]
