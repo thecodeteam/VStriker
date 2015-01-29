@@ -9,13 +9,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import vStrikerEntities.Account;
-
 import vStrikerEntities.VwAccountDetail;
 
 import com.emccode.vstriker.controller.AccountController;
 import com.emccode.vstriker.controller.AtmosController;
 import com.emccode.vstriker.controller.HomepageController;
-
 import com.emccode.vstriker.controller.ResultsChartController;
 import com.emccode.vstriker.controller.S3Controller;
 import com.emccode.vstriker.controller.SwiftController;
@@ -159,7 +157,7 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
-	public void showCharts(java.util.List<vStrikerEntities.ExecutionReportData>  rptData) {
+	public void showCharts(java.util.List<vStrikerEntities.ExecutionReportData>  rptData, String selectedAccount,String selectedTest) {
 		System.out.println("In VStriker ShowEditConfiguaration");
 		try {
 			// Change page title
@@ -174,7 +172,7 @@ public class VStriker extends Application {
 
 			// Give controller access to main app
 			ResultsChartController controller = loader.getController();
-			controller.setVStrikerApp(this,rptData);
+			controller.setVStrikerApp(this,rptData,selectedAccount,selectedTest);
 		} catch (IOException e) {
 			e.getMessage();
 			e.printStackTrace();

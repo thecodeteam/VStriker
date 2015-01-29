@@ -51,7 +51,9 @@ public class ExecutionReportDataBiz {
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
-		Query qry = entitymanager.createQuery("SELECT e FROM ExecutionReportData e Where e.executionReportId="+rptd);
+		Query qry = entitymanager.createQuery("SELECT e FROM ExecutionReportData e Where executionReportId=:id");
+		qry.setParameter("id", rptd);
+		
 		@SuppressWarnings("unchecked")
 		List<ExecutionReportData> list = qry.getResultList();
 		

@@ -118,7 +118,7 @@ public class HomepageController {
 			           if(t1.getId().equals("tbCfg"))
 			           {
 			        	   vStriker.SetTitle("vStriker:Configuration");
-			        	   resultsViewController.LoadLists();
+			        	   configurationViewController.setVStrikerApp(vStriker);
 			           }
 			      
 			           if(t1.getId().equals("tbAccount"))

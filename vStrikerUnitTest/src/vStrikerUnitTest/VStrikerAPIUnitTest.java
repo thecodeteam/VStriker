@@ -25,27 +25,31 @@ public class VStrikerAPIUnitTest {
 	public static void TestS3API() throws Exception
 	{
 		
-		String username="root";
-		String password="eEH7s4MBMNcFNZTzPW1FdRmVeWmr7GmfsiOvlUUg";
-		String proxy="http://10.247.134.77:9020";
+		String username="wuser1@sanity.local";
+		String password="BRuu4J/pKJP9pAXCDvKNF+WozM+/4bJsMOuVC83F";
+		String proxy="http://10.243.188.178:10101";
 		
-		ViPRS3Client conn =s3api.getS3Client(username,password,proxy,"ns");
+		ViPRS3Client conn =s3api.getS3Client(username,password,proxy,null);
 		
 		vLogger.LogInfo("Unit Test S3 API " +conn.S3_SERVICE_NAME);
-    	
+		System.out.println("Unit Test S3 API " +conn.S3_SERVICE_NAME);
 	}
 
 	public static void TestS3ReadBucket() throws Exception
 	{
 		
-		String username="root";
-		String password="eEH7s4MBMNcFNZTzPW1FdRmVeWmr7GmfsiOvlUUg";
-		String proxy="http://10.247.134.77:9020";
-		String bucket="mediaboard-magdy";
-		ObjectListing list =s3api.ReadBucket(username,password,proxy,"ns",bucket);
+		String username="wuser1@sanity.local";
+		String password="BRuu4J/pKJP9pAXCDvKNF+WozM+/4bJsMOuVC83F";
+		String proxy="http://10.243.188.178:10101";
+		String bucket="test";
+		ObjectListing list =s3api.ReadBucket(username,password,proxy,null,bucket);
 		   for (S3ObjectSummary objectSummary : 
 			   list.getObjectSummaries()) {
 			   vLogger.LogInfo("Unit Test S3 API Bucket Read - " + objectSummary.getKey() + "  " +
+                       "(size = " + objectSummary.getSize() + 
+                       ")");
+			   
+			   System.out.println("Unit Test S3 API Bucket Read - " + objectSummary.getKey() + "  " +
                        "(size = " + objectSummary.getSize() + 
                        ")");
 		   }

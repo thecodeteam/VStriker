@@ -16,12 +16,12 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <Label id="lblTestName" layoutX="484.0" layoutY="46.0" prefHeight="17.0" prefWidth="366.0" />
+            <Label id="lblTestName" fx:id="testName" layoutX="484.0" layoutY="46.0" prefHeight="17.0" prefWidth="366.0" />
          </children>
       </HBox>
-      <TabPane layoutX="24.0" layoutY="55.0" prefHeight="400.0" prefWidth="550.0" tabClosingPolicy="UNAVAILABLE" fx:id="tabCharts" >
+      <TabPane fx:id="tabCharts" layoutX="24.0" layoutY="60.0" prefHeight="400.0" prefWidth="550.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Averages" fx:id="tabAvg">
+          <Tab fx:id="tabAvg" text="Averages">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -37,7 +37,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Create Operations" fx:id="tabCreate">
+          <Tab fx:id="tabCreate" text="Create Operations">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 			                       <children>
@@ -53,7 +53,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Read Operations" fx:id="tabRead">
+            <Tab fx:id="tabRead" text="Read Operations">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 				                     <children>
@@ -69,7 +69,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Update Operations" fx:id="tabUpdate">
+            <Tab fx:id="tabUpdate" text="Update Operations">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 				                     <children>
@@ -85,7 +85,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Delete Operations" fx:id="tabDelete">
+            <Tab fx:id="tabDelete" text="Delete Operations">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 				                     <children>
@@ -103,6 +103,16 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button id="btnBackResult" layoutX="450.0" layoutY="461.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Back To Result" onAction="#btnBackResultClicked" />
+      <Button id="btnBackResult" layoutX="450.0" layoutY="466.0" mnemonicParsing="false" onAction="#btnBackResultClicked" prefHeight="25.0" prefWidth="114.0" text="Back To Result" />
+      <HBox layoutX="25.0" layoutY="15.0" prefHeight="20.0" prefWidth="550.0" spacing="20.0">
+         <children>
+            <Label layoutX="25.0" layoutY="35.0" prefHeight="17.0" prefWidth="76.0" text="Account :">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label id="lblTestName" fx:id="accountName" layoutX="484.0" layoutY="46.0" prefHeight="17.0" prefWidth="366.0" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

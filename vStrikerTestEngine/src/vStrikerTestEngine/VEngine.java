@@ -63,7 +63,7 @@ public class VEngine implements Engine {
 		return true;
 	}
 
-	public ExecutionReport runS3Tests(TestConfiguration testconfig, Api api)
+	public ExecutionReport runS3Tests(TestConfiguration testconfig, Api api,ExecutionPlan plan)
 			throws Exception {
 		vLogger.LogInfo("In vTestEngine runS3Tests");
 
@@ -285,6 +285,8 @@ public class VEngine implements Engine {
 					+ " ms");
 		}
 
+		
+		
 		// Save the ExecutionReportData objects in the database
 		for (ExecutionReportData e : list) {
 			e.setExecutionReport(report);
@@ -337,7 +339,9 @@ public class VEngine implements Engine {
 				/ testconfig.getNumberOfOperations()));
 		report.setNumberRequestSec((int) (testconfig.getNumberOfOperations()
 				/ (createTime + readTime + updateTime + deleteTime) / 1000000000));
-
+if(list.size()>0)
+{
+	
 		if (testconfig.getCreateOperation() || testconfig.getReadOperation() || testconfig.getUpdateOperation()) {
 			long maxValue = 0, minValue = Long
 					.parseLong(list.get(1).getDataValue());
@@ -363,10 +367,10 @@ public class VEngine implements Engine {
 			System.out.println(((long) testconfig.getObjectSize() * 1000000000)
 					/ maxValue + " min bytes per second");
 		} else {
-			report.setMaxThroughput("N/A");
-			report.setMinThroughput("N/A");
+			report.setMaxThroughput("0");
+			report.setMinThroughput("0");
 		}
-
+}
 		return report;
 	}
 
@@ -427,7 +431,7 @@ public class VEngine implements Engine {
 						switch (p.getApiType().getApiTypeName()) {
 						case "S3": {
 
-							rpt = runS3Tests(test, p);
+							rpt = runS3Tests(test, p,plan);
 							System.out.println("Validated S3");
 
 							break;

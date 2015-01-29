@@ -8,10 +8,6 @@ import vStrikerTestEngine.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,9 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 import vStrikerEntities.*;
-import javafx.concurrent.Task;
-import javafx.event.EventHandler;
-
 import com.emccode.vstriker.VStriker;
 import com.emccode.vstriker.model.TestInfo;
 
@@ -64,6 +57,8 @@ public class ResultsController {
 	private ExecutionPlan exePlan = new ExecutionPlan();
 	private ExecutionReport exeReport = new ExecutionReport();
 	private  List<ExecutionReportData> data;
+	private String  selectedTest="";
+	private String selectedAccount="";
 	
 	double count=0;
 
@@ -87,7 +82,7 @@ public class ResultsController {
 		@FXML
 	public void btnChartClicked(ActionEvent event) {
 		System.out.println("Back to Accounts button clicked");
-		vStriker.showCharts(data);
+		vStriker.showCharts(data,selectedAccount,selectedTest);
 	}
 		@FXML
 	public void btnExportClicked(ActionEvent event) {
@@ -96,6 +91,10 @@ public class ResultsController {
 		try {
 			String filename="Execuation_report_"+exeReport.getExecutionReportId()+".csv";
 			vStrikerTestUtilities.Utilites.exportResultToFile(filename, exeReport.getExecutionReportId());
+			
+			JOptionPane.showConfirmDialog(null, "Export is finished successfully!",  "VStriker",
+				    JOptionPane.CLOSED_OPTION,JOptionPane.INFORMATION_MESSAGE);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -117,6 +116,8 @@ public class ResultsController {
 	{
 			try
 			{
+			if((ddTestList.getValue()!=null)&(ddAccounts.getValue()!=null))
+					{
 				        hboxProgress.setVisible(true);
 		                btnRun.setDisable(true);
 		                progressbarTest.setProgress(0);
@@ -135,6 +136,13 @@ public class ResultsController {
 		                        ae -> CheckProgress()));
 		                timeline.setCycleCount(Animation.INDEFINITE);
 		                timeline.play();
+					}
+			else
+			{
+				
+				JOptionPane.showConfirmDialog(null, "Both Account and Test are required!",  "VStriker",
+    				    JOptionPane.CLOSED_OPTION,JOptionPane.INFORMATION_MESSAGE);
+			}
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -148,6 +156,7 @@ public class ResultsController {
 			if(lblfinished.getText().equals("Completed!"))
 			{
 				progressbarTest.setProgress(1);
+				this.btnRun.setVisible(true);
 				timeline.stop();
 				timeRunEngine.stop();
 				JOptionPane.showConfirmDialog(null, "Test executed successfully!",  "VStriker",
@@ -177,6 +186,8 @@ public class ResultsController {
 				exePlan.setAccount(ddAccounts.getValue());
 				
 				TestInfo t = ddTestList.getValue(); 
+				this.selectedTest=t.getName();
+				this.selectedAccount=ddAccounts.getValue().getName();
 				if(t.getIsTemplate())
 				{
 					ConfigurationTemplate cfg = vStrikerBizModel.ConfigurationTemplateBiz.ConfigurationTemplateSelect(t.geTestID());
@@ -192,11 +203,14 @@ public class ResultsController {
 				
 			// run Engine
 				
-				//Engine excEngine = new VEngine();
-				//exeReport = excEngine.runTests(exePlan);
+				Engine excEngine = new VEngine();
+				exeReport = excEngine.runTests(exePlan);
 				//Thread.sleep(5000);
-				exeReport =vStrikerBizModel.ExecutionReportBiz.ExecutionReportSelect(1);
+				if(exeReport!=null)
+				vStrikerBizModel.ExecutionReportBiz.ExecutionReportCreate(exeReport);
+				
 				lblfinished.setText("Completed!");
+				btnRun.setDisable(false);
 					
 			}catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -231,12 +245,13 @@ public class ResultsController {
 		 
 		public void LoadLists() {
 			System.out.println("Load List initialize");
+			
 			hboxProgress.setVisible(false);
 			panExecuateResult.setVisible(false);
 			
 			this.LoadAccountsList();
 			this.LoadTestsList();
-			
+			this.btnRun.setVisible(true);
 		}
 		
 		private void LoadAccountsList() {

@@ -80,3 +80,5 @@ DB/
 /vStrikerTestUtilities/src/log4j.properties
 vStrikerDB/DB/vstrikerdb.mv.db
 vStrikerDB/DB/vstrikerdb.mv.db
+vStrikerDB/DB/vstrikerdb.trace.db
+vStrikerDB/DB/vstrikerdb.mv.db
