@@ -3,8 +3,6 @@ package com.emccode.vstriker.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -233,7 +231,8 @@ public class HomepageController {
 		}
 		ObservableList<VwAccountDetail> accts = accountTable.getItems();
 		try {
-			List<Api> listApi = ApiBiz.ApiSelectforAccount((accts.get(selectedRow).getAccountId()));
+			//List<Api> listApi = ApiBiz.ApiSelectforAccount((accts.get(selectedRow).getAccountId()));
+			List<Api> listApi = (AccountBiz.AccountSelect(accts.get(selectedRow).getAccountId())).getApis();
 			for (Api a: listApi) {
 				switch (a.getApiType().getApiTypeName()) {
 				

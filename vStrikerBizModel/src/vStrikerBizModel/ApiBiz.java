@@ -1,12 +1,12 @@
 package vStrikerBizModel;
 import java.util.List;
 
-import vStrikerEntities.*;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
+import vStrikerEntities.Api;
 
 public class ApiBiz {
 	
@@ -39,7 +39,7 @@ public class ApiBiz {
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
-		Api act = entitymanager.find(Api.class,entityId);
+		Api act = entitymanager.find(Api.class, (int)entityId);
 	
 		entitymanager.close( );
 		actfactory.close( );

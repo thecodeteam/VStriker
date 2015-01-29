@@ -11,6 +11,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FilenameUtils;
+
 import vStrikerBizModel.ExecutionReportBiz;
 import vStrikerBizModel.ExecutionReportDataBiz;
 import vStrikerEntities.Account;
@@ -37,24 +39,32 @@ public class VEngine implements Engine {
 			System.out.println("Please ensure user, key and url are valid");
 			return false;
 		}
+		System.out.println("user, key and url are:" + user + " " + key + " "
+				+ url);
 		if (namespace == null || namespace.length() == 0) {
 			namespace = null;
 		}
 		vLogger.LogInfo("In vTestEngine validateS3Connection");
-		String TEST_BUCKET = "vstrikertest" + UUID.randomUUID().toString();
+		String TEST_BUCKET = "vstest"
+				+ (UUID.randomUUID().toString()).substring(0, 10);
 		System.out.println("Test Bucket name is: " + TEST_BUCKET);
 		try {
+			s3api.getS3Client(user, key, url, namespace);
+			System.out.println("Get Client worked");
 			s3api.CreateBucket(user, key, url, namespace, TEST_BUCKET);
-
-			List<String> listofObjects = Utilites.generateTestFileList(
+			System.out.println("Create bucket done");
+			List<String> listofObjects = Utilites.generateFiles(
 					"validationTest", 1000, 1);
-
+			System.out.println(listofObjects.get(0));
 			s3api.CreateObject(user, key, url, namespace, TEST_BUCKET,
-					listofObjects.get(0),
+					FilenameUtils.getName(listofObjects.get(0)),
 					new FileInputStream(listofObjects.get(0)));
+			System.out.println("Create object done");
 			s3api.DeleteObject(user, key, url, namespace, TEST_BUCKET,
-					listofObjects.get(0));
+					FilenameUtils.getName(listofObjects.get(0)));
+			System.out.println("Delete object done");
 			s3api.DeleteBuckets(user, key, url, namespace, TEST_BUCKET);
+			System.out.println("Delete bucket done");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
@@ -65,8 +75,8 @@ public class VEngine implements Engine {
 		return true;
 	}
 
-	public ExecutionReport runS3Tests(TestConfiguration testconfig, Api api)
-			throws Exception {
+	public ExecutionReport runS3Tests(ExecutionPlan ep,
+			TestConfiguration testconfig, Api api) throws Exception {
 		vLogger.LogInfo("In vTestEngine runS3Tests");
 
 		// validate arguments
@@ -155,7 +165,8 @@ public class VEngine implements Engine {
 		 * } }
 		 */
 
-		if (!testconfig.getCreateOperation() || (deleteOps > createOps) || (updateOps > createOps) || (readOps > createOps)) {
+		if (!testconfig.getCreateOperation() || (deleteOps > createOps)
+				|| (updateOps > createOps) || (readOps > createOps)) {
 			long preteststarttime = System.nanoTime();
 			int mostOps = Math.max(Math.max(deleteOps, updateOps), readOps);
 			int pretestcreates = mostOps - createOps;
@@ -254,7 +265,8 @@ public class VEngine implements Engine {
 		}
 
 		// Post-test cleanup
-		if (!testconfig.getDeleteOperation() || (deleteOps < createOps) || (deleteOps < updateOps) || (deleteOps < readOps)) {
+		if (!testconfig.getDeleteOperation() || (deleteOps < createOps)
+				|| (deleteOps < updateOps) || (deleteOps < readOps)) {
 			long postteststarttime = System.nanoTime();
 			int maxOps = Math.max(Math.max(createOps, updateOps), readOps);
 			int posttestdeletes = maxOps - deleteOps;
@@ -280,23 +292,23 @@ public class VEngine implements Engine {
 					+ ((System.nanoTime() - postteststarttime) / 1000000)
 					+ " ms");
 		}
-		
+
 		// Create the summary report
 		ExecutionReport report = new ExecutionReport();
 		report.setExecutionName(LocalDateTime.now().toString());
-		report.setExecutionReportId(1);
-		//report.setExecutionPlan();
-		//ExecutionReportBiz.ExecutionReportCreate(report);
-
+		// report.setExecutionReportId(1);
+		report.setExecutionPlan(ep);
+		ExecutionReportBiz.ExecutionReportCreate(report);
 
 		// Save the ExecutionReportData objects in the database
 		for (ExecutionReportData e : list) {
 			e.setExecutionReport(report);
 			ExecutionReportDataBiz.ExecutionReportDataCreate(e);
-			System.out.println("Id of the data object saved: " + e.getExecutionReportDataId());
-			System.out.println("Id of the summary object saved: " + report.getExecutionReportId());	
+			System.out.println("Id of the data object saved: "
+					+ e.getExecutionReportDataId());
 		}
-
+		System.out.println("Id of the summary object saved: "
+				+ report.getExecutionReportId());
 		// Calculate summary numbers for the report
 		if (testconfig.getCreateOperation()) {
 			System.out
@@ -326,27 +338,32 @@ public class VEngine implements Engine {
 		// Populate the report object
 		// Total volume sent = (createops + updateops) * sizeofobject
 		if (testconfig.getCreateOperation() || testconfig.getUpdateOperation()) {
-			report.setTotalVolumeSent(Long.toString(
-					(createOps + updateOps) * (long)testconfig.getObjectSize())
+			report.setTotalVolumeSent(Long
+					.toString(
+							(createOps + updateOps)
+									* (long) testconfig.getObjectSize())
 					.toString());
 		} else
 			report.setTotalVolumeSent("0");
 
 		// Total volume received = (readops) * sizeofobject
 		if (testconfig.getReadOperation()) {
-		report.setTotalVolumeReceived(Long.toString(readOps
-				* (long)testconfig.getObjectSize()));
-		} else report.setTotalVolumeReceived("0");
-		
+			report.setTotalVolumeReceived(Long.toString(readOps
+					* (long) testconfig.getObjectSize()));
+		} else
+			report.setTotalVolumeReceived("0");
+
 		report.setAvgLatencyPerCrudOperation(Long.toString(((createTime
 				+ readTime + updateTime + deleteTime) / 1000000)
 				/ testconfig.getNumberOfOperations()));
 		report.setNumberRequestSec((int) (testconfig.getNumberOfOperations()
 				/ (createTime + readTime + updateTime + deleteTime) / 1000000000));
 
-		if (testconfig.getCreateOperation() || testconfig.getReadOperation() || testconfig.getUpdateOperation()) {
-			long maxValue = 0, minValue = Long
-					.parseLong(list.get(1).getDataValue());
+		if ((testconfig.getCreateOperation() && createOps != 0)
+				|| (testconfig.getReadOperation() && readOps != 0)
+				|| (testconfig.getUpdateOperation() && updateOps != 0)) {
+			long maxValue = 0, minValue = Long.parseLong(list.get(1)
+					.getDataValue());
 			for (ExecutionReportData erd : list) {
 				if (erd.getCrudValue().contains("Create")
 						|| erd.getCrudValue().contains("Update")
@@ -372,7 +389,7 @@ public class VEngine implements Engine {
 			report.setMaxThroughput("N/A");
 			report.setMinThroughput("N/A");
 		}
-		
+
 		ExecutionReportBiz.ExecutionReportUpdate(report);
 		return report;
 	}
@@ -434,7 +451,7 @@ public class VEngine implements Engine {
 						switch (p.getApiType().getApiTypeName()) {
 						case "S3": {
 
-							rpt = runS3Tests(test, p);
+							rpt = runS3Tests(plan, test, p);
 							System.out.println("Validated S3");
 
 							break;
