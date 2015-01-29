@@ -36,11 +36,11 @@ public class S3CreateWorker implements Callable<ExecutionReportData> {
 				api.getUrl(), null, api.getBucket(), FilenameUtils.getName(objectLocation),
 				new FileInputStream(objectLocation));
 		long endTime = System.nanoTime();
-		//System.out.println("CreateObject execution time: " + (endTime - startTime));
+		System.out.println("CreateObject execution time: " + (endTime - startTime));
 		reportData.setDataKey("S3");
 		reportData.setThreadValue(Thread.currentThread().getName());
 		reportData.setCrudValue("Create");
-		reportData.setDataValue(Long.toString(endTime-startTime));
+		reportData.setDataValue(Long.toString((endTime-startTime)/1000000));
 		return reportData;
 	}
 }
