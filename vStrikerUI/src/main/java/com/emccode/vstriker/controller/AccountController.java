@@ -1,6 +1,13 @@
 package com.emccode.vstriker.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,6 +42,8 @@ public class AccountController {
 	@FXML
 	private TableView<VwAccountDetail> accountDetail;
 	@FXML
+	private TableColumn<VwAccountDetail, Boolean> selectColumn;
+	@FXML
 	private TableColumn<VwAccountDetail, String> APIColumn;
 	@FXML
 	private TableColumn<VwAccountDetail, String> ProtocolColumn;
@@ -44,9 +53,16 @@ public class AccountController {
 	private TableColumn<VwAccountDetail, String> KeyColumn;
 	@FXML
 	private TableColumn<VwAccountDetail, String> EndPointColumn;
+	@FXML
+	private Button validateAPIBtn;
+	@FXML
+	private Button updateAPIBtn;
+	@FXML
+	private Button deleteAPIBtn;
 
 	private VStriker vStriker;
-	private VwAccountDetail validAcct;
+	private Account validAcct;
+	private List<BooleanProperty> selectedRowList;
 
 	// Constructor
 	public AccountController() {
@@ -57,24 +73,48 @@ public class AccountController {
 		this.vStriker = vStriker;
 	}
 
-	public void updateAccount(VStriker vStriker, VwAccountDetail validAcct) {
+	public void updateAccount(VStriker vStriker, Account validAcct) {
 		System.out.println("In AccountController - updateAccount");
 		this.validAcct = validAcct;
 		createAccount(vStriker);
 		accountName.setText(validAcct.getName());
 		accountLocation.setText(validAcct.getAccountLocation());
+		// If this account has not apis yet - exit immediately
+		if (validAcct.getApis() == null || validAcct.getApis().isEmpty()) {
+			System.out.println("Account has no apis");
+			accountDetail.getItems().clear();
+			return;
+		}
 		// Populate the table
 		ObservableList<VwAccountDetail> accountData, selectedAcct;
 		try {
 			accountData = FXCollections.observableArrayList(AccountDetailBiz
 					.AccountSelectAll());
 			selectedAcct = FXCollections.observableArrayList();
+			System.out.println("SelectAcct size" + selectedAcct.size());
 			for (VwAccountDetail a : accountData) {
-				if (a.getAccountId() == validAcct.getAccountId())
+				if (a.getAccountId() == validAcct.getAccountId()) {
+					System.out.println("In AccountController - updateAccount: "
+							+ a.getAccountId());
 					selectedAcct.add(a);
+				}
 			}
+			System.out.println("SelectAcct size" + selectedAcct.size());
 			accountDetail.setItems(selectedAcct);
 			// Populate columns in the details table
+			selectedRowList = setupCheckboxColumn(selectedAcct);
+			System.out.println("SelectedRowList " + selectedRowList.toString());
+			/*
+			selectColumn
+					.setCellFactory(CheckBoxTableCell
+							.forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
+								public ObservableValue<Boolean> call(Integer index) {
+									return new SimpleBooleanProperty();
+									//System.out.println("Index is: " + index);
+									//return selectedRowList.get(index);
+								}
+							}));
+							*/
 			APIColumn
 					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 							cellData.getValue().getApiTypeName()));
@@ -84,6 +124,17 @@ public class AccountController {
 			EndPointColumn
 					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 							cellData.getValue().getUrl()));
+			ProtocolColumn
+					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+							cellData.getValue().getUrl().contains("https") ? "https"
+									: "http"));
+			PortColumn
+					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+							cellData.getValue().getUrl().contains("https") ? cellData
+									.getValue().getHttpsAddressPort()
+									: cellData.getValue().getHttpAddressPort()));
+			//selectColumn.setEditable(true);
+			accountDetail.setEditable(true);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,6 +151,28 @@ public class AccountController {
 		// Set prompt text
 		accountName.setPromptText("Enter Account Name");
 		accountLocation.setPromptText("Enter Account Location");
+	}
+
+	@FXML
+	public void validateAPIClicked(ActionEvent event) {
+		System.out.println("Validate API button clicked");
+	}
+
+	@FXML
+	public void updateAPIClicked(ActionEvent event) {
+		System.out.println("Update API button clicked");
+		// Check if a valid account exists
+		if (accountName.getText() == null
+				|| accountName.getText().length() == 0
+				|| accountLocation.getText() == null
+				|| accountLocation.getText().length() == 0) {
+			System.out.println("Please set Account Name and Account Location");
+		}
+	}
+
+	@FXML
+	public void deleteAPIClicked(ActionEvent event) {
+		System.out.println("Delete API button clicked");
 	}
 
 	@FXML
@@ -165,7 +238,41 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("Not a valid Account");
+			//e.printStackTrace();
+		}
+	}
+
+	private List<BooleanProperty> setupCheckboxColumn(
+			ObservableList<VwAccountDetail> selectedAcct) {
+		// Associate a BooleanProperty to every cell in the first column.
+		ArrayList<BooleanProperty> selectedRowList = new ArrayList<BooleanProperty>();
+		try {
+			for (VwAccountDetail a : selectedAcct) {
+				selectedRowList.add(new SimpleBooleanProperty());
+				System.out.println("Adding BooleanProperty");
+			}
+			// Add a listener for each boolean property
+			for (BooleanProperty b : selectedRowList) {
+				b.addListener(new ChangeListener<Boolean>() {
+					public void changed(ObservableValue<? extends Boolean> obs,
+							Boolean wasSelected, Boolean isSelected) {
+						System.out.println("isSelected: " + isSelected);
+						// Change all other BooleanProperty to false
+						if (b.getValue()) {
+							// This means b just was selected so every other
+							// property should be unchecked
+							for (BooleanProperty bo : selectedRowList) {
+								if (b != bo)
+									bo.setValue(false);
+							}
+						}
+					}
+				});
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("Returning selectedRowList");
+		return selectedRowList;
 	}
 }
