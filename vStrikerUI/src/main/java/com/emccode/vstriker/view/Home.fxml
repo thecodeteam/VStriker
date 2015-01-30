@@ -9,7 +9,7 @@
 	<children>
 		<TabPane fx:id="tbMain" layoutX="125.0" layoutY="30.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<tabs>
-				<Tab fx:id="tbAccount" text="1. Accounts">
+				<Tab text="1. Accounts" fx:id="tbAccount">
 					<content>
 						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="288.0" prefWidth="622.0">
 							<children>
@@ -43,7 +43,7 @@
                           <columns>
                             <TableColumn fx:id="APIColumn" prefWidth="75.0" text="API" />
                             <TableColumn fx:id="ProtocolColumn" prefWidth="75.0" text="Protocol" />
-                              <TableColumn fx:id="PortColumn" prefWidth="75.0" text="Port" />
+                              <TableColumn fx:id="PortColumn" prefWidth="75.0" text="IP:Port" />
                               <TableColumn fx:id="KeyColumn" prefWidth="75.0" text="Key" />
                               <TableColumn fx:id="EndPointColumn" prefWidth="75.0" text="EndPoint" />
                           </columns>
@@ -57,14 +57,14 @@
 						</AnchorPane>
 					</content>
 				</Tab>
-				<Tab fx:id="tbCfg" text="2. Configuration">
+				<Tab text="2. Configuration" fx:id="tbCfg">
 					<content>
-						<fx:include fx:id="configurationView" source="Configuration.fxml" />
+						<fx:include source="Configuration.fxml" fx:id="configurationView"/>
 					</content>
 				</Tab>
-				<Tab fx:id="tbExecution" text="3. Execution">
+				<Tab text="3. Execution" fx:id="tbExecution">
 					<content>
-						<fx:include fx:id="resultsView" source="Results.fxml" />
+						<fx:include source="Results.fxml" fx:id="resultsView"/>
 					</content>
 				</Tab>
 			</tabs>

@@ -213,7 +213,7 @@ public class EditConfigurationController {
 			this.testcfg.setTestConfigDescription(this.txtTestDesc.getText());
 			ObjectSizeReportUnit obj =this.ddObjUnit.getValue();
 			this.testcfg.setObjectSizeReportUnit(obj);
-			this.testcfg.setNumberOfOperations(this.txtNumOps.getNum());
+			this.testcfg.setNumberOfOperations(this.txtNumOps.getNum()*100);
 			this.testcfg.setNumberOfThreads(this.txtNumTh.getNum());
 			this.testcfg.setNumberOfRetry(this.txtNumofRetires.getNum());
 			this.testcfg.setObjectSize(this.txtObjSize.getNum());

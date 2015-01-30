@@ -9,13 +9,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import vStrikerEntities.Account;
+import vStrikerEntities.VwAccountDetail;
 
 import com.emccode.vstriker.controller.AccountController;
 import com.emccode.vstriker.controller.AtmosController;
-import com.emccode.vstriker.controller.EditConfigurationController;
 import com.emccode.vstriker.controller.HomepageController;
+import com.emccode.vstriker.controller.ResultsChartController;
 import com.emccode.vstriker.controller.S3Controller;
 import com.emccode.vstriker.controller.SwiftController;
+import com.emccode.vstriker.controller.EditConfigurationController;
 /*
  * @author Sanjeev Chauhan
  */
@@ -155,6 +157,28 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
+	public void showCharts(java.util.List<vStrikerEntities.ExecutionReportData>  rptData, String selectedAccount,String selectedTest) {
+		System.out.println("In VStriker ShowEditConfiguaration");
+		try {
+			// Change page title
+			this.SetTitle("vStriker:Result Charts");
+			// Load home layout
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VStriker.class.getResource("view/ResultsChart.fxml"));
+			AnchorPane layout = (AnchorPane) loader.load();
+
+			// Show the home layout in the center of the application
+			vStrikerLayout.setCenter(layout);
+
+			// Give controller access to main app
+			ResultsChartController controller = loader.getController();
+			controller.setVStrikerApp(this,rptData,selectedAccount,selectedTest);
+		} catch (IOException e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
+	}
+	
 	public void showEditConfiguration(vStrikerEntities.ConfigurationTemplate tempcfg, vStrikerEntities.TestConfiguration testcfg, long l) {
 		System.out.println("In VStriker ShowEditConfiguaration");
 		try {
@@ -178,7 +202,7 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
-	public void updateAccount(Account validAcct) {
+	public void updateAccount(VwAccountDetail validAcct) {
 		System.out.println("In VStriker updateAccount");
 		try {
 			// Change page title

@@ -1,4 +1,5 @@
 package vStrikerBizModel;
+import java.util.ArrayList;
 import java.util.List;
 
 import vStrikerEntities.*;
@@ -50,7 +51,9 @@ public class ExecutionReportDataBiz {
 	{
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
-		Query qry = entitymanager.createQuery("SELECT e FROM ExecutionReportData e Where e.executionReportId="+rptd);
+		Query qry = entitymanager.createQuery("SELECT e FROM ExecutionReportData e Where executionReportId=:id");
+		qry.setParameter("id", rptd);
+		
 		@SuppressWarnings("unchecked")
 		List<ExecutionReportData> list = qry.getResultList();
 		
@@ -72,4 +75,38 @@ public class ExecutionReportDataBiz {
 		actfactory.close( );
 		
 	}
+	
+	public static List<String> ExecutionReportDataGetApiList(List<ExecutionReportData> data)
+	{
+		List<String> list = new ArrayList<String>();
+		String str="";
+		
+		for(ExecutionReportData a:data)
+		{
+			if(!a.getDataKey().equalsIgnoreCase(str))
+			{
+				str=a.getDataKey();
+				list.add(str);
+			}
+		}
+		
+		return list;
+	}
+	
+	public static List<String> ExecutionReportDataGetApiCrudList(List<ExecutionReportData> data, String api,String crud)
+	{
+		List<String> list = new ArrayList<String>();
+		
+		for(ExecutionReportData a:data)
+		{
+			if(a.getDataKey().equalsIgnoreCase(api)&&a.getCrudValue().equalsIgnoreCase(crud))
+			{
+				
+				list.add(a.getDataValue());
+			}
+		}
+		
+		return list;
+	}
+	
 }

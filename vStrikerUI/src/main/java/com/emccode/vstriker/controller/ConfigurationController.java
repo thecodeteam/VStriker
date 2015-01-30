@@ -147,7 +147,7 @@ public class ConfigurationController {
 		System.out.println(paneCfg.getParent().getParent().getId());
 		TabPane main = (TabPane)paneCfg.getParent().getParent();
 		SingleSelectionModel<Tab> tb = main.getSelectionModel();
-		tb.select(0);
+		tb.select(2);
 	}
 	@FXML
 	public void OnRandomClicked(ActionEvent event) {
@@ -184,13 +184,17 @@ public class ConfigurationController {
 		   this.cbSwiftHttp.setSelected(false);
 		   this.cbSwiftHttps.setSelected(false);
 		   this.btnUpdate.setVisible(false);
+		   
 		
 	}
 	public void LoadTestsList()
 	{
-
+		
 		this.ddTestList.getItems().clear();
+		this.ddTestList.setValue(null);
+		
 		testlist.clear();
+		
 		
 			try {
 				List<ConfigurationTemplate> template=vStrikerBizModel.ConfigurationTemplateBiz.ConfigurationTemplateSelectAll();

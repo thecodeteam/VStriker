@@ -8,10 +8,6 @@ import vStrikerTestEngine.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,9 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 import vStrikerEntities.*;
-import javafx.concurrent.Task;
-import javafx.event.EventHandler;
-
 import com.emccode.vstriker.VStriker;
 import com.emccode.vstriker.model.TestInfo;
 
@@ -55,7 +48,6 @@ public class ResultsController {
 	@FXML private TableColumn<vStrikerEntities.ExecutionReportData, String> crudCol;
 	@FXML private TableColumn<vStrikerEntities.ExecutionReportData, String> valueCol;
 	
-	private Task runWorker;
 	private final ObservableList<TestInfo> testlist = FXCollections.observableArrayList();
 	private final ObservableList<vStrikerEntities.Account> accountlist = FXCollections.observableArrayList();
 	
@@ -64,7 +56,9 @@ public class ResultsController {
 	private Timeline timeRunEngine;
 	private ExecutionPlan exePlan = new ExecutionPlan();
 	private ExecutionReport exeReport = new ExecutionReport();
-	
+	private  List<ExecutionReportData> data;
+	private String  selectedTest="";
+	private String selectedAccount="";
 	
 	double count=0;
 
@@ -73,8 +67,8 @@ public class ResultsController {
 	}
 	
 	// Set the main application
-	public void setVStrikerApp(VStriker vStrikert) {
-		//this.vStriker = vStriker;
+	public void setVStrikerApp(VStriker vStriker) {
+		this.vStriker = vStriker;
 
 	}
 
@@ -82,13 +76,13 @@ public class ResultsController {
 	@FXML
 	private void initialize() {
 		System.out.println("In Result initialize");
-		
+
 	}
 
 		@FXML
 	public void btnChartClicked(ActionEvent event) {
 		System.out.println("Back to Accounts button clicked");
-		//vStriker.showHome();
+		vStriker.showCharts(data,selectedAccount,selectedTest);
 	}
 		@FXML
 	public void btnExportClicked(ActionEvent event) {
@@ -97,6 +91,10 @@ public class ResultsController {
 		try {
 			String filename="Execuation_report_"+exeReport.getExecutionReportId()+".csv";
 			vStrikerTestUtilities.Utilites.exportResultToFile(filename, exeReport.getExecutionReportId());
+			
+			JOptionPane.showConfirmDialog(null, "Export is finished successfully!",  "VStriker",
+				    JOptionPane.CLOSED_OPTION,JOptionPane.INFORMATION_MESSAGE);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,17 +116,20 @@ public class ResultsController {
 	{
 			try
 			{
+			if((ddTestList.getValue()!=null)&(ddAccounts.getValue()!=null))
+					{
 				        hboxProgress.setVisible(true);
 		                btnRun.setDisable(true);
 		                progressbarTest.setProgress(0);
 		                lblfinished.setText("");
-// Progress Bar
+// Progress Bar		
+		                count=0;
 		                progressbarTest.setProgress(0);
 
 		                timeRunEngine =  new Timeline(new KeyFrame(
 		                        Duration.millis(1000),
 		                        ae -> RunEngine()));
-		                timeRunEngine.setCycleCount(Animation.INDEFINITE);
+		    
 		                timeRunEngine.play();
 		                
 		                timeline = new Timeline(new KeyFrame(
@@ -136,6 +137,13 @@ public class ResultsController {
 		                        ae -> CheckProgress()));
 		                timeline.setCycleCount(Animation.INDEFINITE);
 		                timeline.play();
+					}
+			else
+			{
+				
+				JOptionPane.showConfirmDialog(null, "Both Account and Test are required!",  "VStriker",
+    				    JOptionPane.CLOSED_OPTION,JOptionPane.INFORMATION_MESSAGE);
+			}
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -149,7 +157,9 @@ public class ResultsController {
 			if(lblfinished.getText().equals("Completed!"))
 			{
 				progressbarTest.setProgress(1);
+				this.btnRun.setVisible(true);
 				timeline.stop();
+				timeRunEngine.stop();
 				JOptionPane.showConfirmDialog(null, "Test executed successfully!",  "VStriker",
     				    JOptionPane.CLOSED_OPTION,JOptionPane.INFORMATION_MESSAGE);
 				 DisplayResult();
@@ -161,6 +171,7 @@ public class ResultsController {
 				{
 					count++;
 					progressbarTest.setProgress(count/200);
+					
 				}
 				else count=150;
 			}
@@ -177,6 +188,8 @@ public class ResultsController {
 				exePlan.setAccount(ddAccounts.getValue());
 				
 				TestInfo t = ddTestList.getValue(); 
+				this.selectedTest=t.getName();
+				this.selectedAccount=ddAccounts.getValue().getName();
 				if(t.getIsTemplate())
 				{
 					ConfigurationTemplate cfg = vStrikerBizModel.ConfigurationTemplateBiz.ConfigurationTemplateSelect(t.geTestID());
@@ -192,11 +205,13 @@ public class ResultsController {
 				
 			// run Engine
 				
-				//Engine excEngine = new VEngine();
-				//exeReport = excEngine.runTests(exePlan);
-				Thread.sleep(5000);
-				exeReport =vStrikerBizModel.ExecutionReportBiz.ExecutionReportSelect(1);
+				Engine excEngine = new VEngine();
+				exeReport = excEngine.runTests(exePlan);
+				//Thread.sleep(5000);
+			
+				
 				lblfinished.setText("Completed!");
+				btnRun.setDisable(false);
 					
 			}catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -210,8 +225,14 @@ public class ResultsController {
 		{
 		 try
 		 {
+			 timeline.stop();
+			 
 			 this.panExecuateResult.setVisible(true);
-			 List<ExecutionReportData> data = exeReport.getExecutionReportData();
+			
+			 exeReport=vStrikerBizModel.ExecutionReportBiz.ExecutionReportSelect(exeReport.getExecutionReportId());
+			 
+			 data = exeReport.getExecutionReportData();
+			
 			apiCol.setCellValueFactory(new PropertyValueFactory<ExecutionReportData, String>("dataKey"));
 			valueCol.setCellValueFactory(new PropertyValueFactory<ExecutionReportData, String>("dataValue"));
 			crudCol.setCellValueFactory(new PropertyValueFactory<ExecutionReportData, String>("crudValue"));
@@ -229,12 +250,13 @@ public class ResultsController {
 		 
 		public void LoadLists() {
 			System.out.println("Load List initialize");
+			
 			hboxProgress.setVisible(false);
 			panExecuateResult.setVisible(false);
 			
 			this.LoadAccountsList();
 			this.LoadTestsList();
-			
+			this.btnRun.setVisible(true);
 		}
 		
 		private void LoadAccountsList() {

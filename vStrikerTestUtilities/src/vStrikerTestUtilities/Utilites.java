@@ -106,8 +106,8 @@ public class Utilites {
 
 		ExecutionReport rpt = ExecutionReportBiz
 				.ExecutionReportSelect(l);
-		List<ExecutionReportData> list = ExecutionReportDataBiz
-				.ExecutionReportDataSelectByRprtID(l);
+		List<ExecutionReportData> list = rpt.getExecutionReportData();
+		
 
 		String sFileName = dir + "\\" + rpt.getExecutionName() + ".csv";
 		FileWriter writer = new FileWriter(sFileName);
@@ -159,7 +159,12 @@ public class Utilites {
 		for (vStrikerEntities.ExecutionReportData d : list) {
 			writer.append(d.getDataKey());
 			writer.append(',');
-			writer.append(d.getDataKey());
+			writer.append(d.getCrudValue());
+			writer.append(',');
+			writer.append(d.getThreadValue());
+			writer.append(',');
+
+			writer.append(d.getDataValue());
 			writer.append('\n');
 
 		}

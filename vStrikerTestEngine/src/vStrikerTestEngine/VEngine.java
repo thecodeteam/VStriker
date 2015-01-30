@@ -363,7 +363,9 @@ public class VEngine implements Engine {
 				/ testconfig.getNumberOfOperations()));
 		report.setNumberRequestSec((int) (testconfig.getNumberOfOperations()
 				/ (createTime + readTime + updateTime + deleteTime) / 1000000000));
-
+if(list.size()>0)
+{
+	
 		if ((testconfig.getCreateOperation() && createOps != 0)
 				|| (testconfig.getReadOperation() && readOps != 0)
 				|| (testconfig.getUpdateOperation() && updateOps != 0)) {
@@ -391,10 +393,10 @@ public class VEngine implements Engine {
 			System.out.println(((long) testconfig.getObjectSize() * 1000)
 					/ maxValue + " min bytes per second");
 		} else {
-			report.setMaxThroughput("N/A");
-			report.setMinThroughput("N/A");
+			report.setMaxThroughput("0");
+			report.setMinThroughput("0");
 		}
-
+}
 		ExecutionReportBiz.ExecutionReportUpdate(report);
 		return report;
 	}
