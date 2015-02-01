@@ -52,7 +52,7 @@ public class ApiBiz {
 		EntityManagerFactory actfactory = Persistence.createEntityManagerFactory( "vStrikerEntities" );
 		EntityManager entitymanager = actfactory.createEntityManager( );
 		entitymanager.getTransaction( ).begin( );
-		Api act = entitymanager.find(Api.class,entityId);
+		Api act = entitymanager.find(Api.class, (int)entityId);
 		entitymanager.remove(act);
 		entitymanager.getTransaction( ).commit( );
 		

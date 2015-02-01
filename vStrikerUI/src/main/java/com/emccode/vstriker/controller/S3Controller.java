@@ -137,12 +137,14 @@ public class S3Controller {
 				}
 			}
 			if (s3port.getText() == null || s3port.getText().length() == 0) {
+				s3port.setText("80");
 				s3api.setHttpAddressPort("80");
 			} else {
 				s3api.setHttpAddressPort(s3port.getText());
 			}
 			if (!s3url.getText().toLowerCase().startsWith("http://") || !s3url.getText().toLowerCase().startsWith("https://")) {
-				s3url.setText("http://" + s3url.getText());			
+				s3url.setText("http://" + s3url.getText());	
+				s3api.setUrl(s3url.getText());
 				}
 			break;
 		case "https":
@@ -154,12 +156,14 @@ public class S3Controller {
 				}
 			}
 			if (s3port.getText() == null || s3port.getText().length() == 0) {
+				s3port.setText("443");
 				s3api.setHttpAddressPort("443");
 			} else {
 				s3api.setHttpAddressPort(s3port.getText());
 			}
 			if (!s3url.getText().toLowerCase().startsWith("http://") || !s3url.getText().toLowerCase().startsWith("https://")) {
-				s3url.setText("https://" + s3url.getText());			
+				s3url.setText("https://" + s3url.getText());	
+				s3api.setUrl(s3url.getText());
 				}
 			break;
 		default:

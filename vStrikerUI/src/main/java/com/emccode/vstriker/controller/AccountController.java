@@ -17,8 +17,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.CheckBoxTableCell;
-import javafx.util.Callback;
 import vStrikerBizModel.AccountBiz;
 import vStrikerBizModel.AccountDetailBiz;
 import vStrikerEntities.Account;
@@ -55,16 +53,16 @@ public class AccountController {
 	private TableColumn<VwAccountDetail, String> KeyColumn;
 	@FXML
 	private TableColumn<VwAccountDetail, String> EndPointColumn;
-    @FXML
-    private Button validateAPIBtn;
-    @FXML
-    private Button updateAPIBtn;
-    @FXML
-    private Button deleteAPIBtn;
+	@FXML
+	private Button validateAPIBtn;
+	@FXML
+	private Button updateAPIBtn;
+	@FXML
+	private Button deleteAPIBtn;
 
 	private VStriker vStriker;
 	private Account validAcct;
-	private int selectedRow;
+	private List<BooleanProperty> selectedRowList;
 
 	// Constructor
 	public AccountController() {
@@ -93,21 +91,30 @@ public class AccountController {
 			accountData = FXCollections.observableArrayList(AccountDetailBiz
 					.AccountSelectAll());
 			selectedAcct = FXCollections.observableArrayList();
+			System.out.println("SelectAcct size" + selectedAcct.size());
 			for (VwAccountDetail a : accountData) {
-				if (a.getAccountId() == validAcct.getAccountId())
+				if (a.getAccountId() == validAcct.getAccountId()) {
+					System.out.println("In AccountController - updateAccount: "
+							+ a.getAccountId());
 					selectedAcct.add(a);
+				}
 			}
+			System.out.println("SelectAcct size" + selectedAcct.size());
 			accountDetail.setItems(selectedAcct);
 			// Populate columns in the details table
-			List<BooleanProperty> selectedRowList = setupCheckboxColumn(selectedAcct);
+			selectedRowList = setupCheckboxColumn(selectedAcct);
+			System.out.println("SelectedRowList " + selectedRowList.toString());
+			/*
 			selectColumn
 					.setCellFactory(CheckBoxTableCell
 							.forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
 								public ObservableValue<Boolean> call(Integer index) {
-									System.out.println("Index is: " + index);
-									return selectedRowList.get(index);
+									return new SimpleBooleanProperty();
+									//System.out.println("Index is: " + index);
+									//return selectedRowList.get(index);
 								}
 							}));
+							*/
 			APIColumn
 					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 							cellData.getValue().getApiTypeName()));
@@ -117,11 +124,16 @@ public class AccountController {
 			EndPointColumn
 					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 							cellData.getValue().getUrl()));
-			ProtocolColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-					cellData.getValue().getUrl().contains("https")? "https": "http"));
-			PortColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-					cellData.getValue().getUrl().contains("https")? cellData.getValue().getHttpsAddressPort() : cellData.getValue().getHttpAddressPort()));
-			selectColumn.setEditable(true);
+			ProtocolColumn
+					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+							cellData.getValue().getUrl().contains("https") ? "https"
+									: "http"));
+			PortColumn
+					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+							cellData.getValue().getUrl().contains("https") ? cellData
+									.getValue().getHttpsAddressPort()
+									: cellData.getValue().getHttpAddressPort()));
+			//selectColumn.setEditable(true);
 			accountDetail.setEditable(true);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -140,28 +152,28 @@ public class AccountController {
 		accountName.setPromptText("Enter Account Name");
 		accountLocation.setPromptText("Enter Account Location");
 	}
-	
-    @FXML
-    public void validateAPIClicked(ActionEvent event) {
-        System.out.println("Validate API button clicked");
-    }
 
-    @FXML
-    public void updateAPIClicked(ActionEvent event) {
-        System.out.println("Update API button clicked");
-        // Check if a valid account exists
-        if (accountName.getText() == null
-                || accountName.getText().length() == 0
-                || accountLocation.getText() == null
-                || accountLocation.getText().length() == 0) {
-            System.out.println("Please set Account Name and Account Location");
-        }
-    }
+	@FXML
+	public void validateAPIClicked(ActionEvent event) {
+		System.out.println("Validate API button clicked");
+	}
 
-    @FXML
-    public void deleteAPIClicked(ActionEvent event) {
-        System.out.println("Delete API button clicked");
-    }
+	@FXML
+	public void updateAPIClicked(ActionEvent event) {
+		System.out.println("Update API button clicked");
+		// Check if a valid account exists
+		if (accountName.getText() == null
+				|| accountName.getText().length() == 0
+				|| accountLocation.getText() == null
+				|| accountLocation.getText().length() == 0) {
+			System.out.println("Please set Account Name and Account Location");
+		}
+	}
+
+	@FXML
+	public void deleteAPIClicked(ActionEvent event) {
+		System.out.println("Delete API button clicked");
+	}
 
 	@FXML
 	public void backtoAccountClicked(ActionEvent event) {
@@ -226,16 +238,18 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("Not a valid Account");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
-	
-	private List<BooleanProperty> setupCheckboxColumn(ObservableList<VwAccountDetail> selectedAcct) {
+
+	private List<BooleanProperty> setupCheckboxColumn(
+			ObservableList<VwAccountDetail> selectedAcct) {
 		// Associate a BooleanProperty to every cell in the first column.
-		ArrayList<BooleanProperty>selectedRowList = new ArrayList<BooleanProperty>();
+		ArrayList<BooleanProperty> selectedRowList = new ArrayList<BooleanProperty>();
 		try {
 			for (VwAccountDetail a : selectedAcct) {
 				selectedRowList.add(new SimpleBooleanProperty());
+				System.out.println("Adding BooleanProperty");
 			}
 			// Add a listener for each boolean property
 			for (BooleanProperty b : selectedRowList) {
@@ -258,6 +272,7 @@ public class AccountController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("Returning selectedRowList");
 		return selectedRowList;
 	}
 }
