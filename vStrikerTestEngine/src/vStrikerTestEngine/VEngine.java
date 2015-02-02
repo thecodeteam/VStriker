@@ -449,7 +449,9 @@ if(list.size()>0)
 				test.setDeletePercent(cfgtemp.getConfTempDeletePercent());
 
 			} else
+
 				select = test.getApiSelecteds();
+			System.out.println("RunTests: Api selected are " + select.size());
 
 			for (Api p : apilist) {
 				for (ApiSelected s : select) {

@@ -142,7 +142,8 @@ public class S3Controller {
 			} else {
 				s3api.setHttpAddressPort(s3port.getText());
 			}
-			if (!s3url.getText().toLowerCase().startsWith("http://") || !s3url.getText().toLowerCase().startsWith("https://")) {
+			if (!s3url.getText().toLowerCase().matches("^\\w+://.*")) {
+				//if (!s3url.getText().toLowerCase().startsWith("http://") || !s3url.getText().toLowerCase().startsWith("https://")) {
 				s3url.setText("http://" + s3url.getText());	
 				s3api.setUrl(s3url.getText());
 				}
@@ -161,7 +162,8 @@ public class S3Controller {
 			} else {
 				s3api.setHttpAddressPort(s3port.getText());
 			}
-			if (!s3url.getText().toLowerCase().startsWith("http://") || !s3url.getText().toLowerCase().startsWith("https://")) {
+			if (!s3url.getText().toLowerCase().matches("^\\w+://.*")) {
+				//if (!s3url.getText().toLowerCase().startsWith("http://") || !s3url.getText().toLowerCase().startsWith("https://")) {
 				s3url.setText("https://" + s3url.getText());	
 				s3api.setUrl(s3url.getText());
 				}
