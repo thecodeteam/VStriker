@@ -1,4 +1,5 @@
 # Directories #
+/release/
 /build/
 /bin/
 target/
