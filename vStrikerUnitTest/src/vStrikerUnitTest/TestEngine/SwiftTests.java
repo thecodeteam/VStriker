@@ -39,8 +39,8 @@ public class SwiftTests {
 		//TestSwiftcxud();
 		//TestSwiftcrxx();
 		//TestSwiftcrxd();
-		TestSwiftcrux();
-		TestSwiftcrud();
+		//TestSwiftcrux();
+		//TestSwiftcrud();
 	}
 
 	public void TestFileGeneration() {
@@ -592,5 +592,3 @@ public class SwiftTests {
 	}
 }
 
-
-}
