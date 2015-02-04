@@ -23,6 +23,10 @@ import vStrikerEntities.ExecutionPlan;
 import vStrikerEntities.ExecutionReport;
 import vStrikerEntities.ExecutionReportData;
 import vStrikerEntities.TestConfiguration;
+import vStrikerTestEngine.s3.S3CreateWorker;
+import vStrikerTestEngine.s3.S3DeleteWorker;
+import vStrikerTestEngine.s3.S3ReadWorker;
+import vStrikerTestEngine.s3.S3UpdateWorker;
 import vStrikerTestUtilities.Utilites;
 import vStrikerTestUtilities.vLogger;
 
@@ -479,12 +483,10 @@ if(list.size()>0)
 					}
 				}
 			}
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return rpt;
 	}
 }
