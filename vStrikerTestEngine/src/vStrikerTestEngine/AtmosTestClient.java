@@ -1,93 +1,43 @@
 package vStrikerTestEngine;
 
-import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.io.FilenameUtils;
-
 import vStrikerBizModel.ExecutionReportBiz;
 import vStrikerBizModel.ExecutionReportDataBiz;
-import vStrikerEntities.Account;
 import vStrikerEntities.Api;
-import vStrikerEntities.ApiSelected;
-import vStrikerEntities.ConfigurationTemplate;
 import vStrikerEntities.ExecutionPlan;
 import vStrikerEntities.ExecutionReport;
 import vStrikerEntities.ExecutionReportData;
 import vStrikerEntities.TestConfiguration;
-import vStrikerTestEngine.s3.S3CreateWorker;
+import vStrikerTestEngine.atmos.AtmosCreateWorker;
+import vStrikerTestEngine.atmos.AtmosDeleteWorker;
+import vStrikerTestEngine.atmos.AtmosReadWorker;
+import vStrikerTestEngine.atmos.AtmosUpdateWorker;
 import vStrikerTestEngine.s3.S3DeleteWorker;
-import vStrikerTestEngine.s3.S3ReadWorker;
-import vStrikerTestEngine.s3.S3UpdateWorker;
 import vStrikerTestUtilities.Utilites;
 import vStrikerTestUtilities.vLogger;
 
-import com.emc.vipr.s3.s3api;
-
 //@author Sanjeev Chauhan
 
-public class VEngine implements Engine {
-
-	public boolean validateS3Connection(String user, String key, String url,
+public class AtmosTestClient {
+	
+	public boolean validateConnnection(String user, String key, String url,
 			String namespace) {
-		vLogger.LogInfo("In vTestEngine validateS3Connection");
-		if (user == null || key == null || url == null) {
-			System.out.println("Please ensure user, key and url are valid");
-			return false;
-		}
-		System.out.println("user, key and url are:" + user + " " + key + " "
-				+ url);
-		if (namespace == null || namespace.length() == 0) {
-			namespace = null;
-		}
-		vLogger.LogInfo("In vTestEngine validateS3Connection");
-		String TEST_BUCKET = "vstest"
-				+ (UUID.randomUUID().toString()).substring(0, 10);
-		System.out.println("Test Bucket name is: " + TEST_BUCKET);
-		try {
-			s3api.getS3Client(user, key, url, namespace);
-			System.out.println("Get Client worked");
-			s3api.CreateBucket(user, key, url, namespace, TEST_BUCKET);
-			System.out.println("Create bucket done");
-			List<String> listofObjects = Utilites.generateFiles(
-					"validationTest", 1000, 1);
-			System.out.println(listofObjects.get(0));
-			s3api.CreateObject(user, key, url, namespace, TEST_BUCKET,
-					FilenameUtils.getName(listofObjects.get(0)),
-					new FileInputStream(listofObjects.get(0)));
-			System.out.println("Create object done");
-			s3api.DeleteObject(user, key, url, namespace, TEST_BUCKET,
-					FilenameUtils.getName(listofObjects.get(0)));
-			System.out.println("Delete object done");
-			s3api.DeleteBuckets(user, key, url, namespace, TEST_BUCKET);
-			System.out.println("Delete bucket done");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
-			System.out.println("Validation failed: " + e.toString());
-			return false;
-		}
-		System.out.println("Validation successfully");
+		System.out.println("In AtmosTestClient validateConnnection");
 		return true;
 	}
-	
-	public ExecutionReport runSwiftTests(ExecutionPlan ep,
-			TestConfiguration testconfig, Api api) throws Exception {
-		vLogger.LogInfo("In vTestEngine runS3Tests");
-		return (new SwiftTestClient()).runTests(ep, testconfig, api);
-	}
 
-	public ExecutionReport runS3Tests(ExecutionPlan ep,
+	public ExecutionReport runTests(ExecutionPlan ep,
 			TestConfiguration testconfig, Api api) throws Exception {
-		vLogger.LogInfo("In vTestEngine runS3Tests");
+		vLogger.LogInfo("In AtmosTestClient runTests");
+
 		// validate arguments
 		if (testconfig.getCreateOperation() == false
 				&& testconfig.getReadOperation() == false
@@ -133,47 +83,38 @@ public class VEngine implements Engine {
 				testconfig.getNumberOfOperations());
 		// Create create workers
 		List<Callable<ExecutionReportData>> createworkersList = new ArrayList<Callable<ExecutionReportData>>();
-		// Create list of S3CreateWorkers
+		// Create list of AtmosCreateWorkers
 		for (int i = 0; i < createOps; i++) {
-			Callable<ExecutionReportData> s3createworker = new S3CreateWorker(
+			Callable<ExecutionReportData> atmoscreateworker = new AtmosCreateWorker(
 					listofObjects.get(i), api);
-			createworkersList.add(s3createworker);
+			createworkersList.add(atmoscreateworker);
 		}
 		// Create read workers
 		List<Callable<ExecutionReportData>> readworkersList = new ArrayList<Callable<ExecutionReportData>>();
-		// Create list of S3ReadWorkers
+		// Create list of AtmosReadWorkers
 		for (int i = 0; i < readOps; i++) {
-			Callable<ExecutionReportData> s3readworker = new S3ReadWorker(
+			Callable<ExecutionReportData> atmosreadworker = new AtmosReadWorker(
 					listofObjects.get(i), api);
-			readworkersList.add(s3readworker);
+			readworkersList.add(atmosreadworker);
 		}
 		// Create update workers
 		List<Callable<ExecutionReportData>> updateworkersList = new ArrayList<Callable<ExecutionReportData>>();
-		// Create list of S3UpdateWorkers
+		// Create list of AtmosUpdateWorkers
 		for (int i = 0; i < updateOps; i++) {
-			Callable<ExecutionReportData> s3updateworker = new S3UpdateWorker(
+			Callable<ExecutionReportData> atmosupdateworker = new AtmosUpdateWorker(
 					listofObjects.get(i), api);
-			updateworkersList.add(s3updateworker);
+			updateworkersList.add(atmosupdateworker);
 		}
 		// Create delete workers
 		List<Callable<ExecutionReportData>> deleteworkersList = new ArrayList<Callable<ExecutionReportData>>();
-		// Create list of S3DeleteWorkers
+		// Create list of AtmosDeleteWorkers
 		for (int i = 0; i < deleteOps; i++) {
-			Callable<ExecutionReportData> s3deleteworker = new S3DeleteWorker(
+			Callable<ExecutionReportData> atmosdeleteworker = new AtmosDeleteWorker(
 					listofObjects.get(i), api);
-			deleteworkersList.add(s3deleteworker);
+			deleteworkersList.add(atmosdeleteworker);
 		}
 
 		// Pre-test
-		/*
-		 * if (!testconfig.getCreateOperation() || (deleteOps > createOps)) {
-		 * for (String s : listofObjects) {
-		 * s3api.CreateObject(api.getSubtenant(), api.getSecretKey(),
-		 * api.getUrl(), null, api.getBucket(), FilenameUtils.getName(s), new
-		 * FileInputStream(s)); System.out.println("Pre-test - Created: " + s);
-		 * } }
-		 */
-
 		if (!testconfig.getCreateOperation() || (deleteOps > createOps)
 				|| (updateOps > createOps) || (readOps > createOps)) {
 			long preteststarttime = System.nanoTime();
@@ -183,9 +124,9 @@ public class VEngine implements Engine {
 			List<Callable<ExecutionReportData>> pretestList = new ArrayList<Callable<ExecutionReportData>>();
 
 			for (int i = createOps; i < mostOps; i++) {
-				Callable<ExecutionReportData> s3createworker = new S3CreateWorker(
+				Callable<ExecutionReportData> atmoscreateworker = new AtmosCreateWorker(
 						listofObjects.get(i), api);
-				pretestList.add(s3createworker);
+				pretestList.add(atmoscreateworker);
 			}
 			testprepexecutor.invokeAll(pretestList);
 			testprepexecutor.shutdown();
@@ -219,7 +160,8 @@ public class VEngine implements Engine {
 				list.add(f.get());
 			} catch (Exception e) {
 				ExecutionReportData erd = new ExecutionReportData();
-				erd.setDataKey("create");
+				erd.setDataKey("Atmos");
+				erd.setCrudValue("Create");
 				erd.setDataValue(e.toString());
 				failurelist.add(erd);
 			}
@@ -233,7 +175,8 @@ public class VEngine implements Engine {
 				list.add(f.get());
 			} catch (Exception e) {
 				ExecutionReportData erd = new ExecutionReportData();
-				erd.setDataKey("read");
+				erd.setDataKey("Atmos");
+				erd.setCrudValue("Read");
 				erd.setDataValue(e.toString());
 				failurelist.add(erd);
 			}
@@ -247,7 +190,8 @@ public class VEngine implements Engine {
 				list.add(f.get());
 			} catch (Exception e) {
 				ExecutionReportData erd = new ExecutionReportData();
-				erd.setDataKey("update");
+				erd.setDataKey("Atmos");
+				erd.setCrudValue("Update");
 				erd.setDataValue(e.toString());
 				failurelist.add(erd);
 			}
@@ -261,7 +205,8 @@ public class VEngine implements Engine {
 				list.add(f.get());
 			} catch (Exception e) {
 				ExecutionReportData erd = new ExecutionReportData();
-				erd.setDataKey("delete");
+				erd.setDataKey("Atmos");
+				erd.setCrudValue("Delete");
 				erd.setDataValue(e.toString());
 				failurelist.add(erd);
 			}
@@ -274,7 +219,7 @@ public class VEngine implements Engine {
 			System.out.println("Tests did not finish in time: " + e.toString());
 		}
 		totaltime = System.nanoTime() - totaltime;
-		System.out.println("totaltime end : " + totaltime/1000000 + "ms");
+		System.out.println("totaltime end : " + totaltime / 1000000 + "ms");
 
 		// Post-test cleanup
 		if (!testconfig.getDeleteOperation() || (deleteOps < createOps)
@@ -346,8 +291,8 @@ public class VEngine implements Engine {
 							+ "ms with " + testconfig.getNumberOfThreads()
 							+ " threads");
 		}
-		
-		System.out.println("Total test time: " + totaltime/1000000 + "ms");
+
+		System.out.println("Total test time: " + totaltime / 1000000 + "ms");
 
 		// Populate the report object
 		// Total volume sent = (createops + updateops) * sizeofobject
@@ -372,126 +317,41 @@ public class VEngine implements Engine {
 				/ testconfig.getNumberOfOperations()));
 		report.setNumberRequestSec((int) (testconfig.getNumberOfOperations()
 				/ (createTime + readTime + updateTime + deleteTime) / 1000000000));
-if(list.size()>0)
-{
-	
-		if ((testconfig.getCreateOperation() && createOps != 0)
-				|| (testconfig.getReadOperation() && readOps != 0)
-				|| (testconfig.getUpdateOperation() && updateOps != 0)) {
-			long maxValue = 0, minValue = Long.parseLong(list.get(1)
-					.getDataValue());
-			for (ExecutionReportData erd : list) {
-				if (erd.getCrudValue().contains("Create")
-						|| erd.getCrudValue().contains("Update")
-						|| erd.getCrudValue().contains("Read")) {
-					maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
-							.parseLong(erd.getDataValue()) : maxValue;
-					minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
-							.parseLong(erd.getDataValue()) : minValue;
+		if (list.size() > 0) {
+
+			if ((testconfig.getCreateOperation() && createOps != 0)
+					|| (testconfig.getReadOperation() && readOps != 0)
+					|| (testconfig.getUpdateOperation() && updateOps != 0)) {
+				long maxValue = 0, minValue = Long.parseLong(list.get(1)
+						.getDataValue());
+				for (ExecutionReportData erd : list) {
+					if (erd.getCrudValue().contains("Create")
+							|| erd.getCrudValue().contains("Update")
+							|| erd.getCrudValue().contains("Read")) {
+						maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
+								.parseLong(erd.getDataValue()) : maxValue;
+						minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
+								.parseLong(erd.getDataValue()) : minValue;
+					}
 				}
+				System.out.println(maxValue + " ms - max value");
+				System.out.println(minValue + " ms - min value");
+				System.out.println(testconfig.getObjectSize() + " object size");
+				report.setMaxThroughput(((long) testconfig.getObjectSize() * 1000)
+						/ minValue + " bytes per second");
+				report.setMinThroughput(((long) testconfig.getObjectSize() * 1000)
+						/ maxValue + " bytes per second");
+				System.out.println(((long) testconfig.getObjectSize() * 1000)
+						/ minValue + " max bytes per second");
+				System.out.println(((long) testconfig.getObjectSize() * 1000)
+						/ maxValue + " min bytes per second");
+			} else {
+				report.setMaxThroughput("0");
+				report.setMinThroughput("0");
 			}
-			System.out.println(maxValue + " ms - max value");
-			System.out.println(minValue + " ms - min value");
-			System.out.println(testconfig.getObjectSize() + " object size");
-			report.setMaxThroughput(((long) testconfig.getObjectSize() * 1000)
-					/ minValue + " bytes per second");
-			report.setMinThroughput(((long) testconfig.getObjectSize() * 1000)
-					/ maxValue + " bytes per second");
-			System.out.println(((long) testconfig.getObjectSize() * 1000)
-					/ minValue + " max bytes per second");
-			System.out.println(((long) testconfig.getObjectSize() * 1000)
-					/ maxValue + " min bytes per second");
-		} else {
-			report.setMaxThroughput("0");
-			report.setMinThroughput("0");
 		}
-}
 		ExecutionReportBiz.ExecutionReportUpdate(report);
 		return report;
 	}
 
-	public boolean validateSwiftConnnection(String user, String key,
-			String url, String namespace) {
-		// TODO Auto-generated method stub
-		System.out.println("In vTestEngine validateSwiftConnnection");
-		return true;
-	}
-
-	public boolean validateAtmosConnnection(String user, String key,
-			String url, String namespace) {
-		// TODO Auto-generated method stub
-		System.out.println("In vTestEngine validateAtmosConnnection");
-		return true;
-	}
-
-	public ExecutionReport runTests(ExecutionPlan plan) throws Exception {
-		ExecutionReport rpt = new ExecutionReport();
-		try {
-			ConfigurationTemplate cfgtemp = plan.getConfigurationTemplate();
-			TestConfiguration test = plan.getTestConfiguration();
-			Account acct = plan.getAccount();
-
-			List<Api> apilist = acct.getApis();
-			List<ApiSelected> select;
-			if (cfgtemp != null) {
-				select = cfgtemp.getApiSelecteds();
-				// load Cfg as test so we can pass on type of entity to engine
-
-				test.setTestConfigName(cfgtemp.getConfTempName());
-				test.setTestConfigDescription(cfgtemp.getConfTempDescription());
-				test.setObjectSizeReportUnit(cfgtemp.getObjectSizeReportUnit1());
-				test.setNumberOfOperations(cfgtemp
-						.getConfTempNumberOfOperations());
-				test.setNumberOfThreads(cfgtemp.getConfTempNumberOfThreads());
-
-				test.setNumberOfRetry(cfgtemp.getConfTempNumberOfRetry());
-				test.setObjectSize(cfgtemp.getConfTempObjectSize());
-
-				test.setCreateOperation(cfgtemp.getConfTempCreateOperation());
-				test.setDeleteOperation(cfgtemp.getConfTempDeleteOperation());
-				test.setUpdateOperation(cfgtemp.getConfTempUpdateOperation());
-				test.setReadOperation(cfgtemp.getConfTempReadOperation());
-
-				test.setCreatePercent(cfgtemp.getConfTempCreatePercent());
-				test.setUpdatePercent(cfgtemp.getConfTempUpdatePercent());
-				test.setDeletePercent(cfgtemp.getConfTempDeletePercent());
-				test.setDeletePercent(cfgtemp.getConfTempDeletePercent());
-
-			} else
-
-				select = test.getApiSelecteds();
-			System.out.println("RunTests: Api selected are " + select.size());
-
-			for (Api p : apilist) {
-				for (ApiSelected s : select) {
-					if (p.getApiType().getApiTypeId() == s.getApiType()
-							.getApiTypeId()) {
-						switch (p.getApiType().getApiTypeName()) {
-						case "S3": {
-
-							rpt = runS3Tests(plan, test, p);
-							System.out.println("Validated S3");
-
-							break;
-						}
-						case "Swift": {
-							System.out.println("Validated Swift");
-							break;
-						}
-						case "Atmos": {
-							System.out.println("Validated Atmos");
-							break;
-						}
-						default:
-							break;
-						}
-					}
-				}
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return rpt;
-	}
 }

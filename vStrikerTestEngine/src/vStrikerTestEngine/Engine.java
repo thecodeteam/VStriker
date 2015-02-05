@@ -13,5 +13,6 @@ public interface Engine {
 	boolean validateSwiftConnnection(String user, String key, String url, String namespace);
 	boolean validateAtmosConnnection(String user, String key, String url, String namespace);
 	ExecutionReport runS3Tests(ExecutionPlan ep, TestConfiguration testconfig, Api api) throws Exception;
+	ExecutionReport runSwiftTests(ExecutionPlan ep, TestConfiguration testconfig, Api api) throws Exception;
 	ExecutionReport runTests(ExecutionPlan plan) throws Exception;
 }

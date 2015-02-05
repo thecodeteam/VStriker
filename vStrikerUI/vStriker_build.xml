@@ -574,8 +574,8 @@
                 <attribute name="Main-Class" value="com.emccode.vstriker.VStriker"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
-            <fileset dir="${vStriker.location}/vStrikerUI/target/classes"/>
-            <fileset dir="${vStriker.location}/vStrikerTestEngine/target/classes"/>
+            <fileset dir="${vStriker.location}/vStrikerUI/bin"/>
+            <fileset dir="${vStriker.location}/vStrikerTestEngine/bin"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/aws-java-sdk-1.7.5.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/httpclient-4.2.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/httpcore-4.2.jar"/>
@@ -607,8 +607,8 @@
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/commons-logging-1.1.1.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/smart-client-2.0.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/s3-client-2.0.jar"/>
-            <fileset dir="${vStriker.location}/vStrikerAPI/target/classes"/>
-            <fileset dir="${vStriker.location}/vStrikerEntities/target/classes"/>
+            <fileset dir="${vStriker.location}/vStrikerAPI/bin"/>
+            <fileset dir="${vStriker.location}/vStrikerEntities/bin"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/javax.persistence.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/h2-1.4.184.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/EclipseLink 2.5.2/eclipselink/jlib/eclipselink.jar"/>
@@ -630,8 +630,8 @@
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/vipr-object-transformations-2.0.1.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/mimepull-1.9.3.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/atmos-client-2.2.1.jar"/>
-            <fileset dir="${vStriker.location}/vStrikerTestUtilities/target/classes"/>
-            <fileset dir="${vStriker.location}/vStrikerBizModel/target/classes"/>
+            <fileset dir="${vStriker.location}/vStrikerTestUtilities/bin"/>
+            <fileset dir="${vStriker.location}/vStrikerBizModel/bin"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/commons-io-2.4.jar"/>
         </jar>
     </target>

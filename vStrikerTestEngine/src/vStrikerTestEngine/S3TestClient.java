@@ -15,10 +15,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import vStrikerBizModel.ExecutionReportBiz;
 import vStrikerBizModel.ExecutionReportDataBiz;
-import vStrikerEntities.Account;
 import vStrikerEntities.Api;
-import vStrikerEntities.ApiSelected;
-import vStrikerEntities.ConfigurationTemplate;
 import vStrikerEntities.ExecutionPlan;
 import vStrikerEntities.ExecutionReport;
 import vStrikerEntities.ExecutionReportData;
@@ -34,58 +31,50 @@ import com.emc.vipr.s3.s3api;
 
 //@author Sanjeev Chauhan
 
-public class VEngine implements Engine {
+public class S3TestClient {
 
-	public boolean validateS3Connection(String user, String key, String url,
+	public boolean validateConnection(String user, String key, String url,
 			String namespace) {
-		vLogger.LogInfo("In vTestEngine validateS3Connection");
+		vLogger.LogInfo("In S3TestClient validateConnection");
 		if (user == null || key == null || url == null) {
-			System.out.println("Please ensure user, key and url are valid");
+			vLogger.LogError("Please ensure user, key and url are valid");
 			return false;
 		}
-		System.out.println("user, key and url are:" + user + " " + key + " "
-				+ url);
+		vLogger.LogInfo("user, key and url are:" + user + " " + key + " " + url);
 		if (namespace == null || namespace.length() == 0) {
 			namespace = null;
 		}
-		vLogger.LogInfo("In vTestEngine validateS3Connection");
 		String TEST_BUCKET = "vstest"
 				+ (UUID.randomUUID().toString()).substring(0, 10);
-		System.out.println("Test Bucket name is: " + TEST_BUCKET);
+		vLogger.LogInfo("Test Bucket name is: " + TEST_BUCKET);
 		try {
 			s3api.getS3Client(user, key, url, namespace);
-			System.out.println("Get Client worked");
+			vLogger.LogInfo("Get Client worked");
 			s3api.CreateBucket(user, key, url, namespace, TEST_BUCKET);
-			System.out.println("Create bucket done");
+			vLogger.LogInfo("Create bucket done");
 			List<String> listofObjects = Utilites.generateFiles(
 					"validationTest", 1000, 1);
-			System.out.println(listofObjects.get(0));
+			vLogger.LogInfo(listofObjects.get(0));
 			s3api.CreateObject(user, key, url, namespace, TEST_BUCKET,
 					FilenameUtils.getName(listofObjects.get(0)),
 					new FileInputStream(listofObjects.get(0)));
-			System.out.println("Create object done");
+			vLogger.LogInfo("Create object done");
 			s3api.DeleteObject(user, key, url, namespace, TEST_BUCKET,
 					FilenameUtils.getName(listofObjects.get(0)));
-			System.out.println("Delete object done");
+			vLogger.LogInfo("Delete object done");
 			s3api.DeleteBuckets(user, key, url, namespace, TEST_BUCKET);
-			System.out.println("Delete bucket done");
+			vLogger.LogInfo("Delete bucket done");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
-			System.out.println("Validation failed: " + e.toString());
+			vLogger.LogError("Validation failed: " + e.toString());
 			return false;
 		}
-		System.out.println("Validation successfully");
+		vLogger.LogInfo("Validation successfully");
 		return true;
 	}
-	
-	public ExecutionReport runSwiftTests(ExecutionPlan ep,
-			TestConfiguration testconfig, Api api) throws Exception {
-		vLogger.LogInfo("In vTestEngine runS3Tests");
-		return (new SwiftTestClient()).runTests(ep, testconfig, api);
-	}
 
-	public ExecutionReport runS3Tests(ExecutionPlan ep,
+	public ExecutionReport runTests(ExecutionPlan ep,
 			TestConfiguration testconfig, Api api) throws Exception {
 		vLogger.LogInfo("In vTestEngine runS3Tests");
 		// validate arguments
@@ -274,7 +263,7 @@ public class VEngine implements Engine {
 			System.out.println("Tests did not finish in time: " + e.toString());
 		}
 		totaltime = System.nanoTime() - totaltime;
-		System.out.println("totaltime end : " + totaltime/1000000 + "ms");
+		System.out.println("totaltime end : " + totaltime / 1000000 + "ms");
 
 		// Post-test cleanup
 		if (!testconfig.getDeleteOperation() || (deleteOps < createOps)
@@ -346,8 +335,8 @@ public class VEngine implements Engine {
 							+ "ms with " + testconfig.getNumberOfThreads()
 							+ " threads");
 		}
-		
-		System.out.println("Total test time: " + totaltime/1000000 + "ms");
+
+		System.out.println("Total test time: " + totaltime / 1000000 + "ms");
 
 		// Populate the report object
 		// Total volume sent = (createops + updateops) * sizeofobject
@@ -372,126 +361,40 @@ public class VEngine implements Engine {
 				/ testconfig.getNumberOfOperations()));
 		report.setNumberRequestSec((int) (testconfig.getNumberOfOperations()
 				/ (createTime + readTime + updateTime + deleteTime) / 1000000000));
-if(list.size()>0)
-{
-	
-		if ((testconfig.getCreateOperation() && createOps != 0)
-				|| (testconfig.getReadOperation() && readOps != 0)
-				|| (testconfig.getUpdateOperation() && updateOps != 0)) {
-			long maxValue = 0, minValue = Long.parseLong(list.get(1)
-					.getDataValue());
-			for (ExecutionReportData erd : list) {
-				if (erd.getCrudValue().contains("Create")
-						|| erd.getCrudValue().contains("Update")
-						|| erd.getCrudValue().contains("Read")) {
-					maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
-							.parseLong(erd.getDataValue()) : maxValue;
-					minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
-							.parseLong(erd.getDataValue()) : minValue;
-				}
-			}
-			System.out.println(maxValue + " ms - max value");
-			System.out.println(minValue + " ms - min value");
-			System.out.println(testconfig.getObjectSize() + " object size");
-			report.setMaxThroughput(((long) testconfig.getObjectSize() * 1000)
-					/ minValue + " bytes per second");
-			report.setMinThroughput(((long) testconfig.getObjectSize() * 1000)
-					/ maxValue + " bytes per second");
-			System.out.println(((long) testconfig.getObjectSize() * 1000)
-					/ minValue + " max bytes per second");
-			System.out.println(((long) testconfig.getObjectSize() * 1000)
-					/ maxValue + " min bytes per second");
-		} else {
-			report.setMaxThroughput("0");
-			report.setMinThroughput("0");
-		}
-}
-		ExecutionReportBiz.ExecutionReportUpdate(report);
-		return report;
-	}
+		if (list.size() > 0) {
 
-	public boolean validateSwiftConnnection(String user, String key,
-			String url, String namespace) {
-		// TODO Auto-generated method stub
-		System.out.println("In vTestEngine validateSwiftConnnection");
-		return true;
-	}
-
-	public boolean validateAtmosConnnection(String user, String key,
-			String url, String namespace) {
-		// TODO Auto-generated method stub
-		System.out.println("In vTestEngine validateAtmosConnnection");
-		return true;
-	}
-
-	public ExecutionReport runTests(ExecutionPlan plan) throws Exception {
-		ExecutionReport rpt = new ExecutionReport();
-		try {
-			ConfigurationTemplate cfgtemp = plan.getConfigurationTemplate();
-			TestConfiguration test = plan.getTestConfiguration();
-			Account acct = plan.getAccount();
-
-			List<Api> apilist = acct.getApis();
-			List<ApiSelected> select;
-			if (cfgtemp != null) {
-				select = cfgtemp.getApiSelecteds();
-				// load Cfg as test so we can pass on type of entity to engine
-
-				test.setTestConfigName(cfgtemp.getConfTempName());
-				test.setTestConfigDescription(cfgtemp.getConfTempDescription());
-				test.setObjectSizeReportUnit(cfgtemp.getObjectSizeReportUnit1());
-				test.setNumberOfOperations(cfgtemp
-						.getConfTempNumberOfOperations());
-				test.setNumberOfThreads(cfgtemp.getConfTempNumberOfThreads());
-
-				test.setNumberOfRetry(cfgtemp.getConfTempNumberOfRetry());
-				test.setObjectSize(cfgtemp.getConfTempObjectSize());
-
-				test.setCreateOperation(cfgtemp.getConfTempCreateOperation());
-				test.setDeleteOperation(cfgtemp.getConfTempDeleteOperation());
-				test.setUpdateOperation(cfgtemp.getConfTempUpdateOperation());
-				test.setReadOperation(cfgtemp.getConfTempReadOperation());
-
-				test.setCreatePercent(cfgtemp.getConfTempCreatePercent());
-				test.setUpdatePercent(cfgtemp.getConfTempUpdatePercent());
-				test.setDeletePercent(cfgtemp.getConfTempDeletePercent());
-				test.setDeletePercent(cfgtemp.getConfTempDeletePercent());
-
-			} else
-
-				select = test.getApiSelecteds();
-			System.out.println("RunTests: Api selected are " + select.size());
-
-			for (Api p : apilist) {
-				for (ApiSelected s : select) {
-					if (p.getApiType().getApiTypeId() == s.getApiType()
-							.getApiTypeId()) {
-						switch (p.getApiType().getApiTypeName()) {
-						case "S3": {
-
-							rpt = runS3Tests(plan, test, p);
-							System.out.println("Validated S3");
-
-							break;
-						}
-						case "Swift": {
-							System.out.println("Validated Swift");
-							break;
-						}
-						case "Atmos": {
-							System.out.println("Validated Atmos");
-							break;
-						}
-						default:
-							break;
-						}
+			if ((testconfig.getCreateOperation() && createOps != 0)
+					|| (testconfig.getReadOperation() && readOps != 0)
+					|| (testconfig.getUpdateOperation() && updateOps != 0)) {
+				long maxValue = 0, minValue = Long.parseLong(list.get(1)
+						.getDataValue());
+				for (ExecutionReportData erd : list) {
+					if (erd.getCrudValue().contains("Create")
+							|| erd.getCrudValue().contains("Update")
+							|| erd.getCrudValue().contains("Read")) {
+						maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
+								.parseLong(erd.getDataValue()) : maxValue;
+						minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
+								.parseLong(erd.getDataValue()) : minValue;
 					}
 				}
+				System.out.println(maxValue + " ms - max value");
+				System.out.println(minValue + " ms - min value");
+				System.out.println(testconfig.getObjectSize() + " object size");
+				report.setMaxThroughput(((long) testconfig.getObjectSize() * 1000)
+						/ minValue + " bytes per second");
+				report.setMinThroughput(((long) testconfig.getObjectSize() * 1000)
+						/ maxValue + " bytes per second");
+				System.out.println(((long) testconfig.getObjectSize() * 1000)
+						/ minValue + " max bytes per second");
+				System.out.println(((long) testconfig.getObjectSize() * 1000)
+						/ maxValue + " min bytes per second");
+			} else {
+				report.setMaxThroughput("0");
+				report.setMinThroughput("0");
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		return rpt;
+		ExecutionReportBiz.ExecutionReportUpdate(report);
+		return report;
 	}
 }
