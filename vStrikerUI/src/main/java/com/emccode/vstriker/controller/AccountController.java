@@ -17,10 +17,12 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.util.Callback;
 import vStrikerBizModel.AccountBiz;
-import vStrikerBizModel.AccountDetailBiz;
+import vStrikerBizModel.ApiBiz;
 import vStrikerEntities.Account;
-import vStrikerEntities.VwAccountDetail;
+import vStrikerEntities.Api;
 
 import com.emccode.vstriker.VStriker;
 
@@ -40,19 +42,19 @@ public class AccountController {
 	@FXML
 	private TextField accountLocation;
 	@FXML
-	private TableView<VwAccountDetail> accountDetail;
+	private TableView<Api> apiDetail;
 	@FXML
-	private TableColumn<VwAccountDetail, Boolean> selectColumn;
+	private TableColumn<Api, Boolean> SelectColumn;
 	@FXML
-	private TableColumn<VwAccountDetail, String> APIColumn;
+	private TableColumn<Api, String> APIColumn;
 	@FXML
-	private TableColumn<VwAccountDetail, String> ProtocolColumn;
+	private TableColumn<Api, String> ProtocolColumn;
 	@FXML
-	private TableColumn<VwAccountDetail, String> PortColumn;
+	private TableColumn<Api, String> PortColumn;
 	@FXML
-	private TableColumn<VwAccountDetail, String> KeyColumn;
+	private TableColumn<Api, String> KeyColumn;
 	@FXML
-	private TableColumn<VwAccountDetail, String> EndPointColumn;
+	private TableColumn<Api, String> EndPointColumn;
 	@FXML
 	private Button validateAPIBtn;
 	@FXML
@@ -62,7 +64,7 @@ public class AccountController {
 
 	private VStriker vStriker;
 	private Account validAcct;
-	private List<BooleanProperty> selectedRowList;
+	private List<BooleanProperty> listofcheckboxes;
 
 	// Constructor
 	public AccountController() {
@@ -76,48 +78,35 @@ public class AccountController {
 	public void updateAccount(VStriker vStriker, Account validAcct) {
 		System.out.println("In AccountController - updateAccount");
 		this.validAcct = validAcct;
-		createAccount(vStriker);
+		this.vStriker = vStriker;
 		accountName.setText(validAcct.getName());
 		accountLocation.setText(validAcct.getAccountLocation());
 		// If this account has not apis yet - exit immediately
 		if (validAcct.getApis() == null || validAcct.getApis().isEmpty()) {
 			System.out.println("Account has no apis");
-			accountDetail.getItems().clear();
+			apiDetail.getItems().clear();
 			return;
 		}
 		// Populate the table
-		ObservableList<VwAccountDetail> accountData, selectedAcct;
 		try {
-			accountData = FXCollections.observableArrayList(AccountDetailBiz
-					.AccountSelectAll());
-			selectedAcct = FXCollections.observableArrayList();
-			System.out.println("SelectAcct size" + selectedAcct.size());
-			for (VwAccountDetail a : accountData) {
-				if (a.getAccountId() == validAcct.getAccountId()) {
-					System.out.println("In AccountController - updateAccount: "
-							+ a.getAccountId());
-					selectedAcct.add(a);
-				}
-			}
-			System.out.println("SelectAcct size" + selectedAcct.size());
-			accountDetail.setItems(selectedAcct);
-			// Populate columns in the details table
-			selectedRowList = setupCheckboxColumn(selectedAcct);
-			System.out.println("SelectedRowList " + selectedRowList.toString());
-			/*
-			selectColumn
+			ObservableList<Api> accountApis = FXCollections
+					.observableArrayList(ApiBiz.ApiSelectforAccount(validAcct));
+			listofcheckboxes = setupCheckboxColumn(accountApis);
+			apiDetail.setItems(accountApis);
+			SelectColumn
 					.setCellFactory(CheckBoxTableCell
 							.forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
-								public ObservableValue<Boolean> call(Integer index) {
-									return new SimpleBooleanProperty();
-									//System.out.println("Index is: " + index);
-									//return selectedRowList.get(index);
+								@Override
+								public ObservableValue<Boolean> call(
+								Integer index) {
+									// return new SimpleBooleanProperty();
+									System.out.println("Index is: " + index);
+									return listofcheckboxes.get(index);
 								}
 							}));
-							*/
 			APIColumn
 					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-							cellData.getValue().getApiTypeName()));
+							cellData.getValue().getApiType().getApiTypeName()));
 			KeyColumn
 					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 							cellData.getValue().getSecretKey()));
@@ -133,10 +122,10 @@ public class AccountController {
 							cellData.getValue().getUrl().contains("https") ? cellData
 									.getValue().getHttpsAddressPort()
 									: cellData.getValue().getHttpAddressPort()));
-			//selectColumn.setEditable(true);
-			accountDetail.setEditable(true);
+			SelectColumn.setEditable(true);
+			apiDetail.setEditable(true);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			System.out.println("Unable to populate table");
 			e.printStackTrace();
 		}
 	}
@@ -173,6 +162,30 @@ public class AccountController {
 	@FXML
 	public void deleteAPIClicked(ActionEvent event) {
 		System.out.println("Delete API button clicked");
+		if (listofcheckboxes == null) {
+			System.out
+					.println("List of checkboxes not initialized - Unexpected error");
+		}
+		int selectedrow = -1;
+		for (int i = 0; i < listofcheckboxes.size(); i++) {
+			if (listofcheckboxes.get(i).get()) {
+				selectedrow = i;
+			}
+		}
+		if (selectedrow != -1) {
+			List<Api> apis = apiDetail.getItems();
+			Api selectedApi = apis.get(selectedrow);
+			try {
+				ApiBiz.ApiDelete(selectedApi.getApiId());
+			} catch (Exception e) {
+				System.out.println("Delete API failed");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			apiDetail.getItems().remove(selectedrow);
+		} else {
+			System.out.println("Please select an API to delete");
+		}
 	}
 
 	@FXML
@@ -238,22 +251,23 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("Not a valid Account");
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
 	}
 
 	private List<BooleanProperty> setupCheckboxColumn(
-			ObservableList<VwAccountDetail> selectedAcct) {
+			ObservableList<Api> apiList) {
 		// Associate a BooleanProperty to every cell in the first column.
-		ArrayList<BooleanProperty> selectedRowList = new ArrayList<BooleanProperty>();
+		ArrayList<BooleanProperty> listBool = new ArrayList<BooleanProperty>();
 		try {
-			for (VwAccountDetail a : selectedAcct) {
-				selectedRowList.add(new SimpleBooleanProperty());
+			for (Api a : apiList) {
+				listBool.add(new SimpleBooleanProperty());
 				System.out.println("Adding BooleanProperty");
 			}
 			// Add a listener for each boolean property
-			for (BooleanProperty b : selectedRowList) {
+			for (BooleanProperty b : listBool) {
 				b.addListener(new ChangeListener<Boolean>() {
+					@Override
 					public void changed(ObservableValue<? extends Boolean> obs,
 							Boolean wasSelected, Boolean isSelected) {
 						System.out.println("isSelected: " + isSelected);
@@ -261,7 +275,7 @@ public class AccountController {
 						if (b.getValue()) {
 							// This means b just was selected so every other
 							// property should be unchecked
-							for (BooleanProperty bo : selectedRowList) {
+							for (BooleanProperty bo : listBool) {
 								if (b != bo)
 									bo.setValue(false);
 							}
@@ -272,7 +286,7 @@ public class AccountController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Returning selectedRowList");
-		return selectedRowList;
+		System.out.println("Returning list of BooleanProperty");
+		return listBool;
 	}
 }

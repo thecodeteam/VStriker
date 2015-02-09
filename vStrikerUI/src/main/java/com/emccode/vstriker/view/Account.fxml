@@ -20,9 +20,9 @@
          </children>
       </HBox>
       <Button fx:id="saveupdate" layoutX="467.0" layoutY="90.0" mnemonicParsing="false" onAction="#saveupdateClicked" text="Save / Update" />
-      <TableView fx:id="accountDetail" layoutX="50.0" layoutY="203.0" prefHeight="164.0" prefWidth="505.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+      <TableView fx:id="apiDetail" layoutX="50.0" layoutY="203.0" prefHeight="164.0" prefWidth="505.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
         <columns>
-          <TableColumn maxWidth="3000.0" prefWidth="59.0" text="Select" />
+          <TableColumn fx:id="SelectColumn" maxWidth="3000.0" prefWidth="59.0" text="Select" />
           <TableColumn fx:id="APIColumn" prefWidth="107.0" text="API" />
             <TableColumn fx:id="ProtocolColumn" prefWidth="83.0" text="Protocol" />
             <TableColumn fx:id="PortColumn" prefWidth="82.0" text="Port" />

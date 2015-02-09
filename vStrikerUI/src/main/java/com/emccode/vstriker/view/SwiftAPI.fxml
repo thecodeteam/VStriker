@@ -8,35 +8,27 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emccode.vstriker.controller.SwiftController">
    <children>
-      <TextField layoutX="201.0" layoutY="20.0" prefHeight="26.0" prefWidth="364.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="50.0" />
+      <TextField fx:id="swiftuser" layoutX="201.0" layoutY="20.0" prefHeight="26.0" prefWidth="364.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="50.0" />
       <Label layoutX="50.0" layoutY="20.0" text="Swift User Name" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="20.0" />
-      <TextField layoutX="121.0" layoutY="60.0" prefHeight="26.0" prefWidth="254.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="50.0" HBox.hgrow="ALWAYS" />
+      <TextField fx:id="swifturl" layoutX="121.0" layoutY="60.0" prefHeight="26.0" prefWidth="254.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="50.0" HBox.hgrow="ALWAYS" />
       <Label layoutX="50.0" layoutY="60.0" text="Swift URL" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="60.0" />
       <Label layoutX="60.0" layoutY="70.0" text="Swift Secret Key" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="100.0" />
-      <TextField layoutX="171.0" layoutY="95.0" prefHeight="26.0" prefWidth="254.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0" />
+      <TextField fx:id="swiftsecretkey" layoutX="171.0" layoutY="95.0" prefHeight="26.0" prefWidth="254.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0" />
       <Label layoutX="60.0" layoutY="110.0" text="Swift Bucket" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="140.0" />
-      <TextField layoutX="181.0" layoutY="105.0" prefHeight="26.0" prefWidth="254.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="140.0" />
-      <HBox layoutX="50.0" layoutY="180.0" spacing="18.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="180.0">
+      <TextField fx:id="swiftbucket" layoutX="181.0" layoutY="105.0" prefHeight="26.0" prefWidth="254.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="140.0" />
+      <HBox layoutX="50.0" layoutY="180.0" spacing="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="180.0">
          <children>
-            <Label layoutX="70.0" layoutY="120.0" text="Swift Http Address" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="180.0" />
-            <TextField layoutX="191.0" layoutY="115.0" prefHeight="26.0" prefWidth="149.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="180.0" />
-            <Label layoutX="80.0" layoutY="130.0" text="Http Port" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="180.0" />
-            <TextField layoutX="201.0" layoutY="125.0" prefHeight="26.0" prefWidth="149.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="180.0" />
-         </children>
-      </HBox>
-      <HBox layoutX="60.0" layoutY="190.0" spacing="14.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="44.0" AnchorPane.topAnchor="220.0">
-         <children>
-            <Label layoutX="70.0" layoutY="120.0" text="Swift Https Address" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="180.0" />
-            <TextField layoutX="191.0" layoutY="115.0" prefHeight="26.0" prefWidth="149.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="180.0" />
-            <Label layoutX="80.0" layoutY="130.0" text="Https Port" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="180.0" />
-            <TextField layoutX="201.0" layoutY="125.0" prefHeight="26.0" prefWidth="149.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="180.0" />
+            <Label text="Protocol" />
+            <ChoiceBox fx:id="chooseprotocol" prefWidth="150.0" />
+            <Label layoutX="80.0" layoutY="130.0" text="Port" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="180.0" />
+            <TextField fx:id="swiftport" layoutX="201.0" layoutY="125.0" prefHeight="26.0" prefWidth="149.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="180.0" />
          </children>
       </HBox>
       <HBox layoutX="254.0" layoutY="336.0" spacing="10.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="300.0">
          <children>
-            <Button fx:id="validateSwift" layoutX="254.0" layoutY="336.0" mnemonicParsing="false" onAction="#validateSwiftClicked" text="Validate" />
-            <Button layoutX="336.0" layoutY="336.0" mnemonicParsing="false" text="Save" />
-            <Button layoutX="416.0" layoutY="336.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="validateswift" layoutX="254.0" layoutY="336.0" mnemonicParsing="false" onAction="#validateSwiftClicked" text="Validate" />
+            <Button fx:id="saveswift" layoutX="336.0" layoutY="336.0" mnemonicParsing="false" onAction="#saveSwiftClicked" text="Save" />
+            <Button fx:id="deleteswift" layoutX="416.0" layoutY="336.0" mnemonicParsing="false" onAction="#deleteSwiftClicked" text="Delete" />
             <Button fx:id="backtoAccount" layoutX="498.0" layoutY="336.0" mnemonicParsing="false" onAction="#backtoAccountClicked" text="Back to Account &gt;&gt;" />
          </children>
       </HBox>

@@ -1,8 +1,6 @@
 package  com.emccode.vstriker.controller;
 
 import java.util.List;
-import java.util.Observable;
-
 import javax.swing.JOptionPane;
 
 import javafx.beans.value.ChangeListener;
@@ -13,8 +11,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import vStrikerBizModel.ConfigurationTemplateBiz;
-import vStrikerBizModel.TestConfigurationBiz;
 import vStrikerEntities.ApiSelected;
 import vStrikerEntities.ApiType;
 import vStrikerEntities.ConfigurationTemplate;

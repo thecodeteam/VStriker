@@ -78,7 +78,7 @@ public class VEngine implements Engine {
 		System.out.println("Validation successfully");
 		return true;
 	}
-	
+
 	public ExecutionReport runSwiftTests(ExecutionPlan ep,
 			TestConfiguration testconfig, Api api) throws Exception {
 		vLogger.LogInfo("In vTestEngine runS3Tests");
@@ -274,7 +274,7 @@ public class VEngine implements Engine {
 			System.out.println("Tests did not finish in time: " + e.toString());
 		}
 		totaltime = System.nanoTime() - totaltime;
-		System.out.println("totaltime end : " + totaltime/1000000 + "ms");
+		System.out.println("totaltime end : " + totaltime / 1000000 + "ms");
 
 		// Post-test cleanup
 		if (!testconfig.getDeleteOperation() || (deleteOps < createOps)
@@ -346,8 +346,8 @@ public class VEngine implements Engine {
 							+ "ms with " + testconfig.getNumberOfThreads()
 							+ " threads");
 		}
-		
-		System.out.println("Total test time: " + totaltime/1000000 + "ms");
+
+		System.out.println("Total test time: " + totaltime / 1000000 + "ms");
 
 		// Populate the report object
 		// Total volume sent = (createops + updateops) * sizeofobject
@@ -372,40 +372,39 @@ public class VEngine implements Engine {
 				/ testconfig.getNumberOfOperations()));
 		report.setNumberRequestSec((int) (testconfig.getNumberOfOperations()
 				/ (createTime + readTime + updateTime + deleteTime) / 1000000000));
-if(list.size()>0)
-{
-	
-		if ((testconfig.getCreateOperation() && createOps != 0)
-				|| (testconfig.getReadOperation() && readOps != 0)
-				|| (testconfig.getUpdateOperation() && updateOps != 0)) {
-			long maxValue = 0, minValue = Long.parseLong(list.get(1)
-					.getDataValue());
-			for (ExecutionReportData erd : list) {
-				if (erd.getCrudValue().contains("Create")
-						|| erd.getCrudValue().contains("Update")
-						|| erd.getCrudValue().contains("Read")) {
-					maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
-							.parseLong(erd.getDataValue()) : maxValue;
-					minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
-							.parseLong(erd.getDataValue()) : minValue;
+		if (list.size() > 0) {
+
+			if ((testconfig.getCreateOperation() && createOps != 0)
+					|| (testconfig.getReadOperation() && readOps != 0)
+					|| (testconfig.getUpdateOperation() && updateOps != 0)) {
+				long maxValue = 0, minValue = Long.parseLong(list.get(1)
+						.getDataValue());
+				for (ExecutionReportData erd : list) {
+					if (erd.getCrudValue().contains("Create")
+							|| erd.getCrudValue().contains("Update")
+							|| erd.getCrudValue().contains("Read")) {
+						maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
+								.parseLong(erd.getDataValue()) : maxValue;
+						minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
+								.parseLong(erd.getDataValue()) : minValue;
+					}
 				}
+				System.out.println(maxValue + " ms - max value");
+				System.out.println(minValue + " ms - min value");
+				System.out.println(testconfig.getObjectSize() + " object size");
+				report.setMaxThroughput(((long) testconfig.getObjectSize() * 1000)
+						/ minValue + " bytes per second");
+				report.setMinThroughput(((long) testconfig.getObjectSize() * 1000)
+						/ maxValue + " bytes per second");
+				System.out.println(((long) testconfig.getObjectSize() * 1000)
+						/ minValue + " max bytes per second");
+				System.out.println(((long) testconfig.getObjectSize() * 1000)
+						/ maxValue + " min bytes per second");
+			} else {
+				report.setMaxThroughput("0");
+				report.setMinThroughput("0");
 			}
-			System.out.println(maxValue + " ms - max value");
-			System.out.println(minValue + " ms - min value");
-			System.out.println(testconfig.getObjectSize() + " object size");
-			report.setMaxThroughput(((long) testconfig.getObjectSize() * 1000)
-					/ minValue + " bytes per second");
-			report.setMinThroughput(((long) testconfig.getObjectSize() * 1000)
-					/ maxValue + " bytes per second");
-			System.out.println(((long) testconfig.getObjectSize() * 1000)
-					/ minValue + " max bytes per second");
-			System.out.println(((long) testconfig.getObjectSize() * 1000)
-					/ maxValue + " min bytes per second");
-		} else {
-			report.setMaxThroughput("0");
-			report.setMinThroughput("0");
 		}
-}
 		ExecutionReportBiz.ExecutionReportUpdate(report);
 		return report;
 	}

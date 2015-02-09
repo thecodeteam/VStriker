@@ -21,26 +21,26 @@ import vStrikerTestUtilities.vLogger;
 //@author Sanjeev Chauhan
 
 public class SwiftTests {
-	
+
 	@Test
 	public void test() throws Exception {
 
 		// ValidateSwift();
-		//TestSwiftxxxd();
-		//TestSwiftxxux();
-		//TestSwiftxxud();
-		//TestSwiftxrxx();
-		//TestSwiftxrxd();
-		//TestSwiftxrux();
-		//TestSwiftxrud();
-		//TestSwiftcxxx();
-		//TestSwiftcxxd();
-		//TestSwiftcxux();
-		//TestSwiftcxud();
-		//TestSwiftcrxx();
-		//TestSwiftcrxd();
-		//TestSwiftcrux();
-		//TestSwiftcrud();
+		// TestSwiftxxxd();
+		// TestSwiftxxux();
+		// TestSwiftxxud();
+		// TestSwiftxrxx();
+		// TestSwiftxrxd();
+		// TestSwiftxrux();
+		// TestSwiftxrud();
+		// TestSwiftcxxx();
+		// TestSwiftcxxd();
+		// TestSwiftcxux();
+		// TestSwiftcxud();
+		// TestSwiftcrxx();
+		// TestSwiftcrxd();
+		// TestSwiftcrux();
+		TestSwiftcrud();
 	}
 
 	public void TestFileGeneration() {
@@ -92,7 +92,6 @@ public class SwiftTests {
 		}
 
 	}
-
 
 	public void TestSwiftxxxd() {
 		vLogger.LogInfo("TestEngineUnitTest:TestSwiftxxxd");
@@ -282,7 +281,7 @@ public class SwiftTests {
 			System.out.println("TestEngineUnitTest: Failed TestSwiftxrud");
 		}
 	}
-	
+
 	public void TestSwiftcxxx() {
 		vLogger.LogInfo("TestEngineUnitTest:TestSwiftcxxx");
 		TestConfiguration testconfig = getTestConfiguration();
@@ -481,7 +480,7 @@ public class SwiftTests {
 			System.out.println("TestEngineUnitTest: Failed TestSwiftcrux");
 		}
 	}
-	
+
 	public void TestSwiftcrud() {
 		vLogger.LogInfo("TestEngineUnitTest:TestSwiftcrud");
 		TestConfiguration testconfig = getTestConfiguration();
@@ -544,9 +543,9 @@ public class SwiftTests {
 			// TestConfiguration testconfig = new TestConfiguration();
 			testconfig.setTestConfigName("SwiftTests");
 			testconfig.setNumberOfOperations(8);
-			
+
 			Random rand = new Random();
-			testconfig.setNumberOfThreads(rand.nextInt(8)+1);
+			testconfig.setNumberOfThreads(rand.nextInt(8) + 1);
 			testconfig.setObjectSize(1024 * 1024);
 			return testconfig;
 		} catch (Exception e) {
@@ -558,12 +557,14 @@ public class SwiftTests {
 	private Api getApi() {
 		Api api;
 		try {
-			api = ApiBiz.ApiSelect((long) 6);
-			// Api api = new Api();
-			String username = "user045";
-			String password = "vd2bty66GwFjJxB34VHFEBgEJ/b8QWDwnAdA1zjg";
-			String proxy = "http://object.vipronline.com";
+			api = ApiBiz.ApiSelect(6);
+			// String username = "user045";
+			String username = " wuser1@sanity.local";
+			// String password = "vd2bty66GwFjJxB34VHFEBgEJ/b8QWDwnAdA1zjg";
+			String password = "PQ17d30xaL41DL8Uxq7DySy3ZBu5Vi8xS3ksoPP+";
+			String proxy = "http:// hb-test-env-002.cloudapp.net:10501";
 			String bucket = "api-test";
+
 			api.setSubtenant(username);
 			api.setSecretKey(password);
 			api.setUrl(proxy);
@@ -588,4 +589,3 @@ public class SwiftTests {
 		return null;
 	}
 }
-
