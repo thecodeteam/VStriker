@@ -36,6 +36,7 @@ import com.emc.vipr.s3.s3api;
 
 public class VEngine implements Engine {
 
+	@Override
 	public boolean validateS3Connection(String user, String key, String url,
 			String namespace) {
 		vLogger.LogInfo("In vTestEngine validateS3Connection");
@@ -79,12 +80,14 @@ public class VEngine implements Engine {
 		return true;
 	}
 
+	@Override
 	public ExecutionReport runSwiftTests(ExecutionPlan ep,
 			TestConfiguration testconfig, Api api) throws Exception {
 		vLogger.LogInfo("In vTestEngine runS3Tests");
 		return (new SwiftTestClient()).runTests(ep, testconfig, api);
 	}
 
+	@Override
 	public ExecutionReport runS3Tests(ExecutionPlan ep,
 			TestConfiguration testconfig, Api api) throws Exception {
 		vLogger.LogInfo("In vTestEngine runS3Tests");
@@ -324,27 +327,27 @@ public class VEngine implements Engine {
 		// Calculate summary numbers for the report
 		if (testconfig.getCreateOperation()) {
 			System.out
-					.println("Creating objects take " + createTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			.println("Creating objects take " + createTime / 1000000
+					+ "ms with " + testconfig.getNumberOfThreads()
+					+ " threads");
 		}
 		if (testconfig.getReadOperation()) {
 			System.out
-					.println("Reading objects take " + readTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			.println("Reading objects take " + readTime / 1000000
+					+ "ms with " + testconfig.getNumberOfThreads()
+					+ " threads");
 		}
 		if (testconfig.getUpdateOperation()) {
 			System.out
-					.println("Updating objects take " + updateTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			.println("Updating objects take " + updateTime / 1000000
+					+ "ms with " + testconfig.getNumberOfThreads()
+					+ " threads");
 		}
 		if (testconfig.getDeleteOperation()) {
 			System.out
-					.println("Deleting objects take " + deleteTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			.println("Deleting objects take " + deleteTime / 1000000
+					+ "ms with " + testconfig.getNumberOfThreads()
+					+ " threads");
 		}
 
 		System.out.println("Total test time: " + totaltime / 1000000 + "ms");
@@ -355,8 +358,8 @@ public class VEngine implements Engine {
 			report.setTotalVolumeSent(Long
 					.toString(
 							(createOps + updateOps)
-									* (long) testconfig.getObjectSize())
-					.toString());
+							* (long) testconfig.getObjectSize())
+							.toString());
 		} else
 			report.setTotalVolumeSent("0");
 
@@ -385,8 +388,8 @@ public class VEngine implements Engine {
 							|| erd.getCrudValue().contains("Read")) {
 						maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
 								.parseLong(erd.getDataValue()) : maxValue;
-						minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
-								.parseLong(erd.getDataValue()) : minValue;
+								minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
+										.parseLong(erd.getDataValue()) : minValue;
 					}
 				}
 				System.out.println(maxValue + " ms - max value");
@@ -409,20 +412,40 @@ public class VEngine implements Engine {
 		return report;
 	}
 
+	@Override
 	public boolean validateSwiftConnnection(String user, String key,
 			String url, String namespace) {
-		// TODO Auto-generated method stub
-		System.out.println("In vTestEngine validateSwiftConnnection");
-		return true;
+		if (user == null || key == null || url == null) {
+			System.out.println("Please ensure user, key and url are valid");
+			return false;
+		}
+		System.out.println("user, key and url are:" + user + " " + key + " "
+				+ url);
+		if (namespace == null || namespace.length() == 0) {
+			namespace = null;
+		}
+		return new SwiftTestClient().validateConnnection(user, key, url,
+				namespace);
 	}
 
+	@Override
 	public boolean validateAtmosConnnection(String user, String key,
 			String url, String namespace) {
-		// TODO Auto-generated method stub
 		System.out.println("In vTestEngine validateAtmosConnnection");
-		return true;
+		if (user == null || key == null || url == null) {
+			System.out.println("Please ensure user, key and url are valid");
+			return false;
+		}
+		System.out.println("user, key and url are:" + user + " " + key + " "
+				+ url);
+		if (namespace == null || namespace.length() == 0) {
+			namespace = null;
+		}
+		return new AtmosTestClient().validateConnnection(user, key, url,
+				namespace);
 	}
 
+	@Override
 	public ExecutionReport runTests(ExecutionPlan plan) throws Exception {
 		ExecutionReport rpt = new ExecutionReport();
 		try {

@@ -1,13 +1,17 @@
 package vStrikerTestEngine;
 
+import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.io.FilenameUtils;
 
 import vStrikerBizModel.ExecutionReportBiz;
 import vStrikerBizModel.ExecutionReportDataBiz;
@@ -24,6 +28,8 @@ import vStrikerTestEngine.swift.SwiftUpdateWorker;
 import vStrikerTestUtilities.Utilites;
 import vStrikerTestUtilities.vLogger;
 
+import com.emc.vipr.swift.swiftapi;
+
 //@author Sanjeev Chauhan
 
 public class SwiftTestClient {
@@ -31,6 +37,39 @@ public class SwiftTestClient {
 	public boolean validateConnnection(String user, String key, String url,
 			String namespace) {
 		System.out.println("In vTestEngine validateSwiftConnnection");
+		if (user == null || key == null || url == null) {
+			System.out.println("Please ensure user, key and url are valid");
+			return false;
+		}
+		System.out.println("user, key and url are:" + user + " " + key + " "
+				+ url);
+		if (namespace == null || namespace.length() == 0) {
+			namespace = null;
+		}
+		vLogger.LogInfo("In vTestEngine validateS3Connection");
+		String TEST_BUCKET = "vstest"
+				+ (UUID.randomUUID().toString()).substring(0, 10);
+		System.out.println("Test Bucket name is: " + TEST_BUCKET);
+		try {
+			swiftapi.ViPRSwiftClient(user, key, url);
+			System.out.println("Get Client worked");
+			List<String> listofObjects = Utilites.generateFiles(
+					"validationTest", 1000, 1);
+			System.out.println(listofObjects.get(0));
+			swiftapi.CreateObject(user, key, url, TEST_BUCKET,
+					FilenameUtils.getName(listofObjects.get(0)),
+					new FileInputStream(listofObjects.get(0)));
+			System.out.println("Create object done");
+			swiftapi.DeleteObject(user, key, url, TEST_BUCKET,
+					FilenameUtils.getName(listofObjects.get(0)));
+			System.out.println("Delete object done");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			System.out.println("Validation failed: " + e.toString());
+			return false;
+		}
+		System.out.println("Validation successfully");
 		return true;
 	}
 
@@ -269,27 +308,27 @@ public class SwiftTestClient {
 		// Calculate summary numbers for the report
 		if (testconfig.getCreateOperation()) {
 			System.out
-					.println("Creating objects take " + createTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			.println("Creating objects take " + createTime / 1000000
+					+ "ms with " + testconfig.getNumberOfThreads()
+					+ " threads");
 		}
 		if (testconfig.getReadOperation()) {
 			System.out
-					.println("Reading objects take " + readTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			.println("Reading objects take " + readTime / 1000000
+					+ "ms with " + testconfig.getNumberOfThreads()
+					+ " threads");
 		}
 		if (testconfig.getUpdateOperation()) {
 			System.out
-					.println("Updating objects take " + updateTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			.println("Updating objects take " + updateTime / 1000000
+					+ "ms with " + testconfig.getNumberOfThreads()
+					+ " threads");
 		}
 		if (testconfig.getDeleteOperation()) {
 			System.out
-					.println("Deleting objects take " + deleteTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			.println("Deleting objects take " + deleteTime / 1000000
+					+ "ms with " + testconfig.getNumberOfThreads()
+					+ " threads");
 		}
 
 		System.out.println("Total test time: " + totaltime / 1000000 + "ms");
@@ -300,8 +339,8 @@ public class SwiftTestClient {
 			report.setTotalVolumeSent(Long
 					.toString(
 							(createOps + updateOps)
-									* (long) testconfig.getObjectSize())
-					.toString());
+							* (long) testconfig.getObjectSize())
+							.toString());
 		} else
 			report.setTotalVolumeSent("0");
 
@@ -330,8 +369,8 @@ public class SwiftTestClient {
 							|| erd.getCrudValue().contains("Read")) {
 						maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
 								.parseLong(erd.getDataValue()) : maxValue;
-						minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
-								.parseLong(erd.getDataValue()) : minValue;
+								minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
+										.parseLong(erd.getDataValue()) : minValue;
 					}
 				}
 				System.out.println(maxValue + " ms - max value");

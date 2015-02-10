@@ -1,5 +1,6 @@
 package vStrikerTestEngine;
 
+import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.io.FilenameUtils;
 
 import vStrikerBizModel.ExecutionReportBiz;
 import vStrikerBizModel.ExecutionReportDataBiz;
@@ -20,17 +23,47 @@ import vStrikerTestEngine.atmos.AtmosCreateWorker;
 import vStrikerTestEngine.atmos.AtmosDeleteWorker;
 import vStrikerTestEngine.atmos.AtmosReadWorker;
 import vStrikerTestEngine.atmos.AtmosUpdateWorker;
-import vStrikerTestEngine.s3.S3DeleteWorker;
 import vStrikerTestUtilities.Utilites;
 import vStrikerTestUtilities.vLogger;
+
+import com.emc.vipr.atmos.atmosapi;
 
 //@author Sanjeev Chauhan
 
 public class AtmosTestClient {
-	
+
 	public boolean validateConnnection(String user, String key, String url,
 			String namespace) {
 		System.out.println("In AtmosTestClient validateConnnection");
+		vLogger.LogInfo("In Atmos TestClient validateConnection");
+		if (user == null || key == null || url == null) {
+			vLogger.LogError("Please ensure user, key and url are valid");
+			return false;
+		}
+		vLogger.LogInfo("user, key and url are:" + user + " " + key + " " + url);
+		if (namespace == null || namespace.length() == 0) {
+			namespace = null;
+		}
+		try {
+			atmosapi.getAtmosApi(user, key, url);
+			vLogger.LogInfo("Get Api worked");
+			List<String> listofObjects = Utilites.generateFiles(
+					"validationTest", 1000, 1);
+			vLogger.LogInfo(listofObjects.get(0));
+			atmosapi.CreateObject(user, key, url,
+					FilenameUtils.getName(listofObjects.get(0)),
+					new FileInputStream(listofObjects.get(0)), "contentType");
+			vLogger.LogInfo("Create object done");
+			atmosapi.DeleteObject(user, key, url,
+					FilenameUtils.getName(listofObjects.get(0)), "oid");
+			vLogger.LogInfo("Delete object done");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			vLogger.LogError("Validation failed: " + e.toString());
+			return false;
+		}
+		vLogger.LogInfo("Validation successfully");
 		return true;
 	}
 
@@ -231,9 +264,9 @@ public class AtmosTestClient {
 			List<Callable<ExecutionReportData>> posttestList = new ArrayList<Callable<ExecutionReportData>>();
 
 			for (int i = deleteOps; i < maxOps; i++) {
-				Callable<ExecutionReportData> s3deleteworker = new S3DeleteWorker(
+				Callable<ExecutionReportData> atmosdeleteworker = new AtmosDeleteWorker(
 						listofObjects.get(i), api);
-				posttestList.add(s3deleteworker);
+				posttestList.add(atmosdeleteworker);
 			}
 			posttestexecutor.invokeAll(posttestList);
 			posttestexecutor.shutdown();
@@ -269,27 +302,27 @@ public class AtmosTestClient {
 		// Calculate summary numbers for the report
 		if (testconfig.getCreateOperation()) {
 			System.out
-					.println("Creating objects take " + createTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			.println("Creating objects take " + createTime / 1000000
+					+ "ms with " + testconfig.getNumberOfThreads()
+					+ " threads");
 		}
 		if (testconfig.getReadOperation()) {
 			System.out
-					.println("Reading objects take " + readTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			.println("Reading objects take " + readTime / 1000000
+					+ "ms with " + testconfig.getNumberOfThreads()
+					+ " threads");
 		}
 		if (testconfig.getUpdateOperation()) {
 			System.out
-					.println("Updating objects take " + updateTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			.println("Updating objects take " + updateTime / 1000000
+					+ "ms with " + testconfig.getNumberOfThreads()
+					+ " threads");
 		}
 		if (testconfig.getDeleteOperation()) {
 			System.out
-					.println("Deleting objects take " + deleteTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			.println("Deleting objects take " + deleteTime / 1000000
+					+ "ms with " + testconfig.getNumberOfThreads()
+					+ " threads");
 		}
 
 		System.out.println("Total test time: " + totaltime / 1000000 + "ms");
@@ -300,8 +333,8 @@ public class AtmosTestClient {
 			report.setTotalVolumeSent(Long
 					.toString(
 							(createOps + updateOps)
-									* (long) testconfig.getObjectSize())
-					.toString());
+							* (long) testconfig.getObjectSize())
+							.toString());
 		} else
 			report.setTotalVolumeSent("0");
 
@@ -330,8 +363,8 @@ public class AtmosTestClient {
 							|| erd.getCrudValue().contains("Read")) {
 						maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
 								.parseLong(erd.getDataValue()) : maxValue;
-						minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
-								.parseLong(erd.getDataValue()) : minValue;
+								minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
+										.parseLong(erd.getDataValue()) : minValue;
 					}
 				}
 				System.out.println(maxValue + " ms - max value");

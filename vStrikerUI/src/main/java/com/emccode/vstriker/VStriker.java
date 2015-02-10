@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import vStrikerEntities.Account;
+import vStrikerEntities.Api;
 
 import com.emccode.vstriker.controller.AccountController;
 import com.emccode.vstriker.controller.AtmosController;
@@ -17,6 +18,7 @@ import com.emccode.vstriker.controller.HomepageController;
 import com.emccode.vstriker.controller.ResultsChartController;
 import com.emccode.vstriker.controller.S3Controller;
 import com.emccode.vstriker.controller.SwiftController;
+
 /*
  * @author Sanjeev Chauhan
  */
@@ -69,11 +71,11 @@ public class VStriker extends Application {
 	}
 
 	// Show the home page in the application
-	public void SetTitle(String msg)
-	{
-		
+	public void SetTitle(String msg) {
+
 		this.primaryStage.setTitle(msg);
 	}
+
 	public void showHome() {
 		try {
 			// Set title
@@ -93,6 +95,7 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
+
 	public void showConfiguration() {
 		try {
 			// Set title
@@ -109,12 +112,12 @@ public class VStriker extends Application {
 			HomepageController controller = loader.getController();
 			controller.setVStrikerApp(this);
 			controller.setTab(1);
-			
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 	public void showAccount() {
 		System.out.println("In VStriker showAccount");
 		try {
@@ -135,6 +138,7 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
+
 	public void showAddConfiguration() {
 		System.out.println("In VStriker ShowEditConfiguaration");
 		try {
@@ -142,7 +146,8 @@ public class VStriker extends Application {
 			this.SetTitle("vStriker:Add Configuration");
 			// Load home layout
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(VStriker.class.getResource("view/EditConfiguration.fxml"));
+			loader.setLocation(VStriker.class
+					.getResource("view/EditConfiguration.fxml"));
 			AnchorPane layout = (AnchorPane) loader.load();
 
 			// Show the home layout in the center of the application
@@ -156,14 +161,18 @@ public class VStriker extends Application {
 			e.printStackTrace();
 		}
 	}
-	public void showCharts(java.util.List<vStrikerEntities.ExecutionReportData>  rptData, String selectedAccount,String selectedTest) {
+
+	public void showCharts(
+			java.util.List<vStrikerEntities.ExecutionReportData> rptData,
+			String selectedAccount, String selectedTest) {
 		System.out.println("In VStriker ShowEditConfiguaration");
 		try {
 			// Change page title
 			this.SetTitle("vStriker:Result Charts");
 			// Load home layout
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(VStriker.class.getResource("view/ResultsChart.fxml"));
+			loader.setLocation(VStriker.class
+					.getResource("view/ResultsChart.fxml"));
 			AnchorPane layout = (AnchorPane) loader.load();
 
 			// Show the home layout in the center of the application
@@ -171,21 +180,25 @@ public class VStriker extends Application {
 
 			// Give controller access to main app
 			ResultsChartController controller = loader.getController();
-			controller.setVStrikerApp(this,rptData,selectedAccount,selectedTest);
+			controller.setVStrikerApp(this, rptData, selectedAccount,
+					selectedTest);
 		} catch (IOException e) {
 			e.getMessage();
 			e.printStackTrace();
 		}
 	}
-	
-	public void showEditConfiguration(vStrikerEntities.ConfigurationTemplate tempcfg, vStrikerEntities.TestConfiguration testcfg, long l) {
+
+	public void showEditConfiguration(
+			vStrikerEntities.ConfigurationTemplate tempcfg,
+			vStrikerEntities.TestConfiguration testcfg, long l) {
 		System.out.println("In VStriker ShowEditConfiguaration");
 		try {
 			// Change page title
 			this.SetTitle("vStriker:Edit Configuration");
 			// Load home layout
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(VStriker.class.getResource("view/EditConfiguration.fxml"));
+			loader.setLocation(VStriker.class
+					.getResource("view/EditConfiguration.fxml"));
 			AnchorPane layout = (AnchorPane) loader.load();
 
 			// Show the home layout in the center of the application
@@ -194,13 +207,14 @@ public class VStriker extends Application {
 			// Give controller access to main app
 			EditConfigurationController controller = loader.getController();
 			controller.setVStrikerApp(this);
-			controller.seTestEntity(tempcfg,testcfg,l);
-			
+			controller.seTestEntity(tempcfg, testcfg, l);
+
 		} catch (IOException e) {
 			e.getMessage();
 			e.printStackTrace();
 		}
 	}
+
 	public void updateAccount(Account validAcct) {
 		System.out.println("In VStriker updateAccount");
 		try {
@@ -243,6 +257,27 @@ public class VStriker extends Application {
 		}
 	}
 
+	public void updateS3API(Account validAcct, Api validApi) {
+		System.out.println("In VStriker updateS3API");
+		try {
+			// Change page title
+			this.SetTitle("vStriker:S3 API Information");
+			// Load Swift page
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VStriker.class.getResource("view/S3API.fxml"));
+			AnchorPane SwiftLayout = (AnchorPane) loader.load();
+
+			// Show the Swift page in the center of the application
+			vStrikerLayout.setCenter(SwiftLayout);
+
+			// Give controller access to the main application
+			S3Controller controller = loader.getController();
+			controller.updateS3Api(this, validAcct, validApi);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void showSwiftAPI(Account validAcct) {
 		System.out.println("In VStriker showSwiftAPI");
 		try {
@@ -264,6 +299,27 @@ public class VStriker extends Application {
 		}
 	}
 
+	public void updateSwiftAPI(Account validAcct, Api validApi) {
+		System.out.println("In VStriker updateSwiftAPI");
+		try {
+			// Change page title
+			this.SetTitle("vStriker:Swift API Information");
+			// Load Swift page
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VStriker.class.getResource("view/SwiftAPI.fxml"));
+			AnchorPane SwiftLayout = (AnchorPane) loader.load();
+
+			// Show the Swift page in the center of the application
+			vStrikerLayout.setCenter(SwiftLayout);
+
+			// Give controller access to the main application
+			SwiftController controller = loader.getController();
+			controller.updateSwiftApi(this, validAcct, validApi);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void showAtmosAPI(Account validAcct) {
 		System.out.println("In VStriker showAtmosAPI");
 		try {
@@ -280,6 +336,27 @@ public class VStriker extends Application {
 			// Give controller access to the main app
 			AtmosController controller = loader.getController();
 			controller.setVStrikerApp(this, validAcct);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void updateAtmosAPI(Account validAcct, Api validApi) {
+		System.out.println("In VStriker updateAtmosAPI");
+		try {
+			// Change page title
+			this.SetTitle("vStriker:Atmos API Information");
+			// Load Swift page
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VStriker.class.getResource("view/AtmosAPI.fxml"));
+			AnchorPane SwiftLayout = (AnchorPane) loader.load();
+
+			// Show the Swift page in the center of the application
+			vStrikerLayout.setCenter(SwiftLayout);
+
+			// Give controller access to the main application
+			AtmosController controller = loader.getController();
+			controller.updateAtmosApi(this, validAcct, validApi);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -23,6 +23,8 @@ import vStrikerBizModel.AccountBiz;
 import vStrikerBizModel.ApiBiz;
 import vStrikerEntities.Account;
 import vStrikerEntities.Api;
+import vStrikerTestEngine.Engine;
+import vStrikerTestEngine.VEngine;
 
 import com.emccode.vstriker.VStriker;
 
@@ -94,34 +96,34 @@ public class AccountController {
 			listofcheckboxes = setupCheckboxColumn(accountApis);
 			apiDetail.setItems(accountApis);
 			SelectColumn
-					.setCellFactory(CheckBoxTableCell
-							.forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
-								@Override
-								public ObservableValue<Boolean> call(
-								Integer index) {
-									// return new SimpleBooleanProperty();
-									System.out.println("Index is: " + index);
-									return listofcheckboxes.get(index);
-								}
-							}));
+			.setCellFactory(CheckBoxTableCell
+					.forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
+						@Override
+						public ObservableValue<Boolean> call(
+										Integer index) {
+							// return new SimpleBooleanProperty();
+							System.out.println("Index is: " + index);
+							return listofcheckboxes.get(index);
+						}
+					}));
 			APIColumn
-					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-							cellData.getValue().getApiType().getApiTypeName()));
+			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+					cellData.getValue().getApiType().getApiTypeName()));
 			KeyColumn
-					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-							cellData.getValue().getSecretKey()));
+			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+					cellData.getValue().getSecretKey()));
 			EndPointColumn
-					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-							cellData.getValue().getUrl()));
+			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+					cellData.getValue().getUrl()));
 			ProtocolColumn
-					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-							cellData.getValue().getUrl().contains("https") ? "https"
-									: "http"));
+			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+					cellData.getValue().getUrl().contains("https") ? "https"
+							: "http"));
 			PortColumn
-					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-							cellData.getValue().getUrl().contains("https") ? cellData
-									.getValue().getHttpsAddressPort()
-									: cellData.getValue().getHttpAddressPort()));
+			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+					cellData.getValue().getUrl().contains("https") ? cellData
+							.getValue().getHttpsAddressPort()
+							: cellData.getValue().getHttpAddressPort()));
 			SelectColumn.setEditable(true);
 			apiDetail.setEditable(true);
 		} catch (Exception e) {
@@ -145,6 +147,20 @@ public class AccountController {
 	@FXML
 	public void validateAPIClicked(ActionEvent event) {
 		System.out.println("Validate API button clicked");
+		int selectedrow = getSelectedRow();
+		if (selectedrow != -1) {
+			Api selectedApi = apiDetail.getItems().get(selectedrow);
+			Engine e = new VEngine();
+			if (e.validateSwiftConnnection(selectedApi.getSubtenant(),
+					selectedApi.getSecretKey(), selectedApi.getUrl(),
+					selectedApi.getBucket())) {
+				System.out.println("Connection is validated");
+			} else {
+				System.out.println("Connection is not working");
+			}
+		} else {
+			System.out.println("No row selected");
+		}
 	}
 
 	@FXML
@@ -154,27 +170,46 @@ public class AccountController {
 		if (accountName.getText() == null
 				|| accountName.getText().length() == 0
 				|| accountLocation.getText() == null
-				|| accountLocation.getText().length() == 0) {
-			System.out.println("Please set Account Name and Account Location");
+				|| accountLocation.getText().length() == 0
+				|| getSelectedRow() == -1) {
+			System.out
+			.println("Please set Account Name and Account Location and select a row");
+		}
+		int selectedRow = getSelectedRow();
+		if (selectedRow != -1) {
+			switch (apiDetail.getItems().get(selectedRow).getApiType()
+					.getApiTypeName()) {
+			case "S3":
+				vStriker.updateS3API(validAcct,
+						apiDetail.getItems().get(selectedRow));
+				break;
+			case "Swift":
+				vStriker.updateSwiftAPI(validAcct,
+								apiDetail.getItems().get(selectedRow));
+				break;
+			case "Atmos":
+				vStriker.updateAtmosAPI(validAcct,
+						apiDetail.getItems().get(selectedRow));
+				break;
+			default:
+				System.out.println("updateApi - unexpected case");
+			}
 		}
 	}
 
 	@FXML
 	public void deleteAPIClicked(ActionEvent event) {
 		System.out.println("Delete API button clicked");
-		if (listofcheckboxes == null) {
-			System.out
-					.println("List of checkboxes not initialized - Unexpected error");
-		}
-		int selectedrow = -1;
-		for (int i = 0; i < listofcheckboxes.size(); i++) {
-			if (listofcheckboxes.get(i).get()) {
-				selectedrow = i;
-			}
-		}
+		/*
+		 * if (listofcheckboxes == null) { System.out
+		 * .println("List of checkboxes not initialized - Unexpected error");
+		 * return; } int selectedrow = -1; for (int i = 0; i <
+		 * listofcheckboxes.size(); i++) { if (listofcheckboxes.get(i).get()) {
+		 * selectedrow = i; } }
+		 */
+		int selectedrow = getSelectedRow();
 		if (selectedrow != -1) {
-			List<Api> apis = apiDetail.getItems();
-			Api selectedApi = apis.get(selectedrow);
+			Api selectedApi = apiDetail.getItems().get(selectedrow);
 			try {
 				ApiBiz.ApiDelete(selectedApi.getApiId());
 			} catch (Exception e) {
@@ -245,7 +280,7 @@ public class AccountController {
 				break;
 			default:
 				System.out
-						.println("addAPIClicked - chooseAPI is neither S3, Swift or Atmos");
+				.println("addAPIClicked - chooseAPI is neither S3, Swift or Atmos");
 				break;
 			}
 		} catch (Exception e) {
@@ -288,5 +323,21 @@ public class AccountController {
 		}
 		System.out.println("Returning list of BooleanProperty");
 		return listBool;
+	}
+
+	private int getSelectedRow() {
+		if (listofcheckboxes == null) {
+			System.out
+			.println("List of checkboxes not initialized - Unexpected error");
+			return -1;
+		}
+		int selectedrow = -1;
+		for (int i = 0; i < listofcheckboxes.size(); i++) {
+			if (listofcheckboxes.get(i).get()) {
+				System.out.println("selected row is: " + i);
+				selectedrow = i;
+			}
+		}
+		return selectedrow;
 	}
 }
