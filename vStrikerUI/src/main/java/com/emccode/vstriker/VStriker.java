@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import org.controlsfx.control.StatusBar;
+
 import vStrikerEntities.Account;
 import vStrikerEntities.Api;
 
@@ -26,6 +29,7 @@ public class VStriker extends Application {
 
 	private Stage primaryStage;
 	private BorderPane vStrikerLayout;
+	public StatusBar statusbar = new StatusBar();
 
 	// Replace with Account from vStrikerEntities package - ToDo
 	// private ObservableList<Account> accountData =
@@ -61,6 +65,9 @@ public class VStriker extends Application {
 			loader.setLocation(VStriker.class.getResource("view/VStriker.fxml"));
 			vStrikerLayout = (BorderPane) loader.load();
 
+			// Statusbar at the bottom
+			vStrikerLayout.setBottom(statusbar);
+
 			// Show the scene layout
 			Scene scene = new Scene(vStrikerLayout);
 			primaryStage.setScene(scene);
@@ -87,6 +94,7 @@ public class VStriker extends Application {
 
 			// Show the home layout in the center of the application
 			vStrikerLayout.setCenter(homeLayout);
+			statusbar.setText("Status: vStriker homepage");
 
 			// Give controller access to main app
 			HomepageController controller = loader.getController();

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Label layoutX="85.0" layoutY="47.0" text="Account and API/Protocol to be validated" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="25.0" />
+      <HBox layoutX="50.0" layoutY="62.0" spacing="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+         <children>
+            <Label layoutX="50.0" layoutY="88.0" text="Account Name:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <Label layoutX="179.0" layoutY="88.0" text="Account Location:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </HBox>
+      <TableView editable="true" layoutX="50.0" layoutY="99.0" prefHeight="138.0" prefWidth="518.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+        <columns>
+          <TableColumn prefWidth="48.0" text="Select" />
+          <TableColumn prefWidth="54.0" text="API" />
+            <TableColumn prefWidth="73.0" text="Protocol" />
+            <TableColumn prefWidth="69.0" text="Port" />
+            <TableColumn prefWidth="115.0" text="Key" />
+            <TableColumn prefWidth="140.0" text="EndPoint" />
+        </columns>
+      </TableView>
+      <Button layoutX="266.0" layoutY="255.0" mnemonicParsing="false" text="Validate" />
+      <HBox layoutX="32.0" layoutY="294.0" spacing="10.0">
+         <children>
+            <Label layoutX="32.0" layoutY="298.0" text="Validation process" />
+            <ProgressBar layoutX="150.0" layoutY="294.0" prefHeight="20.0" prefWidth="298.0" progress="0.0" />
+            <Label layoutX="461.0" layoutY="296.0" text="Validation complete!" />
+         </children>
+      </HBox>
+      <TextArea layoutX="55.0" layoutY="335.0" prefHeight="90.0" prefWidth="500.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+      <Button layoutX="441.0" layoutY="443.0" mnemonicParsing="false" text="Back to Account &gt;&gt;" AnchorPane.rightAnchor="50.0" />
+   </children>
+</AnchorPane>

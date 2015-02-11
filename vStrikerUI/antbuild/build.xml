@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<project name="vStrikerUI" default="do-deploy" basedir="."  xmlns:fx="javafx:com.sun.javafx.tools.ant">
+		<property name="vStriker.location" value="/Users/sanjeev/Sanjeev/emc/dev" />
+	<target name="init-fx-tasks">
+		<path id="fxant">
+			<filelist>
+				<file name="${java.home}\..\lib\ant-javafx.jar"/>
+				<file name="${java.home}\lib\jfxrt.jar"/>
+			</filelist>
+		</path>
+	
+		<taskdef resource="com/sun/javafx/tools/ant/antlib.xml"      
+			uri="javafx:com.sun.javafx.tools.ant"
+			classpathref="fxant"/>
+	</target>
+	<target name="setup-staging-area">
+		<delete dir="externalLibs" />
+		<delete dir="project" />
+		<delete dir="projectRefs" />
+		
+		<mkdir dir="externalLibs" />
+		
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="s3-client-2.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="javax.persistence.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="slf4j-api-1.7.5.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries/EclipseLink 2.5.2/eclipselink/jlib">
+				<filename name="eclipselink.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="netflix-statistics-0.1.1.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="commons-io-2.4.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="atmos-client-2.2.1.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="commons-codec-1.6.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="log4j-1.2.16.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="servo-core-0.4.44.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="aws-java-sdk-1.7.5.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="netflix-commons-util-0.1.1.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="joss-0.9.8.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="h2-1.4.184.jar"/>	
+			</fileset>
+		</copy>
+		
+		<mkdir dir="project" />
+		<copy todir="project">
+			<fileset dir="${vStriker.location}/VStriker/vStrikerUI">
+				<include name="src/main/java/**" />
+			</fileset>
+		</copy>
+		
+		<mkdir dir="projectRefs" />
+		<copy todir="projectRefs">
+			<fileset dir="${vStriker.location}/VStriker">
+				<include name="vStrikerAPI/src/**" />
+			</fileset>
+		</copy>
+		<copy todir="projectRefs">
+			<fileset dir="${vStriker.location}/VStriker">
+				<include name="vStrikerEntities/src/**" />
+			</fileset>
+		</copy>
+		<copy todir="projectRefs">
+			<fileset dir="${vStriker.location}/VStriker">
+				<include name="vStrikerTestUtilities/src/**" />
+			</fileset>
+		</copy>
+		<copy todir="projectRefs">
+			<fileset dir="${vStriker.location}/VStriker">
+				<include name="vStrikerBizModel/src/**" />
+			</fileset>
+		</copy>
+		<copy todir="projectRefs">
+			<fileset dir="${vStriker.location}/VStriker">
+				<include name="vStrikerTestEngine/src/**" />
+			</fileset>
+		</copy>
+		<copy todir="projectRefs">
+			<fileset dir="${vStriker.location}/VStriker">
+				<include name="vStrikerDB/DB/**" />
+			</fileset>
+		</copy>
+	</target>
+	<target name='do-compile'>
+		<delete dir="build" />
+		<mkdir dir="build/src" />
+		<mkdir dir="build/libs" />
+		<mkdir dir="build/classes" />
+	
+		<!-- Copy project-libs references -->
+		<copy todir="build/libs">
+			<fileset dir="externalLibs">
+				<include name="commons-codec-1.6.jar"/>
+				<include name="servo-core-0.4.44.jar"/>
+				<include name="slf4j-api-1.7.5.jar"/>
+				<include name="s3-client-2.0.jar"/>
+				<include name="netflix-statistics-0.1.1.jar"/>
+				<include name="javax.persistence.jar"/>
+				<include name="atmos-client-2.2.1.jar"/>
+				<include name="eclipselink.jar"/>
+				<include name="aws-java-sdk-1.7.5.jar"/>
+				<include name="h2-1.4.184.jar"/>
+				<include name="log4j-1.2.16.jar"/>
+				<include name="commons-io-2.4.jar"/>
+				<include name="netflix-commons-util-0.1.1.jar"/>
+				<include name="joss-0.9.8.jar"/>
+			</fileset>
+		</copy>
+	
+		<!-- Copy project references -->
+		<copy todir="build/src">
+			<fileset dir="projectRefs/vStrikerTestEngine/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="build/src">
+			<fileset dir="projectRefs/vStrikerEntities/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="build/src">
+			<fileset dir="projectRefs/vStrikerTestUtilities/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="build/src">
+			<fileset dir="projectRefs/vStrikerBizModel/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="build/src">
+			<fileset dir="projectRefs/vStrikerAPI/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="build/src">
+			<fileset dir="projectRefs/vStrikerDB/DB">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	
+		<!-- Copy project sources itself -->
+		<copy todir="build/src">
+			<fileset dir="project/src/main/java">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	
+		<javac includeantruntime="false" source="1.8" target="1.8" srcdir="build/src" destdir="build/classes" encoding="UTF-8">
+			<classpath>
+				<fileset dir="build/libs">
+					<include name="*"/>
+				</fileset>
+			</classpath>
+		</javac>
+		
+		<!-- Copy over none Java-Files -->
+		<copy todir="build/classes">
+		<fileset dir="project/src/main/java">
+			<exclude name="**/*.java"/>
+		</fileset>
+		</copy>
+	
+		<copy todir="build/classes">
+			<fileset dir="projectRefs/vStrikerTestEngine/src">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+		<copy todir="build/classes">
+			<fileset dir="projectRefs/vStrikerEntities/src">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+		<copy todir="build/classes">
+			<fileset dir="projectRefs/vStrikerTestUtilities/src">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+		<copy todir="build/classes">
+			<fileset dir="projectRefs/vStrikerBizModel/src">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+		<copy todir="build/classes">
+			<fileset dir="projectRefs/vStrikerAPI/src">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+	
+	</target>
+	<target name="do-deploy" depends="setup-staging-area, do-compile, init-fx-tasks">
+		<delete file="dist"/>
+		<delete file="deploy" />
+		
+		<delete dir="dist" />
+		<delete dir="deploy" />
+		
+		<mkdir dir="dist" />
+		<mkdir dir="dist/libs" />
+		<mkdir dir="dist/DB" />
+		
+		<copy todir="dist/libs">
+			<fileset dir="externalLibs">
+				<include name="*" />
+			</fileset>
+		</copy>	
+		<copy todir="dist/DB">
+			<fileset dir="projectRefs/vStrikerDB/DB">
+				<include name="*.db" />
+			</fileset>
+		</copy>
+		
+		<fx:resources id="appRes">
+			<fx:fileset dir="dist" includes="vStriker.jar"/>
+			<fx:fileset dir="dist" includes="libs/*"/>
+			<fx:fileset dir="dist" includes="DB/vstrikerdb.mv.db"/>
+		</fx:resources> 
+		
+		<fx:application id="fxApplication"
+			name="vStriker"
+			mainClass="com.emccode.vstriker.VStriker"
+		/>
+	
+		<mkdir dir="build/classes/META-INF" />
+		
+		
+		
+		<fx:jar destfile="dist/vStriker.jar">
+			<fx:application refid="fxApplication"/>
+			<fileset dir="build/classes">
+			</fileset>
+			<fx:resources refid="appRes"/>
+			
+			<manifest>
+				<attribute name="Implementation-Vendor" value="EMC"/>
+				<attribute name="Implementation-Title" value="vStriker"/>
+				<attribute name="Implementation-Version" value="0.1"/>
+				<attribute name="JavaFX-Feature-Proxy" value="None"/>
+			</manifest>
+		</fx:jar>
+		
+		<copy todir="../../release/beta">
+				<fileset dir="dist">
+					<include name="*" />
+				</fileset>
+			</copy>
+			<copy todir="../../release/beta/DB">
+				<fileset dir="dist/DB">
+					<include name="*" />
+				</fileset>
+			</copy>
+			<copy todir="../../release/beta/libs">
+				<fileset dir="dist/libs">
+					<include name="*" />
+				</fileset>
+			</copy>
+		
+		<mkdir dir="deploy" />
+		<!-- Need to use ${basedir} because somehow the ant task is calculating the directory differently 
+		<fx:deploy
+			embedJNLP="false"
+			extension="false"
+			includeDT="false"
+			offlineAllowed="true"
+			outdir="${basedir}/deploy"
+			outfile="vStriker" nativeBundles="dmg"
+			updatemode="background" >
+	
+			<fx:info title="vStriker" vendor="EMC"/>
+			<fx:application refId="fxApplication"/>
+			<fx:resources refid="appRes"/>
+		</fx:deploy>
+		-->
+		
+	</target>
+</project>

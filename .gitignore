@@ -2,6 +2,13 @@
 /release/
 /build/
 /bin/
+/vStrikerUI/StageFiles/
+/vStrikerUI/antbuild/build/
+/vStrikerUI/antbuild/dist/
+/vStrikerUI/antbuild/externalLibs/
+/vStrikerUI/antbuild/project/
+/vStrikerUI/antbuild/projectRefs/
+
 target/
 stagefile/ 
 # OS Files #
