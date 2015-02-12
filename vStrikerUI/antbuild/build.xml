@@ -90,6 +90,11 @@
 				<filename name="h2-1.4.184.jar"/>	
 			</fileset>
 		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="${vStriker.location}/VStriker/libraries">
+				<filename name="controlsfx-8.20.8.jar"/>	
+			</fileset>
+		</copy>
 		
 		<mkdir dir="project" />
 		<copy todir="project">
@@ -153,6 +158,7 @@
 				<include name="commons-io-2.4.jar"/>
 				<include name="netflix-commons-util-0.1.1.jar"/>
 				<include name="joss-0.9.8.jar"/>
+				<include name="controlsfx-8.20.8.jar"/>
 			</fileset>
 		</copy>
 	

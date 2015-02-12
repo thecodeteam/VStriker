@@ -109,6 +109,8 @@
 			location="${vStrikerAPI.location}/../libraries/smart-client-2.0.jar" />
 		<pathelement
 			location="${vStrikerAPI.location}/../libraries/vipr-object-transformations-2.0.1.jar" />
+		<pathelement
+			location="${vStrikerAPI.location}/../libraries/controlsfx-8.20.8.jar" />
 	</path>
 	<path id="Generic JDBC Driver.libraryclasspath">
 		<pathelement location="../libraries/h2-1.4.184.jar" />
@@ -206,6 +208,8 @@
 			location="${vStrikerEntities.location}/../libraries/joda-time-2.3.jar" />
 		<pathelement
 			location="${vStrikerEntities.location}/../libraries/joss-0.9.8.jar" />
+		<pathelement
+					location="${vStrikerEntities.location}/../libraries/controlsfx-8.20.8.jar" />
 		<pathelement
 			location="${vStrikerEntities.location}/../libraries/jsr311-api-1.1.1.jar" />
 		<pathelement location="${vStrikerEntities.location}/../libraries/junit.jar" />
@@ -316,6 +320,8 @@
 			location="${vStrikerBizModel.location}/../libraries/joda-time-2.3.jar" />
 		<pathelement
 			location="${vStrikerBizModel.location}/../libraries/joss-0.9.8.jar" />
+		<pathelement
+					location="${vStrikerBizModel.location}/../libraries/controlsfx-8.20.8.jar" />
 		<pathelement
 			location="${vStrikerBizModel.location}/../libraries/jsr311-api-1.1.1.jar" />
 		<pathelement location="${vStrikerBizModel.location}/../libraries/junit.jar" />
@@ -437,6 +443,8 @@
 			location="${vStrikerTestEngine.location}/../libraries/joda-time-2.3.jar" />
 		<pathelement
 			location="${vStrikerTestEngine.location}/../libraries/joss-0.9.8.jar" />
+		<pathelement
+					location="${vStrikerTestEngine.location}/../libraries/controlsfx-8.20.8.jar" />
 		<pathelement
 			location="${vStrikerTestEngine.location}/../libraries/jsr311-api-1.1.1.jar" />
 		<pathelement location="${vStrikerTestEngine.location}/../libraries/junit.jar" />
@@ -613,6 +621,7 @@
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/h2-1.4.184.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/EclipseLink 2.5.2/eclipselink/jlib/eclipselink.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/joss-0.9.8.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/controlsfx-8.20.8.jar"/>    	
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/security-1.1.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/rest_model-1.0.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${vStriker.location}/libraries/commons-logging-api-1.1.jar"/>
