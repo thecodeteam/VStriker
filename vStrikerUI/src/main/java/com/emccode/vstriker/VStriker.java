@@ -14,6 +14,7 @@ import org.controlsfx.control.StatusBar;
 import vStrikerEntities.Account;
 import vStrikerEntities.Api;
 
+import com.emccode.vstriker.controller.APIValidationController;
 import com.emccode.vstriker.controller.AccountController;
 import com.emccode.vstriker.controller.AtmosController;
 import com.emccode.vstriker.controller.EditConfigurationController;
@@ -143,6 +144,30 @@ public class VStriker extends Application {
 			AccountController controller = loader.getController();
 			controller.createAccount(this);
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void showApiValidation(int accountId) {
+		System.out.println("In VStriker showApiValidation");
+		try {
+			// Change page title
+			this.SetTitle("vStriker:API Validation");
+			// Load home layout
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VStriker.class
+					.getResource("view/APIvalidation.fxml"));
+			AnchorPane apivalidationLayout = (AnchorPane) loader.load();
+
+			// Show the home layout in the center of the application
+			vStrikerLayout.setCenter(apivalidationLayout);
+
+			// Give controller access to main app
+			APIValidationController controller = loader.getController();
+			controller.setup(this, accountId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			statusbar.setText("Unexpected error: " + e.toString());
 			e.printStackTrace();
 		}
 	}

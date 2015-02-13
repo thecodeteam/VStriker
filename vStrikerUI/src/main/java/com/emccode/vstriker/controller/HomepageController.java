@@ -29,8 +29,6 @@ import vStrikerBizModel.ApiBiz;
 import vStrikerEntities.Account;
 import vStrikerEntities.Api;
 import vStrikerEntities.VwAccountDetail;
-import vStrikerTestEngine.Engine;
-import vStrikerTestEngine.VEngine;
 
 import com.emccode.vstriker.VStriker;
 
@@ -263,51 +261,35 @@ public class HomepageController {
 			vStriker.statusbar.setText("Please select an Account to validate");
 			return;
 		}
-		ObservableList<Account> accts = accountTable.getItems();
-		try {
-			// List<Api> listApi =
-			// ApiBiz.ApiSelectforAccount((accts.get(selectedRow).getAccountId()));
-			List<Api> listApi = (AccountBiz.AccountSelect(accts
-					.get(selectedRow).getAccountId())).getApis();
-			for (Api a : listApi) {
-				switch (a.getApiType().getApiTypeName()) {
+		vStriker.showApiValidation((int) accountTable.getItems()
+				.get(selectedRow).getAccountId());
 
-				case "S3":
-					if (a.getSecretKey() != null && a.getUrl() != null
-					&& a.getSubtenant() != null) {
-						Engine e = new VEngine();
-						if (e.validateS3Connection(a.getSubtenant(),
-								a.getSecretKey(), a.getUrl(), "")) {
-							System.out.println("S3 connection is validated");
-							vStriker.statusbar
-									.setText("S3 connection is validated");
-						} else {
-							System.out.println("S3 connection is not working");
-							vStriker.statusbar
-									.setText("S3 connection is not working");
-						}
-					}
-					break;
-				case "Atmos":
-					System.out.println("Atmos");
-					break;
-				case "Swift":
-					System.out.println("Swift");
-					break;
-				default:
-					System.out
-					.println("Please check to ensure the right type of Api is set");
-					vStriker.statusbar
-							.setText("Please check to ensure the right type of Api is set");
-				}
-			}
-
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			System.out.println("Unable to validate account Apis");
-			vStriker.statusbar.setText("Unable to validate account Apis");
-			e1.printStackTrace();
-		}
+		/*
+		 * ObservableList<Account> accts = accountTable.getItems(); try { //
+		 * List<Api> listApi = //
+		 * ApiBiz.ApiSelectforAccount((accts.get(selectedRow).getAccountId()));
+		 * List<Api> listApi = (AccountBiz.AccountSelect(accts
+		 * .get(selectedRow).getAccountId())).getApis(); for (Api a : listApi) {
+		 * switch (a.getApiType().getApiTypeName()) {
+		 *
+		 * case "S3": if (a.getSecretKey() != null && a.getUrl() != null &&
+		 * a.getSubtenant() != null) { Engine e = new VEngine(); if
+		 * (e.validateS3Connection(a.getSubtenant(), a.getSecretKey(),
+		 * a.getUrl(), "")) { System.out.println("S3 connection is validated");
+		 * vStriker.statusbar .setText("S3 connection is validated"); } else {
+		 * System.out.println("S3 connection is not working");
+		 * vStriker.statusbar .setText("S3 connection is not working"); } }
+		 * break; case "Atmos": System.out.println("Atmos"); break; case
+		 * "Swift": System.out.println("Swift"); break; default: System.out
+		 * .println("Please check to ensure the right type of Api is set");
+		 * vStriker.statusbar
+		 * .setText("Please check to ensure the right type of Api is set"); } }
+		 *
+		 * } catch (Exception e1) { // TODO Auto-generated catch block
+		 * System.out.println("Unable to validate account Apis");
+		 * vStriker.statusbar.setText("Unable to validate account Apis");
+		 * e1.printStackTrace(); }
+		 */
 
 	}
 
