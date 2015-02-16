@@ -193,7 +193,6 @@ public class S3TestClient {
 
 		// The test
 		long totaltime = System.nanoTime();
-		System.out.println("totaltime start : " + totaltime);
 		ExecutorService executor = Executors.newFixedThreadPool(testconfig
 				.getNumberOfThreads());
 		List<ExecutionReportData> list = new ArrayList<ExecutionReportData>();
@@ -213,6 +212,7 @@ public class S3TestClient {
 				failurelist.add(erd);
 			}
 		}
+		System.out.println("Create operations completed ");
 
 		long readTime = System.nanoTime();
 		futurelist = executor.invokeAll(readworkersList);
@@ -227,6 +227,7 @@ public class S3TestClient {
 				failurelist.add(erd);
 			}
 		}
+		System.out.println("Read operations completed ");
 
 		long updateTime = System.nanoTime();
 		futurelist = executor.invokeAll(updateworkersList);
@@ -241,6 +242,7 @@ public class S3TestClient {
 				failurelist.add(erd);
 			}
 		}
+		System.out.println("Update operations completed ");
 
 		long deleteTime = System.nanoTime();
 		futurelist = executor.invokeAll(deleteworkersList);
@@ -255,6 +257,7 @@ public class S3TestClient {
 				failurelist.add(erd);
 			}
 		}
+		System.out.println("Delete operations completed ");
 
 		executor.shutdown();
 		try {
@@ -305,35 +308,31 @@ public class S3TestClient {
 		for (ExecutionReportData e : list) {
 			e.setExecutionReport(report);
 			ExecutionReportDataBiz.ExecutionReportDataCreate(e);
-			System.out.println("Id of the data object saved: "
-					+ e.getExecutionReportDataId());
+			// System.out.println("Id of the data object saved: " +
+			// e.getExecutionReportDataId());
 		}
 		System.out.println("Id of the summary object saved: "
 				+ report.getExecutionReportId());
 		// Calculate summary numbers for the report
 		if (testconfig.getCreateOperation()) {
-			System.out
-					.println("Creating objects take " + createTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			System.out.println("Creating " + createOps + " objects take "
+					+ createTime / 1000000 + "ms with "
+					+ testconfig.getNumberOfThreads() + " threads");
 		}
 		if (testconfig.getReadOperation()) {
-			System.out
-					.println("Reading objects take " + readTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			System.out.println("Reading " + readOps + " objects take "
+					+ readTime / 1000000 + "ms with "
+					+ testconfig.getNumberOfThreads() + " threads");
 		}
 		if (testconfig.getUpdateOperation()) {
-			System.out
-					.println("Updating objects take " + updateTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			System.out.println("Updating " + updateOps + " objects take "
+					+ updateTime / 1000000 + "ms with "
+					+ testconfig.getNumberOfThreads() + " threads");
 		}
 		if (testconfig.getDeleteOperation()) {
-			System.out
-					.println("Deleting objects take " + deleteTime / 1000000
-							+ "ms with " + testconfig.getNumberOfThreads()
-							+ " threads");
+			System.out.println("Deleting " + deleteOps + " objects take "
+					+ deleteTime / 1000000 + "ms with "
+					+ testconfig.getNumberOfThreads() + " threads");
 		}
 
 		System.out.println("Total test time: " + totaltime / 1000000 + "ms");
@@ -344,8 +343,8 @@ public class S3TestClient {
 			report.setTotalVolumeSent(Long
 					.toString(
 							(createOps + updateOps)
-									* (long) testconfig.getObjectSize())
-					.toString());
+							* (long) testconfig.getObjectSize())
+							.toString());
 		} else
 			report.setTotalVolumeSent("0");
 
@@ -374,8 +373,8 @@ public class S3TestClient {
 							|| erd.getCrudValue().contains("Read")) {
 						maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
 								.parseLong(erd.getDataValue()) : maxValue;
-						minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
-								.parseLong(erd.getDataValue()) : minValue;
+								minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
+										.parseLong(erd.getDataValue()) : minValue;
 					}
 				}
 				System.out.println(maxValue + " ms - max value");

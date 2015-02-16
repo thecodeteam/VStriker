@@ -1,4 +1,5 @@
 package vStrikerTestEngine.s3;
+
 import java.util.concurrent.Callable;
 
 import org.apache.commons.io.FilenameUtils;
@@ -27,17 +28,17 @@ public class S3ReadWorker implements Callable<ExecutionReportData> {
 		this.api = api;
 	}
 
+	@Override
 	public ExecutionReportData call() throws Exception {
 		// Read object from S3
 		long startTime = System.nanoTime();
 		s3api.ReadObject(api.getSubtenant(), api.getSecretKey(), api.getUrl(),
 				null, api.getBucket(), FilenameUtils.getName(objectLocation));
 		long endTime = System.nanoTime();
-		System.out.println("ReadObject execution time: " + (endTime - startTime));
 		reportData.setDataKey("S3");
 		reportData.setThreadValue(Thread.currentThread().getName());
 		reportData.setCrudValue("Read");
-		reportData.setDataValue(Long.toString((endTime-startTime)/1000000));
+		reportData.setDataValue(Long.toString((endTime - startTime) / 1000000));
 		return reportData;
 	}
 }

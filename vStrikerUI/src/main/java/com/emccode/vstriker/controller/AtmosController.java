@@ -99,7 +99,7 @@ public class AtmosController {
 			return;
 		}
 		Engine engine = new VEngine();
-		if (engine.validateAtmosConnnection(atmosuser.getText(),
+		if (engine.validateAtmosConnection(atmosuser.getText(),
 				atmossecretkey.getText(), atmosurl.getText(), null)) {
 			System.out.println("Atmos connection is validated");
 		} else {
@@ -119,7 +119,7 @@ public class AtmosController {
 				|| atmosbucket.getText() == null
 				|| atmosbucket.getText().length() == 0) {
 			System.out
-			.println("Please set Access Key, URL, Secret Key and Bucket name");
+					.println("Please set Access Key, URL, Secret Key and Bucket name");
 			return;
 		}
 		if (saveAtmos.getText().equals("Update")) {

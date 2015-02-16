@@ -82,7 +82,7 @@ public class APIValidationController {
 		this.vStriker = vStriker;
 		this.validAcct = AccountBiz.AccountSelect(accountId);
 		this.apis = ApiBiz.ApiSelectforAccount(validAcct);
-		vStriker.statusbar.setText("");
+		vStriker.postStatus("");
 		acctname.setText(validAcct.toString());
 		acctlocation.setText(validAcct.getAccountLocation());
 		populateApiTable();
@@ -95,34 +95,32 @@ public class APIValidationController {
 			List<BooleanProperty> listofcheckboxes = setupCheckboxColumn(accountApis);
 			apiDetail.setItems(accountApis);
 			SelectColumn
-			.setCellFactory(CheckBoxTableCell
-					.forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
-						@Override
-						public ObservableValue<Boolean> call(
-								Integer index) {
-							// return new SimpleBooleanProperty();
-							System.out.println("Index is: " + index);
-							return listofcheckboxes.get(index);
-						}
-					}));
+					.setCellFactory(CheckBoxTableCell
+							.forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
+								@Override
+								public ObservableValue<Boolean> call(
+										Integer index) {
+									return listofcheckboxes.get(index);
+								}
+							}));
 			APIColumn
-			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-					cellData.getValue().getApiType().getApiTypeName()));
+					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+							cellData.getValue().getApiType().getApiTypeName()));
 			KeyColumn
-			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-					cellData.getValue().getSecretKey()));
+					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+							cellData.getValue().getSecretKey()));
 			EndPointColumn
-			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-					cellData.getValue().getUrl()));
+					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+							cellData.getValue().getUrl()));
 			ProtocolColumn
-			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-					cellData.getValue().getUrl().contains("https") ? "https"
-							: "http"));
+					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+							cellData.getValue().getUrl().contains("https") ? "https"
+									: "http"));
 			PortColumn
-			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-					cellData.getValue().getUrl().contains("https") ? cellData
-							.getValue().getHttpsAddressPort()
-							: cellData.getValue().getHttpAddressPort()));
+					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+							cellData.getValue().getUrl().contains("https") ? cellData
+									.getValue().getHttpsAddressPort()
+									: cellData.getValue().getHttpAddressPort()));
 			SelectColumn.setEditable(true);
 			apiDetail.setEditable(true);
 		} catch (Exception e) {
@@ -138,7 +136,6 @@ public class APIValidationController {
 		try {
 			for (Api a : apiList) {
 				listBool.add(new SimpleBooleanProperty());
-				System.out.println("Adding BooleanProperty");
 			}
 			// Add a listener for each boolean property
 			for (BooleanProperty b : listBool) {
@@ -146,7 +143,6 @@ public class APIValidationController {
 					@Override
 					public void changed(ObservableValue<? extends Boolean> obs,
 							Boolean wasSelected, Boolean isSelected) {
-						System.out.println("isSelected: " + isSelected);
 						if (b.getValue()) {
 							selectedapis.add(apiList.get(listBool.indexOf(b)));
 						} else {
@@ -158,7 +154,6 @@ public class APIValidationController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Returning list of BooleanProperty");
 		return listBool;
 	}
 
@@ -177,7 +172,7 @@ public class APIValidationController {
 
 		// Check if an api is selected
 		if (selectedapis == null || selectedapis.size() == 0) {
-			System.out.println("No apis selected");
+			vStriker.postStatus("Please select an api");
 			return;
 		}
 		validationWorker = createValidationWorker(selectedapis);
@@ -216,9 +211,10 @@ public class APIValidationController {
 									a.getSecretKey(), a.getUrl(), "")) {
 								System.out
 										.println("S3 connection is validated");
-								updateMessage(a.getSubtenant() + " "
-										+ a.getUrl() + " "
-										+ "S3 connection is validated");
+								updateMessage("S3 connection is validated for User: "
+										+ a.getSubtenant()
+										+ " at URL: "
+										+ a.getUrl());
 
 							} else {
 								System.out
@@ -239,8 +235,7 @@ public class APIValidationController {
 					default:
 						System.out
 								.println("Please check to ensure the right type of Api is set");
-						vStriker.statusbar
-								.setText("Unable to perform validation: Api not of type S3, Swift or Atmos");
+						vStriker.postStatus("Unable to perform validation: Api not of type S3, Swift or Atmos");
 					}
 					updateProgress(totalsteps, totalsteps);
 				} // end for

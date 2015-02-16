@@ -111,28 +111,31 @@ public class HomepageController {
 
 		// Add Tab Listener
 		tbMain.getSelectionModel().selectedItemProperty()
-				.addListener(new ChangeListener<Tab>() {
-					@Override
-					public void changed(ObservableValue<? extends Tab> ov,
-							Tab t, Tab t1) {
-						if (t1.getId().equals("tbExecution")) {
-							vStriker.SetTitle("vStriker:Test Execution");
-							resultsViewController.setVStrikerApp(vStriker);
-							resultsViewController.LoadLists();
-						}
+		.addListener(new ChangeListener<Tab>() {
+			@Override
+			public void changed(ObservableValue<? extends Tab> ov,
+					Tab t, Tab t1) {
+				if (t1.getId().equals("tbExecution")) {
+					vStriker.SetTitle("vStriker:Test Execution");
+					vStriker.postStatus("");
+					resultsViewController.setVStrikerApp(vStriker);
+					resultsViewController.LoadLists();
+				}
 
-						if (t1.getId().equals("tbCfg")) {
-							vStriker.SetTitle("vStriker:Configuration");
-							configurationViewController
-									.setVStrikerApp(vStriker);
-						}
+				if (t1.getId().equals("tbCfg")) {
+					vStriker.SetTitle("vStriker:Configuration");
+					vStriker.postStatus("");
+					configurationViewController
+					.setVStrikerApp(vStriker);
+				}
 
-						if (t1.getId().equals("tbAccount")) {
-							vStriker.SetTitle("vStriker");
-							resultsViewController.LoadLists();
-						}
-					}
-				});
+				if (t1.getId().equals("tbAccount")) {
+					vStriker.SetTitle("vStriker");
+					vStriker.postStatus("");
+					resultsViewController.LoadLists();
+				}
+			}
+		});
 
 		assert accountTab != null : "fx:id=\"accountTab\" was not injected: check your FXML file 'Home.fxml'.";
 		// Populate the name column
@@ -140,20 +143,19 @@ public class HomepageController {
 				cellData.getValue().getName()));
 		// Populate the location column
 		locationColumn
-		.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-				cellData.getValue().getAccountLocation()));
+				.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+						cellData.getValue().getAccountLocation()));
 
 		List<BooleanProperty> selectedRowList = setupCheckboxColumn();
 		// Populating the Checkbox Column
 		selectColumn
-		.setCellFactory(CheckBoxTableCell
-				.forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
-					@Override
-					public ObservableValue<Boolean> call(Integer index) {
-						System.out.println("Index is: " + index);
-						return selectedRowList.get(index);
-					}
-				}));
+				.setCellFactory(CheckBoxTableCell
+						.forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
+							@Override
+							public ObservableValue<Boolean> call(Integer index) {
+								return selectedRowList.get(index);
+							}
+						}));
 
 		// Populating the API Columns
 		// S3 Column
@@ -178,48 +180,48 @@ public class HomepageController {
 		});
 		// Swift Column
 		SwiftColumn
-		.setCellValueFactory(new Callback<CellDataFeatures<Account, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(
-					CellDataFeatures<Account, String> p) {
-				boolean flag = false;
-				for (VwAccountDetail view : accountData) {
-					if ((view.getAccountId() == p.getValue()
-							.getAccountId())
-							&& view.getApiTypeName() != null
-							&& view.getApiTypeName().contains("Swift")) {
-						flag = true;
+				.setCellValueFactory(new Callback<CellDataFeatures<Account, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(
+							CellDataFeatures<Account, String> p) {
+						boolean flag = false;
+						for (VwAccountDetail view : accountData) {
+							if ((view.getAccountId() == p.getValue()
+									.getAccountId())
+									&& view.getApiTypeName() != null
+									&& view.getApiTypeName().contains("Swift")) {
+								flag = true;
+							}
+						}
+						if (flag) {
+							return new SimpleStringProperty("Yes");
+						} else {
+							return new SimpleStringProperty("No");
+						}
 					}
-				}
-				if (flag) {
-					return new SimpleStringProperty("Yes");
-				} else {
-					return new SimpleStringProperty("No");
-				}
-			}
-		});
+				});
 		// Atmos Column
 		AtmosColumn
-		.setCellValueFactory(new Callback<CellDataFeatures<Account, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(
-					CellDataFeatures<Account, String> p) {
-				boolean flag = false;
-				for (VwAccountDetail view : accountData) {
-					if ((view.getAccountId() == p.getValue()
-							.getAccountId())
-							&& view.getApiTypeName() != null
-							&& view.getApiTypeName().contains("Atmos")) {
-						flag = true;
+				.setCellValueFactory(new Callback<CellDataFeatures<Account, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(
+							CellDataFeatures<Account, String> p) {
+						boolean flag = false;
+						for (VwAccountDetail view : accountData) {
+							if ((view.getAccountId() == p.getValue()
+									.getAccountId())
+									&& view.getApiTypeName() != null
+									&& view.getApiTypeName().contains("Atmos")) {
+								flag = true;
+							}
+						}
+						if (flag) {
+							return new SimpleStringProperty("Yes");
+						} else {
+							return new SimpleStringProperty("No");
+						}
 					}
-				}
-				if (flag) {
-					return new SimpleStringProperty("Yes");
-				} else {
-					return new SimpleStringProperty("No");
-				}
-			}
-		});
+				});
 		// Make the checkbox column editable
 		selectColumn.setEditable(true);
 		accountTable.setEditable(true);
@@ -257,40 +259,11 @@ public class HomepageController {
 		System.out.println("Validate account button clicked");
 		int selectedRow = getSelectedRow();
 		if (selectedRow == -1) {
-			System.out.println("Please select an Account to validate");
-			vStriker.statusbar.setText("Please select an Account to validate");
+			vStriker.postStatus("Please select an Account to validate");
 			return;
 		}
 		vStriker.showApiValidation((int) accountTable.getItems()
 				.get(selectedRow).getAccountId());
-
-		/*
-		 * ObservableList<Account> accts = accountTable.getItems(); try { //
-		 * List<Api> listApi = //
-		 * ApiBiz.ApiSelectforAccount((accts.get(selectedRow).getAccountId()));
-		 * List<Api> listApi = (AccountBiz.AccountSelect(accts
-		 * .get(selectedRow).getAccountId())).getApis(); for (Api a : listApi) {
-		 * switch (a.getApiType().getApiTypeName()) {
-		 *
-		 * case "S3": if (a.getSecretKey() != null && a.getUrl() != null &&
-		 * a.getSubtenant() != null) { Engine e = new VEngine(); if
-		 * (e.validateS3Connection(a.getSubtenant(), a.getSecretKey(),
-		 * a.getUrl(), "")) { System.out.println("S3 connection is validated");
-		 * vStriker.statusbar .setText("S3 connection is validated"); } else {
-		 * System.out.println("S3 connection is not working");
-		 * vStriker.statusbar .setText("S3 connection is not working"); } }
-		 * break; case "Atmos": System.out.println("Atmos"); break; case
-		 * "Swift": System.out.println("Swift"); break; default: System.out
-		 * .println("Please check to ensure the right type of Api is set");
-		 * vStriker.statusbar
-		 * .setText("Please check to ensure the right type of Api is set"); } }
-		 *
-		 * } catch (Exception e1) { // TODO Auto-generated catch block
-		 * System.out.println("Unable to validate account Apis");
-		 * vStriker.statusbar.setText("Unable to validate account Apis");
-		 * e1.printStackTrace(); }
-		 */
-
 	}
 
 	public void setTab(int i) {
@@ -307,9 +280,7 @@ public class HomepageController {
 		System.out.println("Update account button clicked");
 		int selectedRow = getSelectedRow();
 		if (selectedRow == -1) {
-			System.out.println("Please select an Account to update");
-			vStriker.statusbar.setText("Please select an Account to update");
-
+			vStriker.postStatus("Please select an Account to update");
 			return;
 		}
 		vStriker.updateAccount(accountTable.getItems().get(selectedRow));
@@ -321,8 +292,7 @@ public class HomepageController {
 		System.out.println("Delete account button clicked");
 		int selectedRow = getSelectedRow();
 		if (selectedRow <= 0) {
-			System.out.println("Please select a row to delete");
-			vStriker.statusbar.setText("Please select an Account to delete");
+			vStriker.postStatus("Please select an Account to delete");
 			return;
 		}
 
@@ -339,15 +309,14 @@ public class HomepageController {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("Unable to delete rows in Api table");
-			vStriker.statusbar.setText("Unable to delete rows in Api table");
+			vStriker.postStatus("Unable to delete rows in Api table");
 			e.printStackTrace();
 			return;
 		}
 
 		/*
 		 * // Delete rows from the API table try {
-		 *
+		 * 
 		 * ApiBiz.ApiDeleteByAcount(accts.get(selectedRow).getAccountId());
 		 * ObservableList<VwAccountDetail> acctDetails =
 		 * accountDetail.getItems(); acctDetails.removeAll(acctDetails); } catch
@@ -362,8 +331,7 @@ public class HomepageController {
 			AccountBiz.AccountDelete(selectedAcct.getAccountId());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			System.out.println("Unable to delete account");
-			vStriker.statusbar.setText("Unable to delete account");
+			vStriker.postStatus("Unable to delete account");
 			e.printStackTrace();
 			return;
 		}
@@ -374,7 +342,7 @@ public class HomepageController {
 		for (BooleanProperty b : selectedRowList) {
 			b.setValue(false);
 		}
-		vStriker.statusbar.setText("Delete account successful");
+		vStriker.postStatus("Delete account successful");
 	}
 
 	// Configure account button clicked
@@ -400,7 +368,6 @@ public class HomepageController {
 					@Override
 					public void changed(ObservableValue<? extends Boolean> obs,
 							Boolean wasSelected, Boolean isSelected) {
-						System.out.println("isSelected: " + isSelected);
 						// Change all other BooleanProperty to false
 						if (b.getValue()) {
 							// This means b just was selected so every other
@@ -409,7 +376,7 @@ public class HomepageController {
 								if (b != bo)
 									bo.setValue(false);
 							}
-							vStriker.statusbar.setText("");
+							vStriker.postStatus("");
 							// Show API details in the table below for Acct
 							// selected.
 							showAcctAPIDetails(acctList.get(selectedRowList
@@ -426,13 +393,9 @@ public class HomepageController {
 
 	private void showAcctAPIDetails(Account account) {
 		System.out.println("In showAcctAPIDetails");
-		System.out.println("Name: " + account.getName() + " Location: "
-				+ account.getAccountLocation() + " Id: "
-				+ account.getAccountId());
 		// If this account has not apis yet - exit immediately
 		if (account.getApis() == null || account.getApis().isEmpty()) {
-			System.out.println("Account has no apis");
-			vStriker.statusbar.setText("Account has no apis");
+			vStriker.postStatus("Account has no apis");
 			accountDetail.getItems().clear();
 			return;
 		}
@@ -447,9 +410,9 @@ public class HomepageController {
 		APIColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 				cellData.getValue().getApiTypeName()));
 		ProtocolColumn
-		.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-				cellData.getValue().getUrl().contains("https") ? "https"
-						: "http"));
+				.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+						cellData.getValue().getUrl().contains("https") ? "https"
+								: "http"));
 		PortColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 				cellData.getValue().getUrl().contains("https") ? cellData
 						.getValue().getHttpsAddressPort() : cellData.getValue()
@@ -457,8 +420,8 @@ public class HomepageController {
 		KeyColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
 				cellData.getValue().getSecretKey()));
 		EndPointColumn
-		.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-				cellData.getValue().getUrl()));
+				.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+						cellData.getValue().getUrl()));
 	}
 
 	private int getSelectedRow() {
@@ -466,7 +429,7 @@ public class HomepageController {
 		for (BooleanProperty b : selectedRowList) {
 			if (b.getValue()) {
 				selectedRow = selectedRowList.indexOf(b);
-				System.out.println("selected row is: " + selectedRow);
+				// System.out.println("selected row is: " + selectedRow);
 				return selectedRow;
 			}
 		}

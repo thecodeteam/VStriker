@@ -30,23 +30,11 @@ public class VStriker extends Application {
 
 	private Stage primaryStage;
 	private BorderPane vStrikerLayout;
-	public StatusBar statusbar = new StatusBar();
-
-	// Replace with Account from vStrikerEntities package - ToDo
-	// private ObservableList<Account> accountData =
-	// FXCollections.observableArrayList();
+	private StatusBar statusbar = new StatusBar();
 
 	// Constructor
 	public VStriker() {
-		// Adding sample data - move to vStrikerLoader package - ToDo
-		// accountData.add(new Account("name1", "location1"));
-		// accountData.add(new Account("name2", "location2"));
 	}
-
-	// Return list of Accounts
-	// public ObservableList<Account> getAccountData() {
-	// return accountData;
-	// }
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -84,6 +72,11 @@ public class VStriker extends Application {
 		this.primaryStage.setTitle(msg);
 	}
 
+	public void postStatus(String msg) {
+		System.out.println(msg);
+		this.statusbar.setText(msg);
+	}
+
 	public void showHome() {
 		try {
 			// Set title
@@ -95,7 +88,7 @@ public class VStriker extends Application {
 
 			// Show the home layout in the center of the application
 			vStrikerLayout.setCenter(homeLayout);
-			statusbar.setText("Status: vStriker homepage");
+			postStatus("Status: vStriker homepage");
 
 			// Give controller access to main app
 			HomepageController controller = loader.getController();
@@ -116,6 +109,7 @@ public class VStriker extends Application {
 
 			// Show the home layout in the center of the application
 			vStrikerLayout.setCenter(homeLayout);
+			postStatus("Status: vStriker configuration ");
 
 			// Give controller access to main app
 			HomepageController controller = loader.getController();
@@ -139,6 +133,7 @@ public class VStriker extends Application {
 
 			// Show the home layout in the center of the application
 			vStrikerLayout.setCenter(accountLayout);
+			postStatus("Status: vStriker account ");
 
 			// Give controller access to main app
 			AccountController controller = loader.getController();
@@ -161,6 +156,7 @@ public class VStriker extends Application {
 
 			// Show the home layout in the center of the application
 			vStrikerLayout.setCenter(apivalidationLayout);
+			postStatus("Status: vStriker api validation ");
 
 			// Give controller access to main app
 			APIValidationController controller = loader.getController();
@@ -185,6 +181,7 @@ public class VStriker extends Application {
 
 			// Show the home layout in the center of the application
 			vStrikerLayout.setCenter(layout);
+			this.postStatus("Status: vStriker add configuration ");
 
 			// Give controller access to main app
 			EditConfigurationController controller = loader.getController();
@@ -210,6 +207,7 @@ public class VStriker extends Application {
 
 			// Show the home layout in the center of the application
 			vStrikerLayout.setCenter(layout);
+			postStatus("Status: vStriker show charts ");
 
 			// Give controller access to main app
 			ResultsChartController controller = loader.getController();
@@ -236,6 +234,7 @@ public class VStriker extends Application {
 
 			// Show the home layout in the center of the application
 			vStrikerLayout.setCenter(layout);
+			postStatus("Status: vStriker edit configuration ");
 
 			// Give controller access to main app
 			EditConfigurationController controller = loader.getController();
@@ -260,6 +259,7 @@ public class VStriker extends Application {
 
 			// Show the home layout in the center of the application
 			vStrikerLayout.setCenter(accountLayout);
+			postStatus("Status: vStriker update account");
 
 			// Give controller access to main app
 			AccountController controller = loader.getController();
@@ -281,6 +281,7 @@ public class VStriker extends Application {
 
 			// Show the Swift page in the center of the application
 			vStrikerLayout.setCenter(S3Layout);
+			postStatus("Status: vStriker S3 API");
 
 			// Give controller access to the main app
 			S3Controller controller = loader.getController();
@@ -302,6 +303,7 @@ public class VStriker extends Application {
 
 			// Show the Swift page in the center of the application
 			vStrikerLayout.setCenter(SwiftLayout);
+			postStatus("Status: vStriker S3 API");
 
 			// Give controller access to the main application
 			S3Controller controller = loader.getController();
@@ -323,6 +325,7 @@ public class VStriker extends Application {
 
 			// Show the Swift page in the center of the application
 			vStrikerLayout.setCenter(SwiftLayout);
+			postStatus("Status: vStriker Swift API");
 
 			// Give controller access to the main application
 			SwiftController controller = loader.getController();
@@ -344,6 +347,7 @@ public class VStriker extends Application {
 
 			// Show the Swift page in the center of the application
 			vStrikerLayout.setCenter(SwiftLayout);
+			postStatus("Status: vStriker Swift API");
 
 			// Give controller access to the main application
 			SwiftController controller = loader.getController();
@@ -365,6 +369,7 @@ public class VStriker extends Application {
 
 			// Show the S3 page in the center of the application
 			vStrikerLayout.setCenter(AtmosLayout);
+			postStatus("Status: vStriker Atmos API");
 
 			// Give controller access to the main app
 			AtmosController controller = loader.getController();
@@ -382,10 +387,11 @@ public class VStriker extends Application {
 			// Load Swift page
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(VStriker.class.getResource("view/AtmosAPI.fxml"));
-			AnchorPane SwiftLayout = (AnchorPane) loader.load();
+			AnchorPane AtmosLayout = (AnchorPane) loader.load();
 
 			// Show the Swift page in the center of the application
-			vStrikerLayout.setCenter(SwiftLayout);
+			vStrikerLayout.setCenter(AtmosLayout);
+			postStatus("Status: vStriker Atmos API");
 
 			// Give controller access to the main application
 			AtmosController controller = loader.getController();

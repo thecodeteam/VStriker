@@ -101,7 +101,7 @@ public class SwiftController {
 		}
 		Engine engine = new VEngine();
 		if (engine
-				.validateSwiftConnnection(swiftuser.getText(),
+				.validateSwiftConnection(swiftuser.getText(),
 						swiftsecretkey.getText(), swifturl.getText(),
 						S3_ViPR_NAMESPACE)) {
 			System.out.println("Swift connection is validated");
@@ -122,7 +122,7 @@ public class SwiftController {
 				|| swiftbucket.getText() == null
 				|| swiftbucket.getText().length() == 0) {
 			System.out
-					.println("Please set Access Key, URL, Secret Key and Bucket name");
+			.println("Please set Access Key, URL, Secret Key and Bucket name");
 			return;
 		}
 		if (saveswift.getText().equals("Update")) {

@@ -29,18 +29,19 @@ public class S3CreateWorker implements Callable<ExecutionReportData> {
 		this.api = api;
 	}
 
+	@Override
 	public ExecutionReportData call() throws Exception {
 		// Create object in S3
 		long startTime = System.nanoTime();
 		s3api.CreateObject(api.getSubtenant(), api.getSecretKey(),
-				api.getUrl(), null, api.getBucket(), FilenameUtils.getName(objectLocation),
-				new FileInputStream(objectLocation));
+				api.getUrl(), null, api.getBucket(), FilenameUtils
+						.getName(objectLocation), new FileInputStream(
+						objectLocation));
 		long endTime = System.nanoTime();
-		System.out.println("CreateObject execution time: " + (endTime - startTime));
 		reportData.setDataKey("S3");
 		reportData.setThreadValue(Thread.currentThread().getName());
 		reportData.setCrudValue("Create");
-		reportData.setDataValue(Long.toString((endTime-startTime)/1000000));
+		reportData.setDataValue(Long.toString((endTime - startTime) / 1000000));
 		return reportData;
 	}
 }
