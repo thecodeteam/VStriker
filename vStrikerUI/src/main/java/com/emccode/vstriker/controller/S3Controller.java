@@ -11,8 +11,6 @@ import javafx.scene.control.TextField;
 import vStrikerBizModel.ApiBiz;
 import vStrikerEntities.Account;
 import vStrikerEntities.Api;
-import vStrikerTestEngine.Engine;
-import vStrikerTestEngine.VEngine;
 
 import com.emccode.vstriker.VStriker;
 
@@ -105,12 +103,10 @@ public class S3Controller {
 			System.out.println("Please set Access Key, URL and Secret Key");
 			return;
 		}
-		Engine engine = new VEngine();
-		if (engine.validateS3Connection(s3accesskey.getText(),
-				s3secretkey.getText(), s3url.getText(), S3_ViPR_NAMESPACE)) {
-			System.out.println("S3 connection is validated");
+		if (acct != null) {
+			vStriker.showApiValidation((int) acct.getAccountId());
 		} else {
-			System.out.println("S3 connection is not working");
+			vStriker.postStatus("A valid account is missing");
 		}
 	}
 
@@ -125,7 +121,7 @@ public class S3Controller {
 				|| s3bucket.getText() == null
 				|| s3bucket.getText().length() == 0) {
 			System.out
-					.println("Please set Access Key, URL, Secret Key and Bucket name");
+			.println("Please set Access Key, URL, Secret Key and Bucket name");
 			return;
 		}
 		if (saveS3.getText().equals("Update")) {
