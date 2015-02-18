@@ -209,19 +209,16 @@ public class APIValidationController {
 							Engine e = new VEngine();
 							if (e.validateS3Connection(a.getSubtenant(),
 									a.getSecretKey(), a.getUrl(), "")) {
-								System.out
-										.println("S3 connection is validated");
 								updateMessage("S3 connection is validated for User: "
 										+ a.getSubtenant()
 										+ " at URL: "
 										+ a.getUrl());
 
 							} else {
-								System.out
-										.println("S3 connection is not working");
-								updateMessage(a.getSubtenant() + " "
-										+ a.getUrl() + " "
-										+ "S3 connection is not working");
+								updateMessage("S3 connection is not working for User: "
+										+ a.getSubtenant()
+										+ " at URL: "
+										+ a.getUrl());
 							}
 							updateProgress(currentstep, totalsteps);
 							break;

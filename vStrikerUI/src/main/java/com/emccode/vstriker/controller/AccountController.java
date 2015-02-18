@@ -94,34 +94,34 @@ public class AccountController {
 			listofcheckboxes = setupCheckboxColumn(accountApis);
 			apiDetail.setItems(accountApis);
 			SelectColumn
-					.setCellFactory(CheckBoxTableCell
-							.forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
-								@Override
-								public ObservableValue<Boolean> call(
-								Integer index) {
-									// return new SimpleBooleanProperty();
-									System.out.println("Index is: " + index);
-									return listofcheckboxes.get(index);
-								}
-							}));
+			.setCellFactory(CheckBoxTableCell
+					.forTableColumn(new Callback<Integer, ObservableValue<Boolean>>() {
+						@Override
+						public ObservableValue<Boolean> call(
+										Integer index) {
+							// return new SimpleBooleanProperty();
+							System.out.println("Index is: " + index);
+							return listofcheckboxes.get(index);
+						}
+					}));
 			APIColumn
-					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-							cellData.getValue().getApiType().getApiTypeName()));
+			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+					cellData.getValue().getApiType().getApiTypeName()));
 			KeyColumn
-					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-							cellData.getValue().getSecretKey()));
+			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+					cellData.getValue().getSecretKey()));
 			EndPointColumn
-					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-							cellData.getValue().getUrl()));
+			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+					cellData.getValue().getUrl()));
 			ProtocolColumn
-					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-							cellData.getValue().getUrl().contains("https") ? "https"
-									: "http"));
+			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+					cellData.getValue().getUrl().contains("https") ? "https"
+							: "http"));
 			PortColumn
-					.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
-							cellData.getValue().getUrl().contains("https") ? cellData
-									.getValue().getHttpsAddressPort()
-									: cellData.getValue().getHttpAddressPort()));
+			.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper(
+					cellData.getValue().getUrl().contains("https") ? cellData
+							.getValue().getHttpsAddressPort()
+							: cellData.getValue().getHttpAddressPort()));
 			SelectColumn.setEditable(true);
 			apiDetail.setEditable(true);
 		} catch (Exception e) {
@@ -162,26 +162,26 @@ public class AccountController {
 				|| accountLocation.getText().length() == 0
 				|| getSelectedRow() == -1) {
 			System.out
-					.println("Please set Account Name and Account Location and select a row");
+			.println("Please set Account Name and Account Location and select a row");
 		}
 		int selectedRow = getSelectedRow();
 		if (selectedRow != -1) {
 			switch (apiDetail.getItems().get(selectedRow).getApiType()
 					.getApiTypeName()) {
-					case "S3":
-						vStriker.updateS3API(validAcct,
-								apiDetail.getItems().get(selectedRow));
-						break;
-					case "Swift":
-						vStriker.updateSwiftAPI(validAcct,
+			case "S3":
+				vStriker.updateS3API(validAcct,
 						apiDetail.getItems().get(selectedRow));
-						break;
-					case "Atmos":
-						vStriker.updateAtmosAPI(validAcct,
+				break;
+			case "Swift":
+				vStriker.updateSwiftAPI(validAcct,
 								apiDetail.getItems().get(selectedRow));
-						break;
-					default:
-						System.out.println("updateApi - unexpected case");
+				break;
+			case "Atmos":
+				vStriker.updateAtmosAPI(validAcct,
+						apiDetail.getItems().get(selectedRow));
+				break;
+			default:
+				System.out.println("updateApi - unexpected case");
 			}
 		}
 	}
@@ -225,7 +225,7 @@ public class AccountController {
 				|| accountName.getText().length() == 0
 				|| accountLocation.getText() == null
 				|| accountLocation.getText().length() == 0) {
-			System.out.println("Please set Account Name and Account Location");
+			vStriker.postStatus("Please set Account Name and Account Location");
 		} else {
 			System.out.println("Account to be added: " + accountName.getText()
 					+ " " + accountLocation.getText());
@@ -234,10 +234,9 @@ public class AccountController {
 			acct.setAccountLocation(accountLocation.getText());
 			try {
 				AccountBiz.AccountCreate(acct);
+				vStriker.postStatus("Account saved");
 			} catch (Exception e) {
-				System.out.println("Failed to save Account");
-				// Show message on screen - ToDo
-				// e.printStackTrace();
+				vStriker.postStatus("Failed to save Account");
 			}
 		}
 	}
@@ -269,7 +268,7 @@ public class AccountController {
 				break;
 			default:
 				System.out
-						.println("addAPIClicked - chooseAPI is neither S3, Swift or Atmos");
+				.println("addAPIClicked - chooseAPI is neither S3, Swift or Atmos");
 				break;
 			}
 		} catch (Exception e) {
@@ -317,7 +316,7 @@ public class AccountController {
 	private int getSelectedRow() {
 		if (listofcheckboxes == null) {
 			System.out
-					.println("List of checkboxes not initialized - Unexpected error");
+			.println("List of checkboxes not initialized - Unexpected error");
 			return -1;
 		}
 		int selectedrow = -1;
