@@ -1,16 +1,23 @@
 ## Introduction
 
-VStriker it’s a Java desktop application that provides connectivy validation and estimates of CRUD (Create, Read, Update and Delete) operations throughputs achievable against the ViPR® Data Services Object storage.  
+VStriker it’s a Java desktop application that provides connectivy validation and estimates of CRUD (Create, Read, Update and Delete) operations throughputs achievable against Object Stores (like ViPR® Data Services Object storage).  
 
 VSTriker's goal is to provide developers a quick and simple way of understanding the throughput  that can be expected from a single node client application connecting to ViPR Data Services that will be running in the same running in the same network conditions. 
-
-ViPR® Data Services is an object store that has the ability of supporting multiple protocols. Vstriker throughput analysis can be performed for applications that use AWS S3, OpenStack Swift and Atmos REST APIs.
 
 
 ![VStiker Throughput Analizer](https://github.com/emccode/VStriker/blob/master/documentation/media/VStriker-Throughput-Analizer.png)
 
+VStriker enables you to execute throughput analysis tests against the following REST APIs:
 
-## USE CASES
+1. AWS S3
+2. OpenStrack SWIFT
+3. EMC Atmos
+
+It provides the ability to fine tune the object workload to meet the expected user workload. It allows to configure the shape of the CRUD operations and the size of the Objects to be transfered. It also implements a multithreading core that will sever to simulate a multiple connections to the Object Store. 
+
+
+
+## Use Cases
 
 
 The following section provides an overview of the Use Cases for the VStriker throughput analyzer. There is only one actor for this application, the end-user:
@@ -20,25 +27,29 @@ Use Case	             | Description
 ---------------------- | -----------|
 Manage Account         | Accounts contain information about the target system and APIs/protocols to perform the throughput analysis against (CRUD Operations on Account)
 Manage APIs/Protocols  | APIs/Protocol contains the information regarding the specific API and Protocol that is supported in the account. There are three main APIs and the protocols supported are HTTP and HTTPS (CRUD for  AWS S3, Swift, and Atmos)
-Validate Account       | 	Validates the account configuration. It tests that the accounts are properly configured. This validation includes the validation of all APIs/Protocols that are supported by the Account.
-Validate APIs	          | Validate the API/Protocol configuration. It tests that the protocol information entered in correct.
-Manage Test Plan	       | Test plans define the parameters, policies, and APIs/Protocols to be tested. There is a list of standard test and the ability for the use to customize it to their needs.  
-Execute Test Plan      | Executes the selected test plan using the account selected.
-Export Test            | 	Exports the test results to a coma delimited file for further analysis.
-View Report and Graphs	| Provides the end user with a report of the test plan and charts that compares the throughput of the CRUD operations performed per API/Protocol used.
+Validate Account       | 	Validates the account's APIs. It tests that the accounts are properly configured. This validation includes the validation of all APIs/Protocols that are supported by the Account.
+Confirgure Test Plan   | Test plans define the parameters, policies, and APIs/Protocols to be tested. There is a list of standard test and the ability for the use to customize it to their needs. VStriker also enables users to create their own throughput tests. 
+Execute Test Plan      | Executes the selected test plan for the account and APIS selected.
 View Test Results      |	View that provides the information resulting from the test performed.
+View Report and Graphs	| Provides the user with a report of the test plan resutls and charts that compares the throughput of the CRUD operations performed per API/Protocol used.
+
+
 
 ## Architecture 
 
-This diagram shows the high level VStriker application architecture: 
+**[This section needs to be reviewed | Components need to be udpated]**
+
+VStriker has a modular design. The following desing shows the high level application architecture: 
 
 VStriker-Architecture.png
 
 ![VStiker Throughput Analizer Architecture](https://github.com/emccode/VStriker/blob/master/documentation/media/VStriker-Architecture.png)
 
+VStriker has been build in Java 1.8 and uses H2 database for persistance. The following has an overview of each one of the components
+
 Component Name |	Component Description
 -------------- | ---------------------|
-JAVA UI |	UI for configuration, execution and display of the throughput tests
+JAVA UI |	UI for configuration, execution and display of the throughput tests. The UI has been build using Java FX. 
 Accounts Library | 	Holds all the Accounts, APIs and Ports information
 Test Plan Library |	Holds the test plain configuration information, premade plans and custom test plans
 Test files Generator |	Generates tests files to be used as objects for the operations
@@ -51,6 +62,7 @@ Java Swift API |	OpenStack’s Java Swift SDK Libraries
 Java Atmos API | 	Atmos’ Java SDK Libraries
 Test Data Store |	Data repository to store the test results, accounts and test plans
  
+ 
 
 ##Application Workflow 
 
@@ -60,7 +72,7 @@ The VStriker application workflow is composed of four main steps:
 ![VStiker Throughput Analizer Architecture](https://github.com/emccode/VStriker/blob/master/documentation/media/VStriker-Application-Workflow.png)
  
 
-**1.	Account Management:**  The application starts on the Account tab. This enables users to create their session information or run a previous session. This step enables users to enter the information regarding the APIs and endpoint configurations that need to be tested. The current supported APIs are: AWS S3, OpenStack Swift and EMC Atmos. 
+**1.	Account Management:**  The application starts on the Account tab. This enables users to enter the target Object store information and APIs that it provides. Users enter the information regarding the APIs and endpoints configurations that need to be tested. Once the information is submited, the user can then Validate the APIs. Once APIs are validated, users can move to the next step of The current supported APIs are: AWS S3, OpenStack Swift and EMC Atmos. 
 
 **2.	Configuration Management:** The configuration management steps enables users to select a test plan from a list of pre-built ones or to create a new one. The test plans provides a very granular set of options to the user. 
 
