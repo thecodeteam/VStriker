@@ -7,7 +7,8 @@ VSTriker's goal is to provide developers a quick and simple way of understanding
 ViPR® Data Services is an object store that has the ability of supporting multiple protocols. Vstriker throughput analysis can be performed for applications that use AWS S3, OpenStack Swift and Atmos REST APIs.
 
 
-![VStiker Throughput Analizer](https://github.com/emccode/VStriker/blob/master/documentation/media/VStriker-Application-Workflow.png)
+![VStiker Throughput Analizer](https://github.com/emccode/VStriker/blob/master/documentation/media/VStriker-Throughput-Analizer.png)
+
 
 ## USE CASES
 
@@ -31,7 +32,9 @@ View Test Results      |	View that provides the information resulting from the t
 
 This diagram shows the high level VStriker application architecture: 
 
-![VStiker Throughput Analizer Architecture](http://macdown.uranusjr.com/static/base/img/logo-160.png)
+VStriker-Architecture.png
+
+![VStiker Throughput Analizer Architecture](https://github.com/emccode/VStriker/blob/master/documentation/media/VStriker-Architecture.png)
 
 Component Name |	Component Description
 -------------- | ---------------------|
@@ -53,7 +56,8 @@ Test Data Store |	Data repository to store the test results, accounts and test p
 
 The VStriker application workflow is composed of four main steps: 
 
-![VStiker Application Workflow](http://macdown.uranusjr.com/static/base/img/logo-160.png)
+
+![VStiker Throughput Analizer Architecture](https://github.com/emccode/VStriker/blob/master/documentation/media/VStriker-Application-Workflow.png)
  
 
 **1.	Account Management:**  The application starts on the Account tab. This enables users to create their session information or run a previous session. This step enables users to enter the information regarding the APIs and endpoint configurations that need to be tested. The current supported APIs are: AWS S3, OpenStack Swift and EMC Atmos. 
@@ -68,7 +72,7 @@ The VStriker application workflow is composed of four main steps:
 
 Account Management enables users to organize the test plans and execution for each account that they create. An account can have multiple APIs that may to be tested as part of the throughput analysis test.  The following figure shows the relationship:
 
-![VStiker Account Management](http://macdown.uranusjr.com/static/base/img/logo-160.png)
+[Add Image]
 
 In addition, accounts and APIs can be validated. This function is performed by the Validation Engine. This function enables users to verify connectivity to the target server. It performs the following checks: 
 
@@ -81,7 +85,7 @@ In addition, accounts and APIs can be validated. This function is performed by t
 
 [To Be Done]
 
- ![VStiker Account Management](http://macdown.uranusjr.com/static/base/img/logo-160.png)
+![VStiker Throughput Analizer Architecture](https://github.com/emccode/VStriker/blob/master/documentation/media/VStriker-Test-Plan-Configuration.png)
 
 
 Test Plan configuration Paramaters: 
