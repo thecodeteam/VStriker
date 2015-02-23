@@ -6,7 +6,8 @@ VSTriker's goal is to provide developers a quick and simple way of understanding
 
 ViPR® Data Services is an object store that has the ability of supporting multiple protocols. Vstriker throughput analysis can be performed for applications that use AWS S3, OpenStack Swift and Atmos REST APIs.
 
-![VStiker Throughput Analizer](https://github.com/emccode/VStriker/documentation/media/VStriker-Application-Workflow.png)
+
+![VStiker Throughput Analizer](https://github.com/emccode/VStriker/blob/master/documentation/media/VStriker-Application-Workflow.png)
 
 ## USE CASES
 
