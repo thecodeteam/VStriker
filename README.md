@@ -72,35 +72,37 @@ The VStriker application workflow is composed of four main steps:
 ![VStiker Throughput Analizer Architecture](https://github.com/emccode/VStriker/blob/master/documentation/media/VStriker-Application-Workflow.png)
  
 
-**1.	Account Management:**  The application starts on the Account tab. This enables users to enter the target Object store information and APIs that it provides. Users enter the information regarding the APIs and endpoints configurations that need to be tested. Once the information is submited, the user can then Validate the APIs. Once APIs are validated, users can move to the next step of The current supported APIs are: AWS S3, OpenStack Swift and EMC Atmos. 
+**1.	Account Management:**  The application starts on the Account tab. This enables users to enter the target Object store information and APIs that it provides. Users enter the information regarding the APIs and endpoints configurations that need to be tested. Once the information is submited, the user can then Validate the APIs. Once APIs (AWS S3, OpenStack Swift and EMC Atmos)  are validated, users can move to the next step.
 
-**2.	Configuration Management:** The configuration management steps enables users to select a test plan from a list of pre-built ones or to create a new one. The test plans provides a very granular set of options to the user. 
+**2.	Configuration Management:** The configuration management step enables users to select a test plan from a list of pre-built ones or to create a new one. The test plans provides a granular set of options to the user to map the test to their object workload.  
 
-**3.	Test Execution:** This step takes the information defined in the session and the test plan configuration, generates the load to be applied to the defined endpoints and executes the test. This step also records the test execution information that will later be used for the user.
+**3.	Test Execution:** This step takes the information defined in the session and the test plan configuration, it then generates the load to be applied to the defined endpoints and executes the test. This step also records the test execution information that will later be used for the user.
 
-**4.	View Results:** This step provides consolidated view of the test results. It provides raw data, averages, graphs and the ability to export the data for further analysis. 
+**4.	View Results:** This step provides a consolidated view of the test results. It provides raw data, averages, graphs and the ability to export the data for further analysis. 
 
 ### Account Management 
 
 Account Management enables users to organize the test plans and execution for each account that they create. An account can have multiple APIs that may to be tested as part of the throughput analysis test.  The following figure shows the relationship:
 
-[Add Image]
+**[Add Image of account management]**
 
-In addition, accounts and APIs can be validated. This function is performed by the Validation Engine. This function enables users to verify connectivity to the target server. It performs the following checks: 
+APIs in an account can be validated. This function is performed by the Validation Engine. It enables users to verify connectivity and functionality of the validate API in the Object store. API validation performs the following checks: 
 
-1.	Check the connectivity to the server
-2.	Check the ability to perform CRUD operations 
-3.	Check the Ability to perform object and CRUD on a bucket. 
+1.	Check the connectivity to the Object Store.
+2.	Check the ability to perform CRUD Object operations.
+3.	Check the Ability to perform CRUD bucket operations.
    
 
 ### Test Plan Configuration
 
-[To Be Done]
+Test plan enables users to select a pre-created test plan and to create a new one if the choose so. The test plan defines the load that will be send to the Object Store. The configuration is granular to enable users to closely map their current workload to get a throughput analsyis against the Object Store.
+
+**[Add minage of Test Plant configuration]**
 
 ![VStiker Throughput Analizer Architecture](https://github.com/emccode/VStriker/blob/master/documentation/media/VStriker-Test-Plan-Configuration.png)
 
 
-Test Plan configuration Paramaters: 
+Users can configure thier test plan using the folloing configuration Paramaters: 
 
 Parameter Name | Parameter Description
 ---------------| ---------------------|
