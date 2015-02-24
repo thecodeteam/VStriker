@@ -78,7 +78,7 @@ The VStriker application workflow is composed of four main steps:
 
 **3.	Test Execution:** This step takes the information defined in the session and the test plan configuration, it then generates the load to be applied to the defined endpoints and executes the test. This step also records the test execution information that will later be used for the user.
 
-**4.	View Results:** This step provides a consolidated view of the test results. It provides raw data, averages, graphs and the ability to export the data for further analysis. 
+**4.	View Results:** This step provides a consolidated view of the test results. It provides raw data, averages, graphs and the ability to export the data for further analysis.
 
 ### Account Management 
 
@@ -118,14 +118,30 @@ Ojbect Max. Size (in Kb.) | Enter the Maximum size of the objets to be usined in
 Object Size Preference | This allows you to define the type of object size load you may have in your application. This enables to fine tune the test workload to your needs.
 Protocols to be Tested | Select what API you want to use in this test. This is tied to the APIs that have been defined and validated in the selected Account. 
 
-
+Users can use the parameters to define the workload they want to test and get an estimate of the throughput they could accomplish with one client (mulitple clients if using multithreading).
 
 
 ### Test Plan Execution 
 
-[To Do]
+Once the user has selected the Account and Test Plan, we are ready for the exection. The execution engine will create the object require for test and run the test.  
+
+[Insert screen shoot about the Execution Page]
+
+
 
 ### View and Export Restuls
 
+Upon the comopletion of the Test Plan exectuion, the results are displayed to the customer. This include summary of the data, raw data, graphs and the ability to export the raw data into Excel.
+
 [To Do] 
+
+
+## References
+
+[1] Java
+ 
+[2] H2 Database 
+
+[3] Other Reference
+
 
