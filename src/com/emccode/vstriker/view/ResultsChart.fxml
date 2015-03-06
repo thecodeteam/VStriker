@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emccode.vstriker.controller.ResultsChartController">
+   <children>
+      <HBox layoutX="24.0" layoutY="35.0" prefHeight="20.0" prefWidth="550.0" spacing="20.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="26.0">
+         <children>
+            <Label layoutX="25.0" layoutY="35.0" prefHeight="17.0" prefWidth="76.0" text="Test Name :">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label id="lblTestName" fx:id="testName" layoutX="484.0" layoutY="46.0" prefHeight="17.0" prefWidth="366.0" />
+         </children>
+      </HBox>
+      <TabPane fx:id="tabCharts" layoutX="24.0" layoutY="60.0" prefHeight="400.0" prefWidth="550.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabAvg" text="Averages">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <LineChart fx:id="chartAvg" layoutX="14.0" layoutY="14.0" prefHeight="343.0" prefWidth="500.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tabCreate" text="Create Operations">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+			                       <children>
+                        <LineChart fx:id="chartCreate" layoutX="14.0" layoutY="14.0" prefHeight="343.0" prefWidth="500.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="tabRead" text="Read Operations">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+				                     <children>
+                        <LineChart fx:id="chartRead" layoutX="14.0" layoutY="14.0" prefHeight="343.0" prefWidth="500.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="tabUpdate" text="Update Operations">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+				                     <children>
+                        <LineChart fx:id="chartUpdate" layoutX="14.0" layoutY="14.0" prefHeight="343.0" prefWidth="500.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="tabDelete" text="Delete Operations">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+				                     <children>
+                        <LineChart fx:id="chartDelete" layoutX="14.0" layoutY="14.0" prefHeight="343.0" prefWidth="500.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button id="btnBackResult" layoutX="450.0" layoutY="466.0" mnemonicParsing="false" onAction="#btnBackResultClicked" prefHeight="25.0" prefWidth="114.0" text="Back To Result" />
+      <HBox layoutX="25.0" layoutY="15.0" prefHeight="20.0" prefWidth="550.0" spacing="20.0">
+         <children>
+            <Label layoutX="25.0" layoutY="35.0" prefHeight="17.0" prefWidth="76.0" text="Account :">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label id="lblTestName" fx:id="accountName" layoutX="484.0" layoutY="46.0" prefHeight="17.0" prefWidth="366.0" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

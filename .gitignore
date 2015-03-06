@@ -91,3 +91,15 @@ vStrikerDB/DB/vstrikerdb.mv.db
 vStrikerDB/DB/vstrikerdb.mv.db
 vStrikerDB/DB/vstrikerdb.trace.db
 vStrikerDB/DB/vstrikerdb.mv.db
+
+
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+
+*.iml
+.idea/
+.idea/libraries
+*.ipr
+*.iws
+out/
+build/
+.gradle/

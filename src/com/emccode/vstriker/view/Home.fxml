@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="paneHome" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emccode.vstriker.controller.HomepageController">
+	<children>
+		<TabPane fx:id="tbMain" layoutX="125.0" layoutY="30.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<tabs>
+				<Tab text="1. Accounts" fx:id="tbAccount">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="288.0" prefWidth="622.0">
+							<children>
+								<Label alignment="CENTER" layoutX="68.0" layoutY="21.0" text="Select the ViPR Data Services account that will be used to perform the throughput test " AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0" />
+								<HBox layoutX="50.0" layoutY="55.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
+									<children>
+										<TableView fx:id="accountTable" layoutX="50.0" layoutY="55.0" prefHeight="109.0" prefWidth="556.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="55.0" HBox.hgrow="ALWAYS">
+											<columns>
+												<TableColumn fx:id="selectColumn" maxWidth="1000.0" minWidth="20.0" prefWidth="71.0" text="Select" />
+												<TableColumn fx:id="nameColumn" prefWidth="128.0" text="Name" />
+												<TableColumn fx:id="locationColumn" prefWidth="93.0" text="Location" />
+												<TableColumn fx:id="S3Column" maxWidth="2000.0" prefWidth="92.0" text="S3" />
+												<TableColumn fx:id="SwiftColumn" maxWidth="2000.0" prefWidth="82.0" text="Swift" />
+												<TableColumn fx:id="AtmosColumn" maxWidth="2000.0" prefWidth="83.0" text="Atmos" />
+											</columns>
+											<columnResizePolicy>
+												<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+											</columnResizePolicy>
+										</TableView>
+									</children>
+								</HBox>
+								<Button fx:id="addButton" layoutX="450.0" layoutY="26.0" mnemonicParsing="false" onAction="#addAccountClicked" text="Add Account" AnchorPane.rightAnchor="20.0" />
+								<HBox layoutX="341.0" layoutY="175.0" spacing="15.0" AnchorPane.rightAnchor="20.0">
+									<children>
+										<Button fx:id="validateButton" layoutX="370.0" layoutY="183.0" mnemonicParsing="false" onAction="#validateAccountClicked" text="Validate" />
+										<Button fx:id="updateButton" layoutX="428.0" layoutY="186.0" mnemonicParsing="false" onAction="#updateAccountClicked" text="Update" />
+										<Button fx:id="deleteButton" layoutX="482.0" layoutY="183.0" mnemonicParsing="false" onAction="#deleteAccountClicked" text="Delete" />
+									</children>
+								</HBox>
+                        <TableView fx:id="accountDetail" layoutX="20.0" layoutY="290.0" prefHeight="102.0" prefWidth="414.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                          <columns>
+                            <TableColumn fx:id="APIColumn" prefWidth="75.0" text="API" />
+                            <TableColumn fx:id="ProtocolColumn" prefWidth="75.0" text="Protocol" />
+                              <TableColumn fx:id="PortColumn" prefWidth="75.0" text="IP:Port" />
+                              <TableColumn fx:id="KeyColumn" prefWidth="75.0" text="Key" />
+                              <TableColumn fx:id="EndPointColumn" prefWidth="75.0" text="EndPoint" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <Label layoutX="247.0" layoutY="249.0" text="ViPR Data Services Account Details" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                        <Button fx:id="configureButton" layoutX="423.0" layoutY="410.0" mnemonicParsing="false" onAction="#configureAccountClicked" text="Setup Configuration &gt;&gt;" AnchorPane.rightAnchor="20.0" />
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab text="2. Configuration" fx:id="tbCfg">
+					<content>
+						<fx:include source="Configuration.fxml" fx:id="configurationView"/>
+					</content>
+				</Tab>
+				<Tab text="3. Execution" fx:id="tbExecution">
+					<content>
+						<fx:include source="Results.fxml" fx:id="resultsView"/>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+	</children>
+</AnchorPane>

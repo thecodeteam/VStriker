@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="paneCfg" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emccode.vstriker.controller.ConfigurationController">
+   <children>
+      <Label layoutX="30.0" layoutY="25.0" text="Test to be performed :" />
+      <ComboBox fx:id="ddTestList" layoutX="160.0" layoutY="20.0" prefHeight="26.0" prefWidth="287.0" />
+      <CheckBox fx:id="cbTemplateOnly" layoutX="450.0" layoutY="25.0" mnemonicParsing="false" text="Template Test Only" onAction="#oncbTemplateOnlyClick" />
+       <Pane layoutX="30.0" layoutY="83.0" prefHeight="100.0" prefWidth="250.0" style="-fx-border-color: black;">
+     
+         <children>
+            <Label layoutX="25.0" layoutY="13.0" prefHeight="17.0" prefWidth="128.0" text="Object Size (in KB):" />
+            <Label fx:id="txtObjSize" layoutX="150.0" layoutY="8.0" prefHeight="27.0" prefWidth="60.0" />
+             <Label layoutX="25.0" layoutY="45.0" text="Number of Operations:" />
+            <Label fx:id="txtNumOps" layoutX="150.0" layoutY="40.0" prefHeight="25.0" prefWidth="60.0" />
+             <Label layoutX="25.0" layoutY="73.0" prefHeight="17.0" prefWidth="123.0" text="Number of Threads:  " />
+            <Label fx:id="txtNumTh" layoutX="150.0" layoutY="70.0" prefHeight="25.0" prefWidth="60.0" />
+         </children>
+      </Pane>
+     
+      <Pane layoutX="340.0" layoutY="83.0" prefHeight="80.0" prefWidth="220.0" style="-fx-border-color: black;">
+         <children>
+            <Label layoutX="10.0" layoutY="13.0" prefHeight="17.0" prefWidth="129.0" text="Number of Retires: " />
+            <Label fx:id="txtNumofRetires" layoutX="140.0" layoutY="8.0" prefHeight="25.0" prefWidth="60.0" />
+              <Label layoutX="10.0" layoutY="45.0" prefHeight="17.0" prefWidth="127.0" text="Object Size Report Unit:" />
+            <Label fx:id="ddObjUnit" layoutX="140.0" layoutY="40.0" prefHeight="26.0" prefWidth="68.0" />
+         </children>
+      </Pane>
+      <HBox layoutX="340.0" layoutY="180.0" spacing="25.0" visible="false">
+         <children>
+            <Label layoutX="40.0" layoutY="21.0" prefHeight="17.0" prefWidth="124.0" text="Random Size Objects:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <CheckBox fx:id="ckRandom" disable="true" mnemonicParsing="false" />
+         </children>
+      </HBox>
+      <Pane layoutX="30.0" layoutY="220.0" prefHeight="138.0" prefWidth="270.0" style="-fx-border-color: black;">
+         <children>
+            <CheckBox fx:id="cbObjCreate" disable="true" layoutX="25.0" layoutY="13.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="101.0" style="-fx-opacity: 1;" text="Create Object:" />
+            <Label fx:id="txtPrctCreate" layoutX="150.0" layoutY="8.0" prefHeight="25.0" prefWidth="25.0" textAlignment="JUSTIFY" />
+        
+      
+            <CheckBox fx:id="cbObjRead" disable="true" layoutX="25.0" layoutY="38.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="101.0" style="-fx-opacity: 1;" text="Read Object:" />
+            <Label fx:id="txtPrctRead" layoutX="150.0" layoutY="35.0" prefHeight="25.0" prefWidth="25.0" textAlignment="JUSTIFY" />
+         
+            <CheckBox fx:id="cbObjUpdate" disable="true" layoutX="25.0" layoutY="65.0" mnemonicParsing="false" style="-fx-opacity: 1;" text="Update Object:" />
+            <Label fx:id="txtPrctUpdate" layoutX="150.0" layoutY="62.0" prefHeight="25.0" prefWidth="25.0" />
+        
+            <CheckBox fx:id="cbObjDelete" disable="true" layoutX="25.0" layoutY="93.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="102.0" style="-fx-opacity: 1;" text="Delete Object:" />
+            <Label fx:id="txtPrctDelete" layoutX="150.0" layoutY="89.0" prefHeight="25.0" prefWidth="25.0" textAlignment="JUSTIFY" />
+            <Label layoutX="170.0" layoutY="13.0" text="\% Create" />
+            <Label graphicTextGap="2.0" layoutX="170.0" layoutY="38.0" prefHeight="17.0" prefWidth="51.0" text="\% Read" textAlignment="CENTER" />
+            <Label layoutX="170.0" layoutY="93.0" text="\% Delete" />
+            <Label layoutX="170.0" layoutY="65.0" text="\% Update" />
+            <Label fx:id="lblTotal" layoutX="150.0" layoutY="116.0" prefHeight="17.0" prefWidth="51.0" text="Label" textAlignment="JUSTIFY" />
+         </children>
+      </Pane>
+      <Pane fx:id="paneRandom" layoutX="340.0" layoutY="200.0" prefHeight="155.0" prefWidth="220.0" style="-fx-border-color: black;" visible="false">
+         <children>
+            <Label layoutX="10.0" layoutY="9.0" prefHeight="17.0" prefWidth="135.0" text="Object Min. Size (in KB):" />
+            <Label fx:id="txtMinObjSize" layoutX="140.0" layoutY="4.0" prefHeight="25.0" prefWidth="60.0" />
+
+            <Label layoutX="10.0" layoutY="34.0" prefHeight="17.0" prefWidth="135.0" text="Object Max. Size (in KB):" />
+            <Label fx:id="txtMaxObjSize" layoutX="140.0" layoutY="31.0" prefHeight="25.0" prefWidth="60.0" />
+
+            <Label layoutX="10.0" layoutY="57.0" prefHeight="17.0" prefWidth="150.0" text="Object Size Preference:">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Label>
+    
+            <Label layoutX="50.0" layoutY="78.0" prefHeight="17.0" prefWidth="88.0" text="\% Small Size" />
+            <Label fx:id="txtPrctSmallSize" layoutX="140.0" layoutY="73.0" prefHeight="25.0" prefWidth="60.0" />
+
+            <Label layoutX="50.0" layoutY="103.0" prefHeight="17.0" prefWidth="89.0" text="\% Medium Size " />
+        
+            <Label layoutX="50.0" layoutY="128.0" prefHeight="17.0" prefWidth="89.0" text="\% Large Size" />
+            <Label fx:id="txtPrctMedSize" layoutX="140.0" layoutY="100.0" prefHeight="25.0" prefWidth="60.0" />
+            <Label fx:id="txtPrctLargeSize" layoutX="140.0" layoutY="127.0" prefHeight="25.0" prefWidth="60.0" />
+         </children>
+      </Pane>
+      <Button fx:id="btnUpdate" layoutX="50.0" layoutY="461.0" mnemonicParsing="false" onAction="#btnUpdateClicked" prefHeight="25.0" prefWidth="150.0" text="Update Custom Test" />
+      <Button fx:id="btnSave" layoutX="225.0" layoutY="461.0" mnemonicParsing="false" onAction="#btnSaveClicked" prefHeight="25.0" prefWidth="150.0" text="Add new Custom Test" />
+      <Button fx:id="btnBack" layoutX="400.0" layoutY="461.0" mnemonicParsing="false" onAction="#btnBackClicked" prefHeight="25.0" prefWidth="150.0" text="Execute Test" />
+      <Label layoutX="35.0" layoutY="372.0" text="Protocals to be Tested (from the selected Account)">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Pane layoutX="35.0" layoutY="392.0" prefHeight="60.0" prefWidth="500.0" style="-fx-border-color: black;">
+         <children>
+            <CheckBox fx:id="cbS3Http" disable="true" layoutX="24.0" layoutY="6.0" mnemonicParsing="false" style="-fx-opacity: 1;" text="S3 - HTTP" />
+            <CheckBox fx:id="cbS3Https" disable="true" layoutX="24.0" layoutY="36.0" mnemonicParsing="false" style="-fx-opacity: 1;" text="S3 - HTTPS" />
+            <CheckBox fx:id="cbSwiftHttp" disable="true" layoutX="135.0" layoutY="6.0" mnemonicParsing="false" style="-fx-opacity: 1;" text="Swift - HTTP" />
+            <CheckBox fx:id="cbAtmosHttp" disable="true" layoutX="260.0" layoutY="6.0" mnemonicParsing="false" style="-fx-opacity: 1;" text="Atmos - HTTP" />
+            <CheckBox fx:id="cbAtmosHttps" disable="true" layoutX="260.0" layoutY="36.0" mnemonicParsing="false" style="-fx-opacity: 1;" text="Atmos - HTTPS" />
+            <CheckBox fx:id="cbSwiftHttps" disable="true" layoutX="135.0" layoutY="36.0" mnemonicParsing="false" style="-fx-opacity: 1;" text="Swift - HTTPS" />
+         </children>
+      </Pane>
+      <Label layoutX="30.0" layoutY="200.0" text="Operations to be tested">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

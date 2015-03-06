@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.emccode.vstriker.controller.APIValidationController">
+   <children>
+      <Label layoutX="85.0" layoutY="47.0" text="Account and API/Protocol to be validated" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="25.0" />
+      <HBox layoutX="49.92073059082031" layoutY="62.0" spacing="20.0" AnchorPane.leftAnchor="50.0">
+         <children>
+            <Label layoutX="50.0" layoutY="62.0" text="Account Name:" />
+            <Text fx:id="acctname" layoutX="167.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </HBox>
+      <HBox layoutX="217.9207305908203" layoutY="62.0" spacing="20.0" AnchorPane.rightAnchor="50.0">
+         <children>
+            <Label layoutX="218.0" layoutY="62.0" text="Account Location:" />
+            <Text fx:id="acctlocation" layoutX="351.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </HBox>
+      <TableView fx:id="apiDetail" editable="true" layoutX="50.0" layoutY="99.0" prefHeight="138.0" prefWidth="518.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+        <columns>
+          <TableColumn fx:id="SelectColumn" prefWidth="48.0" text="Select" />
+          <TableColumn fx:id="APIColumn" prefWidth="54.0" text="API" />
+            <TableColumn fx:id="ProtocolColumn" prefWidth="73.0" text="Protocol" />
+            <TableColumn fx:id="PortColumn" prefWidth="69.0" text="Port" />
+            <TableColumn fx:id="KeyColumn" prefWidth="115.0" text="Key" />
+            <TableColumn fx:id="EndPointColumn" prefWidth="140.0" text="EndPoint" />
+        </columns>
+      </TableView>
+      <Button fx:id="validateButton" layoutX="266.0" layoutY="255.0" mnemonicParsing="false" onAction="#validateButtonClicked" text="Validate" />
+      <HBox layoutX="32.0" layoutY="294.0" spacing="10.0">
+         <children>
+            <Label layoutX="32.0" layoutY="298.0" text="Validation process" />
+            <ProgressBar fx:id="validationProgress" layoutX="150.0" layoutY="294.0" prefHeight="20.0" prefWidth="298.0" progress="0.0" />
+            <Label layoutX="461.0" layoutY="296.0" text="Validation complete!" />
+         </children>
+      </HBox>
+      <TextArea fx:id="validationMessage" layoutX="55.0" layoutY="335.0" prefHeight="90.0" prefWidth="500.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+      <Button fx:id="backtoAccount" layoutX="441.0" layoutY="443.0" mnemonicParsing="false" onAction="#backtoAccountClicked" text="Back to Account &gt;&gt;" AnchorPane.rightAnchor="50.0" />
+   </children>
+</AnchorPane>
