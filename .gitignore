@@ -95,6 +95,10 @@ vStrikerDB/DB/vstrikerdb.mv.db
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 .idea/
 .idea/libraries
 *.ipr
