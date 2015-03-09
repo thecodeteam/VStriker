@@ -82,15 +82,8 @@ DB/
 /ResultFiles/*.*
 /release/beta/*.*
 
-/vStrikerDB/DB/vstrikerdb.mv.db
-/vStrikerDB/DB/vstrikerdb.trace.db
-/vStrikerUnitTest/pom.xml
-/vStrikerEntities/src/META-INF/persistence.xml
-/vStrikerTestUtilities/src/log4j.properties
-vStrikerDB/DB/vstrikerdb.mv.db
 vStrikerDB/DB/vstrikerdb.mv.db
 vStrikerDB/DB/vstrikerdb.trace.db
-vStrikerDB/DB/vstrikerdb.mv.db
 
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
