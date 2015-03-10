@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/vStrikerAPI/vStrikerAPI.iml" filepath="$PROJECT_DIR$/vStrikerAPI/vStrikerAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vStrikerBizModel/vStrikerBizModel.iml" filepath="$PROJECT_DIR$/vStrikerBizModel/vStrikerBizModel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vStrikerEntities/vStrikerEntities.iml" filepath="$PROJECT_DIR$/vStrikerEntities/vStrikerEntities.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vStrikerTestEngine/vStrikerTestEngine.iml" filepath="$PROJECT_DIR$/vStrikerTestEngine/vStrikerTestEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vStrikerTestUtilities/vStrikerTestUtilities.iml" filepath="$PROJECT_DIR$/vStrikerTestUtilities/vStrikerTestUtilities.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vStrikerUI.iml" filepath="$PROJECT_DIR$/vStrikerUI.iml" />
+    </modules>
+  </component>
+</project>

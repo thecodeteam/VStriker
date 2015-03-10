@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="H2 - vstrikerdb" uuid="8f1ae095-5808-452c-9bcf-01605099c698">
+      <secret-storage>master_key</secret-storage>
+      <user-name>sa</user-name>
+      <schema-pattern>VSTRIKERDB.VSTRIKERDB</schema-pattern>
+      <default-schemas>VSTRIKERDB.VSTRIKERDB</default-schemas>
+    </data-source>
+  </component>
+</project>

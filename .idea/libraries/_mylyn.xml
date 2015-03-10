@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name=".mylyn">
+    <CLASSES>
+      <root url="jar://C:/vstriker/.metadata/.mylyn/.tasks.xml.zip!/" />
+      <root url="jar://C:/vstriker/.metadata/.mylyn/repositories.xml.zip!/" />
+      <root url="jar://C:/vstriker/.metadata/.mylyn/tasks.xml.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

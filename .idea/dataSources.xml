@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3018841795">
+    <data-source source="LOCAL" name="H2 - vstrikerdb" uuid="8f1ae095-5808-452c-9bcf-01605099c698">
+      <driver-ref>h2.embedded</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:file:$PROJECT_DIR$/vStrikerDB/DB/vstrikerdb</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>

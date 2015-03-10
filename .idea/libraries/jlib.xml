@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="jlib">
+    <CLASSES>
+      <root url="jar://C:/vstriker/libraries/EclipseLink 2.5.2/eclipselink/utils/workbench/jlib/connector.jar!/" />
+      <root url="jar://C:/vstriker/libraries/EclipseLink 2.5.2/eclipselink/utils/workbench/jlib/elmwcore.jar!/" />
+      <root url="jar://C:/vstriker/libraries/EclipseLink 2.5.2/eclipselink/utils/workbench/jlib/xercesImpl.jar!/" />
+      <root url="jar://C:/vstriker/libraries/EclipseLink 2.5.2/eclipselink/utils/workbench/jlib/eclipselinkmw.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

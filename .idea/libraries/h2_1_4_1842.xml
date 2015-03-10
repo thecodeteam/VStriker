@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="h2-1.4.1842">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/vStrikerDB/lib/h2-1.4.184.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

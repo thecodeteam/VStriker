@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="H2 - vstrikerdb" uuid="8f1ae095-5808-452c-9bcf-01605099c698">
+    <database-info product="H2" version="1.4.184 (2014-12-19)" jdbc-version="4.0" driver-name="H2 JDBC Driver" driver-version="1.4.184 (2014-12-19)">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact"/>
+    <schema name="VSTRIKERDB" catalog="VSTRIKERDB"/>
+    <table name="ACCOUNT" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="TABLE" remarks="QWNjb3VudCB0YWJsZQ==">
+      <column name="ACCOUNT_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFZTVFJJS0VSREIuU1lTVEVNX1NFUVVFTkNFX0VFNUIxMTU5X0QwNjhfNERFMV84NzAxXzgwRDEyNjNFRUEzOSk=" autoIncrement="true"/>
+      <column name="NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="ACCOUNT_LOCATION" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="VALIDATED" sqlType="BOOLEAN" precision="1" scale="0" nullable="false" jdbcType="16" def="J0ZhbHNlJw=="/>
+      <column name="LAST_VALIDATION_DATE" sqlType="DATE" precision="8" scale="0" nullable="true" jdbcType="91"/>
+      <primary-key name="CONSTRAINT_E" columns="ACCOUNT_ID"/>
+      <exported-key name="CONSTRAINT_FD" table="API" schema="VSTRIKERDB" catalog="VSTRIKERDB" columns="ACCOUNT_ID"/>
+      <exported-key name="CONSTRAINT_28" table="EXECUTION_PLAN" schema="VSTRIKERDB" catalog="VSTRIKERDB" columns="ACCOUNT_ID"/>
+    </table>
+    <table name="API" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="TABLE">
+      <column name="API_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4" def="KE5FWFQgVkFMVUUgRk9SIFZTVFJJS0VSREIuU1lTVEVNX1NFUVVFTkNFXzgxRTgxN0JEXzY1NDBfNEY4NV9BMDQzX0Y1MkUwNkZDMzUzRCk=" autoIncrement="true"/>
+      <column name="ACCOUNT_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="API_TYPE_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="URL" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="SECRET_KEY" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="BUCKET" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="SUBTENANT" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="HTTP_ADDRESS_IP" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12"/>
+      <column name="HTTPS_ADDRESS_IP" sqlType="VARCHAR" precision="16" scale="0" nullable="true" jdbcType="12"/>
+      <column name="HTTP_ADDRESS_PORT" sqlType="VARCHAR" precision="5" scale="0" nullable="false" jdbcType="12"/>
+      <column name="HTTPS_ADDRESS_PORT" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="CONSTRAINT_F" columns="API_ID"/>
+      <foreign-key name="CONSTRAINT_FD" columns="ACCOUNT_ID" ref-table="ACCOUNT" ref-schema="VSTRIKERDB" ref-catalog="VSTRIKERDB" ref-columns="ACCOUNT_ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <foreign-key name="CONSTRAINT_FDF" columns="API_TYPE_ID" ref-table="API_TYPE" ref-schema="VSTRIKERDB" ref-catalog="VSTRIKERDB" ref-columns="API_TYPE_ID" update-rule="1" delete-rule="1" deferrability="2"/>
+    </table>
+    <table name="API_SELECTED" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="TABLE">
+      <column name="API_SELECTED_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFZTVFJJS0VSREIuU1lTVEVNX1NFUVVFTkNFXzUwMUFDMkQ4X0U4RThfNDI1QV84Qzk4X0IxQkMzOTQ1QTM5RSk=" autoIncrement="true"/>
+      <column name="API_TYPE_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="CONFIGURATION_TEMPLATE_ID" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="TESTCONFIGURATION_ID" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="CONSTRAINT_9" columns="API_SELECTED_ID"/>
+      <foreign-key name="CONSTRAINT_9F9" columns="CONFIGURATION_TEMPLATE_ID" ref-table="CONFIGURATION_TEMPLATE" ref-schema="VSTRIKERDB" ref-catalog="VSTRIKERDB" ref-columns="CONFIGURATION_TEMPLATE_ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <foreign-key name="CONSTRAINT_9F95" columns="TESTCONFIGURATION_ID" ref-table="TEST_CONFIGURATION" ref-schema="VSTRIKERDB" ref-catalog="VSTRIKERDB" ref-columns="TESTCONFIGURATION_ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <index name="CONSTRAINT_9F95_INDEX_B" unique="false" columns="TESTCONFIGURATION_ID"/>
+      <index name="CONSTRAINT_9F9_INDEX_B" unique="false" columns="CONFIGURATION_TEMPLATE_ID"/>
+    </table>
+    <table name="API_TYPE" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="TABLE" remarks="VHlwZSBvZiB0aGUgQVBJIHJlZmVyZW5jZWQuIFRoaXMgY2FuIGJlIFMzLCBTd2lmdCwgQXRtb3MsIGV0Yy4u">
+      <column name="API_TYPE_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4" def="KE5FWFQgVkFMVUUgRk9SIFZTVFJJS0VSREIuU1lTVEVNX1NFUVVFTkNFXzJCQ0Q1OUI3X0Y2NDFfNDY5QV9CMkE5X0JBRjQyNDYyOTYyNSk=" autoIncrement="true"/>
+      <column name="API_TYPE_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="API_TYPE_URL" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="API_TYPE_DESCRIPTION" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="CONSTRAINT_6" columns="API_TYPE_ID"/>
+      <exported-key name="CONSTRAINT_FDF" table="API" schema="VSTRIKERDB" catalog="VSTRIKERDB" columns="API_TYPE_ID"/>
+      <exported-key name="CONSTRAINT_610" table="TEST_PLAN_OPERATION" schema="VSTRIKERDB" catalog="VSTRIKERDB" columns="API_TYPE_ID"/>
+    </table>
+    <table name="CONFIGURATION_TEMPLATE" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="TABLE">
+      <column name="CONFIGURATION_TEMPLATE_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFZTVFJJS0VSREIuU1lTVEVNX1NFUVVFTkNFXzBDOTMzMEFCXzAzQjdfNEQzM184MUMzXzM4RThCODk2NzNERSk=" autoIncrement="true"/>
+      <column name="CONF_TEMP_OBJECT_SIZE_REPORT_UNIT_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="CONF_TEMP_NAME" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="CONF_TEMP_DESCRIPTION" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CONF_TEMP_OBJECT_SIZE" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CONF_TEMP_NUMBER_OF_OPERATIONS" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="CONF_TEMP_NUMBER_OF_THREADS" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4" def="MQ=="/>
+      <column name="CONF_TEMP_CREATE_OPERATION" sqlType="BOOLEAN" precision="1" scale="0" nullable="true" jdbcType="16"/>
+      <column name="CONF_TEMP_READ_OPERATION" sqlType="BOOLEAN" precision="1" scale="0" nullable="true" jdbcType="16"/>
+      <column name="CONF_TEMP_UPDATE_OPERATION" sqlType="BOOLEAN" precision="1" scale="0" nullable="true" jdbcType="16"/>
+      <column name="CONF_TEMP_DELETE_OPERATION" sqlType="BOOLEAN" precision="1" scale="0" nullable="true" jdbcType="16"/>
+      <column name="CONF_TEMP_CREATE_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CONF_TEMP_READ_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CONF_TEMP_UPDATE_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CONF_TEMP_DELETE_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CONF_TEMP_NUMBER_OF_RETRY" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CONF_TEMP_ENABLE_RAND_SIZE_OBJECT" sqlType="BOOLEAN" precision="1" scale="0" nullable="true" jdbcType="16"/>
+      <column name="CONF_TEMP_MIN_RAND_SIZE_OBJECT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CONF_TEMP_MAX_RAND_SIZE_OBJECT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CONF_TEMP_CREATED_DATE" sqlType="DATE" precision="8" scale="0" nullable="true" jdbcType="91" def="Q1VSUkVOVF9EQVRFKCk="/>
+      <column name="CONF_TEMP_SMALL_SIZE_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CONF_TEMP_MEDIUM_SIZE_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CONF_TEMP_LARGE_SIZE_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="CONSTRAINT_1" columns="CONFIGURATION_TEMPLATE_ID"/>
+      <foreign-key name="CONSTRAINT_16" columns="CONF_TEMP_OBJECT_SIZE_REPORT_UNIT_ID" ref-table="OBJECT_SIZE_REPORT_UNIT" ref-schema="VSTRIKERDB" ref-catalog="VSTRIKERDB" ref-columns="OBJECT_SIZE_REPORT_UNIT_ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <exported-key name="CONSTRAINT_9F9" table="API_SELECTED" schema="VSTRIKERDB" catalog="VSTRIKERDB" columns="CONFIGURATION_TEMPLATE_ID"/>
+      <exported-key name="CONSTRAINT_282" table="EXECUTION_PLAN" schema="VSTRIKERDB" catalog="VSTRIKERDB" columns="CONFIGURATION_TEMPLATE_ID"/>
+    </table>
+    <table name="CRUD_OPERATION_TYPE" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="TABLE" remarks="VGhlIHR5cGUgb2YgQ1JVRCBvcGVyYXRpb24=">
+      <column name="CRUD_OPERATION_TYPE_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFZTVFJJS0VSREIuU1lTVEVNX1NFUVVFTkNFXzJCQUEzODc2XzkxRUJfNDBFNl9CRUJDX0RFODI3QTZBNjU5OSk=" autoIncrement="true"/>
+      <column name="CRUD_OPERATION_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CRUD OPERATION VALUE" sqlType="VARCHAR" precision="1000" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="CONSTRAINT_4" columns="CRUD_OPERATION_TYPE_ID"/>
+      <exported-key name="CONSTRAINT_6108" table="TEST_PLAN_OPERATION" schema="VSTRIKERDB" catalog="VSTRIKERDB" columns="CRUD_OPERATION_TYPE_ID"/>
+    </table>
+    <table name="EXECUTION_PLAN" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="TABLE">
+      <column name="EXECUTION_PLAN_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFZTVFJJS0VSREIuU1lTVEVNX1NFUVVFTkNFX0Y2Njc3MzYxX0JDMDRfNDdFRF9CRUZDXzg0RDU5MDg5NTQ5Qik=" autoIncrement="true"/>
+      <column name="ACCOUNT_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="CONFIGURATION_TEMPLATE_ID" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="TESTCONFIGURATION_ID" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="CONSTRAINT_2" columns="EXECUTION_PLAN_ID"/>
+      <foreign-key name="CONSTRAINT_28" columns="ACCOUNT_ID" ref-table="ACCOUNT" ref-schema="VSTRIKERDB" ref-catalog="VSTRIKERDB" ref-columns="ACCOUNT_ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <foreign-key name="CONSTRAINT_282" columns="CONFIGURATION_TEMPLATE_ID" ref-table="CONFIGURATION_TEMPLATE" ref-schema="VSTRIKERDB" ref-catalog="VSTRIKERDB" ref-columns="CONFIGURATION_TEMPLATE_ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <foreign-key name="CONSTRAINT_2821" columns="TESTCONFIGURATION_ID" ref-table="TEST_CONFIGURATION" ref-schema="VSTRIKERDB" ref-catalog="VSTRIKERDB" ref-columns="TESTCONFIGURATION_ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <exported-key name="CONSTRAINT_A7" table="EXECUTION_REPORT" schema="VSTRIKERDB" catalog="VSTRIKERDB" columns="EXECUTION_PLAN_ID"/>
+    </table>
+    <table name="EXECUTION_REPORT" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="TABLE" remarks="VGhpcyB0YWJsZSBjb250YWlucyB0aGUgcmVwb3J0IG9mIHRoZSBleGVjdXRpb24=">
+      <column name="EXECUTION_REPORT_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFZTVFJJS0VSREIuU1lTVEVNX1NFUVVFTkNFXzI4OUEyNDUzX0NDRkFfNEREMV84Q0YzXzcxQjQxQkYyOUFGRSk=" autoIncrement="true"/>
+      <column name="EXECUTION_NAME" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="EXECUTION_DATE" sqlType="DATE" precision="8" scale="0" nullable="true" jdbcType="91"/>
+      <column name="TOTAL_THROUGHPUT" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="MAX_THROUGHPUT" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="MIN_THROUGHPUT" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TOTAL_VOLUME_SENT" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TOTAL_VOLUME_RECEIVED" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="AVG_LATENCY_PER_CRUD_OPERATION" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="NUMBER_REQUEST_SEC" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="PERECENT_FAILED_REQUEST" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="EXECUTION_PLAN_ID" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="CONSTRAINT_A" columns="EXECUTION_REPORT_ID"/>
+      <foreign-key name="CONSTRAINT_A7" columns="EXECUTION_PLAN_ID" ref-table="EXECUTION_PLAN" ref-schema="VSTRIKERDB" ref-catalog="VSTRIKERDB" ref-columns="EXECUTION_PLAN_ID" update-rule="1" delete-rule="1" deferrability="2"/>
+    </table>
+    <table name="EXECUTION_REPORT_DATA" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="TABLE">
+      <column name="EXECUTION_REPORT_DATA_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFZTVFJJS0VSREIuU1lTVEVNX1NFUVVFTkNFXzc1QkRBRDY2XzUzMEZfNDA5M185MUM5XzQ0NTlFODhBNTY3MSk=" autoIncrement="true"/>
+      <column name="EXECUTION_REPORT_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="DATA_KEY" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DATA_VALUE" sqlType="VARCHAR" precision="500" scale="0" nullable="false" jdbcType="12"/>
+      <column name="CRUD_VALUE" sqlType="VARCHAR" precision="6" scale="0" nullable="true" jdbcType="12"/>
+      <column name="THREAD_NUM" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="CONSTRAINT_FF" columns="EXECUTION_REPORT_DATA_ID"/>
+    </table>
+    <table name="OBJECT_SIZE_REPORT_UNIT" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="TABLE">
+      <column name="OBJECT_SIZE_REPORT_UNIT_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4" def="KE5FWFQgVkFMVUUgRk9SIFZTVFJJS0VSREIuU1lTVEVNX1NFUVVFTkNFXzdBN0Q5MzE2XzlFRkNfNDBGNl84Rjg2X0Q4NjZBODE4QzJDQyk=" autoIncrement="true"/>
+      <column name="REPORT_UNIT_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="REPORT_UNIT_VALUE" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="CONSTRAINT_AA" columns="OBJECT_SIZE_REPORT_UNIT_ID"/>
+      <exported-key name="CONSTRAINT_16" table="CONFIGURATION_TEMPLATE" schema="VSTRIKERDB" catalog="VSTRIKERDB" columns="CONF_TEMP_OBJECT_SIZE_REPORT_UNIT_ID"/>
+      <exported-key name="CONSTRAINT_DA" table="TEST_CONFIGURATION" schema="VSTRIKERDB" catalog="VSTRIKERDB" columns="OBJECT_SIZE_REPORT_UNIT_ID"/>
+    </table>
+    <table name="TEST_CONFIGURATION" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="TABLE">
+      <column name="TESTCONFIGURATION_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFZTVFJJS0VSREIuU1lTVEVNX1NFUVVFTkNFX0UzNTc4MzA4XzA3M0RfNEQzNV85N0ZEXzI5OUY3NjYzNjQ0Qyk=" autoIncrement="true"/>
+      <column name="OBJECT_SIZE_REPORT_UNIT_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="TEST_CONFIG_NAME" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="TEST_CONFIG_DESCRIPTION" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="OBJECT_SIZE" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="NUMBER_OF_OPERATIONS" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="NUMBER_OF_THREADS" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4" def="MQ=="/>
+      <column name="CREATE_OPERATION" sqlType="BOOLEAN" precision="1" scale="0" nullable="true" jdbcType="16"/>
+      <column name="READ_OPERATION" sqlType="BOOLEAN" precision="1" scale="0" nullable="true" jdbcType="16"/>
+      <column name="UPDATE_OPERATION" sqlType="BOOLEAN" precision="1" scale="0" nullable="true" jdbcType="16"/>
+      <column name="DELETE_OPERATION" sqlType="BOOLEAN" precision="1" scale="0" nullable="true" jdbcType="16"/>
+      <column name="CREATE_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="READ_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="UPDATE_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="DELETE_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="NUMBER_OF_RETRY" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ENABLE_RAND_SIZE_OBJECT" sqlType="BOOLEAN" precision="1" scale="0" nullable="true" jdbcType="16"/>
+      <column name="MIN_RAND_SIZE_OBJECT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="MAX_RAN_DSIZE_OBJECT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CREATED_DATE" sqlType="DATE" precision="8" scale="0" nullable="true" jdbcType="91" def="Q1VSUkVOVF9EQVRFKCk="/>
+      <column name="SMALL_SIZE_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="MEDIUM_SIZE_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="LARGE_SIZE_PERCENT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="CONSTRAINT_D" columns="TESTCONFIGURATION_ID"/>
+      <foreign-key name="CONSTRAINT_DA" columns="OBJECT_SIZE_REPORT_UNIT_ID" ref-table="OBJECT_SIZE_REPORT_UNIT" ref-schema="VSTRIKERDB" ref-catalog="VSTRIKERDB" ref-columns="OBJECT_SIZE_REPORT_UNIT_ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <exported-key name="CONSTRAINT_9F95" table="API_SELECTED" schema="VSTRIKERDB" catalog="VSTRIKERDB" columns="TESTCONFIGURATION_ID"/>
+      <exported-key name="CONSTRAINT_2821" table="EXECUTION_PLAN" schema="VSTRIKERDB" catalog="VSTRIKERDB" columns="TESTCONFIGURATION_ID"/>
+    </table>
+    <table name="TEST_PLAN_OPERATION" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="TABLE">
+      <column name="TEST_PLAN_OPERATION_ID" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" def="KE5FWFQgVkFMVUUgRk9SIFZTVFJJS0VSREIuU1lTVEVNX1NFUVVFTkNFXzdBRTcwREJDX0MzMDNfNDYzNF84NkEyXzcxRkM3NjAzRUE3MSk=" autoIncrement="true"/>
+      <column name="API_TYPE_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="CRUD_OPERATION_TYPE_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="CRUD_OPERATION" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="FILE_URL" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="CONSTRAINT_61" columns="TEST_PLAN_OPERATION_ID"/>
+      <foreign-key name="CONSTRAINT_610" columns="API_TYPE_ID" ref-table="API_TYPE" ref-schema="VSTRIKERDB" ref-catalog="VSTRIKERDB" ref-columns="API_TYPE_ID" update-rule="1" delete-rule="1" deferrability="2"/>
+      <foreign-key name="CONSTRAINT_6108" columns="CRUD_OPERATION_TYPE_ID" ref-table="CRUD_OPERATION_TYPE" ref-schema="VSTRIKERDB" ref-catalog="VSTRIKERDB" ref-columns="CRUD_OPERATION_TYPE_ID" update-rule="1" delete-rule="1" deferrability="2"/>
+    </table>
+    <table name="VW_ACCOUNT_DETAIL" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="VIEW">
+      <column name="ID" sqlType="UUID" precision="2147483647" scale="0" nullable="true" jdbcType="-2"/>
+      <column name="NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ACCOUNT_LOCATION" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="VALIDATED" sqlType="BOOLEAN" precision="1" scale="0" nullable="true" jdbcType="16"/>
+      <column name="LAST_VALIDATION_DATE" sqlType="DATE" precision="8" scale="0" nullable="true" jdbcType="91"/>
+      <column name="API_ID" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="ACCOUNT_ID" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="API_TYPE_ID" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="URL" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="SECRET_KEY" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="BUCKET" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="SUBTENANT" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="HTTP_ADDRESS_IP" sqlType="VARCHAR" precision="16" scale="0" nullable="true" jdbcType="12"/>
+      <column name="HTTPS_ADDRESS_IP" sqlType="VARCHAR" precision="16" scale="0" nullable="true" jdbcType="12"/>
+      <column name="HTTP_ADDRESS_PORT" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12"/>
+      <column name="HTTPS_ADDRESS_PORT" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12"/>
+      <column name="API_TYPE_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="API_TYPE_URL" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="API_TYPE_DESCRIPTION" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+    </table>
+    <table name="VW_API_SELECTED_DETAIL" schema="VSTRIKERDB" catalog="VSTRIKERDB" type="VIEW">
+      <column name="ID" sqlType="UUID" precision="2147483647" scale="0" nullable="true" jdbcType="-2"/>
+      <column name="API_SELECTED_ID" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="API_TYPE_ID" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CONFIGURATION_TEMPLATE_ID" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="TESTCONFIGURATION_ID" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="API_TYPE_NAME" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="API_TYPE_URL" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+    </table>
+  </data-source>
+</component>
