@@ -79,7 +79,7 @@ DB/
 /vStrikerDB/DB/vstrikerdb.trace.db
 
 /vStrikerUnitTest/Stagefiles/*.*
-/ResultFiles/*.*
+
 /release/beta/*.*
 
 vStrikerDB/DB/vstrikerdb.mv.db
