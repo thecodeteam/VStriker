@@ -2,48 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22358470-0504-441b-a6d2-df6ab5701241" name="Default" comment="adding drive f">
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\_mylyn.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\commonj_sdo_2_1_1_v201112051852.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\commonj_sdo_2_1_1_v2011120518521.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\commonj_sdo_2_1_1_v2011120518522.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\dbws.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\dbws1.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\dbws2.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\eclipselink.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\eclipselink1.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\eclipselink2.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\gradle_wrapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\gradle_wrapper1.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\h2_1_4_184.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\h2_1_4_1841.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\h2_1_4_1842.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\jlib.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\jlib1.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\jlib2.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\jlib4.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\jlib5.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\jpa.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\jpa2.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\libraries.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\libraries1.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\moxy.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\moxy1.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\moxy2.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\package_rename.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\package_rename1.xml" afterPath="" />
-      <change type="DELETED" beforePath="F:\vstriker\.idea\libraries\package_rename2.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vStrikerTestEngine/src/vStrikerTestEngine/atmos/AtmosCreateWorker.java" afterPath="$PROJECT_DIR$/vStrikerTestEngine/src/vStrikerTestEngine/atmos/AtmosCreateWorker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vStrikerTestEngine/src/vStrikerTestEngine/AtmosTestClient.java" afterPath="$PROJECT_DIR$/vStrikerTestEngine/src/vStrikerTestEngine/AtmosTestClient.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vStrikerAPI/src/test/java/VStrikerAPIUnitTest.java" afterPath="$PROJECT_DIR$/vStrikerAPI/src/test/java/VStrikerAPIUnitTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vStrikerBizModel/src/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/vStrikerBizModel/src/resources/META-INF/persistence.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vStrikerEntities/src/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/vStrikerEntities/src/META-INF/persistence.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vStrikerAPI/vStrikerAPI.iml" afterPath="$PROJECT_DIR$/vStrikerAPI/vStrikerAPI.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vStrikerBizModel/vStrikerBizModel.iml" afterPath="$PROJECT_DIR$/vStrikerBizModel/vStrikerBizModel.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vStrikerEntities/vStrikerEntities.iml" afterPath="$PROJECT_DIR$/vStrikerEntities/vStrikerEntities.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vStrikerTestEngine/vStrikerTestEngine.iml" afterPath="$PROJECT_DIR$/vStrikerTestEngine/vStrikerTestEngine.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vStrikerTestUtilities/vStrikerTestUtilities.iml" afterPath="$PROJECT_DIR$/vStrikerTestUtilities/vStrikerTestUtilities.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vStrikerUI.iml" afterPath="$PROJECT_DIR$/vStrikerUI.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/libraries2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/libraries2.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="vStrikerUI.iws" />
@@ -84,22 +44,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="VStrikerAPIUnitTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="VStrikerAPIUnitTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vStrikerAPI/src/test/java/VStrikerAPIUnitTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1921">
-              <caret line="39" column="68" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.3056266" vertical-offset="424" max-vertical-offset="2329">
+              <caret line="39" column="73" selection-start-line="39" selection-start-column="73" selection-end-line="39" selection-end-column="73" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3148148" vertical-offset="0" max-vertical-offset="2771">
+            <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="2771">
               <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
               <folding />
             </state>
@@ -381,7 +339,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="2850403650396" />
+        <entry key="$PROJECT_DIR$" value="2850313680077" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -487,10 +445,10 @@
         <option value="$PROJECT_DIR$/vStrikerAPI/src/com/emc/vipr/atmos/atmosapi.java" />
         <option value="$PROJECT_DIR$/vStrikerTestEngine/src/vStrikerTestEngine/AtmosTestClient.java" />
         <option value="$PROJECT_DIR$/vStrikerTestEngine/src/vStrikerTestEngine/atmos/AtmosCreateWorker.java" />
-        <option value="$PROJECT_DIR$/vStrikerAPI/src/test/java/VStrikerAPIUnitTest.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/vStrikerEntities/src/META-INF/persistence.xml" />
         <option value="$PROJECT_DIR$/vStrikerBizModel/src/resources/META-INF/persistence.xml" />
+        <option value="$PROJECT_DIR$/vStrikerAPI/src/test/java/VStrikerAPIUnitTest.java" />
       </list>
     </option>
   </component>
@@ -528,7 +486,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -543,6 +500,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -561,6 +519,86 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vStrikerUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vstriker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vStrikerAPI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vStrikerUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vstriker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vStrikerAPI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vStrikerUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vstriker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vStrikerAPI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vStrikerUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vstriker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vStrikerAPI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -574,10 +612,10 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="F:/Java/IntelliJ/HelloWorldFX" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libraries/hamcrest-core-1.3.jar!/" />
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
@@ -601,7 +639,7 @@
       <recent name="vStrikerAPI.apitest" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.vstriker [build]">
+  <component name="RunManager" selected="JUnit.VStrikerAPIUnitTest.test">
     <configuration default="false" name="VStriker" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -991,8 +1029,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Gradle.vstriker [build]" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.VStrikerAPIUnitTest.test" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.VStrikerAPIUnitTest.test" />
+        <item index="1" class="java.lang.String" itemvalue="Gradle.vstriker [build]" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.VStrikerAPIUnitTest" />
         <item index="3" class="java.lang.String" itemvalue="Application.VStriker" />
         <item index="4" class="java.lang.String" itemvalue="Gradle.vstriker [buildDependents]" />
@@ -1035,45 +1073,46 @@
       <workItem from="1426178391394" duration="2017000" />
       <workItem from="1426180566723" duration="1136000" />
       <workItem from="1426181917700" duration="1014000" />
+      <workItem from="1426183414367" duration="1013000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60309000" />
+    <option name="totallyTimeSpent" value="61322000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1272" y="-8" width="1936" height="1216" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3267148" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12916666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14895834" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.184375" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30776173" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3267148" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26895306" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12916666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.184375" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30776173" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26895306" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17418772" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1254,13 +1293,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/com/emccode/vstriker/view/VStriker.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1037">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/emccode/vstriker/VStriker.java">
@@ -1341,7 +1380,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="935">
           <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1398,7 +1436,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
           <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1434,7 +1471,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="27472">
           <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1450,7 +1486,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.366448" vertical-offset="0" max-vertical-offset="1067">
           <caret line="23" column="71" selection-start-line="23" selection-start-column="71" selection-end-line="23" selection-end-column="71" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1475,20 +1510,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vStrikerAPI/src/test/java/VStrikerAPIUnitTest.java">
+    <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1921">
-          <caret line="39" column="68" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="2771">
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
+    <entry file="file://$PROJECT_DIR$/vStrikerAPI/src/test/java/VStrikerAPIUnitTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3148148" vertical-offset="0" max-vertical-offset="2771">
-          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.3056266" vertical-offset="424" max-vertical-offset="2329">
+          <caret line="39" column="73" selection-start-line="39" selection-start-column="73" selection-end-line="39" selection-end-column="73" />
           <folding />
         </state>
       </provider>
@@ -1547,7 +1580,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>vStrikerBizModel</last-edited>
+          <last-edited>vStrikerAPI</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

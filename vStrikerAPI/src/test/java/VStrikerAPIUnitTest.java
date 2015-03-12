@@ -12,7 +12,7 @@ import org.javaswift.joss.model.Account;
 import org.javaswift.joss.model.Container;
 import org.javaswift.joss.model.StoredObject;
 import com.emc.atmos.api.ObjectId;
-
+import java.text.SimpleDateFormat;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
@@ -37,7 +37,7 @@ public class VStrikerAPIUnitTest {
 	public static String swiftbucket="test-swift";
 	public static String atmosbucket="test-atmos";
 	public static String filelocation="F:\\vstriker\\ResultFiles\\Dashboard-Nov.xlsx";
-	public static String fileName ="Dashboard-"+new java.util.Date()+".xlsx";
+	public static String fileName ="Dashboard-"+((new SimpleDateFormat("_yyyyMMdd_hhmmss")).format(new Date()))+".xlsx";
 
 
 	@Test
