@@ -8,7 +8,9 @@ import com.emc.atmos.api.AtmosApi;
 import com.emc.atmos.api.AtmosConfig;
 import com.emc.atmos.api.ObjectId;
 import com.emc.atmos.api.jersey.AtmosApiClient;
-
+import com.emc.atmos.api.ObjectIdentifier;
+import com.emc.atmos.api.ObjectPath;
+import java.io.*;
 public class atmosapi {
 	
 	
@@ -18,10 +20,12 @@ public class atmosapi {
 	    }
 
 	 
-	   public static ObjectId CreateObject(String UID, String SECRET,String ENDPOINT,String key, InputStream content, String contentType) throws Exception {
+	   public static ObjectId CreateObject(String UID, String SECRET,String ENDPOINT,String key, File fis,String bucket) throws Exception {
 	        
 		   AtmosApi atmos = getAtmosApi( UID, SECRET,ENDPOINT);
-	        return atmos.createObject( content, contentType );
+		   ObjectIdentifier identifier = new ObjectPath(bucket+"/"+key);
+
+		   return atmos.createObject(identifier , fis,null);
 	    }
 	   
 	   public static void UpdateObject(String UID, String SECRET,String ENDPOINT,String key, InputStream content, String oid) throws Exception {
