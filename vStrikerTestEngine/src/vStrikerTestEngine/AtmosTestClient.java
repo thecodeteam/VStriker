@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-
+import java.io.File;
 import org.apache.commons.io.FilenameUtils;
 
 import vStrikerBizModel.ExecutionReportBiz;
@@ -52,7 +52,7 @@ public class AtmosTestClient {
 			vLogger.LogInfo(listofObjects.get(0));
 			atmosapi.CreateObject(user, key, url,
 					FilenameUtils.getName(listofObjects.get(0)),
-					new FileInputStream(listofObjects.get(0)), "contentType");
+					new File(listofObjects.get(0)), "contentType");
 			vLogger.LogInfo("Create object done");
 			atmosapi.DeleteObject(user, key, url,
 					FilenameUtils.getName(listofObjects.get(0)), "oid");

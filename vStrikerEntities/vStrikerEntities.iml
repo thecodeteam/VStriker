@@ -22,6 +22,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="jpa1" level="project" />
     <orderEntry type="library" exported="" name="jlib3" level="project" />
-    <orderEntry type="library" exported="" name="libraries1" level="project" />
+    <orderEntry type="library" name="libraries2" level="project" />
   </component>
 </module>

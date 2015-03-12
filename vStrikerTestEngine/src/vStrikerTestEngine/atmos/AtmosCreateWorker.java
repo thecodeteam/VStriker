@@ -2,7 +2,7 @@ package vStrikerTestEngine.atmos;
 
 import java.io.FileInputStream;
 import java.util.concurrent.Callable;
-
+import java.io.File;
 import org.apache.commons.io.FilenameUtils;
 
 import vStrikerEntities.Api;
@@ -36,7 +36,7 @@ public class AtmosCreateWorker implements Callable<ExecutionReportData> {
 		long startTime = System.nanoTime();
 		atmosapi.CreateObject(api.getSubtenant(), api.getSecretKey(),
 				api.getUrl(), FilenameUtils.getName(objectLocation),
-				new FileInputStream(objectLocation), null);
+				new File(objectLocation), null);
 		long endTime = System.nanoTime();
 		System.out.println("Atmos CreateObject execution time: " + (endTime - startTime));
 		reportData.setDataKey("Atmos");

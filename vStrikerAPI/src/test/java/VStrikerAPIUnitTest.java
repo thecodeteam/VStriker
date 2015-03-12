@@ -16,6 +16,7 @@ import com.emc.atmos.api.ObjectId;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import java.util.Date;
 
 import com.emc.vipr.s3.*;
 import com.emc.vipr.swift.*;
@@ -35,20 +36,20 @@ public class VStrikerAPIUnitTest {
 	public static String s3bucket="test-s3";
 	public static String swiftbucket="test-swift";
 	public static String atmosbucket="test-atmos";
-
-
+	public static String filelocation="F:\\vstriker\\ResultFiles\\Dashboard-Nov.xlsx";
+	public static String fileName ="Dashboard-"+new java.util.Date()+".xlsx";
 
 
 	@Test
 	public  void test() throws Exception {
 		System.out.println("Hello Test");
-	/*	TestS3API();
+		TestS3API();
 		TestS3CreateObject();
 
 		TestSwiftGetClient();
 		TestSwiftCreateObject();
 
-		TestAtmosGetClient();*/
+		TestAtmosGetClient();
 		TestAtmosCreateObject();
 	}
 
@@ -74,8 +75,8 @@ public class VStrikerAPIUnitTest {
 	{
 		try
 		{
-				FileInputStream fis = new FileInputStream("C:\\EMC\\emccode\\vstriker\\ResultFiles\\Dashboard-Nov.xlsx");
-				s3api.CreateObject(username,password,s3proxy,null,s3bucket,"Dashboard-Nov2.xlsx", fis);
+				FileInputStream fis = new FileInputStream(filelocation);
+				s3api.CreateObject(username,password,s3proxy,null,s3bucket,fileName, fis);
 			System.out.println("Finished loading S3 Test file");
 		}
 		catch(Exception e)
@@ -95,8 +96,8 @@ public class VStrikerAPIUnitTest {
 	{
 		try
 		{
-				FileInputStream fis = new FileInputStream("C:\\EMC\\emccode\\vstriker\\ResultFiles\\Dashboard-Nov.xlsx");
-				swiftapi.CreateObject(username,password,swiftproxy,swiftbucket,"Dashboard-Nov2.xlsx", fis);
+				FileInputStream fis = new FileInputStream(filelocation);
+				swiftapi.CreateObject(username,password,swiftproxy,swiftbucket,fileName, fis);
 				System.out.println("Finished loading Swift Test file");
 		}
 		catch(Exception e)
@@ -116,8 +117,8 @@ public class VStrikerAPIUnitTest {
 	{
 		try
 		{
-			File fis = new File("C:\\EMC\\emccode\\vstriker\\ResultFiles\\Dashboard-Nov.xlsx");
-			ObjectId id =atmosapi.CreateObject(atmosusername,password,atmosproxy,"Dashboard-Nov.xlsx", fis,atmosbucket);
+			File fis = new File(filelocation);
+			ObjectId id =atmosapi.CreateObject(atmosusername,password,atmosproxy,fileName, fis,atmosbucket);
 			System.out.println("Finished loading Atmos Test file"+id);
 		}
 		catch(Exception e)

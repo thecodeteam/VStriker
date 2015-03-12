@@ -9,10 +9,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="libraries1" level="project" />
     <orderEntry type="module" module-name="vStrikerEntities" />
     <orderEntry type="module" module-name="vStrikerBizModel" />
     <orderEntry type="module" module-name="vStrikerAPI" />
     <orderEntry type="module" module-name="vStrikerTestUtilities" />
+    <orderEntry type="library" name="libraries2" level="project" />
   </component>
 </module>

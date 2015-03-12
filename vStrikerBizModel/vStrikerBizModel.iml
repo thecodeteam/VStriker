@@ -11,8 +11,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="vStrikerEntities" exported="" />
-    <orderEntry type="library" exported="" name="jlib5" level="project" />
-    <orderEntry type="library" exported="" name="jpa2" level="project" />
     <orderEntry type="library" exported="" name="libraries2" level="project" />
+    <orderEntry type="library" exported="" name="jpa1" level="project" />
+    <orderEntry type="library" exported="" name="jlib3" level="project" />
   </component>
 </module>
