@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="22358470-0504-441b-a6d2-df6ab5701241" name="Default" comment="adding drive f">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="22358470-0504-441b-a6d2-df6ab5701241" name="Default" comment="adding drive f" />
     <ignored path="vStrikerUI.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -1000,12 +998,12 @@
       <workItem from="1426263709069" duration="9793000" />
       <workItem from="1426284283411" duration="1419000" />
       <workItem from="1426287025327" duration="11000" />
-      <workItem from="1426287046785" duration="313000" />
+      <workItem from="1426287046785" duration="721000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94254000" />
+    <option name="totallyTimeSpent" value="94662000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1272" y="-8" width="1936" height="1216" extended-state="6" />
