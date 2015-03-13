@@ -36,7 +36,7 @@ public class SwiftTests {
 		prop = new Properties();
 		try {
 			prop.load(new FileInputStream(
-					"./src/vStrikerUnitTest/TestEngine/swiftconfig.properties"));
+					"./src/test/java/TestEngine/swiftconfig.properties"));
 		} catch (Exception e) {
 			System.out.println("Unable to load swiftconfig.properties");
 			e.printStackTrace();

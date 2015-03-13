@@ -142,6 +142,7 @@ public class SwiftController {
 				System.out.println("Api type needs to be http or https");
 			}
 			ApiBiz.ApiUpdate(api);
+			vStriker.postStatus("API data saved!");
 
 		} else {
 			Api swiftapi = new Api();
@@ -209,6 +210,7 @@ public class SwiftController {
 			}
 			try {
 				ApiBiz.ApiCreate(swiftapi);
+				vStriker.postStatus("API data saved!");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println("Failed to create Swift Api");

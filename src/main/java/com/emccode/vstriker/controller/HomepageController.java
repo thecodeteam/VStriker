@@ -291,7 +291,7 @@ public class HomepageController {
 	public void deleteAccountClicked(ActionEvent event) {
 		System.out.println("Delete account button clicked");
 		int selectedRow = getSelectedRow();
-		if (selectedRow <= 0) {
+		if (selectedRow <0) {
 			vStriker.postStatus("Please select an Account to delete");
 			return;
 		}

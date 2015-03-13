@@ -36,7 +36,7 @@ public class S3UnitTest {
 		prop = new Properties();
 		try {
 			prop.load(new FileInputStream(
-					"./src/vStrikerUnitTest/TestEngine/s3config.properties"));
+					"./src/test/java/TestEngine/s3config.properties"));
 		} catch (Exception e) {
 			System.out.println("Unable to load s3config.properties");
 			e.printStackTrace();

@@ -20,7 +20,7 @@ import vStrikerEntities.ExecutionPlan;
 import vStrikerEntities.ExecutionReport;
 import vStrikerEntities.ExecutionReportData;
 import vStrikerEntities.TestConfiguration;
-import vStrikerTestEngine.s3.S3DeleteWorker;
+
 import vStrikerTestEngine.swift.SwiftCreateWorker;
 import vStrikerTestEngine.swift.SwiftDeleteWorker;
 import vStrikerTestEngine.swift.SwiftReadWorker;
@@ -46,7 +46,7 @@ public class SwiftTestClient {
 		if (namespace == null || namespace.length() == 0) {
 			namespace = null;
 		}
-		vLogger.LogInfo("In vTestEngine validateS3Connection");
+		vLogger.LogInfo("In vTestEngine validate Swift Connection");
 		String TEST_BUCKET = "vstest"
 				+ (UUID.randomUUID().toString()).substring(0, 10);
 		System.out.println("Test Bucket name is: " + TEST_BUCKET);
@@ -260,6 +260,7 @@ public class SwiftTestClient {
 		totaltime = System.nanoTime() - totaltime;
 		System.out.println("totaltime end : " + totaltime / 1000000 + "ms");
 
+		System.out.println("Post-test cleanup:");
 		// Post-test cleanup
 		if (!testconfig.getDeleteOperation() || (deleteOps < createOps)
 				|| (deleteOps < updateOps) || (deleteOps < readOps)) {
@@ -270,9 +271,9 @@ public class SwiftTestClient {
 			List<Callable<ExecutionReportData>> posttestList = new ArrayList<Callable<ExecutionReportData>>();
 
 			for (int i = deleteOps; i < maxOps; i++) {
-				Callable<ExecutionReportData> s3deleteworker = new S3DeleteWorker(
+				Callable<ExecutionReportData> swiftdeleteworker = new SwiftDeleteWorker(
 						listofObjects.get(i), api);
-				posttestList.add(s3deleteworker);
+				posttestList.add(swiftdeleteworker);
 			}
 			posttestexecutor.invokeAll(posttestList);
 			posttestexecutor.shutdown();

@@ -139,7 +139,7 @@ public class AtmosController {
 				System.out.println("Api type needs to be http or https");
 			}
 			ApiBiz.ApiUpdate(api);
-
+			vStriker.postStatus("API data saved!");
 		} else {
 			Api atmosapi = new Api();
 			atmosapi.setAccount(acct);
@@ -206,6 +206,7 @@ public class AtmosController {
 			}
 			try {
 				ApiBiz.ApiCreate(atmosapi);
+				vStriker.postStatus("API data saved!");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println("Failed to create Atmos Api");

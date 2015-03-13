@@ -36,8 +36,8 @@ public class VStrikerAPIUnitTest {
 	public static String s3bucket="test-s3";
 	public static String swiftbucket="test-swift";
 	public static String atmosbucket="test-atmos";
-	public static String filelocation="F:\\vstriker\\ResultFiles\\Dashboard-Nov.xlsx";
-	public static String fileName ="Dashboard-"+((new SimpleDateFormat("_yyyyMMdd_hhmmss")).format(new Date()))+".xlsx";
+	public static String filelocation="F:\\vstriker\\ResultFiles\\Test Med CRUD  Template_1.txt";
+	public static String fileName ="Dashboard-"+((new SimpleDateFormat("_yyyyMMdd_hhmmss")).format(new Date()))+".txt";
 
 
 	@Test
@@ -48,6 +48,7 @@ public class VStrikerAPIUnitTest {
 
 		TestSwiftGetClient();
 		TestSwiftCreateObject();
+		TestSwiftDeleteObject();
 
 		TestAtmosGetClient();
 		TestAtmosCreateObject();
@@ -97,8 +98,8 @@ public class VStrikerAPIUnitTest {
 		try
 		{
 				FileInputStream fis = new FileInputStream(filelocation);
-				swiftapi.CreateObject(username,password,swiftproxy,swiftbucket,fileName, fis);
-				System.out.println("Finished loading Swift Test file");
+			swiftapi.CreateObject(username, password, swiftproxy,swiftbucket,fileName, fis);
+			System.out.println("Finished Create Swift Test file");
 		}
 		catch(Exception e)
 		{
@@ -106,6 +107,19 @@ public class VStrikerAPIUnitTest {
 		}
 	}
 
+	public static void TestSwiftDeleteObject() throws Exception
+	{
+		try
+		{
+			swiftapi.DeleteObject(username,password,swiftproxy,swiftbucket,fileName);
+			System.out.println("Finished Deleting Swift Test file");
+
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 	public static void TestAtmosGetClient() throws Exception
 	{
 

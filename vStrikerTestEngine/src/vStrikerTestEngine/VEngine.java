@@ -33,7 +33,7 @@ public class VEngine implements Engine {
 	public ExecutionReport runAtmosTests(ExecutionPlan ep,
 			TestConfiguration testconfig, Api api) throws Exception {
 		vLogger.LogInfo("In vTestEngine runAtmosTests");
-		return new ExecutionReport();
+		return  (new AtmosTestClient()).runTests(ep, testconfig, api);
 	}
 
 	@Override
@@ -135,18 +135,20 @@ public class VEngine implements Engine {
 
 						switch (x) {
 						case 1: {
-
+							System.out.println("Run S3");
 							rpt = runS3Tests(plan, test, p);
-							System.out.println("Validated S3");
+
 
 							break;
 						}
 						case 2: {
 							System.out.println("Validated Swift");
+							rpt = runSwiftTests(plan, test, p);
 							break;
 						}
 						case 3: {
 							System.out.println("Validated Atmos");
+							rpt = runAtmosTests(plan, test, p);
 							break;
 						}
 						default:

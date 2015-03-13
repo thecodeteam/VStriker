@@ -141,6 +141,7 @@ public class S3Controller {
 				System.out.println("Api type needs to be http or https");
 			}
 			ApiBiz.ApiUpdate(api);
+			vStriker.postStatus("API data saved!");
 		} else {
 			Api s3api = new Api();
 			s3api.setAccount(acct);
@@ -212,6 +213,8 @@ public class S3Controller {
 			// Add protocol and port after entity is updated - ToDo
 			try {
 				ApiBiz.ApiCreate(s3api);
+				vStriker.postStatus("API data saved!");
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println("Failed to create S3 Api");

@@ -99,9 +99,17 @@ public class s3api {
 			String S3_SECRET_KEY, String S3_ENDPOINT, String S3_ViPR_NAMESPACE,
 			String S3_BUCKET, String key, InputStream content) throws Exception {
 
+		System.out.println("Access ID:"+S3_ACCESS_KEY_ID);
+		System.out.println("Access secret:"+S3_SECRET_KEY);
+		System.out.println("Access URL:"+S3_ENDPOINT);
+		System.out.println("Access namespace:"+S3_ViPR_NAMESPACE);
+		System.out.println("Access bucket:"+S3_BUCKET);
+		System.out.println("Access key:"+key);
+
 		ViPRS3Client s3 = getS3Client(S3_ACCESS_KEY_ID, S3_SECRET_KEY,
 				S3_ENDPOINT, S3_ViPR_NAMESPACE);
 		// create the object in the demo bucket
+		System.out.println("client:"+s3.getServiceName());
 		s3.putObject(S3_BUCKET, key, content, null);
 
 	}
