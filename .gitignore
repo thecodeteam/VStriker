@@ -73,17 +73,11 @@ logs/
 DB/
 *.sql
 .buildpath
-/vStrikerDB/DB/vstrikerdb.mv.db.orig
-/vStrikerDB/DB/vstrikerdb.trace.db.orig
-/vStrikerDB/DB/vstrikerdb.mv.db
-/vStrikerDB/DB/vstrikerdb.trace.db
 
 /vStrikerUnitTest/Stagefiles/*.*
 
 /release/beta/*.*
 
-vStrikerDB/DB/vstrikerdb.mv.db
-vStrikerDB/DB/vstrikerdb.trace.db
 
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
