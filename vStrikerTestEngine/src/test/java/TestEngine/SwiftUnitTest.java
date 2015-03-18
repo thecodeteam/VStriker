@@ -1,6 +1,5 @@
 package vStrikerUnitTest.TestEngine;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -22,7 +21,9 @@ import vStrikerTestEngine.VEngine;
 import vStrikerTestUtilities.Utilites;
 import vStrikerTestUtilities.vLogger;
 
-public class S3UnitTest {
+//@author Sanjeev Chauhan
+
+public class SwiftUnitTest {
 
 	Api api =new Api();
 	TestConfiguration testconfig = new TestConfiguration();
@@ -33,13 +34,12 @@ public class S3UnitTest {
 	public void test() throws Exception {
 
 		// Load the properties file
-		System.out.println(new File(".").getAbsolutePath());
 		prop = new Properties();
 		try {
 			prop.load(new FileInputStream(
-					"./src/test/java/TestEngine/s3config.properties"));
+					"./src/test/java/TestEngine/swiftconfig.properties"));
 		} catch (Exception e) {
-			System.out.println("Unable to load s3config.properties");
+			System.out.println("Unable to load swiftconfig.properties");
 			e.printStackTrace();
 			return;
 		}
@@ -51,30 +51,26 @@ public class S3UnitTest {
 
 		if (testconfig != null && api != null && ep != null) {
 			System.out
-			.println("Need valid testconfig, api, and execution plan to continue");
+					.println("Need valid testconfig, api, and execution plan to continue");
 			return;
 		}
 
-		// TestFileGeneration();
-		// TestFileGeneration2();
-		// CreateTestPlan();
-		// ValidateS3();
-		// TestS3();
-		// TestS3xxxd();
-		// TestS3xxux();
-		// TestS3xxud();
-		// TestS3xrxx();
-		// TestS3xrxd();
-		// TestS3xrux();
-		// TestS3xrud();
-		// TestS3cxxx();
-		// TestS3cxxd();
-		// TestS3cxux();
-		// TestS3cxud();
-		// TestS3crxx();
-		// TestS3crxd();
-		// TestS3crux();
-		TestS3crud();
+		// ValidateSwift();
+		// TestSwiftxxxd();
+		// TestSwiftxxux();
+		// TestSwiftxxud();
+		// TestSwiftxrxx();
+		// TestSwiftxrxd();
+		// TestSwiftxrux();
+		// TestSwiftxrud();
+		// TestSwiftcxxx();
+		// TestSwiftcxxd();
+		// TestSwiftcxux();
+		// TestSwiftcxud();
+		// TestSwiftcrxx();
+		// TestSwiftcrxd();
+		// TestSwiftcrux();
+		TestSwiftcrud();
 	}
 
 	private TestConfiguration getTestConfiguration() {
@@ -82,7 +78,7 @@ public class S3UnitTest {
 			TestConfiguration testconfig = TestConfigurationBiz
 					.TestConfigurationSelect(Long.parseLong(prop
 							.getProperty("testconfig-id")));
-			/*testconfig.setTestConfigName(prop.getProperty("testconfig-name"));
+		/*	testconfig.setTestConfigName(prop.getProperty("testconfig-name"));
 			testconfig.setNumberOfOperations(Integer.parseInt(prop
 					.getProperty("testconfig-numofops")));
 
@@ -141,11 +137,12 @@ public class S3UnitTest {
 			e.printStackTrace();
 		}
 		// return list;
+
 	}
 
 	public void TestFileGeneration2() {
 		String testConfName = "testme";
-		int objSize = 1024;
+		int objSize = 1024 ;
 		int numfiles = 4;
 		List<String> list;
 		try {
@@ -159,10 +156,10 @@ public class S3UnitTest {
 		// return list;
 	}
 
-	public void ValidateS3() {
+	public void ValidateSwift() {
 		Engine tengine = new VEngine();
 		try {
-			tengine.validateS3Connection(prop.getProperty("username"),
+			tengine.validateSwiftConnection(prop.getProperty("username"),
 					prop.getProperty("password"), prop.getProperty("proxy"),
 					null);
 		} catch (Exception e) {
@@ -171,48 +168,44 @@ public class S3UnitTest {
 		}
 	}
 
-	public void CreateTestPlan() {
-		vLogger.LogInfo("TestEngineUnitTest:CreateTestPlan");
-	}
-
-	public void TestS3xxxd() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3xxxd");
+	public void TestSwiftxxxd() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftxxxd");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setDeleteOperation(true);
 		testconfig.setDeletePercent(100);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3xxxd");
+		System.out.println("TestEngineUnitTest: Done TestSwiftxxxd");
 	}
 
-	public void TestS3xxux() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3xxux");
+	public void TestSwiftxxux() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftxxux");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setUpdateOperation(true);
 		testconfig.setUpdatePercent(100);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3xxux");
+		System.out.println("TestEngineUnitTest: Done TestSwiftxxux");
 	}
 
-	public void TestS3xxud() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3xxud");
+	public void TestSwiftxxud() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftxxud");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setDeleteOperation(true);
@@ -222,36 +215,36 @@ public class S3UnitTest {
 		testconfig.setDeletePercent(percent[1] - percent[0]);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3xxud");
+		System.out.println("TestEngineUnitTest: Done TestSwiftxxud");
 	}
 
-	public void TestS3xrxx() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3xrxx");
+	public void TestSwiftxrxx() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftxrxx");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setReadOperation(true);
 		testconfig.setReadPercent(100);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3xrxx");
+		System.out.println("TestEngineUnitTest: Done TestSwiftxrxx");
 	}
 
-	public void TestS3xrxd() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3xrxd");
+	public void TestSwiftxrxd() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftxrxd");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setDeleteOperation(true);
@@ -261,18 +254,18 @@ public class S3UnitTest {
 		testconfig.setDeletePercent(percent[1] - percent[0]);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3xrxd");
+		System.out.println("TestEngineUnitTest: Done TestSwiftxrxd");
 	}
 
-	public void TestS3xrux() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3xrux");
+	public void TestSwiftxrux() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftxrux");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setReadOperation(true);
@@ -282,18 +275,18 @@ public class S3UnitTest {
 		testconfig.setReadPercent(percent[1] - percent[0]);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3xrux");
+		System.out.println("TestEngineUnitTest: Done TestSwiftxrux");
 	}
 
-	public void TestS3xrud() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3xrud");
+	public void TestSwiftxrud() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftxrud");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setReadOperation(true);
@@ -305,36 +298,36 @@ public class S3UnitTest {
 		testconfig.setReadPercent(percent[2] - percent[1]);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3xrud");
+		System.out.println("TestEngineUnitTest: Done TestSwiftxrud");
 	}
 
-	public void TestS3cxxx() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3cxxx");
+	public void TestSwiftcxxx() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftcxxx");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setCreateOperation(true);
 		testconfig.setCreatePercent(100);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3cxxx");
+		System.out.println("TestEngineUnitTest: Done TestSwiftcxxx");
 	}
 
-	public void TestS3cxxd() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3cxxd");
+	public void TestSwiftcxxd() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftcxxd");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setCreateOperation(true);
@@ -344,18 +337,18 @@ public class S3UnitTest {
 		testconfig.setDeletePercent(percent[1] - percent[0]);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3cxxd");
+		System.out.println("TestEngineUnitTest: Done TestSwiftcxxd");
 	}
 
-	public void TestS3cxux() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3cxux");
+	public void TestSwiftcxux() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftcxux");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setCreateOperation(true);
@@ -365,18 +358,18 @@ public class S3UnitTest {
 		testconfig.setCreatePercent(percent[1] - percent[0]);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3cxux");
+		System.out.println("TestEngineUnitTest: Done TestSwiftcxux");
 	}
 
-	public void TestS3cxud() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3cxud");
+	public void TestSwiftcxud() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftcxud");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setCreateOperation(true);
@@ -388,18 +381,18 @@ public class S3UnitTest {
 		testconfig.setCreatePercent(percent[2] - percent[1]);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3cxud");
+		System.out.println("TestEngineUnitTest: Done TestSwiftcxud");
 	}
 
-	public void TestS3crxx() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3crxx");
+	public void TestSwiftcrxx() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftcrxx");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setReadOperation(true);
@@ -409,18 +402,18 @@ public class S3UnitTest {
 		testconfig.setReadPercent(percent[1] - percent[0]);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3crxx");
+		System.out.println("TestEngineUnitTest: Done TestSwiftcrxx");
 	}
 
-	public void TestS3crxd() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3crxd");
+	public void TestSwiftcrxd() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftcrxd");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setReadOperation(true);
@@ -432,18 +425,18 @@ public class S3UnitTest {
 		testconfig.setReadPercent(percent[2] - percent[1]);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3crxd");
+		System.out.println("TestEngineUnitTest: Done TestSwiftcrxd");
 	}
 
-	public void TestS3crux() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3crux");
+	public void TestSwiftcrux() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftcrux");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setReadOperation(true);
@@ -455,18 +448,18 @@ public class S3UnitTest {
 		testconfig.setReadPercent(percent[2] - percent[1]);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3crux");
+		System.out.println("TestEngineUnitTest: Done TestSwiftcrux");
 	}
 
-	public void TestS3crud() {
-		vLogger.LogInfo("TestEngineUnitTest:TestS3crud");
+	public void TestSwiftcrud() {
+		vLogger.LogInfo("TestEngineUnitTest:TestSwiftcrud");
 		Engine tengine = new VEngine();
 		resetTC(testconfig);
 		testconfig.setReadOperation(true);
@@ -480,14 +473,14 @@ public class S3UnitTest {
 		testconfig.setCreatePercent(percent[3] - percent[2]);
 		long starttime = System.nanoTime();
 		try {
-			tengine.runS3Tests(ep, testconfig, api,report);
+			tengine.runSwiftTests(ep, testconfig, api,report);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Total run time: " + (System.nanoTime() - starttime)
 				/ 1000000 + "ms");
-		System.out.println("TestEngineUnitTest: Done TestS3crud");
+		System.out.println("TestEngineUnitTest: Done TestSwiftcrud");
 	}
 
 	private int[] createRandomArray(int size) {

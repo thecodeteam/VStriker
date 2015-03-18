@@ -24,17 +24,19 @@ public class S3DeleteWorker implements Callable<ExecutionReportData> {
 	@Override
 	public ExecutionReportData call() throws Exception {
 		// Create object in S3
+		reportData.setDataKey("S3");
+		reportData.setCrudValue("Delete");
+		try{
 		long startTime = System.nanoTime();
 		s3api.DeleteObject(api.getSubtenant(), api.getSecretKey(),
 				api.getUrl(), null, api.getBucket(),
 				FilenameUtils.getName(objectLocation));
 		long endTime = System.nanoTime();
-		// System.out.println("DeleteObject execution time: " + (endTime -
-		// startTime));
-		reportData.setDataKey("S3");
 		reportData.setThreadValue(Thread.currentThread().getName());
-		reportData.setCrudValue("Delete");
 		reportData.setDataValue(Long.toString((endTime - startTime) / 1000000));
+	} catch (Exception e) {
+		reportData.setDataValue(e.getMessage());
+	}
 		return reportData;
 	}
 

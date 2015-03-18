@@ -20,6 +20,7 @@ import com.emccode.vstriker.model.TestInfo;
 
 public class ConfigurationController {
 	   @FXML private Button btnUpdate;
+	   @FXML private Button btnDelete;
 	   @FXML private Button btnSave;
 	   @FXML private Button btnBack;
 	   @FXML private AnchorPane paneCfg;
@@ -132,6 +133,21 @@ public class ConfigurationController {
 		}
 	}
 	@FXML
+	public void btnDeleteClicked(ActionEvent event) {
+		System.out.println("Delete button clicked");
+		try {
+			// Change page title
+			if(!selectTest.getIsTemplate()) {
+				vStrikerBizModel.TestConfigurationBiz.TestConfigurationDelete(testcfg.getTestconfigurationId());
+				vStriker.postStatus("Deleted Test Configuration Name: "+testcfg.getTestConfigName()+" Successfully!");
+				this.ClearForm();
+			}
+		} catch (Exception e) {
+			e.getMessage();
+			e.printStackTrace();
+		}
+	}
+	@FXML
 	public void btnBackClicked(ActionEvent event) {
 		System.out.println("Back to Accounts button clicked");
 		System.out.println(paneCfg.getParent().getParent().getId());
@@ -174,6 +190,7 @@ public class ConfigurationController {
 		   this.cbSwiftHttp.setSelected(false);
 		   this.cbSwiftHttps.setSelected(false);
 		   this.btnUpdate.setVisible(false);
+		   this.btnDelete.setVisible(false);
 		   
 		
 	}
@@ -332,6 +349,7 @@ public class ConfigurationController {
 						  if((a.getApiTypeName().equalsIgnoreCase("Atmos")) && (a.getApiTypeUrl().equalsIgnoreCase("https"))) this.cbAtmosHttps.setSelected(true);
 					 }
 					 this.btnUpdate.setVisible(true);
+					this.btnDelete.setVisible(true);
 				}
 			
 	    } catch (Exception e) {

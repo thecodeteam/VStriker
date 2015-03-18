@@ -33,16 +33,19 @@ public class SwiftCreateWorker implements Callable<ExecutionReportData> {
 	}
 	
 	public ExecutionReportData call() throws Exception {
+		reportData.setDataKey("Swift");
+		reportData.setCrudValue("Create");
+		try{
 		long startTime = System.nanoTime();
 		swiftapi.CreateObject(api.getSubtenant(), api.getSecretKey(),
 				api.getUrl(), api.getBucket(), FilenameUtils.getName(objectLocation),
 				new FileInputStream(objectLocation));
 		long endTime = System.nanoTime();
-		System.out.println("Swift CreateObject execution time: " + (endTime - startTime));
-		reportData.setDataKey("Swift");
 		reportData.setThreadValue(Thread.currentThread().getName());
-		reportData.setCrudValue("Create");
 		reportData.setDataValue(Long.toString((endTime-startTime)/1000000));
+	} catch (Exception e) {
+		reportData.setDataValue(e.getMessage());
+	}
 		return reportData;
 	}
 }

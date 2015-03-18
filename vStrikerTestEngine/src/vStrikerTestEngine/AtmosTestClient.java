@@ -24,7 +24,7 @@ import vStrikerTestEngine.atmos.AtmosDeleteWorker;
 import vStrikerTestEngine.atmos.AtmosReadWorker;
 import vStrikerTestEngine.atmos.AtmosUpdateWorker;
 import vStrikerTestUtilities.Utilites;
-import vStrikerTestUtilities.vLogger;
+import vStrikerTestUtilities.*;
 
 import com.emc.vipr.atmos.atmosapi;
 
@@ -67,9 +67,10 @@ public class AtmosTestClient {
 		return true;
 	}
 
-	public ExecutionReport runTests(ExecutionPlan ep,
-			TestConfiguration testconfig, Api api) throws Exception {
+	public TestResult runTests(ExecutionPlan ep,
+			TestConfiguration testconfig, Api api,ExecutionReport report) throws Exception {
 		vLogger.LogInfo("In AtmosTestClient runTests");
+		vStrikerTestUtilities.TestResult testResult = new vStrikerTestUtilities.TestResult();
 
 		// validate arguments
 		if (testconfig.getCreateOperation() == false
@@ -284,20 +285,15 @@ public class AtmosTestClient {
 		}
 
 		// Create the summary report
-		ExecutionReport report = new ExecutionReport();
-		report.setExecutionName(LocalDateTime.now().toString());
-		// report.setExecutionReportId(1);
-		report.setExecutionPlan(ep);
-		ExecutionReportBiz.ExecutionReportCreate(report);
-
+System.out.println("Calcualte Summary data now");
 		// Save the ExecutionReportData objects in the database
 		for (ExecutionReportData e : list) {
 			e.setExecutionReport(report);
 			ExecutionReportDataBiz.ExecutionReportDataCreate(e);
-			System.out.println("Id of the data object saved: "
+			System.out.println("atmos Id of the data object saved: "
 					+ e.getExecutionReportDataId());
 		}
-		System.out.println("Id of the summary object saved: "
+		System.out.println("atmos Id of the summary object saved: "
 				+ report.getExecutionReportId());
 		// Calculate summary numbers for the report
 		if (testconfig.getCreateOperation()) {
@@ -326,65 +322,46 @@ public class AtmosTestClient {
 		}
 
 		System.out.println("Total test time: " + totaltime / 1000000 + "ms");
-
-		// Populate the report object
-		// Total volume sent = (createops + updateops) * sizeofobject
-		if (testconfig.getCreateOperation() || testconfig.getUpdateOperation()) {
-			report.setTotalVolumeSent(Long
-					.toString(
-							(createOps + updateOps)
-							* (long) testconfig.getObjectSize())
-							.toString());
-		} else
-			report.setTotalVolumeSent("0");
-
-		// Total volume received = (readops) * sizeofobject
-		if (testconfig.getReadOperation()) {
-			report.setTotalVolumeReceived(Long.toString(readOps
-					* (long) testconfig.getObjectSize()));
-		} else
-			report.setTotalVolumeReceived("0");
-
-		report.setAvgLatencyPerCrudOperation(Long.toString(((createTime
-				+ readTime + updateTime + deleteTime) / 1000000)
-				/ testconfig.getNumberOfOperations()));
-		report.setNumberRequestSec((int) (testconfig.getNumberOfOperations()
-				/ (createTime + readTime + updateTime + deleteTime) / 1000000000));
+		long maxValue = 0, minValue = 0;
 		if (list.size() > 0) {
 
 			if ((testconfig.getCreateOperation() && createOps != 0)
 					|| (testconfig.getReadOperation() && readOps != 0)
 					|| (testconfig.getUpdateOperation() && updateOps != 0)) {
-				long maxValue = 0, minValue = Long.parseLong(list.get(1)
-						.getDataValue());
+				try {
+					minValue = Long.parseLong(list.get(1)
+							.getDataValue());
+				}catch(Exception e){}
 				for (ExecutionReportData erd : list) {
 					if (erd.getCrudValue().contains("Create")
 							|| erd.getCrudValue().contains("Update")
 							|| erd.getCrudValue().contains("Read")) {
-						maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
-								.parseLong(erd.getDataValue()) : maxValue;
-								minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
-										.parseLong(erd.getDataValue()) : minValue;
+						try {
+							maxValue = (Long.parseLong(erd.getDataValue()) > maxValue) ? Long
+									.parseLong(erd.getDataValue()) : maxValue;
+							minValue = (Long.parseLong(erd.getDataValue()) < minValue) ? Long
+									.parseLong(erd.getDataValue()) : minValue;
+						}catch(Exception e){}
 					}
 				}
-				System.out.println(maxValue + " ms - max value");
-				System.out.println(minValue + " ms - min value");
-				System.out.println(testconfig.getObjectSize() + " object size");
-				report.setMaxThroughput(((long) testconfig.getObjectSize() * 1000)
-						/ minValue + " bytes per second");
-				report.setMinThroughput(((long) testconfig.getObjectSize() * 1000)
-						/ maxValue + " bytes per second");
-				System.out.println(((long) testconfig.getObjectSize() * 1000)
-						/ minValue + " max bytes per second");
-				System.out.println(((long) testconfig.getObjectSize() * 1000)
-						/ maxValue + " min bytes per second");
-			} else {
-				report.setMaxThroughput("0");
-				report.setMinThroughput("0");
 			}
 		}
-		ExecutionReportBiz.ExecutionReportUpdate(report);
-		return report;
+
+
+
+
+
+		// Populate the report object
+		testResult.setCreateTime(createTime);
+		testResult.setReadTime(readTime);
+		testResult.setDeleteTime(deleteTime);
+		testResult.setUpdateTime(updateTime);
+		testResult.setTotalTime(totaltime);
+		testResult.setMax(maxValue);
+		testResult.setMin(minValue);
+		return testResult;
+
+
 	}
 
 }

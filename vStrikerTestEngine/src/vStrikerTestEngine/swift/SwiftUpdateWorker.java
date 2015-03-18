@@ -33,16 +33,20 @@ public class SwiftUpdateWorker implements Callable<ExecutionReportData> {
 	}
 	
 	public ExecutionReportData call() throws Exception {
+		reportData.setDataKey("Swift");
+		reportData.setCrudValue("Update");
+		try{
+
 		long startTime = System.nanoTime();
 		swiftapi.CreateObject(api.getSubtenant(), api.getSecretKey(),
 				api.getUrl(), api.getBucket(), FilenameUtils.getName(objectLocation),
 				new FileInputStream(objectLocation));
 		long endTime = System.nanoTime();
-		System.out.println("Swift UpdateObject execution time: " + (endTime - startTime));
-		reportData.setDataKey("Swift");
 		reportData.setThreadValue(Thread.currentThread().getName());
-		reportData.setCrudValue("Update");
 		reportData.setDataValue(Long.toString((endTime-startTime)/1000000));
+	} catch (Exception e) {
+		reportData.setDataValue(e.getMessage());
+	}
 		return reportData;
 	}
 }

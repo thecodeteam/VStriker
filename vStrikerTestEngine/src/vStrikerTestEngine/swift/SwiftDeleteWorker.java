@@ -32,19 +32,19 @@ public class SwiftDeleteWorker implements Callable<ExecutionReportData> {
 	}
 	
 	public ExecutionReportData call() throws Exception {
-		long startTime = System.nanoTime();
-
-		System.out.println("object location: "+objectLocation);
-		System.out.println("object file name: "+FilenameUtils.getName(objectLocation));
+		reportData.setDataKey("Swift");
+		reportData.setCrudValue("Delete");
+		try{
+			long startTime = System.nanoTime();
 
 		swiftapi.DeleteObject(api.getSubtenant(), api.getSecretKey(),
 						api.getUrl(), api.getBucket(), FilenameUtils.getName(objectLocation));
 		long endTime = System.nanoTime();
-		System.out.println("Swift DeleteObject execution time: " + (endTime - startTime));
-		reportData.setDataKey("Swift");
 		reportData.setThreadValue(Thread.currentThread().getName());
-		reportData.setCrudValue("Delete");
 		reportData.setDataValue(Long.toString((endTime-startTime)/1000000));
+	} catch (Exception e) {
+		reportData.setDataValue(e.getMessage());
+	}
 		return reportData;
 	}
 }

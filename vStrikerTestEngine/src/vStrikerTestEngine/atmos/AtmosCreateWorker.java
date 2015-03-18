@@ -33,19 +33,21 @@ public class AtmosCreateWorker implements Callable<ExecutionReportData> {
 	}
 	
 	public ExecutionReportData call() throws Exception {
+		reportData.setDataKey("Atmos");
+		reportData.setCrudValue("Create");
+		try {
 		long startTime = System.nanoTime();
-
-
-
 		atmosapi.CreateObject(api.getSubtenant(), api.getSecretKey(),
 				api.getUrl(), FilenameUtils.getName(objectLocation),
 				new File(objectLocation), api.getBucket());
 		long endTime = System.nanoTime();
-		System.out.println("Atmos CreateObject execution time: " + (endTime - startTime));
-		reportData.setDataKey("Atmos");
 		reportData.setThreadValue(Thread.currentThread().getName());
-		reportData.setCrudValue("Create");
 		reportData.setDataValue(Long.toString((endTime-startTime)/1000000));
+
+		} catch (Exception e) {
+			reportData.setDataValue(e.getMessage());
+		}
+
 		return reportData;
 	}
 

@@ -32,15 +32,19 @@ public class SwiftReadWorker implements Callable<ExecutionReportData> {
 	}
 	
 	public ExecutionReportData call() throws Exception {
-		long startTime = System.nanoTime();
+		reportData.setDataKey("Swift");
+		reportData.setCrudValue("Read");
+		try{
+
+			long startTime = System.nanoTime();
 		swiftapi.ReadObject(api.getSubtenant(), api.getSecretKey(),
 				api.getUrl(), api.getBucket(), FilenameUtils.getName(objectLocation));
 		long endTime = System.nanoTime();
-		System.out.println("Swift ReadObject execution time: " + (endTime - startTime));
-		reportData.setDataKey("Swift");
 		reportData.setThreadValue(Thread.currentThread().getName());
-		reportData.setCrudValue("Read");
 		reportData.setDataValue(Long.toString((endTime-startTime)/1000000));
+	} catch (Exception e) {
+		reportData.setDataValue(e.getMessage());
+	}
 		return reportData;
 	}
 }

@@ -25,16 +25,20 @@ public class S3UpdateWorker implements Callable<ExecutionReportData> {
 	@Override
 	public ExecutionReportData call() throws Exception {
 		// Create object in S3
+		reportData.setDataKey("S3");
+		reportData.setCrudValue("Update");
+		try{
 		long startTime = System.nanoTime();
 		s3api.UpdateObject(api.getSubtenant(), api.getSecretKey(),
 				api.getUrl(), null, api.getBucket(), FilenameUtils
 						.getName(objectLocation), new FileInputStream(
 						objectLocation));
 		long endTime = System.nanoTime();
-		reportData.setDataKey("S3");
 		reportData.setThreadValue(Thread.currentThread().getName());
-		reportData.setCrudValue("Update");
 		reportData.setDataValue(Long.toString((endTime - startTime) / 1000000));
+	} catch (Exception e) {
+		reportData.setDataValue(e.getMessage());
+	}
 		return reportData;
 	}
 }

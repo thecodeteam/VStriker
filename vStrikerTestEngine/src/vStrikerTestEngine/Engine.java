@@ -18,14 +18,14 @@ public interface Engine {
 	boolean validateAtmosConnection(String user, String key, String url,
 			String namespace);
 
-	ExecutionReport runS3Tests(ExecutionPlan ep, TestConfiguration testconfig,
-			Api api) throws Exception;
+	vStrikerTestUtilities.TestResult runS3Tests(ExecutionPlan ep, TestConfiguration testconfig,
+			Api api,ExecutionReport report) throws Exception;
 
-	ExecutionReport runSwiftTests(ExecutionPlan ep,
-			TestConfiguration testconfig, Api api) throws Exception;
+	vStrikerTestUtilities.TestResult runSwiftTests(ExecutionPlan ep,
+			TestConfiguration testconfig, Api api,ExecutionReport report) throws Exception;
 
-	ExecutionReport runAtmosTests(ExecutionPlan ep,
-			TestConfiguration testconfig, Api api) throws Exception;
+	vStrikerTestUtilities.TestResult runAtmosTests(ExecutionPlan ep,
+			TestConfiguration testconfig, Api api,ExecutionReport report) throws Exception;
 
 	ExecutionReport runTests(ExecutionPlan plan) throws Exception;
 

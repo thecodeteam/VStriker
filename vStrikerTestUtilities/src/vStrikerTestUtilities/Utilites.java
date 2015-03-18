@@ -36,7 +36,7 @@ public class Utilites {
 
 		RandomAccessFile raf = new RandomAccessFile(fileName, "rw");
 		try {
-			raf.setLength(objSize);
+			raf.setLength(objSize*1024);
 		} finally {
 			raf.close();
 		}
@@ -71,7 +71,7 @@ public class Utilites {
 
 		RandomAccessFile raf = new RandomAccessFile(fileName, "rw");
 		try {
-			raf.setLength(objSize);
+			raf.setLength(objSize*1024);
 		} finally {
 			raf.close();
 		}

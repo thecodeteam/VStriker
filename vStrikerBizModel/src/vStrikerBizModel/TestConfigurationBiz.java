@@ -52,6 +52,7 @@ public class TestConfigurationBiz {
 		EntityManager entitymanager = actfactory.createEntityManager( );
 		entitymanager.getTransaction( ).begin( );
 		TestConfiguration act = entitymanager.find(TestConfiguration.class,entityId);
+
 		entitymanager.remove(act);
 		entitymanager.getTransaction( ).commit( );
 		

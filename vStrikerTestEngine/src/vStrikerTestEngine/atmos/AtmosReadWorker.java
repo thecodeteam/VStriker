@@ -31,16 +31,20 @@ public class AtmosReadWorker implements Callable<ExecutionReportData> {
 	}
 	
 	public ExecutionReportData call() throws Exception {
-		long startTime = System.nanoTime();
-		// ToDo - Atmos is expecting ObjectId as the last argument
-		atmosapi.ReadStringObject(api.getSubtenant(), api.getSecretKey(),
-				api.getUrl(), FilenameUtils.getName(objectLocation), null);
-		long endTime = System.nanoTime();
-		System.out.println("Atmos CreateObject execution time: " + (endTime - startTime));
+
 		reportData.setDataKey("Atmos");
-		reportData.setThreadValue(Thread.currentThread().getName());
 		reportData.setCrudValue("Read");
-		reportData.setDataValue(Long.toString((endTime-startTime)/1000000));
-		return reportData;
+		try {
+			long startTime = System.nanoTime();
+			atmosapi.ReadStringObject(api.getSubtenant(), api.getSecretKey(),
+					api.getUrl(), FilenameUtils.getName(objectLocation), null);
+			long endTime = System.nanoTime();
+			reportData.setThreadValue(Thread.currentThread().getName());
+			reportData.setDataValue(Long.toString((endTime - startTime) / 1000000));
+		} catch (Exception e) {
+			reportData.setDataValue(e.getMessage());
+		}
+
+	return reportData;
 	}
 }

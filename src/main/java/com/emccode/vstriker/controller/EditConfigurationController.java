@@ -413,20 +413,20 @@ public class EditConfigurationController {
 
 	public void ClearForm() {
 		// this.btnEditUpdate.setVisible(false);
-		this.txtNumOps.setText("");
-		this.txtNumTh.setText("");
-		this.txtNumofRetires.setText("");
-		this.txtObjSize.setText("");
+		this.txtNumOps.setText("0");
+		this.txtNumTh.setText("0");
+		this.txtNumofRetires.setText("0");
+		this.txtObjSize.setText("0");
 		this.cbRandom.setSelected(false);
 		this.cbObjCreate.setSelected(false);
 		this.cbObjDelete.setSelected(false);
 		this.cbObjUpdate.setSelected(false);
 		this.cbObjRead.setSelected(false);
-		this.txtPrctCreate.setText("");
-		this.txtPrctRead.setText("");
-		this.txtPrctUpdate.setText("");
-		this.txtPrctDelete.setText("");
-		this.lblTotal.setText("");
+		this.txtPrctCreate.setText("0");
+		this.txtPrctRead.setText("0");
+		this.txtPrctUpdate.setText("0");
+		this.txtPrctDelete.setText("0");
+		this.lblTotal.setText("0");
 		;
 		this.cbS3Http.setSelected(false);
 		this.cbS3Https.setSelected(false);
@@ -439,7 +439,7 @@ public class EditConfigurationController {
 		this.txtPrctRead.setDisable(true);
 		this.txtPrctUpdate.setDisable(true);
 		this.txtPrctDelete.setDisable(true);
-		this.lblTotal.setText("");
+
 		;
 
 		// v1 random object is hidden
@@ -531,7 +531,7 @@ public class EditConfigurationController {
 
 				this.ddObjUnit.setValue(cfgtemp.getObjectSizeReportUnit1());
 				this.txtNumOps.setText(String.valueOf(cfgtemp
-						.getConfTempNumberOfOperations()));
+						.getConfTempNumberOfOperations()/100));
 
 				this.txtNumTh.setText(String.valueOf(cfgtemp
 						.getConfTempNumberOfThreads()));
@@ -630,7 +630,7 @@ public class EditConfigurationController {
 
 				this.ddObjUnit.setValue(testcfg.getObjectSizeReportUnit());
 				this.txtNumOps.setText(String.valueOf(testcfg
-						.getNumberOfOperations()));
+						.getNumberOfOperations()/100));
 
 				this.txtNumTh.setText(String.valueOf(testcfg
 						.getNumberOfThreads()));
