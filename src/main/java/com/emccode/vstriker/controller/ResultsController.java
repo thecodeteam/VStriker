@@ -1,5 +1,6 @@
 package com.emccode.vstriker.controller;
 
+import java.security.Timestamp;
 import java.util.List;
 
 import javafx.animation.Animation;
@@ -23,7 +24,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 import vStrikerEntities.Account;
@@ -118,14 +120,18 @@ public class ResultsController {
 		System.out.println("Back to Accounts button clicked");
 
 		try {
-			String filename = "Execuation_report_"
-					+ exeReport.getExecutionReportId() + ".csv";
+			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy_hhmmss");
+			Date curDate = new Date();
+			String strDate = sdf.format(curDate);
+			String filename = "Execuation_report_"+ strDate + ".csv";
+			System.out.println(filename);
 			vStrikerTestUtilities.Utilites.exportResultToFile(filename,
 					exeReport.getExecutionReportId());
 
-			JOptionPane.showConfirmDialog(null,
+			vStriker.postStatus("Result is exported to file "+filename);
+			/*JOptionPane.showConfirmDialog(null,
 					"Export is finished successfully!", "VStriker",
-					JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE);*/
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -151,22 +157,25 @@ public class ResultsController {
 					&& (ddAccounts.getValue() != null)) {
 				System.out.println("Account selected: " + ddAccounts.getValue().toString());
 				System.out.println("Test selected: " + ddTestList.getValue().toString());
-				hboxProgress.setVisible(true);
 				btnRun.setDisable(true);
-				progressbarTest.setProgress(0);
 				lblfinished.setText("");
+				vStriker.postStatus("Test is started....");
+				//hboxProgress.setVisible(true);
+				//progressbarTest.setProgress(0);
 				// Progress Bar
 				count = 0;
-				progressbarTest.setProgress(0);
-
 				timeRunEngine = new Timeline(new KeyFrame(
-						Duration.millis(1000), ae -> RunEngine()));
+						Duration.millis(2000), ae -> RunEngine()));
 				timeRunEngine.play();
 
-				timeline = new Timeline(new KeyFrame(Duration.millis(100),
+				/*
+				* We need to fix this part to implement better way to update the progress.
+				* Maybe using Task or Platform
+				* */
+				/*timeline = new Timeline(new KeyFrame(Duration.millis(100),
 						ae -> CheckProgress()));
 				timeline.setCycleCount(Animation.INDEFINITE);
-				timeline.play();
+				timeline.play();*/
 			} else {
 
 				JOptionPane.showConfirmDialog(null,
@@ -228,12 +237,16 @@ public class ResultsController {
 			vStrikerBizModel.ExecutionPlanBiz.ExecutionPlanCreate(exePlan);
 
 			// run Engine
+
+
 			Engine excEngine = new VEngine();
 			exeReport = excEngine.runTests(exePlan);
 			// Thread.sleep(5000);
 
-			lblfinished.setText("Completed!");
+			//lblfinished.setText("Completed!");
+			vStriker.postStatus("Test is completed..");
 			btnRun.setDisable(false);
+			DisplayResult();
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -244,7 +257,7 @@ public class ResultsController {
 
 	public void DisplayResult() {
 		try {
-			timeline.stop();
+//			timeline.stop();
 
 			this.panExecuateResult.setVisible(true);
 

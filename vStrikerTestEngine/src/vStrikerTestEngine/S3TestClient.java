@@ -34,18 +34,16 @@ import com.emc.vipr.s3.s3api;
 public class S3TestClient {
 
 	public boolean validateConnection(String user, String key, String url,
-			String namespace) {
+			String bucket) {
 		vLogger.LogInfo("In S3TestClient validateConnection");
 		if (user == null || key == null || url == null) {
 			vLogger.LogError("Please ensure user, key and url are valid");
 			return false;
 		}
 		vLogger.LogInfo("user, key and url are:" + user + " " + key + " " + url);
-		if (namespace == null || namespace.length() == 0) {
-			namespace = null;
-		}
-		String TEST_BUCKET = "vstest"
-				+ (UUID.randomUUID().toString()).substring(0, 10);
+
+		String TEST_BUCKET =bucket;
+		String namespace=null;
 		vLogger.LogInfo("Test Bucket name is: " + TEST_BUCKET);
 		try {
 			s3api.getS3Client(user, key, url, namespace);

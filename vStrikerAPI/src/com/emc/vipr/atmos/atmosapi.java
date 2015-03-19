@@ -43,11 +43,30 @@ public class atmosapi {
 		   return id;
 	    }
 	   
-	   public static void UpdateObject(String UID, String SECRET,String ENDPOINT,String key, InputStream content, String oid) throws Exception {
-	        
+	   public static long UpdateObject(String UID, String SECRET,String ENDPOINT,String key, InputStream content, String oid) throws Exception {
+
+		   long t=0;
+		   long startTime = System.nanoTime();
 		   AtmosApi atmos = getAtmosApi( UID, SECRET,ENDPOINT);
-		   
-	        atmos.updateObject( new ObjectId( oid ), content );
+		   long endTime = System.nanoTime();
+
+		   t=endTime-startTime;
+
+		   ListObjectsRequest request = new ListObjectsRequest().metadataName( key );
+		   List<ObjectEntry> results = atmos.listObjects( request ).getEntries();
+		   // while there are more pages, keep getting them
+		   while ( request.getToken() != null )
+			   results.addAll( atmos.listObjects( request ).getEntries() );
+
+		   System.out.println( String.format( "Objects tagged with \"%s\"", key ) );
+		   for ( ObjectEntry entry : results ) {
+			   System.out.println( entry.getObjectId() );
+			   atmos.updateObject(new ObjectId(oid), content);
+			   endTime = System.nanoTime();
+			   t=t+endTime-startTime;
+		   }
+
+		   return t;
 	    }
 	   
 	   public static long DeleteObject(String UID, String SECRET,String ENDPOINT,String key,  String oid) throws Exception {
@@ -80,7 +99,19 @@ public class atmosapi {
 	   public static String ReadStringObject(String UID, String SECRET,String ENDPOINT,String key,  String oid ) throws Exception {
 	        
 		   AtmosApi atmos = getAtmosApi( UID, SECRET,ENDPOINT);
-		   
-	       return atmos.readObject( new ObjectId( oid ),String.class );
+		   ListObjectsRequest request = new ListObjectsRequest().metadataName( key );
+		   List<ObjectEntry> results = atmos.listObjects( request ).getEntries();
+		   // while there are more pages, keep getting them
+		   while ( request.getToken() != null )
+			   results.addAll( atmos.listObjects( request ).getEntries() );
+
+		   System.out.println( String.format( "Objects tagged with \"%s\"", key ) );
+		   for ( ObjectEntry entry : results ) {
+			   System.out.println( entry.getObjectId() );
+
+			   return atmos.readObject( new ObjectId( oid ),String.class );
+		   }
+
+		   return null;
 	    }
 }

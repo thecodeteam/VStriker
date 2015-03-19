@@ -57,8 +57,8 @@ public class ResultsChartController {
 		
 		this.testName.setText(this.selectedTest);
 		this.accountName.setText(selectedAccount);
-		 ProcessAvgChart();
-		
+		 //ProcessAvgChart();
+		ProcesCreateChart();
 	}
 
 	// Initialize

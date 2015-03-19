@@ -109,7 +109,7 @@ public class Utilites {
 		List<ExecutionReportData> list = rpt.getExecutionReportData();
 		
 
-		String sFileName = dir + "\\" + rpt.getExecutionName() + ".csv";
+		String sFileName = dir + "\\" + filename ;
 		FileWriter writer = new FileWriter(sFileName);
 
 		writer.append("Execuation Name");

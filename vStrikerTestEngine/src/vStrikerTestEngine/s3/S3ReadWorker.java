@@ -34,6 +34,7 @@ public class S3ReadWorker implements Callable<ExecutionReportData> {
 		reportData.setDataKey("S3");
 		reportData.setCrudValue("Read");
 		try{
+		System.out.println("Process S3 read "+FilenameUtils.getName(objectLocation));
 		long startTime = System.nanoTime();
 		s3api.ReadObject(api.getSubtenant(), api.getSecretKey(), api.getUrl(),
 				null, api.getBucket(), FilenameUtils.getName(objectLocation));

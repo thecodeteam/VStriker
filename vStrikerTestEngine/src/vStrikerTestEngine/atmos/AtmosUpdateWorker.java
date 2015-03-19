@@ -36,13 +36,12 @@ public class AtmosUpdateWorker implements Callable<ExecutionReportData> {
 		reportData.setCrudValue("Update");
 
 		try {
-			long startTime = System.nanoTime();
-			atmosapi.UpdateObject(api.getSubtenant(), api.getSecretKey(),
+			long time = atmosapi.UpdateObject(api.getSubtenant(), api.getSecretKey(),
 					api.getUrl(), FilenameUtils.getName(objectLocation),
 					new FileInputStream(objectLocation), null);
-			long endTime = System.nanoTime();
+
 			reportData.setThreadValue(Thread.currentThread().getName());
-			reportData.setDataValue(Long.toString((endTime - startTime) / 1000000));
+			reportData.setDataValue(Long.toString(time / 1000000));
 		} catch (Exception e) {
 			reportData.setDataValue(e.getMessage());
 		}

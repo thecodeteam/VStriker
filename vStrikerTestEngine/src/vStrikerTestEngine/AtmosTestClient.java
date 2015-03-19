@@ -33,7 +33,7 @@ import com.emc.vipr.atmos.atmosapi;
 public class AtmosTestClient {
 
 	public boolean validateConnnection(String user, String key, String url,
-			String namespace) {
+			String bucket) {
 		System.out.println("In AtmosTestClient validateConnnection");
 		vLogger.LogInfo("In Atmos TestClient validateConnection");
 		if (user == null || key == null || url == null) {
@@ -41,9 +41,7 @@ public class AtmosTestClient {
 			return false;
 		}
 		vLogger.LogInfo("user, key and url are:" + user + " " + key + " " + url);
-		if (namespace == null || namespace.length() == 0) {
-			namespace = null;
-		}
+
 		try {
 			atmosapi.getAtmosApi(user, key, url);
 			vLogger.LogInfo("Get Api worked");
@@ -52,7 +50,10 @@ public class AtmosTestClient {
 			vLogger.LogInfo(listofObjects.get(0));
 			atmosapi.CreateObject(user, key, url,
 					FilenameUtils.getName(listofObjects.get(0)),
-					new File(listofObjects.get(0)), "contentType");
+					new File(listofObjects.get(0)), bucket);
+
+
+
 			vLogger.LogInfo("Create object done");
 			atmosapi.DeleteObject(user, key, url,
 					FilenameUtils.getName(listofObjects.get(0)), "oid");

@@ -35,7 +35,7 @@ import com.emc.vipr.swift.swiftapi;
 public class SwiftTestClient {
 
 	public boolean validateConnnection(String user, String key, String url,
-			String namespace) {
+			String bucket) {
 		System.out.println("In vTestEngine validateSwiftConnnection");
 		if (user == null || key == null || url == null) {
 			System.out.println("Please ensure user, key and url are valid");
@@ -43,12 +43,11 @@ public class SwiftTestClient {
 		}
 		System.out.println("user, key and url are:" + user + " " + key + " "
 				+ url);
-		if (namespace == null || namespace.length() == 0) {
-			namespace = null;
-		}
+		String	namespace = null;
+
 		vLogger.LogInfo("In vTestEngine validate Swift Connection");
-		String TEST_BUCKET = "vstest"
-				+ (UUID.randomUUID().toString()).substring(0, 10);
+		String TEST_BUCKET = bucket;
+
 		System.out.println("Test Bucket name is: " + TEST_BUCKET);
 		try {
 			swiftapi.ViPRSwiftClient(user, key, url);

@@ -203,36 +203,71 @@ public class APIValidationController {
 				int currentstep = 1;
 				for (Api a : apis) {
 					switch (a.getApiType().getApiTypeName()) {
-					case "S3":
-						if (a.getSecretKey() != null && a.getUrl() != null
-								&& a.getSubtenant() != null) {
-							Engine e = new VEngine();
-							if (e.validateS3Connection(a.getSubtenant(),
-									a.getSecretKey(), a.getUrl(), "")) {
-								updateMessage("S3 connection is validated for User: "
-										+ a.getSubtenant()
-										+ " at URL: "
-										+ a.getUrl());
+						case "S3":
+							if (a.getSecretKey() != null && a.getUrl() != null
+									&& a.getSubtenant() != null) {
+								Engine e = new VEngine();
+								if (e.validateS3Connection(a.getSubtenant(),
+										a.getSecretKey(), a.getUrl(), a.getBucket())) {
+									updateMessage("S3 connection is validated for User: "
+											+ a.getSubtenant()
+											+ " at URL: "
+											+ a.getUrl());
 
-							} else {
-								updateMessage("S3 connection is not working for User: "
-										+ a.getSubtenant()
-										+ " at URL: "
-										+ a.getUrl());
+								} else {
+									updateMessage("S3 connection is not working for User: "
+											+ a.getSubtenant()
+											+ " at URL: "
+											+ a.getUrl());
+								}
+								updateProgress(currentstep, totalsteps);
+								break;
 							}
-							updateProgress(currentstep, totalsteps);
+						case "Atmos":
+							if (a.getSecretKey() != null && a.getUrl() != null
+									&& a.getSubtenant() != null) {
+								Engine e = new VEngine();
+								if (e.validateAtmosConnection(a.getSubtenant(),
+										a.getSecretKey(), a.getUrl(), a.getBucket())) {
+									updateMessage("Atmos connection is validated for User: "
+											+ a.getSubtenant()
+											+ " at URL: "
+											+ a.getUrl());
+
+								} else {
+									updateMessage("Atmos connection is not working for User: "
+											+ a.getSubtenant()
+											+ " at URL: "
+											+ a.getUrl());
+								}
+								updateProgress(currentstep, totalsteps);
+								break;
+							}
+						case "Swift":
+							if (a.getSecretKey() != null && a.getUrl() != null
+									&& a.getSubtenant() != null) {
+								Engine e = new VEngine();
+								if (e.validateSwiftConnection(a.getSubtenant(),
+										a.getSecretKey(), a.getUrl(),a.getBucket())) {
+									updateMessage("Swift connection is validated for User: "
+											+ a.getSubtenant()
+											+ " at URL: "
+											+ a.getUrl());
+
+								} else {
+									updateMessage("Swift connection is not working for User: "
+											+ a.getSubtenant()
+											+ " at URL: "
+											+ a.getUrl());
+								}
+								updateProgress(currentstep, totalsteps);
+								break;
+							}
+						default:
+							System.out
+									.println("Please check to ensure the right type of Api is set");
+							vStriker.postStatus("Unable to perform validation: Api not of type S3, Swift or Atmos");
 							break;
-						}
-					case "Atmos":
-						System.out.println("Atmos");
-						break;
-					case "Swift":
-						System.out.println("Swift");
-						break;
-					default:
-						System.out
-								.println("Please check to ensure the right type of Api is set");
-						vStriker.postStatus("Unable to perform validation: Api not of type S3, Swift or Atmos");
 					}
 					updateProgress(totalsteps, totalsteps);
 				} // end for
