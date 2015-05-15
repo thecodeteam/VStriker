@@ -34,8 +34,13 @@ public class swiftapi {
 			try{
 				Account client = ViPRSwiftClient(username, passwod, dataNode);
 				Container myContainer = client.getContainer(container);
+				if (!myContainer.exists()) {
+					myContainer.create();
+					myContainer.makePublic();
+				}
 				StoredObject object = myContainer.getObject(key);
 				object.uploadObject(content);
+
 			}
 			catch(Exception e)
 			{
