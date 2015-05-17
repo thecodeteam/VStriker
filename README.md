@@ -1,6 +1,6 @@
 ## Introduction
 
-VStriker it’s a Java desktop application that provides connectivity validation and estimates of CRUD (Create, Read, Update and Delete) operations throughput achievable against Object Stores (like ViPR® Data Services Object storage).  
+VStriker it’s a Java desktop application that provides connectivity validation and estimates of CRUD (Create, Read, Update and Delete) operations throughput achievable against Object Stores (like [EMC's ECS](http://www.emc.com/storage/ecs-appliance/index.htm "Elastic Cloud Storage") ).  
 
 VStriker's goal is to provide developers a quick and simple way of understanding the throughput  that can be expected from a single node client application connecting to ViPR Data Services that will be running in the same running in the same network conditions. 
 
