@@ -123,7 +123,7 @@ Users can use the parameters to define the workload they want to test and get an
 Once the user has selected the Account and Test Plan, we are ready for the execution. The execution engine will create the object require for test and run the test.  
 
 
-![VStiker Throughput Analyzer Execution](https://github.com/emccode/VStriker/blob/master/documentation/media/execution.png)
+![VStiker Throughput Analyzer Execution](https://github.com/emccode/VStriker/blob/master/documentation/media/Executation.png)
 
 
 ### View and Export Restuls
