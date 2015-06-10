@@ -82,7 +82,7 @@ The VStriker application work-flow is composed of four main steps:
 
 Account Management enables users to organize the test plans and execution for each account that they create. An account can have multiple APIs that may to be tested as part of the throughput analysis test.  The following figure shows the relationship:
 
-**[Add Image of account management]**
+account.png
 
 APIs in an account can be validated. This function is performed by the Validation Engine. It enables users to verify connectivity and functionality of the validate API in the Object store. API validation performs the following checks: 
 
