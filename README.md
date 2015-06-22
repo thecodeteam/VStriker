@@ -82,7 +82,7 @@ The VStriker application work-flow is composed of four main steps:
 
 Account Management enables users to organize the test plans and execution for each account that they create. An account can have multiple APIs that may to be tested as part of the throughput analysis test.  The following figure shows the relationship:
 
-**[Add Image of account management]**
+![VStiker Throughput Analyzer Account](https://github.com/emccode/VStriker/blob/master/documentation/media/account.png)
 
 APIs in an account can be validated. This function is performed by the Validation Engine. It enables users to verify connectivity and functionality of the validate API in the Object store. API validation performs the following checks: 
 
@@ -122,8 +122,8 @@ Users can use the parameters to define the workload they want to test and get an
 
 Once the user has selected the Account and Test Plan, we are ready for the execution. The execution engine will create the object require for test and run the test.  
 
-[Insert screen shoot about the Execution Page]
 
+![VStiker Throughput Analyzer Execution](https://github.com/emccode/VStriker/blob/master/documentation/media/Executation.png)
 
 
 ### View and Export Restuls
